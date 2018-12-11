@@ -1,0 +1,289 @@
+.defaultCaption {
+	font-family: "ariel", sans-serif;
+  	font-size: 12pt;
+  	font-weight: bold;
+}
+
+.top5{
+	margin-top:50px !important
+	font-family: "ariel", sans-serif;
+  	font-size: 14pt;
+  	font-weight: bold;	
+}
+
+.reportText {
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+  	font-size: 14px;
+  	font-weight: bold;
+}
+
+.ui-widget {             
+ 	font-size: 12px ;   
+}
+
+.ui-menu .ui-menuitem-link {
+	cursor: pointer;
+    font-weight: bold;
+    line-height: 12px;
+}
+
+.ui-column-title {
+	font-weight: bold;
+}
+
+.noBorder {
+    border: 0px;
+}
+
+.op_style {
+	float:left;text-align :right;width : 120px;align: center ;
+}
+
+.op_style_medium {
+	float:center;text-align :top;width : 100px;
+}
+
+.selected-menu-style-background .ui-menuitem-link {
+	background-color:green !important; 
+}
+
+.ui-picklist
+.ui-picklist-source {
+   height:90px;
+   
+}
+
+.ui-picklist
+.ui-picklist-target {
+   height:90px;
+   
+}
+
+.ui-picklist.ui-picklist-responsive .ui-picklist-list-wrapper {
+	width: 18%;
+}
+
+.hide-column-names table thead tr {
+    display: none;
+}
+
+.ui-datatable.borderless thead th,
+.ui-datatable.borderless tbody,
+.ui-datatable.borderless tbody tr,
+.ui-datatable.borderless tbody td {
+    border-style: none;
+}
+
+.ui-datatable tbody td {
+	padding : 1px 4px;	
+}
+
+td.center {
+    text-align: center;
+}
+
+.ui-panelgrid-cell {
+	vertical-align:top;
+}
+
+.ui-picklist .ui-picklist-buttons {
+    vertical-align: top;
+    height: 40px;
+}
+
+.ui-layout, .ui-layout-doc, .ui-layout-unit, .ui-layout-wrap, .ui-layout-bd, .ui-layout-hd {
+	 border: none;
+}
+
+.ui-panel-content .ui-widget-content {
+	padding: 0.2px;
+}
+
+.bigText {
+	font-size: 10pt;
+  	font-weight: normal;
+}
+
+.logintext {
+	background-color: FFFFFF;
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+    font-size: 14px;		
+}
+
+#wrapper {
+	min-height:100%;
+	position:relative;
+}
+
+#header {	
+	padding:10px;
+}
+
+#content {
+	padding-bottom:100px; /* Height of the footer element */
+}
+
+#footer {
+	width:100%;
+	position:absolute;
+	bottom:0;
+	overflow-x:hidden;
+	overflow-y:hidden;
+}
+
+/*--Demo test page */
+.centralAlign {
+	left:36%;
+	top :20%;
+	position: absolute;
+}
+
+.centralContent {
+	position: fixed; 
+	top: 15%; 
+	left: 30%; 
+}
+
+
+
+/**Makes the items appear in a line. But you can't define the width of an inline element.**/
+#footer li{
+    display:inline;
+    float:centre;
+	text-decoration: none;
+	padding: .2em 1em;    
+}
+
+.header-cont {
+    width:100%;
+    position:fixed;
+    top:0px;
+    background:#F0F0F0;
+    border:0px solid #CCC;	
+	margin:0px auto;
+	left:0;
+}
+
+.ui-panelgrid-footer {
+	text-align: right ! important;	
+}
+
+.absolute-Center {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.paypalButton 
+{
+    background-image: url(images/btn_dg_pay_w_paypal.gif)
+}
+
+html.progress, html.progress * {
+    cursor: progress !important;
+}
+
+.labelx {
+  min-width: 90px !important;
+  display: inline-block !important;
+  text-align : left;
+}
+
+#Font Decoration
+.example2 {
+ 	height: 50px;	
+ 	overflow: hidden;
+ 	position: relative;
+}
+.example2 h3 {
+ 	position: absolute;
+ 	width: 100%;
+ 	height: 100%;
+ 	margin: 0;
+ 	line-height: 50px;
+ 	text-align: center;
+ 	/* Starting position */
+ 	-moz-transform:translateX(-100%);
+ 	-webkit-transform:translateX(-100%);	
+ 	transform:translateX(-100%);
+ 	/* Apply animation to this element */	
+ 	-moz-animation: example2 15s linear infinite;
+ 	-webkit-animation: example2 15s linear infinite;
+ 	animation: example2 15s linear infinite;
+}
+/* Move it (define the animation) */
+@-moz-keyframes example2 {
+ 0%   { -moz-transform: translateX(-100%); }
+ 100% { -moz-transform: translateX(100%); }
+}
+@-webkit-keyframes example2 {
+ 0%   { -webkit-transform: translateX(-100%); }
+ 100% { -webkit-transform: translateX(100%); }
+}
+@keyframes example2 {
+ 0%   { 
+ 	-moz-transform: translateX(-100%); /* Firefox bug fix */
+ 	-webkit-transform: translateX(-100%); /* Firefox bug fix */
+ 	transform: translateX(-100%); 		
+ }
+ 100% { 
+ 	-moz-transform: translateX(100%); /* Firefox bug fix */
+ 	-webkit-transform: translateX(100%); /* Firefox bug fix */
+ 	transform: translateX(100%); 
+ }
+}
+#End -Font decoration
+
+		
+@media screen and (min-width: 768px) {
+    .rightborder {
+  		border-right: 1px solid black;
+  }
+}
+
+.ui-selectonemenu-trigger{
+     width: 28px !important;
+}  
+
+.navbar-nav {
+  text-align: center;
+  float:none;
+}
+
+.navbar-nav li {
+      display:inline-block;
+      float:none;
+}  
+.navbar-nav > li > a {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    line-height: 2px;
+}  
+
+    .Xlabel {
+        width:20%;
+        padding:4px;
+    }
+ 
+    .Xvalue {
+        width:80%;
+        padding:4px;
+    }
+ 
+    .Xgrid {
+        width:100%;
+    }
+ 
+    .Xerror {
+        color: red;
+    }
+ 
+    .XoutputLabel {
+        font-weight: bold;
+    }
+ 
+    .Xgrid {
+        width:33%;
+        padding:4px;
+    }
+

@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"   
+     xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+		    <h:body>
+		    <f:view>
+		    	<ui:composition>
+			    	<h:form>
+				    	<f:loadBundle basename="messages" var="bundle"/>
+					    <div class="container">				        
+				            <ul class="nav navbar-nav">
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/aboutus.xhtml">
+					          		<p:outputLabel value="#{bundle.label_aboutus}"/></a>
+					          </li>					        
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/faq.xhtml">
+					          	<p:outputLabel value="#{bundle.label_faq}"/>
+					          </a>
+					          </li>					        
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/terms.xhtml">
+					          	<p:outputLabel value="#{bundle.label_tandc}"/>
+					          </a>
+					          </li>   					       
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/privacy.xhtml">
+					          	<p:outputLabel value="#{bundle.label_privacy_policy}"/>
+					          </a>
+					          </li>					        
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/contact.xhtml">
+					          	<p:outputLabel value="#{bundle.title_contact}"/>							          
+					          </a></li>
+				            </ul>				        
+					    </div>	    				    	
+			   		</h:form>
+			   </ui:composition>
+			   <p:sticky target="j_idt19:menubar" /> 
+		   </f:view>
+   </h:body>
+</html>
+   

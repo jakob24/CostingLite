@@ -1,0 +1,54 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title><ui:insert name="adminTitle"/> - Costing Lite</title>		
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />	
+		<meta name="Title" content="Admin Pages - ShareOurCar.com"/>				
+		<meta name="description" content="Create your group with your friends and colleagues to share your daily commute by car."/>
+		<meta name="keywords" content="Share Car, Car Sharing, Car Share, car pooling, pool car, Ride share, drive share"/>	
+		<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=yes"/>			
+		
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.css" />
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap-theme.css" />			
+		<!-- 
+		<h:outputStylesheet library="primefaces-#{ThemeSwitcherView.theme}" name="theme.css" rendered="#{not empty LoginBean.loggedInUser.fullName}"  />
+		 -->
+		<link rel="icon" type="image/ico" href="#{request.contextPath}/resources/images/carlogo_icon.ico"/>
+	
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/stylesheet.css" />
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/jquery.cookiebar.css" />
+		
+		<script src="#{request.contextPath}/resources/scripts/jquery.cookiebar.js" />	
+	</h:head>
+
+	<h:body>	
+		
+		<p:layout fullPage="true" resizable="true">
+			<p:layoutUnit position="north">			
+				<ui:insert name="header">
+					<div id="header">		
+						<ui:include src="header.xhtml" />
+					</div>
+				</ui:insert>			
+			</p:layoutUnit>
+			
+			<p:layoutUnit position="south" >
+				<ui:insert name="footer">
+					<ui:include src="footer.xhtml" />				
+				</ui:insert>
+			</p:layoutUnit>		
+					
+			<p:layoutUnit position="center">
+				<ui:include src="topMenu.xhtml" />
+				<ui:insert name="content" />
+			</p:layoutUnit>
+		</p:layout>		
+	
+	</h:body>
+
+</html>
