@@ -5,13 +5,12 @@ package com.artisans.inventory.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.sql.Timestamp;
 
 /**
  * @author Jacob
  *
  */
-public class ShipmentProductVO implements Serializable {
+public class ShipmentProductVO extends BaseVO implements Serializable {
 
     /**
 	 * 
@@ -30,13 +29,9 @@ public class ShipmentProductVO implements Serializable {
 
     private int productQty;
 
-    private Timestamp modifiedOn;
-
     private ProductVO productVO;
 
     private ShipmentVO shipmentVO;
-
-    private UserVO userVO;
 
 	/**
 	 * @return the shipmentProductId
@@ -123,20 +118,6 @@ public class ShipmentProductVO implements Serializable {
 	}
 
 	/**
-	 * @return the modifiedOn
-	 */
-	public Timestamp getModifiedOn() {
-		return modifiedOn;
-	}
-
-	/**
-	 * @param modifiedOn the modifiedOn to set
-	 */
-	public void setModifiedOn(Timestamp modifiedOn) {
-		this.modifiedOn = modifiedOn;
-	}
-
-	/**
 	 * @return the productVO
 	 */
 	public ProductVO getProductVO() {
@@ -162,21 +143,6 @@ public class ShipmentProductVO implements Serializable {
 	 */
 	public void setShipmentVO(ShipmentVO shipmentVO) {
 		this.shipmentVO = shipmentVO;
-	}
-
-	/**
-	 * @return the userVO
-	 */
-	public UserVO getUserVO() {
-		return userVO;
-	}
-
-	/**
-	 * @param userVO the userVO to set
-	 */
-	public void setUserVO(UserVO userVO) {
-		this.userVO = userVO;
-	}
-    
+	}   
     
 }

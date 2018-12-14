@@ -4,14 +4,13 @@
 package com.artisans.inventory.vo;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Set;
 
 /**
  * @author Jacob
  *
  */
-public class UserVO implements Serializable {
+public class UserVO extends BaseVO implements Serializable {
 
     /**
 	 * 
@@ -24,15 +23,13 @@ public class UserVO implements Serializable {
 
     private int modifiedBy;
 
-    private Timestamp modifiedOn;
-
     private boolean admin;
 
     private Set<CourierVO> courierVO;
 
     private Set<InvoiceVO> invoiceVO;
 
-    private Set<PaymentsVO> paymentsVO;
+    private Set<PaymentVO> paymentVO;
 
     private Set<ProductVO> productVO;
 
@@ -85,20 +82,6 @@ public class UserVO implements Serializable {
 	}
 
 	/**
-	 * @return the modifiedOn
-	 */
-	public Timestamp getModifiedOn() {
-		return modifiedOn;
-	}
-
-	/**
-	 * @param modifiedOn the modifiedOn to set
-	 */
-	public void setModifiedOn(Timestamp modifiedOn) {
-		this.modifiedOn = modifiedOn;
-	}
-
-	/**
 	 * @return the admin
 	 */
 	public boolean isAdmin() {
@@ -143,15 +126,15 @@ public class UserVO implements Serializable {
 	/**
 	 * @return the paymentsVO
 	 */
-	public Set<PaymentsVO> getPaymentsVO() {
-		return paymentsVO;
+	public Set<PaymentVO> getPaymentsVO() {
+		return paymentVO;
 	}
 
 	/**
-	 * @param paymentsVO the paymentsVO to set
+	 * @param paymentVO the paymentsVO to set
 	 */
-	public void setPaymentsVO(Set<PaymentsVO> paymentsVO) {
-		this.paymentsVO = paymentsVO;
+	public void setPaymentsVO(Set<PaymentVO> paymentVO) {
+		this.paymentVO = paymentVO;
 	}
 
 	/**

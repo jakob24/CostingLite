@@ -55,7 +55,7 @@ public class Shipment implements Serializable {
     @JoinColumn(name="modified_by")
     private User user;
     @OneToMany(mappedBy="shipment")
-    private Set<Payments> payments;
+    private Set<Payment> payments;
 
     /** Default constructor. */
     public Shipment() {
@@ -247,7 +247,7 @@ public class Shipment implements Serializable {
      *
      * @return the current value of payments
      */
-    public Set<Payments> getPayments() {
+    public Set<Payment> getPayments() {
         return payments;
     }
 
@@ -256,7 +256,7 @@ public class Shipment implements Serializable {
      *
      * @param aPayments the new value for payments
      */
-    public void setPayments(Set<Payments> aPayments) {
+    public void setPayments(Set<Payment> aPayments) {
         payments = aPayments;
     }
 

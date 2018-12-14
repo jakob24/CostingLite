@@ -53,18 +53,17 @@ public class LoginController implements Serializable {
 		DefaultSubMenu adminSubmenu = new DefaultSubMenu("Admin");
 		
 		item = new DefaultMenuItem("Maintain Product");		
-		//item.setOutcome("maintainTeam");
+		item.setHref("product.xhtml");
 		item.setIcon("fa fa-user");
 		adminSubmenu.addElement(item);	
 				
 		item = new DefaultMenuItem("Maintain Courier");		
-		//item.setOutcome("adminSettings");
+		item.setHref("courier.xhtml");
 		item.setIcon("fa fa-cogs");
 		adminSubmenu.addElement(item);	
 		
 		item = new DefaultMenuItem("Maintain Supplier");		
-		//item.setOutcome("reportOptions");
-		item.setHref("standingData.xhtml");
+		item.setHref("supplier.xhtml");
 		item.setIcon("fa fa-file-archive-o");
 		adminSubmenu.addElement(item);
 		

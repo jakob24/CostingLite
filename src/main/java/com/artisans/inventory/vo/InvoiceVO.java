@@ -5,16 +5,13 @@ package com.artisans.inventory.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.Set;
-
-import com.artisans.inventory.model.User;
 
 /**
  * @author Jacob
  *
  */
-public class InvoiceVO implements Serializable {
+public class InvoiceVO extends BaseVO implements Serializable {
 	
     /**
 	 * 
@@ -33,11 +30,7 @@ public class InvoiceVO implements Serializable {
 
     private double invAmountUsd;
 
-    private Timestamp modifiedOn;
-
-    private Set<PaymentsVO> paymentsVO;
-
-    private User user;
+    private Set<PaymentVO> paymentVO;
 
     private Set<ShipmentVO> shipmentVO;
 
@@ -128,45 +121,17 @@ public class InvoiceVO implements Serializable {
 	}
 
 	/**
-	 * @return the modifiedOn
-	 */
-	public Timestamp getModifiedOn() {
-		return modifiedOn;
-	}
-
-	/**
-	 * @param modifiedOn the modifiedOn to set
-	 */
-	public void setModifiedOn(Timestamp modifiedOn) {
-		this.modifiedOn = modifiedOn;
-	}
-
-	/**
 	 * @return the paymentsVO
 	 */
-	public Set<PaymentsVO> getPaymentsVO() {
-		return paymentsVO;
+	public Set<PaymentVO> getPaymentsVO() {
+		return paymentVO;
 	}
 
 	/**
-	 * @param paymentsVO the paymentsVO to set
+	 * @param paymentVO the paymentsVO to set
 	 */
-	public void setPaymentsVO(Set<PaymentsVO> paymentsVO) {
-		this.paymentsVO = paymentsVO;
-	}
-
-	/**
-	 * @return the user
-	 */
-	public User getUser() {
-		return user;
-	}
-
-	/**
-	 * @param user the user to set
-	 */
-	public void setUser(User user) {
-		this.user = user;
+	public void setPaymentsVO(Set<PaymentVO> paymentVO) {
+		this.paymentVO = paymentVO;
 	}
 
 	/**

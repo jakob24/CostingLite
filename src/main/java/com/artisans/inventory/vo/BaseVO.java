@@ -12,7 +12,12 @@ import java.sql.Timestamp;
  */
 public class BaseVO implements Serializable {
 	
-    private UserVO userVO;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private UserVO userVO;
     
     private Timestamp modifiedOn;
 

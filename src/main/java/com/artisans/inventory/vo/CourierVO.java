@@ -4,14 +4,13 @@
 package com.artisans.inventory.vo;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Set;
 
 /**
  * @author Jacob
  *
  */
-public class CourierVO implements Serializable {
+public class CourierVO extends BaseVO implements Serializable {
 
     /**
 	 * 
@@ -22,11 +21,8 @@ public class CourierVO implements Serializable {
 
     private String name;
 
-    private Timestamp modifiedDate;
-
     private Set<ShipmentVO> shipmentVO;
 
-    private UserVO userVO;
 
 	/**
 	 * @return the courierId
@@ -57,20 +53,6 @@ public class CourierVO implements Serializable {
 	}
 
 	/**
-	 * @return the modifiedDate
-	 */
-	public Timestamp getModifiedDate() {
-		return modifiedDate;
-	}
-
-	/**
-	 * @param modifiedDate the modifiedDate to set
-	 */
-	public void setModifiedDate(Timestamp modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
-
-	/**
 	 * @return the shipmentVO
 	 */
 	public Set<ShipmentVO> getShipmentVO() {
@@ -83,28 +65,4 @@ public class CourierVO implements Serializable {
 	public void setShipmentVO(Set<ShipmentVO> shipmentVO) {
 		this.shipmentVO = shipmentVO;
 	}
-
-	/**
-	 * @return the userVO
-	 */
-	public UserVO getUserVO() {
-		return userVO;
-	}
-
-	/**
-	 * @param userVO the userVO to set
-	 */
-	public void setUserVO(UserVO userVO) {
-		this.userVO = userVO;
-	}
-
-	/**
-	 * @return the serialversionuid
-	 */
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-    
-    
-    
 }

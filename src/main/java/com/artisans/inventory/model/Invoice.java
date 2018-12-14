@@ -17,12 +17,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Version;
 
 @Entity(name="invoice")
 public class Invoice implements Serializable {
 
-    /** Primary key. */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** Primary key. */
     protected static final String PK = "invoiceId";
 
     @Id
@@ -42,7 +46,7 @@ public class Invoice implements Serializable {
     @Column(name="modified_on")
     private Timestamp modifiedOn;
     @OneToMany(mappedBy="invoice")
-    private Set<Payments> payments;
+    private Set<Payment> payment;
     @ManyToOne
     @JoinColumn(name="modified_by")
     private User user;
@@ -188,8 +192,8 @@ public class Invoice implements Serializable {
      *
      * @return the current value of payments
      */
-    public Set<Payments> getPayments() {
-        return payments;
+    public Set<Payment> getPayments() {
+        return payment;
     }
 
     /**
@@ -197,8 +201,8 @@ public class Invoice implements Serializable {
      *
      * @param aPayments the new value for payments
      */
-    public void setPayments(Set<Payments> aPayments) {
-        payments = aPayments;
+    public void setPayments(Set<Payment> aPayments) {
+        payment = aPayments;
     }
 
     /**

@@ -8,16 +8,21 @@
     <ui:composition>
     <f:view>
 	    <h:form>	 
+	    	<f:loadBundle basename="messages" var="bundle"/>
 			<div class="hidden-sm hidden-xs container-fluid">
 			   <div class="row">
 			   	<a href="#{request.contextPath}/ui/rota.xhtml">
+			   	<!-- 
 					<img src="#{request.contextPath}/images/carlogo2.png" alt="Share Our Car" class="img-responsive"/>
+					 -->
 				</a>
 			   </div>
 			</div> 
-			<div class="hidden-md hidden-lg .visible-sm-block .visible-xs-block">		   
+			<div class="hidden-md hidden-lg .visible-sm-block .visible-xs-block">						   
 			   	<a href="#{request.contextPath}/ui/rota.xhtml">
+			   		<!-- 
 					<img src="#{request.contextPath}/images/carlogom.png" alt="Share Our Car" class="img-responsive"/>
+					 -->
 				</a>
 			</div> 			   
 		</h:form>

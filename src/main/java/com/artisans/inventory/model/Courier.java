@@ -16,7 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Version;
 
 @Entity(name="courier")
 public class Courier implements Serializable {
@@ -36,8 +35,8 @@ public class Courier implements Serializable {
     private int courierId;
     @Column(length=45)
     private String name;
-    @Column(name="modified_date")
-    private Timestamp modifiedDate;
+    @Column(name="modified_on")
+    private Timestamp modifiedOn;
     @OneToMany(mappedBy="courier")
     private Set<Shipment> shipment;
     @ManyToOne
@@ -84,26 +83,23 @@ public class Courier implements Serializable {
     public void setName(String aName) {
         name = aName;
     }
+ 
 
     /**
-     * Access method for modifiedDate.
-     *
-     * @return the current value of modifiedDate
-     */
-    public Timestamp getModifiedDate() {
-        return modifiedDate;
-    }
+	 * @return the modifiedOn
+	 */
+	public Timestamp getModifiedOn() {
+		return modifiedOn;
+	}
 
-    /**
-     * Setter method for modifiedDate.
-     *
-     * @param aModifiedDate the new value for modifiedDate
-     */
-    public void setModifiedDate(Timestamp aModifiedDate) {
-        modifiedDate = aModifiedDate;
-    }
+	/**
+	 * @param modifiedOn the modifiedOn to set
+	 */
+	public void setModifiedOn(Timestamp modifiedOn) {
+		this.modifiedOn = modifiedOn;
+	}
 
-    /**
+	/**
      * Access method for shipment.
      *
      * @return the current value of shipment

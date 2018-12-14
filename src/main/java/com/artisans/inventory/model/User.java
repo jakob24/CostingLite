@@ -51,7 +51,7 @@ public class User implements Serializable {
     private Set<Invoice> invoice;
     
     @OneToMany(mappedBy="user")
-    private Set<Payments> payments;
+    private Set<Payment> payment;
     
     @OneToMany(mappedBy="user")
     private Set<Product> product;
@@ -209,8 +209,8 @@ public class User implements Serializable {
      * @return the current value of payments
      */
     @JsonIgnore
-    public Set<Payments> getPayments() {
-        return payments;
+    public Set<Payment> getPayments() {
+        return payment;
     }
 
     /**
@@ -218,8 +218,8 @@ public class User implements Serializable {
      *
      * @param aPayments the new value for payments
      */
-    public void setPayments(Set<Payments> aPayments) {
-        payments = aPayments;
+    public void setPayments(Set<Payment> aPayments) {
+        payment = aPayments;
     }
 
     /**

@@ -5,14 +5,13 @@ package com.artisans.inventory.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.Set;
 
 /**
  * @author Jacob
  *
  */
-public class ShipmentVO implements Serializable {
+public class ShipmentVO extends BaseVO implements Serializable {
 
     /**
 	 * 
@@ -29,17 +28,13 @@ public class ShipmentVO implements Serializable {
 
     private Date deliveryDate;
 
-    private Timestamp modifiedOn;
-
     private CourierVO courierVO;
 
     private InvoiceVO invoiceVO;
 
     private Set<ShipmentProductVO> shipmentProductVO;
 
-    private UserVO userVO;
-
-    private Set<PaymentsVO> paymentsVO;
+    private Set<PaymentVO> paymentVO;
 
 	/**
 	 * @return the shipmentId
@@ -112,20 +107,6 @@ public class ShipmentVO implements Serializable {
 	}
 
 	/**
-	 * @return the modifiedOn
-	 */
-	public Timestamp getModifiedOn() {
-		return modifiedOn;
-	}
-
-	/**
-	 * @param modifiedOn the modifiedOn to set
-	 */
-	public void setModifiedOn(Timestamp modifiedOn) {
-		this.modifiedOn = modifiedOn;
-	}
-
-	/**
 	 * @return the courierVO
 	 */
 	public CourierVO getCourierVO() {
@@ -168,34 +149,16 @@ public class ShipmentVO implements Serializable {
 	}
 
 	/**
-	 * @return the userVO
-	 */
-	public UserVO getUserVO() {
-		return userVO;
-	}
-
-	/**
-	 * @param userVO the userVO to set
-	 */
-	public void setUserVO(UserVO userVO) {
-		this.userVO = userVO;
-	}
-
-	/**
 	 * @return the paymentsVO
 	 */
-	public Set<PaymentsVO> getPaymentsVO() {
-		return paymentsVO;
+	public Set<PaymentVO> getPaymentsVO() {
+		return paymentVO;
 	}
 
 	/**
-	 * @param paymentsVO the paymentsVO to set
+	 * @param paymentVO the paymentsVO to set
 	 */
-	public void setPaymentsVO(Set<PaymentsVO> paymentsVO) {
-		this.paymentsVO = paymentsVO;
+	public void setPaymentsVO(Set<PaymentVO> paymentVO) {
+		this.paymentVO = paymentVO;
 	}	
-    
-    
-    
-    
 }
