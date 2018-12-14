@@ -1,0 +1,58 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+                
+
+<ui:composition template="layout.xhtml">
+    <ui:define name="content">
+    
+			<h:outputScript target="body">
+ 				$(document).ready(function()
+				{				
+					  					  
+				});				
+			</h:outputScript>	
+    
+		<div class="container-fluid">
+			<div class="ui-g-12 ui-md-4 ui-lg-6" id="dataEditDiv">
+				<h:form id="dataSettings" prependId="false">
+					<p:growl id="growl" showDetail="true" sticky="true" />  
+					
+				    <p:panel id="productSelection" header="Select a Product" style="margin-bottom:10px">
+				        <h:panelGrid columns="3" cellpadding="10">				           
+					        <p:selectOneMenu id="console" value="#{StandingDataController.selectedProduct}" style="width:125px;">
+					            <f:selectItems value="#{StandingDataController.productVOList}" />
+					        </p:selectOneMenu>
+					    						    	
+							<p:commandButton value="#{bundle.btn_edit_product}" id="editProduct" action="#{StandingDataController.onProductEdit}" process="@this"
+								styleClass="btn ui-state-default" style="margin-left: 20px" disabled="#{empty StandingDataController.selectedProduct}"/>
+								
+							<p:commandButton value="#{bundle.btn_add_new_product}" id="addNewProduct" action="#{StandingDataController.onProductEdit}" process="@this"
+								styleClass="btn ui-state-default"/>										
+										        
+				        </h:panelGrid>
+				    </p:panel>
+            
+				    <p:panel id="productAdd" header="Product Details" style="margin-bottom:10px">
+				        <h:panelGrid columns="2" cellpadding="10">				           
+					    <div class="pull-right" style="margin-top: 10px;">	
+							<p:commandButton value="#{bundle.btn_label_save}" id="saveProduct" action="#{StandingDataController.onProductEdit}" process="@this"
+								styleClass="btn ui-state-default"/>									
+						</div>					        
+				        </h:panelGrid>
+				    </p:panel>
+											
+				</h:form>
+				
+			    <div class="row">			      
+					<p:messages id="messages" showDetail="true" autoUpdate="true"/>	
+				</div>				
+			</div>				
+		</div>					
+    </ui:define>
+</ui:composition>
+
+</html>
