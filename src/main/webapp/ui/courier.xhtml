@@ -32,7 +32,7 @@
 				            <p:outputLabel	value="#{bundle.title_courier_settings}"/>
 					    </f:facet> 
 				        
-						<p:ajax event="rowEdit" listener="#{StandingDataController.onCourierEdit}" update=":messages"/> 
+						<p:ajax event="rowEdit" listener="#{StandingDataController.onCourierEdit}" update=":messages" oncomplete="$('#addNewCourier').prop('disabled',false);"/> 
 	                    <p:ajax event="rowEditCancel" listener="#{StandingDataController.onCourierCancel}" update="courierList"  /> 			        
 				        
 				        <p:column headerText="#{bundle.label_courier_name}" >  

@@ -14,6 +14,10 @@ public class ViewScope implements Scope {
 
 	@Override
 	public Object get(String name, ObjectFactory<?> objectFactory) {
+		if(null == FacesContext.getCurrentInstance().getViewRoot()) {
+			//Object object = objectFactory.getObject();
+			return null;
+		}
 		Map<String, Object> viewMap = FacesContext.getCurrentInstance().getViewRoot().getViewMap();
 		if (viewMap.containsKey(name)) {
 			return viewMap.get(name);

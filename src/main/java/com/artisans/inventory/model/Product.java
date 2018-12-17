@@ -45,6 +45,27 @@ public class Product implements Serializable {
     private byte[] image;
     @Column(name="modified_on")
     private Timestamp modifiedOn;
+    @Column(name="postage_charges", precision=22)
+    private Double postageCharges;	
+    @Column(name="packing_charges", precision=22)
+    private Double packingCharges;	
+    @Column(name="other_charges", precision=22)
+    private Double otherCharges;		
+    @Column(name="web_rrp", precision=22)
+    private Double webRrp;	
+    @Column(name="web_pp_charge", precision=22)
+    private Double webPpCharge;	
+    @Column(name="ebay_rrp", precision=22)
+    private Double ebayRrp;		
+    @Column(name="ebay_fees", precision=22)
+    private Double ebayFees;	
+    @Column(name="amz_rrp", precision=22)
+    private Double amzRrp;	
+    @Column(name="amz_fees", precision=22)
+    private Double amzFees;		
+    @Column(name="amz_fba_fees", precision=22)
+    private Double amzFbaFees;    
+                  
     @OneToMany(mappedBy="product")
     private Set<ShipmentProduct> shipmentProduct;
     @ManyToOne
@@ -181,8 +202,149 @@ public class Product implements Serializable {
     public void setImage(byte[] aImage) {
         image = aImage;
     }
+            
 
     /**
+	 * @return the postageCharges
+	 */
+	public Double getPostageCharges() {
+		return postageCharges;
+	}
+
+	/**
+	 * @param postageCharges the postageCharges to set
+	 */
+	public void setPostageCharges(Double postageCharges) {
+		this.postageCharges = postageCharges;
+	}
+
+	/**
+	 * @return the packingCharges
+	 */
+	public Double getPackingCharges() {
+		return packingCharges;
+	}
+
+	/**
+	 * @param packingCharges the packingCharges to set
+	 */
+	public void setPackingCharges(Double packingCharges) {
+		this.packingCharges = packingCharges;
+	}
+
+	/**
+	 * @return the otherCharges
+	 */
+	public Double getOtherCharges() {
+		return otherCharges;
+	}
+
+	/**
+	 * @param otherCharges the otherCharges to set
+	 */
+	public void setOtherCharges(Double otherCharges) {
+		this.otherCharges = otherCharges;
+	}
+
+	/**
+	 * @return the webRrp
+	 */
+	public Double getWebRrp() {
+		return webRrp;
+	}
+
+	/**
+	 * @param webRrp the webRrp to set
+	 */
+	public void setWebRrp(Double webRrp) {
+		this.webRrp = webRrp;
+	}
+
+	/**
+	 * @return the webPpCharge
+	 */
+	public Double getWebPpCharge() {
+		return webPpCharge;
+	}
+
+	/**
+	 * @param webPpCharge the webPpCharge to set
+	 */
+	public void setWebPpCharge(Double webPpCharge) {
+		this.webPpCharge = webPpCharge;
+	}
+
+	/**
+	 * @return the ebayRrp
+	 */
+	public Double getEbayRrp() {
+		return ebayRrp;
+	}
+
+	/**
+	 * @param ebayRrp the ebayRrp to set
+	 */
+	public void setEbayRrp(Double ebayRrp) {
+		this.ebayRrp = ebayRrp;
+	}
+
+	/**
+	 * @return the ebayFees
+	 */
+	public Double getEbayFees() {
+		return ebayFees;
+	}
+
+	/**
+	 * @param ebayFees the ebayFees to set
+	 */
+	public void setEbayFees(Double ebayFees) {
+		this.ebayFees = ebayFees;
+	}
+
+	/**
+	 * @return the amzRrp
+	 */
+	public Double getAmzRrp() {
+		return amzRrp;
+	}
+
+	/**
+	 * @param amzRrp the amzRrp to set
+	 */
+	public void setAmzRrp(Double amzRrp) {
+		this.amzRrp = amzRrp;
+	}
+
+	/**
+	 * @return the amzFees
+	 */
+	public Double getAmzFees() {
+		return amzFees;
+	}
+
+	/**
+	 * @param amzFees the amzFees to set
+	 */
+	public void setAmzFees(Double amzFees) {
+		this.amzFees = amzFees;
+	}
+
+	/**
+	 * @return the amzFbaFees
+	 */
+	public Double getAmzFbaFees() {
+		return amzFbaFees;
+	}
+
+	/**
+	 * @param amzFbaFees the amzFbaFees to set
+	 */
+	public void setAmzFbaFees(Double amzFbaFees) {
+		this.amzFbaFees = amzFbaFees;
+	}
+
+	/**
      * Access method for modifiedOn.
      *
      * @return the current value of modifiedOn
@@ -199,8 +361,9 @@ public class Product implements Serializable {
     public void setModifiedOn(Timestamp aModifiedOn) {
         modifiedOn = aModifiedOn;
     }
-
-    /**
+    
+ 
+	/**
      * Access method for shipmentProduct.
      *
      * @return the current value of shipmentProduct

@@ -32,7 +32,7 @@
 				            <p:outputLabel	value="#{bundle.title_supplier_settings}"/>
 					    </f:facet> 
 				        
-						<p:ajax event="rowEdit" listener="#{StandingDataController.onSupplierEdit}" update=":messages"/> 
+						<p:ajax event="rowEdit" listener="#{StandingDataController.onSupplierEdit}" update=":messages" oncomplete="$('#addNewSupplier').prop('disabled',false);"/> 
 	                    <p:ajax event="rowEditCancel" listener="#{StandingDataController.onSupplierCancel}" update="supplierList"  /> 			        
 				        
 				        <p:column headerText="#{bundle.label_supplier_name}" >  
@@ -66,8 +66,9 @@
 					</p:dataTable>
 													
 				    <div class="pull-right" style="margin-top: 10px;">					    	
-						<p:commandButton value="#{bundle.btn_label_add_new}" id="addNewSupplier" action="#{StandingDataController.onAddNewSupplierRow}" process="@this" update="supplierList"
-							styleClass="btn ui-state-default" validateClient="true" oncomplete="$('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){$(this).click()});"/>
+						<p:commandButton value="#{bundle.btn_label_add_new}" id="addNewSupplier" action="#{StandingDataController.onAddNewSupplierRow}" 
+							process="@this" update="supplierList" styleClass="btn ui-state-default" validateClient="true"
+							oncomplete="$('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){$(this).click()});"/>
 					</div>						
 				</h:form>
 				

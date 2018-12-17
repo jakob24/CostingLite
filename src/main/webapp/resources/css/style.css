@@ -297,8 +297,68 @@ body {
 	text-shadow: 0 1px 1px rgba(255,255,255,0.6);
 }
 
+/* Inventory Lite */
+    .labelx {
+        width:30%;
+        padding:4px;
+    }
+ 
+    .valuex {
+        width:70%;
+        padding:4px;
+    }
+ 
+    .grid {
+        width:100%;
+    }
+ 
+    .error {
+        color: red;
+    }
+ 
+    .outputLabel {
+        font-weight: bold;
+    }
+ 
+    .grid {
+        width:33%;
+        padding:4px;
+    }
 
+	.customTxtWidth150px{
+	    width:300px !important;
+	}
+	
+.ui-fileupload-buttonbar {
+     width:50%;
+}
+	
+/* hide the icons in the file upload button bar */
+.ui-fileupload-buttonbar .ui-icon {
+    display: none;
+     width:50%;
+}
 
+/* adjust the padding of all buttons inside the file upload button bar */
+.ui-fileupload-buttonbar .ui-button-text-icon-left .ui-button-text {
+    font-size: 1em;
+    padding: 0 0.2em;
+   
+}
 
+/* unstyle the file upload button bar background */
+.ui-fileupload-buttonbar.ui-widget-header {
+    background-color: transparent;
+    border: 0 none;
+}
 
+/* increase fileupload button spacing between 'choose' and 'upload' */
+.ui-fileupload-buttonbar .ui-fileupload-choose {
+    margin-right: 10em;
+}
+
+/* remove the border of file upload content list */
+.ui-fileupload-content {
+    border: 0 none;
+}	
 
