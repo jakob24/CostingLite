@@ -22,5 +22,8 @@ CHANGE COLUMN `amz_rrp` `amz_rrp` DOUBLE NULL DEFAULT 0 ,
 CHANGE COLUMN `amz_fees` `amz_fees` DOUBLE NULL DEFAULT 0 ,
 CHANGE COLUMN `amz_fba_fees` `amz_fba_fees` DOUBLE NULL DEFAULT 0 ;
 
+ALTER TABLE `costing_lite`.`product` 
+ADD COLUMN `ean` VARCHAR(45) NULL AFTER `amz_fba_fees`;
+
 
 

@@ -77,15 +77,59 @@
 		                    <h:outputText value="ASIN List *" />
 		                    <p:inputTextarea value="#{StandingDataController.newProduct.asin}" required="true" label="asin" />	
 		                    
+		                    <h:outputText value="EAN *" />
+		                    <p:inputText value="#{StandingDataController.newProduct.ean}" required="true" label="ean" />			                    
+		                    
 		                    <h:outputText value="Inventory" />
-		                    <p:inputText value="#{StandingDataController.newProduct.inventory}" required="true" styleClass="customTxtWidth150px" >
+		                    <p:inputText value="#{StandingDataController.newProduct.inventory}" required="true">
 		                    	<f:validateDoubleRange minimum="0" />
 		                    </p:inputText>  		                    	                    
 		 
 		                    <h:outputText value="Min Inventory" />
-		                    <p:inputText value="#{StandingDataController.newProduct.minInventory}" styleClass="customTxtWidth150px">
+		                    <p:inputText value="#{StandingDataController.newProduct.minInventory}">
 		                    	<f:validateDoubleRange minimum="1" maximum="200" />
-		                    </p:inputText>                  				        	
+		                    </p:inputText>  	  
+		                                      
+		 					<p:separator/><p:separator/><p:separator/><p:separator/>
+		 						
+		                    <h:outputText value="Web Retail Price" />
+		                    <p:inputText value="#{StandingDataController.newProduct.webRrp}">
+		                    	<f:validateDoubleRange minimum="1" maximum="200" />
+		                    </p:inputText> 
+		                    
+		                    <h:outputText value="Postal Charges" />
+		                    <p:inputText value="#{StandingDataController.newProduct.postageCharges}" required="true">
+		                    	<f:validateDoubleRange minimum="0" />
+		                    </p:inputText>  			                    
+		                    
+		                    <h:outputText value="Packing Charges" />
+		                    <p:inputText value="#{StandingDataController.newProduct.packingCharges}" required="true">
+		                    	<f:validateDoubleRange minimum="0" />
+		                    </p:inputText>  		                    	                    
+		 
+		                    <h:outputText value="Other Charges" />
+		                    <p:inputText value="#{StandingDataController.newProduct.otherCharges}">
+		                    	<f:validateDoubleRange minimum="0" maximum="200" />
+		                    </p:inputText> 	
+		                    
+		                    <h:outputText value="Web Payment Processor Charges" />
+		                    <p:inputText value="#{StandingDataController.newProduct.webPpCharge}" required="true">
+		                    	<f:validateDoubleRange minimum="0" />
+		                    </p:inputText>  		                    	                    
+		 					
+		 					<h:panelGroup /><h:panelGroup />		 					
+		 					<p:separator/><p:separator/><p:separator/><p:separator/>            				
+		 					
+		                    <h:outputText value="Ebay Retail Price" />
+		                    <p:inputText value="#{StandingDataController.newProduct.ebayRrp}">
+		                    	<f:validateDoubleRange minimum="0" maximum="200" />
+		                    </p:inputText> 
+		                    
+		                    <h:outputText value="Ebay Fees" />
+		                    <p:inputText value="#{StandingDataController.newProduct.ebayFees}" required="true">
+		                    	<f:validateDoubleRange minimum="0" />
+		                    </p:inputText>  		                    
+		                                  				        	
 				        </h:panelGrid>
 				        
 					    <div style="margin-top: 20px;" class="pull-right">

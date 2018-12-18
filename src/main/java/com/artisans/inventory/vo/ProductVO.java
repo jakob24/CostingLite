@@ -51,6 +51,8 @@ public class ProductVO extends BaseVO implements Serializable {
     private Double amzFees;		
     
     private Double amzFbaFees;   
+    
+    private String ean;
        
     private Set<ShipmentProductVO> shipmentProductVO;
 
@@ -306,5 +308,21 @@ public class ProductVO extends BaseVO implements Serializable {
 	public void setShipmentProductVO(Set<ShipmentProductVO> shipmentProductVO) {
 		this.shipmentProductVO = shipmentProductVO;
 	}
+
+	/**
+	 * @return the ean
+	 */
+	public String getEan() {
+		return ean;
+	}
+
+	/**
+	 * @param ean the ean to set
+	 */
+	public void setEan(String ean) {
+		this.ean = ean;
+	}
+	
+	
 
 }

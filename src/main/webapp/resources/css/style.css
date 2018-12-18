@@ -299,13 +299,14 @@ body {
 
 /* Inventory Lite */
     .labelx {
-        width:30%;
-        padding:4px;
+        width:40%;
+        min-width:200px !important;
+        padding:2px;
     }
  
     .valuex {
-        width:70%;
-        padding:4px;
+        width:60%;
+        padding:2px;
     }
  
     .grid {
@@ -321,8 +322,7 @@ body {
     }
  
     .grid {
-        width:33%;
-        padding:4px;
+
     }
 
 	.customTxtWidth150px{

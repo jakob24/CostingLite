@@ -65,6 +65,9 @@ public class Product implements Serializable {
     private Double amzFees;		
     @Column(name="amz_fba_fees", precision=22)
     private Double amzFbaFees;    
+    
+    @Column(name="ean", length=45)
+    private String ean;
                   
     @OneToMany(mappedBy="product")
     private Set<ShipmentProduct> shipmentProduct;
@@ -342,6 +345,21 @@ public class Product implements Serializable {
 	 */
 	public void setAmzFbaFees(Double amzFbaFees) {
 		this.amzFbaFees = amzFbaFees;
+	}
+	
+
+	/**
+	 * @return the ean
+	 */
+	public String getEan() {
+		return ean;
+	}
+
+	/**
+	 * @param ean the ean to set
+	 */
+	public void setEan(String ean) {
+		this.ean = ean;
 	}
 
 	/**
