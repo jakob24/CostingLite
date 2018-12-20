@@ -1,0 +1,123 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">					        
+				        
+        <p:tab id="InvoicePaymentTab" title="Invoice Payments">				        	
+        	 <p:panel id="PaymentsTab" header="Add / Edit Invoices" style="margin-bottom:10px" >				        	 
+				<p:dataTable var="payments" value="#{InvoiceWizard.invoiceVO.paymentsVO}" id="paymentList" 
+					editable="true" emptyMessage="" reflow="true" style="margin: 0 auto;" > 
+					
+			        <f:facet  name="header" styleClass="ui-column-title">  
+			            <p:outputLabel value="Invoices" />
+			        </f:facet> 						
+			        	        
+					<p:ajax event="rowEdit" listener="#{InvoiceWizard.onPaymentsEdit}" update=":messages" oncomplete="showHideNextButton();"  /> 
+                    <p:ajax event="rowEditCancel" listener="#{InvoiceWizard.onPaymentsCancel}" update="paymentList"  /> 		        
+			        
+			        <p:column headerText="Invoice Amount ($)">  
+			            <p:cellEditor>  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{payments.amountUsd}" />  
+			                </f:facet>  
+			                <f:facet name="input">  
+			                    <p:inputNumber value="#{payments.amountUsd}" id="paymentAmountUSD" decimalPlaces="2" maxValue="#{InvoiceWizard.invoiceVO.invAmountUsd}">
+			                    	<p:ajax event="change"  process="@this" update="paymentAmountUSD"/>  
+			                    </p:inputNumber>
+			                </f:facet>  
+			            </p:cellEditor>  
+			        </p:column>							        
+			        <p:column headerText="GBP->USD">  
+			            <p:cellEditor>  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{payments.gbpToUsd}" />  
+			                </f:facet>  
+			                <f:facet name="input">  
+			                    <p:inputNumber value="#{payments.gbpToUsd}" id="paymentgbpToUsd" decimalPlaces="4" >	
+			                    	<p:ajax event="focus" process="@this" update="paymentAmountUSD"/> 
+			                    	<p:ajax event="change" listener="#{InvoiceWizard.updateInvoiceAmountBasedoUSD}" process="@this" update="invAmount"/>  
+			                    </p:inputNumber>
+			                </f:facet>  
+			            </p:cellEditor>  
+			        </p:column>
+			        <p:column headerText="Invoice Amount *">  
+			            <p:cellEditor>  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{payments.amount}" >  
+			                    	<f:convertNumber pattern="#0.00" locale="en_GB"/>
+			                    </h:outputText>
+			                </f:facet>  
+			                <f:facet name="input">  
+			                    <p:inputNumber value="#{payments.amount}" decimalPlaces="2" required="true" id="invAmount" /> 	
+			                </f:facet>  
+			            </p:cellEditor>  
+			        </p:column>						        
+			        <p:column headerText="Bank Charges">  
+			            <p:cellEditor>  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{payments.bankCharges}" />  
+			                </f:facet>  
+			                <f:facet name="input">  
+			                    <p:inputNumber value="#{payments.bankCharges}" id="bankCharges" decimalPlaces="2"/>		
+			                </f:facet>  
+			            </p:cellEditor>  
+			        </p:column>	
+			        <p:column headerText="Other Charges">  
+			            <p:cellEditor>  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{payments.otherCharges}" />  
+			                </f:facet>  
+			                <f:facet name="input">  
+			                    <p:inputNumber value="#{payments.otherCharges}" id="otherCharges" decimalPlaces="2"/>		
+			                </f:facet>  
+			            </p:cellEditor>  
+			        </p:column>		
+			        <p:column headerText="Disburse Charges">  
+			            <p:cellEditor>  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{payments.disbursementCharges}" />  
+			                </f:facet>  
+			                <f:facet name="input">  
+			                    <p:inputNumber value="#{payments.disbursementCharges}" id="disbursementCharges" decimalPlaces="2"/>		
+			                </f:facet>  
+			            </p:cellEditor>  
+			        </p:column>
+			        <p:column headerText="VAT">  
+			            <p:cellEditor>  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{payments.vat}" />  
+			                </f:facet>  
+			                <f:facet name="input">  
+			                    <p:inputNumber value="#{payments.vat}" id="vat" decimalPlaces="2"/>		
+			                </f:facet>  
+			            </p:cellEditor>  
+			        </p:column>	
+			        <p:column headerText="Date Paid">  
+			            <p:cellEditor>  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{payments.datePaid}">  
+			                    	<f:convertDateTime pattern="dd/MM/yyyy"/>  
+			                    </h:outputText>
+			                </f:facet>  
+			                <f:facet name="input">  
+			                    <p:calendar pattern="dd/MM/yyyy" value="#{payments.datePaid}" mindate="#{InvoiceWizard.invoiceVO.invoiceDate}" />		
+			                </f:facet>  
+			            </p:cellEditor>  
+			        </p:column>						        
+				    <p:column headerText="#{bundle.btn_label_amend}" style="color:red;" id="amendTool">  
+				    	<p:rowEditor />  
+				    </p:column> 	
+				    
+			        <f:facet name="footer" styleClass="ui-column-title">  
+			            <h:outputText value="Total : "/>
+			            <h:outputText value="#{InvoiceWizard.totalInvoicePaymentAmount}">
+			            	<f:convertNumber pattern="#0.00" locale="en_GB"/>
+			            </h:outputText>
+			        </f:facet> 				        				    			    
+				</p:dataTable>				
+			</p:panel>
+        </p:tab>
+</ui:composition>				        

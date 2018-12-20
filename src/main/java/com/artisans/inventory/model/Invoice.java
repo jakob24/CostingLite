@@ -33,25 +33,35 @@ public class Invoice implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="invoice_id", unique=true, nullable=false, length=10)
     private int invoiceId;
+    
     @Column(name="invoice_number", length=45)
     private String invoiceNumber;
+    
     @Column(name="invoice_date")
     private Date invoiceDate;
+    
     @Column(name="date_paid")
     private Date datePaid;
+    
     @Column(name="inv_amount", precision=22)
     private double invAmount;
+    
     @Column(name="inv_amount_usd", precision=22)
     private double invAmountUsd;
+    
     @Column(name="modified_on")
     private Timestamp modifiedOn;
+    
     @OneToMany(mappedBy="invoice")
     private Set<Payment> payment;
+    
     @ManyToOne
     @JoinColumn(name="modified_by")
     private User user;
+    
     @OneToMany(mappedBy="invoice")
     private Set<Shipment> shipment;
+    
     @ManyToOne
     @JoinColumn(name="supplier")
     private Supplier supplier;

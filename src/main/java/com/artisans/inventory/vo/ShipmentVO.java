@@ -4,7 +4,7 @@
 package com.artisans.inventory.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -20,6 +20,8 @@ public class ShipmentVO extends BaseVO implements Serializable {
 
 	private int shipmentId;
 
+	private int shipmentNumber;
+	
     private Date shipmentDate;
 
     private int payment;
@@ -48,6 +50,21 @@ public class ShipmentVO extends BaseVO implements Serializable {
 	 */
 	public void setShipmentId(int shipmentId) {
 		this.shipmentId = shipmentId;
+	}
+		
+
+	/**
+	 * @return the shipmentNumber
+	 */
+	public int getShipmentNumber() {
+		return shipmentNumber;
+	}
+
+	/**
+	 * @param shipmentNumber the shipmentNumber to set
+	 */
+	public void setShipmentNumber(int shipmentNumber) {
+		this.shipmentNumber = shipmentNumber;
 	}
 
 	/**

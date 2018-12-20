@@ -4,7 +4,8 @@
 package com.artisans.inventory.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
+
 
 /**
  * @author Jacob
@@ -20,23 +21,23 @@ public class PaymentVO extends BaseVO implements Serializable {
 
 	private int paymentId;
 
-    private double amount;
+    private Double amount;
 
-    private double amountUsd;
+    private Double amountUsd;
 
-    private double bankCharges;
+    private Double bankCharges;
 
-    private double gbpToUsd;
+    private Double gbpToUsd;
 
-    private double otherCharges;
+    private Double otherCharges;
 
     private Date datePaid;
 
-    private double vat;
+    private Double vat;
 
-    private double disbursementCharges;
+    private Double disbursementCharges;
 
-    private String paymentType;
+    private String paymentType; // INVOICE/SHIPMENT
 
     private short paid;
 
@@ -61,70 +62,70 @@ public class PaymentVO extends BaseVO implements Serializable {
 	/**
 	 * @return the amount
 	 */
-	public double getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
 	/**
 	 * @param amount the amount to set
 	 */
-	public void setAmount(double amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 
 	/**
 	 * @return the amountUsd
 	 */
-	public double getAmountUsd() {
+	public Double getAmountUsd() {
 		return amountUsd;
 	}
 
 	/**
 	 * @param amountUsd the amountUsd to set
 	 */
-	public void setAmountUsd(double amountUsd) {
+	public void setAmountUsd(Double amountUsd) {
 		this.amountUsd = amountUsd;
 	}
 
 	/**
 	 * @return the bankCharges
 	 */
-	public double getBankCharges() {
+	public Double getBankCharges() {
 		return bankCharges;
 	}
 
 	/**
 	 * @param bankCharges the bankCharges to set
 	 */
-	public void setBankCharges(double bankCharges) {
+	public void setBankCharges(Double bankCharges) {
 		this.bankCharges = bankCharges;
 	}
 
 	/**
 	 * @return the gbpToUsd
 	 */
-	public double getGbpToUsd() {
+	public Double getGbpToUsd() {
 		return gbpToUsd;
 	}
 
 	/**
 	 * @param gbpToUsd the gbpToUsd to set
 	 */
-	public void setGbpToUsd(double gbpToUsd) {
+	public void setGbpToUsd(Double gbpToUsd) {
 		this.gbpToUsd = gbpToUsd;
 	}
 
 	/**
 	 * @return the otherCharges
 	 */
-	public double getOtherCharges() {
+	public Double getOtherCharges() {
 		return otherCharges;
 	}
 
 	/**
 	 * @param otherCharges the otherCharges to set
 	 */
-	public void setOtherCharges(double otherCharges) {
+	public void setOtherCharges(Double otherCharges) {
 		this.otherCharges = otherCharges;
 	}
 
@@ -145,28 +146,28 @@ public class PaymentVO extends BaseVO implements Serializable {
 	/**
 	 * @return the vat
 	 */
-	public double getVat() {
+	public Double getVat() {
 		return vat;
 	}
 
 	/**
 	 * @param vat the vat to set
 	 */
-	public void setVat(double vat) {
+	public void setVat(Double vat) {
 		this.vat = vat;
 	}
 
 	/**
 	 * @return the disbursementCharges
 	 */
-	public double getDisbursementCharges() {
+	public Double getDisbursementCharges() {
 		return disbursementCharges;
 	}
 
 	/**
 	 * @param disbursementCharges the disbursementCharges to set
 	 */
-	public void setDisbursementCharges(double disbursementCharges) {
+	public void setDisbursementCharges(Double disbursementCharges) {
 		this.disbursementCharges = disbursementCharges;
 	}
 

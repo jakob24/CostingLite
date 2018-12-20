@@ -50,28 +50,42 @@ public class LoginController implements Serializable {
 		firstSubmenu.addElement(item);
 		topMenu.addElement(firstSubmenu);
 				
-		DefaultSubMenu adminSubmenu = new DefaultSubMenu("Admin");
+		DefaultSubMenu invoiceSubmenu = new DefaultSubMenu("Invoice");
+		
+		item = new DefaultMenuItem("New");		
+		item.setHref("newInvoice.xhtml");
+		item.setIcon("fa fa-user");
+		invoiceSubmenu.addElement(item);	
+				
+		item = new DefaultMenuItem("Update");		
+		item.setHref("editInvoice.xhtml");
+		item.setIcon("fa fa-cogs");
+		invoiceSubmenu.addElement(item);	
+		
+		topMenu.addElement(invoiceSubmenu);	
+						
+		DefaultSubMenu dataSubmenu = new DefaultSubMenu("Data");
 		
 		item = new DefaultMenuItem("Maintain Product");		
 		item.setHref("product.xhtml");
 		item.setIcon("fa fa-user");
-		adminSubmenu.addElement(item);	
+		dataSubmenu.addElement(item);	
 				
 		item = new DefaultMenuItem("Maintain Courier");		
 		item.setHref("courier.xhtml");
 		item.setIcon("fa fa-cogs");
-		adminSubmenu.addElement(item);	
+		dataSubmenu.addElement(item);	
 		
 		item = new DefaultMenuItem("Maintain Supplier");		
 		item.setHref("supplier.xhtml");
 		item.setIcon("fa fa-file-archive-o");
-		adminSubmenu.addElement(item);
+		dataSubmenu.addElement(item);
 		
 		item = new DefaultMenuItem("Maintain User");		
 		//item.setOutcome("subscription");
 		item.setIcon("fa fa-paypal");
-		adminSubmenu.addElement(item);			
-					
-		topMenu.addElement(adminSubmenu);			
+		dataSubmenu.addElement(item);	
+							
+		topMenu.addElement(dataSubmenu);			
 	}
 }

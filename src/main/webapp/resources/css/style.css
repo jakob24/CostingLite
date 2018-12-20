@@ -300,7 +300,7 @@ body {
 /* Inventory Lite */
     .labelx {
         width:40%;
-        min-width:200px !important;
+        min-width:100px !important;
         padding:2px;
     }
  
@@ -309,6 +309,16 @@ body {
         padding:2px;
     }
  
+    .labelY {
+        width:20%;
+        padding:4px;
+    }
+ 
+    .valueY {
+        width:80%;
+        padding:4px;
+    }
+     
     .grid {
         width:100%;
     }

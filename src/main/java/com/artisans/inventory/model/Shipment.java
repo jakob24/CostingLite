@@ -21,7 +21,7 @@ import javax.persistence.OneToMany;
 @Entity(name="shipment")
 public class Shipment implements Serializable {
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -33,29 +33,39 @@ public class Shipment implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="shipment_id", unique=true, nullable=false, length=10)
     private int shipmentId;
+    
+    @Column(length=2)
+    private int shipmentNumber;
+    
     @Column(name="shipment_date")
     private Date shipmentDate;
-    @Column(length=10)
-    private int payment;
+    
     @Column(name="tracking_number", length=45)
     private String trackingNumber;
+    
     @Column(name="delivery_date")
     private Date deliveryDate;
+    
     @Column(name="modified_on")
     private Timestamp modifiedOn;
+    
     @ManyToOne
     @JoinColumn(name="courier")
     private Courier courier;
+    
     @ManyToOne
     @JoinColumn(name="invoice")
     private Invoice invoice;
+    
     @OneToMany(mappedBy="shipment")
     private Set<ShipmentProduct> shipmentProduct;
+    
     @ManyToOne
     @JoinColumn(name="modified_by")
     private User user;
+    
     @OneToMany(mappedBy="shipment")
-    private Set<Payment> payments;
+    private Set<Payment> payment;
 
     /** Default constructor. */
     public Shipment() {
@@ -98,23 +108,7 @@ public class Shipment implements Serializable {
         shipmentDate = aShipmentDate;
     }
 
-    /**
-     * Access method for payment.
-     *
-     * @return the current value of payment
-     */
-    public int getPayment() {
-        return payment;
-    }
 
-    /**
-     * Setter method for payment.
-     *
-     * @param aPayment the new value for payment
-     */
-    public void setPayment(int aPayment) {
-        payment = aPayment;
-    }
 
     /**
      * Access method for trackingNumber.
@@ -168,9 +162,24 @@ public class Shipment implements Serializable {
      */
     public void setModifiedOn(Timestamp aModifiedOn) {
         modifiedOn = aModifiedOn;
-    }
+    }    
 
-    /**
+
+	/**
+	 * @return the shipmentNumber
+	 */
+	public int getShipmentNumber() {
+		return shipmentNumber;
+	}
+
+	/**
+	 * @param shipmentNumber the shipmentNumber to set
+	 */
+	public void setShipmentNumber(int shipmentNumber) {
+		this.shipmentNumber = shipmentNumber;
+	}
+
+	/**
      * Access method for courier.
      *
      * @return the current value of courier
@@ -225,6 +234,20 @@ public class Shipment implements Serializable {
     }
 
     /**
+	 * @return the payment
+	 */
+	public Set<Payment> getPayment() {
+		return payment;
+	}
+
+	/**
+	 * @param payment the payment to set
+	 */
+	public void setPayment(Set<Payment> payment) {
+		this.payment = payment;
+	}    
+    
+    /**
      * Access method for user.
      *
      * @return the current value of user
@@ -242,23 +265,6 @@ public class Shipment implements Serializable {
         user = aUser;
     }
 
-    /**
-     * Access method for payments.
-     *
-     * @return the current value of payments
-     */
-    public Set<Payment> getPayments() {
-        return payments;
-    }
-
-    /**
-     * Setter method for payments.
-     *
-     * @param aPayments the new value for payments
-     */
-    public void setPayments(Set<Payment> aPayments) {
-        payments = aPayments;
-    }
 
     /**
      * Compares the key for this instance with another Shipment.

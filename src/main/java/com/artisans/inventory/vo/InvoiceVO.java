@@ -4,7 +4,7 @@
 package com.artisans.inventory.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -26,13 +26,13 @@ public class InvoiceVO extends BaseVO implements Serializable {
 
     private Date datePaid;
 
-    private double invAmount;
+    private Double invAmount;
 
-    private double invAmountUsd;
+    private Double invAmountUsd;
 
-    private Set<PaymentVO> paymentVO;
+    private Set<PaymentVO> paymentsVO;
 
-    private Set<ShipmentVO> shipmentVO;
+    private Set<ShipmentVO> shipmentsVO;
 
     private SupplierVO supplierVO;
 
@@ -95,28 +95,28 @@ public class InvoiceVO extends BaseVO implements Serializable {
 	/**
 	 * @return the invAmount
 	 */
-	public double getInvAmount() {
+	public Double getInvAmount() {
 		return invAmount;
 	}
 
 	/**
 	 * @param invAmount the invAmount to set
 	 */
-	public void setInvAmount(double invAmount) {
+	public void setInvAmount(Double invAmount) {
 		this.invAmount = invAmount;
 	}
 
 	/**
 	 * @return the invAmountUsd
 	 */
-	public double getInvAmountUsd() {
+	public Double getInvAmountUsd() {
 		return invAmountUsd;
 	}
 
 	/**
 	 * @param invAmountUsd the invAmountUsd to set
 	 */
-	public void setInvAmountUsd(double invAmountUsd) {
+	public void setInvAmountUsd(Double invAmountUsd) {
 		this.invAmountUsd = invAmountUsd;
 	}
 
@@ -124,28 +124,28 @@ public class InvoiceVO extends BaseVO implements Serializable {
 	 * @return the paymentsVO
 	 */
 	public Set<PaymentVO> getPaymentsVO() {
-		return paymentVO;
+		return paymentsVO;
 	}
 
 	/**
-	 * @param paymentVO the paymentsVO to set
+	 * @param paymentsVO the paymentsVO to set
 	 */
-	public void setPaymentsVO(Set<PaymentVO> paymentVO) {
-		this.paymentVO = paymentVO;
+	public void setPaymentsVO(Set<PaymentVO> paymentsVO) {
+		this.paymentsVO = paymentsVO;
 	}
 
 	/**
-	 * @return the shipmentVO
+	 * @return the shipmentsVO
 	 */
-	public Set<ShipmentVO> getShipmentVO() {
-		return shipmentVO;
+	public Set<ShipmentVO> getShipmentsVO() {
+		return shipmentsVO;
 	}
 
 	/**
-	 * @param shipmentVO the shipmentVO to set
+	 * @param shipmentsVO the shipmentsVO to set
 	 */
-	public void setShipmentVO(Set<ShipmentVO> shipmentVO) {
-		this.shipmentVO = shipmentVO;
+	public void setShipmentsVO(Set<ShipmentVO> shipmentsVO) {
+		this.shipmentsVO = shipmentsVO;
 	}
 
 	/**

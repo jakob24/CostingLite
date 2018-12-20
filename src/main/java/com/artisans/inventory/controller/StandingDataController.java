@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.artisans.inventory.helper.ApplicationConfiguration;
 import com.artisans.inventory.helper.BeanHelper;
 import com.artisans.inventory.helper.UIMessageHelper;
 import com.artisans.inventory.service.api.StandingDataService;
@@ -40,6 +41,12 @@ public class StandingDataController implements Serializable {
 	@Autowired
 	StandingDataService standingDataService;	
 	
+	@Autowired
+	private ApplicationConfiguration configUtil;
+	
+	@Autowired
+	private ReferenceDataController referenceDataController;
+	
 	
 	private List<SupplierVO> supplierVOList;
 	
@@ -48,7 +55,7 @@ public class StandingDataController implements Serializable {
 	private List<ProductVO> productVOList;
 	
 	//Selected Product
-	private int selectedProductId;
+	private ProductVO selectedProduct;
 	
 	//Product to Save
 	private ProductVO newProduct;	
@@ -64,18 +71,15 @@ public class StandingDataController implements Serializable {
 	 */
 	@PostConstruct
 	public void init() 
-	{
+	{		
 		//Get all Suppliers
-		List<SupplierVO> suppliervoList = standingDataService.findSuppliers();
-		setSupplierVOList(suppliervoList);
+		setSupplierVOList(referenceDataController.getSupplierVOList());
 		
 		//Get All Couriers
-		List<CourierVO> couriervoList = standingDataService.findCouriers();
-		setCourierVOList(couriervoList);
+		setCourierVOList(referenceDataController.getCourierVOList());
 		
 		//Get All Products
-		List<ProductVO> productvoList = standingDataService.findProducts();
-		setProductVOList(productvoList);
+		setProductVOList(referenceDataController.getProductVOList());
 	}		
 	
     /**
@@ -189,27 +193,12 @@ public class StandingDataController implements Serializable {
     	CourierVO courierVO = new CourierVO(); 
     	courierVOList.add(courierVO);
     }
-    
-    /**
-     * Delete Group
-     * @param event
-     */
-    public void onCourierCancel(RowEditEvent event) 
-    {     	
-    }	   
-    
+         
     /**
      * Add new Product
      */
     public void onEditProduct() {	
-    	int productId = getSelectedProductId();
-    	
-    	//Get Selected Product
-    	for(ProductVO product : productVOList) {
-    		if(product.getProductId() == productId) {
-    			setNewProduct(product);
-    		}
-    	}
+    	setNewProduct(getSelectedProduct());
     }    
     
     /**
@@ -218,14 +207,13 @@ public class StandingDataController implements Serializable {
     public void onAddProduct() {	
     	
     	ProductVO prod= new ProductVO();
+    	prod.setWebPpCharge(new Double(configUtil.getProperty("web.payment.processor.charge")));
     	setNewProduct(prod);    	
     }
     
     
     public void uploadPhoto(FileUploadEvent event) {
         UploadedFile uploadedFile = event.getFile();
-        //String fileName = uploadedFile.getFileName();
-        //String contentType = uploadedFile.getContentType();        
         setImageContent(uploadedFile.getContents()); // Or getInputStream()
     }
     
@@ -352,21 +340,33 @@ public class StandingDataController implements Serializable {
 		this.imageFile = imageFile;
 	}
 
+
 	/**
-	 * @return the selectedProductId
+	 * @return the selectedProduct
 	 */
-	public int getSelectedProductId() {
-		return selectedProductId;
+	public ProductVO getSelectedProduct() {
+		return selectedProduct;
 	}
 
 	/**
-	 * @param selectedProductId the selectedProductId to set
+	 * @param selectedProduct the selectedProduct to set
 	 */
-	public void setSelectedProductId(int selectedProductId) {
-		this.selectedProductId = selectedProductId;
+	public void setSelectedProduct(ProductVO selectedProduct) {
+		this.selectedProduct = selectedProduct;
 	}
-	
-	
-	
+
+	/**
+	 * @return the configUtil
+	 */
+	public ApplicationConfiguration getConfigUtil() {
+		return configUtil;
+	}
+
+	/**
+	 * @param configUtil the configUtil to set
+	 */
+	public void setConfigUtil(ApplicationConfiguration configUtil) {
+		this.configUtil = configUtil;
+	}
 	
 }

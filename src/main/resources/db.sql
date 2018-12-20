@@ -26,4 +26,25 @@ ALTER TABLE `costing_lite`.`product`
 ADD COLUMN `ean` VARCHAR(45) NULL AFTER `amz_fba_fees`;
 
 
+ALTER TABLE `costing_lite`.`shipment` 
+ADD INDEX `pay_ship_fk_idx` (`payment` ASC);
+;
+ALTER TABLE `costing_lite`.`shipment` 
+ADD CONSTRAINT `pay_ship_fk`
+  FOREIGN KEY (`payment`)
+  REFERENCES `costing_lite`.`payment` (`payment_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+#19/12/2018
+ALTER TABLE `costing_lite`.`shipment` 
+ADD COLUMN `shipment_number` INT NULL AFTER `modified_on`;
+
+ALTER TABLE `costing_lite`.`shipment` 
+CHANGE COLUMN `shipment_number` `shipment_number` INT(2) NULL DEFAULT NULL ;
+
+ALTER TABLE `costing_lite`.`invoice` 
+ADD COLUMN `invoice_ref` VARCHAR(45) NULL AFTER `modified_on`;
+
+
 

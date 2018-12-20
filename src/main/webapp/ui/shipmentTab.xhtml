@@ -1,0 +1,92 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">				        
+				        				        
+        <p:tab id="ShipmentsTab" title="Shipments">
+            <p:panel header="Shipment Information">
+				<p:dataTable var="shipments" value="#{InvoiceWizard.invoiceVO.shipmentsVO}" id="shipmentList" 
+					editable="true" emptyMessage="" reflow="true" style="margin: 0 auto;" > 
+					
+			        <f:facet  name="header" styleClass="ui-column-title">  
+			            <p:outputLabel value="Shipments" />
+			        </f:facet> 						
+			        	        
+					<p:ajax event="rowEdit" listener="#{InvoiceWizard.onShipmentsEdit}" update=":messages" oncomplete="showHideNextButton();"/> 
+                    <p:ajax event="rowEditCancel" listener="#{InvoiceWizard.onShipmentsCancel}" update="shipmentList"  /> 		        
+			        
+			        <p:column headerText="Shipment No.">  
+			            <p:cellEditor>  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{shipments.shipmentNumber}" />  
+			                </f:facet>  
+			                <f:facet name="input">  
+			                    <p:inputText value="#{shipments.shipmentNumber}" id="courierName" required="true" readonly="true"/>	
+			                </f:facet>  							                
+			            </p:cellEditor>  
+			        </p:column>			
+			        				        
+			        <p:column headerText="Shipment Date *">  
+			            <p:cellEditor>  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{shipments.shipmentDate}">  
+			                    	<f:convertDateTime pattern="dd/MM/yyyy"/>  
+			                    </h:outputText>
+			                </f:facet>  
+			                <f:facet name="input">  
+			                    <p:calendar id="shipdate" pattern="dd/MM/yyyy" value="#{shipments.shipmentDate}" required="true" mindate="#{InvoiceWizard.invoiceVO.invoiceDate}">
+			                    	<p:ajax event="dateSelect" update="deliveryDate" />
+			                    </p:calendar>			
+			                </f:facet>  
+			            </p:cellEditor>  
+			        </p:column>		
+			        					        
+			        <p:column headerText="Courier *">  
+			            <p:cellEditor>  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{shipments.courierVO.name}" />  
+			                </f:facet>  
+			                <f:facet name="input">  
+						        <p:selectOneMenu id="courierSelect" value="#{shipments.courierVO}" converter="#{CourierConverter}" style="width:150px;">
+						        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}" />
+						            <f:selectItems value="#{ReferenceDataController.courierVOList}" var="courier" itemLabel="#{courier.name}" itemValue="#{courier}"/>
+						        </p:selectOneMenu>								        										        
+			                </f:facet>  
+			            </p:cellEditor>  
+			        </p:column>
+			        <p:column headerText="Tracking No.">  
+			            <p:cellEditor >  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{shipments.trackingNumber}" />  
+			                </f:facet>  
+			                <f:facet name="input">  
+			                    <p:inputText value="#{shipments.trackingNumber}" id="trackingNumber" converter="#{toUpperCaseConverter}">	
+			                    	<f:ajax event="blur" render="@this" />
+			                    </p:inputText>	
+			                </f:facet>  
+			            </p:cellEditor>  
+			        </p:column>	
+			        
+			        <p:column headerText="Delivery Date">  
+			            <p:cellEditor>  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{payments.deliveryDate}">  
+			                    	<f:convertDateTime pattern="dd/MM/yyyy"/>  
+			                    </h:outputText>
+			                </f:facet>  
+			                <f:facet name="input">  
+			                    <p:calendar id="deliveryDate" pattern="dd/MM/yyyy" value="#{shipments.deliveryDate}" mindate="#{shipments.shipmentDate}"/>	
+			                </f:facet>  
+			            </p:cellEditor>  
+			        </p:column>	
+				    <p:column headerText="#{bundle.btn_label_amend}">  
+				    	<p:rowEditor/>  
+				    </p:column>  					    
+				</p:dataTable>
+
+            </p:panel>
+        </p:tab>
+</ui:composition>				        
