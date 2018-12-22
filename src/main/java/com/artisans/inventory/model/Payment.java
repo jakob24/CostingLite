@@ -33,34 +33,48 @@ public class Payment implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="payment_id", unique=true, nullable=false, length=10)
     private int paymentId;
+    
     @Column(precision=22)
     private double amount;
+    
     @Column(name="amount_usd", precision=22)
     private double amountUsd;
+    
     @Column(name="bank_charges", precision=22)
     private double bankCharges;
+    
     @Column(name="gbp_to_usd", precision=22)
     private double gbpToUsd;
+    
     @Column(name="other_charges", precision=22)
     private double otherCharges;
+    
     @Column(name="date_paid")
     private Date datePaid;
+    
     @Column(precision=22)
     private double vat;
+    
     @Column(name="disbursement_charges", precision=22)
     private double disbursementCharges;
+    
     @Column(name="payment_type", length=45)
     private String paymentType;
+    
     @Column(length=3)
     private short paid;
+    
     @Column(name="modified_on")
     private Timestamp modifiedOn;
+    
     @ManyToOne
     @JoinColumn(name="invoice")
     private Invoice invoice;
+    
     @ManyToOne
     @JoinColumn(name="modified_by")
     private User user;
+    
     @ManyToOne
     @JoinColumn(name="shipment")
     private Shipment shipment;

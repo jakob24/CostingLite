@@ -7,35 +7,59 @@
     xmlns:c="http://java.sun.com/jsp/jstl/core">				        
 				        
         <p:tab id="InvoiceTab" title="Invoice">
-            <p:panel header="New Invoice">
+        	
+        	<p:panel header="Add/Edit Invoice">
                 <p:messages />
-                <h:panelGrid columns="2" columnClasses="labelY, valueY">				                	
+                <h:panelGrid columns="5">				                	
                 	<h:outputText value="Supplier *" />				                	
-			        <p:selectOneMenu id="console" value="#{InvoiceWizard.invoiceVO.supplierVO}" converter="#{SupplierConverter}" style="width:150px;">
+			        <p:selectOneMenu id="supplierSelect" value="#{InvoiceWizard.selectedSupplierVO}" converter="#{SupplierConverter}" style="width:150px;">
 			        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}" />
 			            <f:selectItems value="#{ReferenceDataController.supplierVOList}" var="supplier" itemLabel="#{supplier.name}" itemValue="#{supplier}"/>
-			        </p:selectOneMenu>						        				                	
-                
-                    <h:outputText value="Invoice Number *" />
-                    <p:inputText id="invNumber" value="#{InvoiceWizard.invoiceVO.invoiceNumber}" required="true" label="Invoice Number" converter="#{toUpperCaseConverter}">
-                    	<f:ajax event="blur" render="@this" />
-                    </p:inputText>
- 
-                    <h:outputText value="Invoice Date *" />
-                    <p:calendar id="invDate" value="#{InvoiceWizard.invoiceVO.invoiceDate}" required="true" label="InvoiceDate" pattern="dd/MM/yyyy"> 
-                    </p:calendar>
-                    
-                    <h:outputText value="Invoice Amount (USD)" />				                    
-                    <p:inputNumber id="invamtusd" value="#{InvoiceWizard.invoiceVO.invAmountUsd}" decimalPlaces="2" maxlength="5" />	                    
- 					
- 					<!-- 
-                    <h:outputText value="Invoice Amount *" />				                    
-                    <p:inputNumber id ="invAmount" value="#{InvoiceWizard.invoiceVO.invAmount}" decimalPlaces="2" maxlength="5" required="true" />
-                    
-                    <h:outputText value="Paid In Full Date " />
-                    <p:calendar id="datePaid" value="#{InvoiceWizard.invoiceVO.datePaid}" label="InvoiceDate" pattern="dd/MM/yyyy" readonly="true"/>	
-                     -->			                    
-                </h:panelGrid>
+			            <p:ajax event="change" update="invoiceSelect" listener="#{InvoiceWizard.findAllInvoicesForSupplier}" />
+			        </p:selectOneMenu>
+			        
+			        <p:spacer width="50px"/>
+			        
+                	<h:outputText value="Invoices *" />				                	
+			        <p:selectOneMenu id="invoiceSelect" value="#{InvoiceWizard.selectedInvoiceId}" converter="#{InvoiceConverter}" style="width:150px;" disabled="#{InvoiceWizard.selectedSupplierVO eq null}">
+			        	<f:selectItem itemValue="#{null}" itemLabel="Select one" />			        	
+			            <f:selectItems value="#{InvoiceWizard.supplierInvoiceList}" var="invoice" itemLabel="#{invoice.invoiceNumber}" itemValue="#{invoice.invoiceId}"/>	
+			            <f:selectItem  itemValue="0" itemLabel="Add New Invoice .."/>		            
+			            <p:ajax event="change" update="invoicePanel" listener="#{InvoiceWizard.addNewInvoice}" />			            
+			        </p:selectOneMenu>			        
+			        						        				                	
+             	</h:panelGrid>
+             	   
+	            <p:panel header="New Invoice" id="invoicePanel" visible="#{! empty InvoiceWizard.selectedInvoiceVO}" >
+	                <p:messages />
+	                <h:panelGrid columns="2" columnClasses="labelY, valueY" >		                	
+	                    <h:outputText value="Invoice Number *" />
+	                    <p:inputText id="invNumber" value="#{InvoiceWizard.selectedInvoiceVO.invoiceNumber}" required="true" label="Invoice Number" converter="#{toUpperCaseConverter}" 
+	                    	requiredMessage="Invoice Number is mandatory">
+	                    	<f:ajax event="blur" render="@this" />
+	                    </p:inputText>
+	 
+	                    <h:outputText value="Invoice Date *" />
+	                    <p:calendar id="invDate" value="#{InvoiceWizard.selectedInvoiceVO.invoiceDate}" required="true" label="InvoiceDate" pattern="dd/MM/yyyy"> 
+	                    </p:calendar>
+	                    
+	                    <h:outputText value="Invoice Amount (USD)" />				                    
+	                    <p:inputNumber id="invamtusd" value="#{InvoiceWizard.selectedInvoiceVO.invAmountUsd}" decimalPlaces="2" maxlength="5" />	                    
+	 					
+		                <h:outputText value="Comments" />
+		                <p:inputTextarea value="#{InvoiceWizard.selectedInvoiceVO.comments}" label="comments" maxlength="500" />	
+		                    	 					 					 
+	                    <h:outputText value="Invoice Amount *" />				                    
+	                    <p:inputNumber id ="invAmount" value="#{InvoiceWizard.selectedInvoiceVO.invAmount}" decimalPlaces="2" maxlength="5" required="true" />
+	                    	                     	                     
+	                    <h:outputText value="Paid In Full Date : " />
+	                    <h:outputText value="#{InvoiceWizard.selectedInvoiceVO.datePaid}">
+	                    	<f:convertDateTime pattern="dd/MM/yyyy" />
+	                    </h:outputText>
+	                    			                    
+	                </h:panelGrid>
+	            </p:panel>
+            
             </p:panel>
         </p:tab>
 				        

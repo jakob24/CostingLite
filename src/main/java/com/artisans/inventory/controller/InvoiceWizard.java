@@ -4,13 +4,14 @@
 package com.artisans.inventory.controller;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.component.UIInput;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import org.primefaces.PrimeFaces;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.artisans.inventory.helper.ApplicationConfiguration;
+import com.artisans.inventory.service.api.InvoiceService;
 import com.artisans.inventory.service.api.StandingDataService;
-import com.artisans.inventory.vo.CourierVO;
 import com.artisans.inventory.vo.InvoiceVO;
 import com.artisans.inventory.vo.PaymentVO;
-import com.artisans.inventory.vo.ProductVO;
-import com.artisans.inventory.vo.ShipmentVO;
 import com.artisans.inventory.vo.SupplierVO;
 
 /**
@@ -43,32 +42,30 @@ public class InvoiceWizard implements Serializable {
 	StandingDataService standingDataService;	
 	
 	@Autowired
-	private ReferenceDataController referenceDataController;	
+	InvoiceService invoiceService;
+	
+	//@Autowired
+	//private ReferenceDataController referenceDataController;	
 	
 	@Autowired
 	private ApplicationConfiguration configUtil;
 		
-	private List<SupplierVO> supplierVOList;
-	
-	private List<CourierVO> courierVOList;
-	
-	private InvoiceVO invoiceVO;
-	
-	private List<PaymentVO> invoicePaymentVOList;
-		
-	private List<ShipmentVO> shipmentVOList;	
-	
-	private List<PaymentVO> shipmentPaymentVOList;
-	
-	private List<ProductVO> productVOList;
 	
 	private boolean skip;
 	
-	private int selectedSupplierId; 
-	
 	private Double totalInvoicePaymentAmount;
+		//	
+	private Integer selectedInvoiceId;
 	
+	private SupplierVO selectedSupplierVO;
 	
+	private InvoiceVO selectedInvoiceVO;
+	
+	private List<SupplierVO> supplierVOList;
+	
+	private List<InvoiceVO> supplierInvoiceList;
+	
+			
 	/**
 	 * Initial method to load data on the screen
 	 */
@@ -78,13 +75,13 @@ public class InvoiceWizard implements Serializable {
 		createNewInvoice();
 				
 		//Get all Suppliers
-		setSupplierVOList(referenceDataController.getSupplierVOList());
+		//setSupplierVOList(referenceDataController.getSupplierVOList());
 		
 		//Get All Couriers
-		setCourierVOList(referenceDataController.getCourierVOList());
+		//setCourierVOList(referenceDataController.getCourierVOList());
 		
 		//Get All Products
-		setProductVOList(referenceDataController.getProductVOList());		
+		//setProductVOList(referenceDataController.getProductVOList());		
 	}
 	
 	
@@ -122,20 +119,64 @@ public class InvoiceWizard implements Serializable {
 	
 	private void createNewInvoice() 
 	{
-		invoiceVO = new InvoiceVO();
+		//invoiceVO = new InvoiceVO();
 		
-		PaymentVO paymentVO  = new PaymentVO();
+/*		//Create new Invoice Payment
+		LinkedHashSet<PaymentVO> invoicePayments = new LinkedHashSet<PaymentVO>();
+		
+		PaymentVO invoicePaymentVO  = new PaymentVO();
+		invoicePaymentVO.setPaymentType("INVOICE");
+		invoicePaymentVO.setInvoiceVO(invoiceVO);		
+		invoicePayments.add(invoicePaymentVO);			
+		invoiceVO.setPaymentsVO(invoicePayments);
+		
+		//Create new Shipment	
+		LinkedHashSet<ShipmentVO> invoiceShipments = new LinkedHashSet<ShipmentVO>();	
+		
 		ShipmentVO shipmentVO = new ShipmentVO();	
 		shipmentVO.setShipmentNumber(null != invoiceVO.getShipmentsVO() ? invoiceVO.getShipmentsVO().size()+1 : 1);
+		shipmentVO.setInvoiceVO(invoiceVO);
+		invoiceShipments.add(shipmentVO);
 		
-		LinkedHashSet<PaymentVO> invPayments = new LinkedHashSet<PaymentVO>();		
-		paymentVO.setPaymentType("INVOICE");
-		invPayments.add(paymentVO);		
-		invoiceVO.setPaymentsVO(new HashSet<PaymentVO>(invPayments));
+		invoiceVO.setShipmentsVO(invoiceShipments);
 		
-		LinkedHashSet<ShipmentVO> invShipments = new LinkedHashSet<ShipmentVO>();
-		invShipments.add(shipmentVO);		
-		invoiceVO.setShipmentsVO(new HashSet<ShipmentVO>(invShipments));			
+		//Create new Shipment Payment
+		PaymentVO shipmentPaymentVO  = new PaymentVO();
+		shipmentPaymentVO.setPaymentType("SHIPMENT");
+		shipmentPaymentVO.setShipmentVO(shipmentVO);
+								
+		LinkedHashSet<PaymentVO> shipmentPayments = new LinkedHashSet<PaymentVO>();
+		shipmentPayments.add(shipmentPaymentVO);		
+		shipmentVO.setPaymentVO(shipmentPayments);*/
+					
+	}
+	
+    /**
+     * Invoked on selection of Invoice
+     */
+    public void addNewInvoice() {
+    	if(null != getSelectedInvoiceId()) {    		
+    		if(getSelectedInvoiceId() == 0) {
+        		//Add New Invoice
+        		selectedInvoiceVO = new InvoiceVO();
+        	} else if(null != getSelectedInvoiceId()) {
+        		//Get Selected Invoice details
+        		selectedInvoiceVO = invoiceService.findInvoice(getSelectedInvoiceId());
+        	}     		
+    	}
+    	else {
+    		selectedInvoiceVO = null;
+    	}
+
+    }    
+    
+	/**
+	 * Get All Invoices for the supplier
+	 */
+	public void findAllInvoicesForSupplier()
+	{
+		List<InvoiceVO> invoiceVOList = invoiceService.findAllActiveInvoicesForSupplier(getSelectedSupplierVO());
+		setSupplierInvoiceList(invoiceVOList);
 	}
 	
     /**
@@ -175,12 +216,31 @@ public class InvoiceWizard implements Serializable {
 
     }  
     
+    
+    /**
+     * Update Group Name
+     * @param event
+     */
+    public void onShipmentPaymentEdit(RowEditEvent event) 
+    {
+
+    }	
+    
+    /**
+     * Update Group Name
+     * @param event
+     */
+    public void onShipmentPaymentCancel(RowEditEvent event) 
+    {
+
+    }     
+    
     /**
      * Save Invoice,Invoice Payments And shipments Data
      */
     public void saveInvoiceData() 
     {
-    	System.out.println(invoiceVO);
+    	//System.out.println(invoiceVO);
     }
     
     /**
@@ -190,7 +250,7 @@ public class InvoiceWizard implements Serializable {
     {
     	Double invAmount = 0.0;
     	
-    	for(PaymentVO payment : getInvoiceVO().getPaymentsVO()) {
+    	for(PaymentVO payment : getSelectedInvoiceVO().getPaymentsVO()) {
     		if (payment.getPaymentId() == 0  && payment.getPaymentType().equalsIgnoreCase("INVOICE")) {
     			//Updating only unsaved Data    			
 				if(null != payment.getAmountUsd() && null != payment.getGbpToUsd()) {
@@ -217,87 +277,6 @@ public class InvoiceWizard implements Serializable {
 		this.supplierVOList = supplierVOList;
 	}
 
-
-	/**
-	 * @return the courierVOList
-	 */
-	public List<CourierVO> getCourierVOList() {
-		return courierVOList;
-	}
-
-
-	/**
-	 * @param courierVOList the courierVOList to set
-	 */
-	public void setCourierVOList(List<CourierVO> courierVOList) {
-		this.courierVOList = courierVOList;
-	}
-
-
-	/**
-	 * @return the invoiceVO
-	 */
-	public InvoiceVO getInvoiceVO() {
-		return invoiceVO;
-	}
-
-
-	/**
-	 * @param invoiceVO the invoiceVO to set
-	 */
-	public void setInvoiceVO(InvoiceVO invoiceVO) {
-		this.invoiceVO = invoiceVO;
-	}
-
-
-	/**
-	 * @return the invoicePaymentVOList
-	 */
-	public List<PaymentVO> getInvoicePaymentVOList() {
-		return invoicePaymentVOList;
-	}
-
-
-	/**
-	 * @param invoicePaymentVOList the invoicePaymentVOList to set
-	 */
-	public void setInvoicePaymentVOList(List<PaymentVO> invoicePaymentVOList) {
-		this.invoicePaymentVOList = invoicePaymentVOList;
-	}
-
-
-	/**
-	 * @return the shipmentVOList
-	 */
-	public List<ShipmentVO> getShipmentVOList() {
-		return shipmentVOList;
-	}
-
-
-	/**
-	 * @param shipmentVOList the shipmentVOList to set
-	 */
-	public void setShipmentVOList(List<ShipmentVO> shipmentVOList) {
-		this.shipmentVOList = shipmentVOList;
-	}
-
-
-	/**
-	 * @return the shipmentPaymentVOList
-	 */
-	public List<PaymentVO> getShipmentPaymentVOList() {
-		return shipmentPaymentVOList;
-	}
-
-
-	/**
-	 * @param shipmentPaymentVOList the shipmentPaymentVOList to set
-	 */
-	public void setShipmentPaymentVOList(List<PaymentVO> shipmentPaymentVOList) {
-		this.shipmentPaymentVOList = shipmentPaymentVOList;
-	}
-
-
 	/**
 	 * @param skip the skip to set
 	 */
@@ -322,36 +301,6 @@ public class InvoiceWizard implements Serializable {
 	}
 
 
-	/**
-	 * @return the selectedSupplierId
-	 */
-	public int getSelectedSupplierId() {
-		return selectedSupplierId;
-	}
-
-
-	/**
-	 * @param selectedSupplierId the selectedSupplierId to set
-	 */
-	public void setSelectedSupplierId(int selectedSupplierId) {
-		this.selectedSupplierId = selectedSupplierId;
-	}
-
-
-	/**
-	 * @return the productVOList
-	 */
-	public List<ProductVO> getProductVOList() {
-		return productVOList;
-	}
-
-
-	/**
-	 * @param productVOList the productVOList to set
-	 */
-	public void setProductVOList(List<ProductVO> productVOList) {
-		this.productVOList = productVOList;
-	}
 
 
 	/**
@@ -367,6 +316,70 @@ public class InvoiceWizard implements Serializable {
 	 */
 	public void setTotalInvoicePaymentAmount(Double totalInvoicePaymentAmount) {
 		this.totalInvoicePaymentAmount = totalInvoicePaymentAmount;
+	}
+
+
+	/**
+	 * @return the supplierInvoiceList
+	 */
+	public List<InvoiceVO> getSupplierInvoiceList() {
+		return supplierInvoiceList;
+	}
+
+
+	/**
+	 * @param supplierInvoiceList the supplierInvoiceList to set
+	 */
+	public void setSupplierInvoiceList(List<InvoiceVO> supplierInvoiceList) {
+		this.supplierInvoiceList = supplierInvoiceList;
+	}
+
+
+	/**
+	 * @return the selectedSupplierVO
+	 */
+	public SupplierVO getSelectedSupplierVO() {
+		return selectedSupplierVO;
+	}
+
+
+	/**
+	 * @param selectedSupplierVO the selectedSupplierVO to set
+	 */
+	public void setSelectedSupplierVO(SupplierVO selectedSupplierVO) {
+		this.selectedSupplierVO = selectedSupplierVO;
+	}
+
+
+	/**
+	 * @return the selectedInvoiceVO
+	 */
+	public InvoiceVO getSelectedInvoiceVO() {
+		return selectedInvoiceVO;
+	}
+
+
+	/**
+	 * @param selectedInvoiceVO the selectedInvoiceVO to set
+	 */
+	public void setSelectedInvoiceVO(InvoiceVO selectedInvoiceVO) {
+		this.selectedInvoiceVO = selectedInvoiceVO;
+	}
+
+
+	/**
+	 * @return the selectedInvoiceId
+	 */
+	public Integer getSelectedInvoiceId() {
+		return selectedInvoiceId;
+	}
+
+
+	/**
+	 * @param selectedInvoiceId the selectedInvoiceId to set
+	 */
+	public void setSelectedInvoiceId(Integer selectedInvoiceId) {
+		this.selectedInvoiceId = selectedInvoiceId;
 	}	
 	
 	

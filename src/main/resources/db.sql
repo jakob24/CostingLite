@@ -46,5 +46,17 @@ CHANGE COLUMN `shipment_number` `shipment_number` INT(2) NULL DEFAULT NULL ;
 ALTER TABLE `costing_lite`.`invoice` 
 ADD COLUMN `invoice_ref` VARCHAR(45) NULL AFTER `modified_on`;
 
+#21/12/2018
+ALTER TABLE `costing_lite`.`shipment` 
+DROP COLUMN `payment`;
+
+22/12/2018
+ALTER TABLE `costing_lite`.`invoice` 
+DROP COLUMN `invoice_ref`;
+
+ALTER TABLE `costing_lite`.`invoice` 
+ADD COLUMN `comments` VARCHAR(500) NULL AFTER `modified_on`;
+
+
 
 

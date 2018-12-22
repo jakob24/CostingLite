@@ -24,8 +24,6 @@ public class ShipmentVO extends BaseVO implements Serializable {
 	
     private Date shipmentDate;
 
-    private int payment;
-
     private String trackingNumber;
 
     private Date deliveryDate;
@@ -79,20 +77,6 @@ public class ShipmentVO extends BaseVO implements Serializable {
 	 */
 	public void setShipmentDate(Date shipmentDate) {
 		this.shipmentDate = shipmentDate;
-	}
-
-	/**
-	 * @return the payment
-	 */
-	public int getPayment() {
-		return payment;
-	}
-
-	/**
-	 * @param payment the payment to set
-	 */
-	public void setPayment(int payment) {
-		this.payment = payment;
 	}
 
 	/**
@@ -166,16 +150,17 @@ public class ShipmentVO extends BaseVO implements Serializable {
 	}
 
 	/**
-	 * @return the paymentsVO
+	 * @return the paymentVO
 	 */
-	public Set<PaymentVO> getPaymentsVO() {
+	public Set<PaymentVO> getPaymentVO() {
 		return paymentVO;
 	}
 
 	/**
-	 * @param paymentVO the paymentsVO to set
+	 * @param paymentVO the paymentVO to set
 	 */
-	public void setPaymentsVO(Set<PaymentVO> paymentVO) {
+	public void setPaymentVO(Set<PaymentVO> paymentVO) {
 		this.paymentVO = paymentVO;
-	}	
+	}
+	
 }

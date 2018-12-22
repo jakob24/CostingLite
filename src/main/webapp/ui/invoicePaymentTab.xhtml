@@ -8,7 +8,7 @@
 				        
         <p:tab id="InvoicePaymentTab" title="Invoice Payments">				        	
         	 <p:panel id="PaymentsTab" header="Add / Edit Invoices" style="margin-bottom:10px" >				        	 
-				<p:dataTable var="payments" value="#{InvoiceWizard.invoiceVO.paymentsVO}" id="paymentList" 
+				<p:dataTable var="payments" value="#{InvoiceWizard.selectedInvoiceVO.paymentsVO}" id="paymentList" 
 					editable="true" emptyMessage="" reflow="true" style="margin: 0 auto;" > 
 					
 			        <f:facet  name="header" styleClass="ui-column-title">  
@@ -75,6 +75,7 @@
 			                </f:facet>  
 			            </p:cellEditor>  
 			        </p:column>		
+			        <!--  
 			        <p:column headerText="Disburse Charges">  
 			            <p:cellEditor>  
 			                <f:facet name="output">  
@@ -95,6 +96,7 @@
 			                </f:facet>  
 			            </p:cellEditor>  
 			        </p:column>	
+			        -->
 			        <p:column headerText="Date Paid">  
 			            <p:cellEditor>  
 			                <f:facet name="output">  

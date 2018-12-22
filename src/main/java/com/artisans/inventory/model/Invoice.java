@@ -65,6 +65,9 @@ public class Invoice implements Serializable {
     @ManyToOne
     @JoinColumn(name="supplier")
     private Supplier supplier;
+    
+    @Column(name="comments", length=500)
+    private String comments;     
 
     /** Default constructor. */
     public Invoice() {
@@ -197,25 +200,36 @@ public class Invoice implements Serializable {
         modifiedOn = aModifiedOn;
     }
 
-    /**
-     * Access method for payments.
-     *
-     * @return the current value of payments
-     */
-    public Set<Payment> getPayments() {
-        return payment;
-    }
 
     /**
-     * Setter method for payments.
-     *
-     * @param aPayments the new value for payments
-     */
-    public void setPayments(Set<Payment> aPayments) {
-        payment = aPayments;
-    }
+	 * @return the payment
+	 */
+	public Set<Payment> getPayment() {
+		return payment;
+	}
 
-    /**
+	/**
+	 * @param payment the payment to set
+	 */
+	public void setPayment(Set<Payment> payment) {
+		this.payment = payment;
+	}
+
+	/**
+	 * @return the comments
+	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	/**
      * Access method for user.
      *
      * @return the current value of user

@@ -35,6 +35,8 @@ public class InvoiceVO extends BaseVO implements Serializable {
     private Set<ShipmentVO> shipmentsVO;
 
     private SupplierVO supplierVO;
+    
+    private String comments;      
 
 	/**
 	 * @return the invoiceId
@@ -160,7 +162,20 @@ public class InvoiceVO extends BaseVO implements Serializable {
 	 */
 	public void setSupplierVO(SupplierVO supplierVO) {
 		this.supplierVO = supplierVO;
+	}
+
+	/**
+	 * @return the comments
+	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(String comments) {
+		this.comments = comments;
 	}	
-    
 
 }

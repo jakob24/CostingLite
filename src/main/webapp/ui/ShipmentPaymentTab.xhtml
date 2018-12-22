@@ -1,0 +1,146 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">					        
+				        
+        <p:tab id="ShipmentPaymentTab" title="Shipment Payments">
+            <p:panel header="Shipment Payment Information">
+            
+				<p:dataTable var="shipments" value="#{InvoiceWizard.invoiceVO.shipmentsVO}" id="shipmenPayTable" 
+					editable="true" emptyMessage="" reflow="true" style="margin: 0 auto;" > 
+					     										
+					<p:subTable var="shipPayments" value="#{shipments.paymentVO}" id="shipmenPaySubTable" 
+						editable="true" emptyMessage="" reflow="true" style="margin: 0 auto;"> 	
+					<!-- 													
+					<p:ajax event="rowEdit" listener="#{InvoiceWizard.onShipmentPaymentEdit}" update=":messages" oncomplete="showHideNextButton();"  />
+	                <p:ajax event="rowEditCancel" listener="#{InvoiceWizard.onShipmentPaymentCancel}" update="shipmenPaySubTable"  /> 	
+	                 -->     						
+				    <p:columnGroup type="header"> 
+			  			<p:row>  
+				            <p:column headerText="Shipment Invoice Amount ($)"/>  
+				            <p:column headerText="GBP->USD"/>  
+				            <p:column headerText="Invoice Amount *"/>
+				            <p:column headerText="Bank Charges" />  
+				            <p:column headerText="Other Charges"/>    
+				            <p:column headerText="Disburse Charges"/>  
+				            <p:column headerText="VAT"/>  
+				            <p:column headerText="Date Paid"/>
+				            <p:column headerText="#{bundle.btn_label_amend}" style="color:red;" id="amendTool"/> 				            
+				        </p:row>  
+				    </p:columnGroup>  						
+				        	        
+
+	                     		                     
+				        <f:facet  name="header" styleClass="ui-column-title"> 
+				            <h:outputText value="Shipment Number : #{shipments.shipmentNumber}"/>  
+				        </f:facet>  
+        	                             
+						 <p:column>
+				            <p:cellEditor>  
+				                <f:facet name="output">  
+				                    <h:outputText value="#{shipPayments.amountUsd}" />  
+				                </f:facet>  
+				                <f:facet name="input">  
+				                    <p:inputNumber value="#{shipPayments.amountUsd}" id="shipPaymentAmountUSD" decimalPlaces="2" maxValue="#{InvoiceWizard.invoiceVO.invAmountUsd}">
+				                    	<p:ajax event="change"  process="@this" update="shipPaymentAmountUSD"/>  
+				                    </p:inputNumber>
+				                </f:facet>  
+				            </p:cellEditor>  
+						</p:column>
+				        				        
+				         <p:column>
+				            <p:cellEditor>  
+				                <f:facet name="output">  
+				                    <h:outputText value="#{shipPayments.gbpToUsd}" />  
+				                </f:facet>  
+				                <f:facet name="input">  
+				                    <p:inputNumber value="#{shipPayments.gbpToUsd}" id="shipPaymentgbpToUsd" decimalPlaces="4" >	
+				                    	<p:ajax event="focus" process="@this" update="shipPaymentAmountUSD"/> 
+				                    	<p:ajax event="change" listener="#{InvoiceWizard.updateInvoiceAmountBasedoUSD}" process="@this" update="invAmount"/>  
+				                    </p:inputNumber>
+				                </f:facet>  
+				            </p:cellEditor>  
+				       </p:column>
+				        
+				        <p:column>  
+				            <p:cellEditor>  
+				                <f:facet name="output">  
+				                    <h:outputText value="#{shipPayments.amount}" >  
+				                    	<f:convertNumber pattern="#0.00" locale="en_GB"/>
+				                    </h:outputText>
+				                </f:facet>  
+				                <f:facet name="input">  
+				                    <p:inputNumber value="#{shipPayments.amount}" decimalPlaces="2" required="true" id="invAmount" /> 	
+				                </f:facet>  
+				            </p:cellEditor>  
+				        </p:column>			
+				        			        
+				        <p:column>  
+				            <p:cellEditor>  
+				                <f:facet name="output">  
+				                    <h:outputText value="#{shipPayments.bankCharges}" />  
+				                </f:facet>  
+				                <f:facet name="input">  
+				                    <p:inputNumber value="#{shipPayments.bankCharges}" id="bankCharges" decimalPlaces="2"/>		
+				                </f:facet>  
+				            </p:cellEditor>  
+				        </p:column>	
+				        
+				        <p:column>  
+				            <p:cellEditor>  
+				                <f:facet name="output">  
+				                    <h:outputText value="#{shipPayments.otherCharges}" />  
+				                </f:facet>  
+				                <f:facet name="input">  
+				                    <p:inputNumber value="#{shipPayments.otherCharges}" id="otherCharges" decimalPlaces="2"/>		
+				                </f:facet>  
+				            </p:cellEditor>  
+				        </p:column>		
+				        
+				        <p:column>  
+				            <p:cellEditor>  
+				                <f:facet name="output">  
+				                    <h:outputText value="#{shipPayments.disbursementCharges}" />  
+				                </f:facet>  
+				                <f:facet name="input">  
+				                    <p:inputNumber value="#{shipPayments.disbursementCharges}" id="disbursementCharges" decimalPlaces="2"/>		
+				                </f:facet>  
+				            </p:cellEditor>  
+				        </p:column>
+				        
+				        <p:column>  
+				            <p:cellEditor>  
+				                <f:facet name="output">  
+				                    <h:outputText value="#{shipPayments.vat}" />  
+				                </f:facet>  
+				                <f:facet name="input">  
+				                    <p:inputNumber value="#{shipPayments.vat}" id="vat" decimalPlaces="2"/>		
+				                </f:facet>  
+				            </p:cellEditor>  
+				        </p:column>	
+				        
+				        <p:column>  
+				            <p:cellEditor>  
+				                <f:facet name="output">  
+				                    <h:outputText value="#{shipPayments.datePaid}">  
+				                    	<f:convertDateTime pattern="dd/MM/yyyy"/>  
+				                    </h:outputText>
+				                </f:facet>  
+				                <f:facet name="input">  
+				                    <p:calendar pattern="dd/MM/yyyy" value="#{shipPayments.datePaid}" mindate="#{InvoiceWizard.invoiceVO.invoiceDate}" />		
+				                </f:facet>  
+				            </p:cellEditor>  
+				        </p:column>	
+				        					        
+					    <p:column>  
+					    	<p:rowEditor />  
+					    </p:column> 				    	
+			        
+			        </p:subTable>			        				    			    
+				</p:dataTable>			
+            </p:panel>
+        </p:tab>
+</ui:composition>				        
