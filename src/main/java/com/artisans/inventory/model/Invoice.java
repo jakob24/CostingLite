@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -53,14 +54,14 @@ public class Invoice implements Serializable {
     private Timestamp modifiedOn;
     
     @OneToMany(mappedBy="invoice")
-    private Set<Payment> payment;
+    private List<Payment> payment;
     
     @ManyToOne
     @JoinColumn(name="modified_by")
     private User user;
     
     @OneToMany(mappedBy="invoice")
-    private Set<Shipment> shipment;
+    private List<Shipment> shipment;
     
     @ManyToOne
     @JoinColumn(name="supplier")
@@ -68,6 +69,9 @@ public class Invoice implements Serializable {
     
     @Column(name="comments", length=500)
     private String comments;     
+    
+    @Column(length=2)
+    private Short shipmentComplete;
 
     /** Default constructor. */
     public Invoice() {
@@ -200,18 +204,17 @@ public class Invoice implements Serializable {
         modifiedOn = aModifiedOn;
     }
 
-
-    /**
+	/**
 	 * @return the payment
 	 */
-	public Set<Payment> getPayment() {
+	public List<Payment> getPayment() {
 		return payment;
 	}
 
 	/**
 	 * @param payment the payment to set
 	 */
-	public void setPayment(Set<Payment> payment) {
+	public void setPayment(List<Payment> payment) {
 		this.payment = payment;
 	}
 
@@ -247,25 +250,22 @@ public class Invoice implements Serializable {
         user = aUser;
     }
 
-    /**
-     * Access method for shipment.
-     *
-     * @return the current value of shipment
-     */
-    public Set<Shipment> getShipment() {
-        return shipment;
-    }
 
     /**
-     * Setter method for shipment.
-     *
-     * @param aShipment the new value for shipment
-     */
-    public void setShipment(Set<Shipment> aShipment) {
-        shipment = aShipment;
-    }
+	 * @return the shipment
+	 */
+	public List<Shipment> getShipment() {
+		return shipment;
+	}
 
-    /**
+	/**
+	 * @param shipment the shipment to set
+	 */
+	public void setShipment(List<Shipment> shipment) {
+		this.shipment = shipment;
+	}
+
+	/**
      * Access method for supplier.
      *
      * @return the current value of supplier
@@ -282,8 +282,23 @@ public class Invoice implements Serializable {
     public void setSupplier(Supplier aSupplier) {
         supplier = aSupplier;
     }
+        
 
     /**
+	 * @return the shipmentComplete
+	 */
+	public Short getShipmentComplete() {
+		return shipmentComplete;
+	}
+
+	/**
+	 * @param shipmentComplete the shipmentComplete to set
+	 */
+	public void setShipmentComplete(Short shipmentComplete) {
+		this.shipmentComplete = shipmentComplete;
+	}
+
+	/**
      * Compares the key for this instance with another Invoice.
      *
      * @param other The object to compare to

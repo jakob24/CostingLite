@@ -7,16 +7,17 @@
     xmlns:c="http://java.sun.com/jsp/jstl/core">					        
 				        
         <p:tab id="InvoicePaymentTab" title="Invoice Payments">				        	
-        	 <p:panel id="PaymentsTab" header="Add / Edit Invoices" style="margin-bottom:10px" >				        	 
-				<p:dataTable var="payments" value="#{InvoiceWizard.selectedInvoiceVO.paymentsVO}" id="paymentList" 
+        	 <p:panel id="PaymentsTab" header="Add / Edit Invoice Payments" style="margin-bottom:10px" >				        	 
+				<p:dataTable var="payments" value="#{InvoiceWizard.selectedInvoiceVO.payment}" id="paymentList" 
 					editable="true" emptyMessage="" reflow="true" style="margin: 0 auto;" > 
 					
 			        <f:facet  name="header" styleClass="ui-column-title">  
 			            <p:outputLabel value="Invoices" />
 			        </f:facet> 						
 			        	        
-					<p:ajax event="rowEdit" listener="#{InvoiceWizard.onPaymentsEdit}" update=":messages" oncomplete="showHideNextButton();"  /> 
-                    <p:ajax event="rowEditCancel" listener="#{InvoiceWizard.onPaymentsCancel}" update="paymentList"  /> 		        
+					<p:ajax event="rowEdit" listener="#{InvoiceWizard.onPaymentsEdit}" update="paymentList :invoiceForm:newInvPaymentBtn totalPaidText :messages" 
+						oncomplete="showHideNextButton();"  /> 
+                    <p:ajax event="rowEditCancel" listener="#{InvoiceWizard.onPaymentsCancel}" update="paymentList :invoiceForm:newInvPaymentBtn"  /> 		        
 			        
 			        <p:column headerText="Invoice Amount ($)">  
 			            <p:cellEditor>  
@@ -24,13 +25,14 @@
 			                    <h:outputText value="#{payments.amountUsd}" />  
 			                </f:facet>  
 			                <f:facet name="input">  
-			                    <p:inputNumber value="#{payments.amountUsd}" id="paymentAmountUSD" decimalPlaces="2" maxValue="#{InvoiceWizard.invoiceVO.invAmountUsd}">
+			                    <p:inputNumber value="#{payments.amountUsd}" id="paymentAmountUSD" decimalPlaces="2" maxValue="#{InvoiceWizard.selectedInvoiceVO.invAmountUsd}" 
+			                    	required="#{InvoiceWizard.selectedInvoiceVO.invAmountUsd !=null}">
 			                    	<p:ajax event="change"  process="@this" update="paymentAmountUSD"/>  
 			                    </p:inputNumber>
 			                </f:facet>  
 			            </p:cellEditor>  
 			        </p:column>							        
-			        <p:column headerText="GBP->USD">  
+			        <p:column headerText="GBP To USD">  
 			            <p:cellEditor>  
 			                <f:facet name="output">  
 			                    <h:outputText value="#{payments.gbpToUsd}" />  
@@ -74,29 +76,7 @@
 			                    <p:inputNumber value="#{payments.otherCharges}" id="otherCharges" decimalPlaces="2"/>		
 			                </f:facet>  
 			            </p:cellEditor>  
-			        </p:column>		
-			        <!--  
-			        <p:column headerText="Disburse Charges">  
-			            <p:cellEditor>  
-			                <f:facet name="output">  
-			                    <h:outputText value="#{payments.disbursementCharges}" />  
-			                </f:facet>  
-			                <f:facet name="input">  
-			                    <p:inputNumber value="#{payments.disbursementCharges}" id="disbursementCharges" decimalPlaces="2"/>		
-			                </f:facet>  
-			            </p:cellEditor>  
-			        </p:column>
-			        <p:column headerText="VAT">  
-			            <p:cellEditor>  
-			                <f:facet name="output">  
-			                    <h:outputText value="#{payments.vat}" />  
-			                </f:facet>  
-			                <f:facet name="input">  
-			                    <p:inputNumber value="#{payments.vat}" id="vat" decimalPlaces="2"/>		
-			                </f:facet>  
-			            </p:cellEditor>  
 			        </p:column>	
-			        -->
 			        <p:column headerText="Date Paid">  
 			            <p:cellEditor>  
 			                <f:facet name="output">  
@@ -105,7 +85,7 @@
 			                    </h:outputText>
 			                </f:facet>  
 			                <f:facet name="input">  
-			                    <p:calendar pattern="dd/MM/yyyy" value="#{payments.datePaid}" mindate="#{InvoiceWizard.invoiceVO.invoiceDate}" />		
+			                    <p:calendar pattern="dd/MM/yyyy" value="#{payments.datePaid}" mindate="#{InvoiceWizard.selectedInvoiceVO.invoiceDate}" />		
 			                </f:facet>  
 			            </p:cellEditor>  
 			        </p:column>						        
@@ -114,12 +94,29 @@
 				    </p:column> 	
 				    
 			        <f:facet name="footer" styleClass="ui-column-title">  
+			        	<h:outputText value="Invoice Total " style="text-align:left"/>
+			        	<h:outputText value="$ : "  rendered="#{InvoiceWizard.selectedInvoiceVO.invAmount ==null }"/>
+			        	<h:outputText value="#{InvoiceWizard.selectedInvoiceVO.invAmount !=null ? InvoiceWizard.selectedInvoiceVO.invAmount :InvoiceWizard.selectedInvoiceVO.invAmountUsd }"/>
+			        	<p:spacer width="30px"/>
 			            <h:outputText value="Total : "/>
-			            <h:outputText value="#{InvoiceWizard.totalInvoicePaymentAmount}">
+			            <h:outputText value="#{InvoiceWizard.totalInvoicePaymentAmount}" id="totalPaidText">
 			            	<f:convertNumber pattern="#0.00" locale="en_GB"/>
 			            </h:outputText>
 			        </f:facet> 				        				    			    
-				</p:dataTable>				
+				</p:dataTable>
+				
+			    <div class="row">
+			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
+					    <p:commandButton value="Add Shipments" id="newShipmentBtn" actionListener="#{InvoiceWizard.addShipment}" 
+							ajax="true" styleClass="btn btn-block ui-state-default" disabled="#{InvoiceWizard.enableAddInvoice}" onclick="this.disabled=true;"/> 
+				    </div>	
+				    			    
+			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
+					    <p:commandButton value="Add New Payment" id="newInvPaymentBtn" update="paymentList" actionListener="#{InvoiceWizard.addNewInvoicePayment}" 
+							ajax="true" styleClass="btn btn-block ui-state-default" disabled="#{! InvoiceWizard.enableAddInvoice}" oncomplete="clickPencil()"/> 
+				    </div>
+				    	
+				 </div>								
 			</p:panel>
         </p:tab>
 </ui:composition>				        

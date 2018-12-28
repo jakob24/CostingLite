@@ -11,7 +11,7 @@ import java.util.Date;
  * @author Jacob
  *
  */
-public class PaymentVO extends BaseVO implements Serializable {
+public class PaymentVO extends BaseVO implements Serializable, Comparable<PaymentVO> {
 	
 
     /**
@@ -225,8 +225,16 @@ public class PaymentVO extends BaseVO implements Serializable {
 	 */
 	public void setShipmentVO(ShipmentVO shipmentVO) {
 		this.shipmentVO = shipmentVO;
-	}	
-    
-    
+	}
 
+	@Override
+	public int compareTo(PaymentVO o) {		
+	   if (this.getDatePaid() == null && o.getDatePaid() == null)
+		   return 0;            // make null==null
+	   if (this.getDatePaid() == null)
+		   return 1;     // this null < other not null
+	   if (o.getDatePaid() == null)
+		   return 1;  // this not null > other null				
+		return this.getDatePaid().compareTo(o.getDatePaid());
+	}
 }

@@ -4,8 +4,10 @@
 package com.artisans.inventory.vo;
 
 import java.io.Serializable;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author Jacob
@@ -18,7 +20,7 @@ public class ShipmentVO extends BaseVO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int shipmentId;
+	private Integer shipmentId;
 
 	private int shipmentNumber;
 	
@@ -28,25 +30,35 @@ public class ShipmentVO extends BaseVO implements Serializable {
 
     private Date deliveryDate;
 
-    private CourierVO courierVO;
+    private CourierVO courier;
 
-    private InvoiceVO invoiceVO;
+    private InvoiceVO invoice;
 
-    private Set<ShipmentProductVO> shipmentProductVO;
+    private List<ShipmentProductVO> shipmentProduct;
 
-    private Set<PaymentVO> paymentVO;
-
+    private List<PaymentVO> payment;
+        
+        
+    /**
+     * Method to format the Shipment number + date to be 
+     * shown in dropdown
+     * @return
+     */
+    public String getFormattedLabel() {
+    	Format formatter = new SimpleDateFormat("dd/MM/yyyy"); 
+    	return getShipmentNumber() + " - " + formatter.format(getShipmentDate());
+    }
 	/**
 	 * @return the shipmentId
 	 */
-	public int getShipmentId() {
+	public Integer getShipmentId() {
 		return shipmentId;
 	}
 
 	/**
 	 * @param shipmentId the shipmentId to set
 	 */
-	public void setShipmentId(int shipmentId) {
+	public void setShipmentId(Integer shipmentId) {
 		this.shipmentId = shipmentId;
 	}
 		
@@ -108,59 +120,67 @@ public class ShipmentVO extends BaseVO implements Serializable {
 	}
 
 	/**
-	 * @return the courierVO
+	 * @return the courier
 	 */
-	public CourierVO getCourierVO() {
-		return courierVO;
+	public CourierVO getCourier() {
+		return courier;
 	}
 
 	/**
-	 * @param courierVO the courierVO to set
+	 * @param courier the courier to set
 	 */
-	public void setCourierVO(CourierVO courierVO) {
-		this.courierVO = courierVO;
+	public void setCourier(CourierVO courier) {
+		this.courier = courier;
 	}
 
 	/**
-	 * @return the invoiceVO
+	 * @return the invoice
 	 */
-	public InvoiceVO getInvoiceVO() {
-		return invoiceVO;
+	public InvoiceVO getInvoice() {
+		return invoice;
 	}
 
 	/**
-	 * @param invoiceVO the invoiceVO to set
+	 * @param invoice the invoice to set
 	 */
-	public void setInvoiceVO(InvoiceVO invoiceVO) {
-		this.invoiceVO = invoiceVO;
+	public void setInvoice(InvoiceVO invoice) {
+		this.invoice = invoice;
+	}
+		
+	/**
+	 * @return the shipmentProduct
+	 */
+	public List<ShipmentProductVO> getShipmentProduct() {
+		return shipmentProduct;
+	}
+	/**
+	 * @param shipmentProduct the shipmentProduct to set
+	 */
+	public void setShipmentProduct(List<ShipmentProductVO> shipmentProduct) {
+		this.shipmentProduct = shipmentProduct;
+	}
+	/**
+	 * @return the payment
+	 */
+	public List<PaymentVO> getPayment() {
+		return payment;
+	}
+	/**
+	 * @param payment the payment to set
+	 */
+	public void setPayment(List<PaymentVO> payment) {
+		this.payment = payment;
 	}
 
-	/**
-	 * @return the shipmentProductVO
-	 */
-	public Set<ShipmentProductVO> getShipmentProductVO() {
-		return shipmentProductVO;
-	}
+	@Override
+    public boolean equals(Object newShipment) { 	   
+       if (this != null && newShipment != null && null !=((ShipmentVO)newShipment).getShipmentId() && null != this.getShipmentId() &&
+    		   this.getShipmentId().intValue() == ((ShipmentVO)newShipment).getShipmentId().intValue()) {
+           return true;
+       } 
+       else {
+    	   return false;
+       }
 
-	/**
-	 * @param shipmentProductVO the shipmentProductVO to set
-	 */
-	public void setShipmentProductVO(Set<ShipmentProductVO> shipmentProductVO) {
-		this.shipmentProductVO = shipmentProductVO;
-	}
-
-	/**
-	 * @return the paymentVO
-	 */
-	public Set<PaymentVO> getPaymentVO() {
-		return paymentVO;
-	}
-
-	/**
-	 * @param paymentVO the paymentVO to set
-	 */
-	public void setPaymentVO(Set<PaymentVO> paymentVO) {
-		this.paymentVO = paymentVO;
-	}
-	
+    } 	
 }

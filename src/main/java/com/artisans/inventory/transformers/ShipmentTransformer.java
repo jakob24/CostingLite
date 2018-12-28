@@ -31,7 +31,7 @@ public class ShipmentTransformer implements Transformer {
 	
 	private static ShipmentVO transformToShipmentVO(Shipment shipment)
 	{
-		ShipmentVO shipmentProductVO = new DozerBeanMapper().map(shipment, ShipmentVO.class);   
-		return shipmentProductVO;
+		ShipmentVO shipmentVO = new DozerBeanMapper().map(shipment, ShipmentVO.class);   
+		return shipmentVO;
 	}
 }

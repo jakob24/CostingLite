@@ -4,7 +4,7 @@
 package com.artisans.inventory.vo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 import com.artisans.inventory.model.Invoice;
 
@@ -25,7 +25,7 @@ public class SupplierVO extends BaseVO implements Serializable {
 
     private String location;
 
-    private Set<Invoice> invoice;
+    private List<Invoice> invoice;
 
 
 	/**
@@ -70,20 +70,20 @@ public class SupplierVO extends BaseVO implements Serializable {
 		this.location = location;
 	}
 
-
-
 	/**
 	 * @return the invoice
 	 */
-	public Set<Invoice> getInvoice() {
+	public List<Invoice> getInvoice() {
 		return invoice;
 	}
 
 	/**
 	 * @param invoice the invoice to set
 	 */
-	public void setInvoice(Set<Invoice> invoice) {
+	public void setInvoice(List<Invoice> invoice) {
 		this.invoice = invoice;
 	}
+
+	
 
 }

@@ -22,6 +22,12 @@ import org.springframework.stereotype.Component;
 @Component(value = "loginController")
 public class LoginController implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	
 	private MenuModel topMenu;
 	
 	/**
@@ -47,25 +53,25 @@ public class LoginController implements Serializable {
 		DefaultSubMenu firstSubmenu = new DefaultSubMenu("Home");
 		DefaultMenuItem item = new DefaultMenuItem("Home");	
 		item.setIcon("fa fa-automobile");
+		item.setHref("index.xhtml");
 		firstSubmenu.addElement(item);
 		topMenu.addElement(firstSubmenu);
 				
-		DefaultSubMenu invoiceSubmenu = new DefaultSubMenu("Invoice");
-		
-		item = new DefaultMenuItem("New");		
-		item.setHref("newInvoice.xhtml");
+		DefaultSubMenu invoiceSubmenu = new DefaultSubMenu("Invoices");		
+		item = new DefaultMenuItem("Manageme Invoices");		
+		item.setHref("invoices.xhtml");
 		item.setIcon("fa fa-user");
-		invoiceSubmenu.addElement(item);	
-				
-		item = new DefaultMenuItem("Update");		
-		item.setHref("editInvoice.xhtml");
-		item.setIcon("fa fa-cogs");
-		invoiceSubmenu.addElement(item);	
-		
+		invoiceSubmenu.addElement(item);
 		topMenu.addElement(invoiceSubmenu);	
-						
-		DefaultSubMenu dataSubmenu = new DefaultSubMenu("Data");
 		
+		DefaultSubMenu ShipmentSubmenu = new DefaultSubMenu("Shipments");		
+		item = new DefaultMenuItem("Manage Shipments");		
+		item.setHref("shipments.xhtml");
+		item.setIcon("fa fa-user");
+		ShipmentSubmenu.addElement(item);
+		topMenu.addElement(ShipmentSubmenu);			
+						
+		DefaultSubMenu dataSubmenu = new DefaultSubMenu("Data");		
 		item = new DefaultMenuItem("Maintain Product");		
 		item.setHref("product.xhtml");
 		item.setIcon("fa fa-user");

@@ -57,6 +57,16 @@ DROP COLUMN `invoice_ref`;
 ALTER TABLE `costing_lite`.`invoice` 
 ADD COLUMN `comments` VARCHAR(500) NULL AFTER `modified_on`;
 
+27/12/2018
+ALTER TABLE `costing_lite`.`invoice` 
+ADD COLUMN `shipment_complete` TINYINT(2) NULL AFTER `comments`;
+
+ALTER TABLE `costing_lite`.`invoice` 
+CHANGE COLUMN `shipment_complete` `shipment_complete` TINYINT(2) NULL DEFAULT 0 ;
+
+
+DROP TABLE `costing_lite`.`payment`;
+
 
 
 

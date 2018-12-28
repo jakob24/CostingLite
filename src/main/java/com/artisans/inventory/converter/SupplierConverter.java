@@ -45,7 +45,7 @@ public class SupplierConverter implements Converter, Serializable {
 		List<SupplierVO>suppliers = referenceDataController.getSupplierVOList();			
 		for(SupplierVO supplier : suppliers)
 		{
-			if(supplier.getSupplierId() == new Long(value).longValue())
+			if(supplier.getSupplierId() == new Integer(value).intValue())
 			{
 				selectedSupplier =  supplier;
 				break;
@@ -60,7 +60,7 @@ public class SupplierConverter implements Converter, Serializable {
 	{
 		if( null != value && value != "")
 		{
-			return new Long(((SupplierVO) value).getSupplierId()).toString(); 
+			return new Integer(((SupplierVO) value).getSupplierId()).toString(); 
 		}
 		else
 		{

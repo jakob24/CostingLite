@@ -36,4 +36,13 @@ public interface InvoiceService
 	 * @return Invoice List
 	 */
 	public List<InvoiceVO> findAllActiveInvoicesForSupplier(SupplierVO supplierVO);
+	
+	
+	/**
+	 * Save the invoice and all its invoice payments
+	 * @param supplierId
+	 * @param drivePattern
+	 * @return Invoice List
+	 */
+	public InvoiceVO SaveInvoiceAndPayments(InvoiceVO invoiceVO);
 }

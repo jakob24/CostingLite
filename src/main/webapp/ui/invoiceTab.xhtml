@@ -6,8 +6,7 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="http://java.sun.com/jsp/jstl/core">				        
 				        
-        <p:tab id="InvoiceTab" title="Invoice">
-        	
+        <p:tab id="InvoiceTab" title="Invoice">        	
         	<p:panel header="Add/Edit Invoice">
                 <p:messages />
                 <h:panelGrid columns="5">				                	
@@ -23,7 +22,7 @@
                 	<h:outputText value="Invoices *" />				                	
 			        <p:selectOneMenu id="invoiceSelect" value="#{InvoiceWizard.selectedInvoiceId}" converter="#{InvoiceConverter}" style="width:150px;" disabled="#{InvoiceWizard.selectedSupplierVO eq null}">
 			        	<f:selectItem itemValue="#{null}" itemLabel="Select one" />			        	
-			            <f:selectItems value="#{InvoiceWizard.supplierInvoiceList}" var="invoice" itemLabel="#{invoice.invoiceNumber}" itemValue="#{invoice.invoiceId}"/>	
+			            <f:selectItems value="#{InvoiceWizard.supplierInvoiceList}" var="invoice" itemLabel="#{invoice.formattedLabel}" itemValue="#{invoice.invoiceId}"/>	
 			            <f:selectItem  itemValue="0" itemLabel="Add New Invoice .."/>		            
 			            <p:ajax event="change" update="invoicePanel" listener="#{InvoiceWizard.addNewInvoice}" />			            
 			        </p:selectOneMenu>			        
@@ -44,13 +43,18 @@
 	                    </p:calendar>
 	                    
 	                    <h:outputText value="Invoice Amount (USD)" />				                    
-	                    <p:inputNumber id="invamtusd" value="#{InvoiceWizard.selectedInvoiceVO.invAmountUsd}" decimalPlaces="2" maxlength="5" />	                    
+	                    <p:inputNumber id="invamtusd" value="#{InvoiceWizard.selectedInvoiceVO.invAmountUsd}" decimalPlaces="2" maxlength="5" required="#{InvoiceWizard.selectedInvoiceVO.invAmount eq null}">	
+	                    	<p:ajax event="blur"  process="@this" update="invamtusd"/>  
+	                    </p:inputNumber>                    
 	 					
 		                <h:outputText value="Comments" />
 		                <p:inputTextarea value="#{InvoiceWizard.selectedInvoiceVO.comments}" label="comments" maxlength="500" />	
 		                    	 					 					 
 	                    <h:outputText value="Invoice Amount *" />				                    
-	                    <p:inputNumber id ="invAmount" value="#{InvoiceWizard.selectedInvoiceVO.invAmount}" decimalPlaces="2" maxlength="5" required="true" />
+	                    <p:inputNumber id ="invAmount" value="#{InvoiceWizard.selectedInvoiceVO.invAmount}" decimalPlaces="2" maxlength="5" 
+	                    	required="#{InvoiceWizard.selectedInvoiceVO.invAmountUsd eq null}" >
+	                    	<p:ajax event="blur" process="@this" update="invAmount" />  
+	                    </p:inputNumber>
 	                    	                     	                     
 	                    <h:outputText value="Paid In Full Date : " />
 	                    <h:outputText value="#{InvoiceWizard.selectedInvoiceVO.datePaid}">
@@ -59,8 +63,6 @@
 	                    			                    
 	                </h:panelGrid>
 	            </p:panel>
-            
             </p:panel>
-        </p:tab>
-				        
+        </p:tab>				        
 </ui:composition>				        

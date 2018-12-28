@@ -1,0 +1,123 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">				        
+				        
+        <p:tab id="ShipmentTab" title="Shipments">        	
+        	<p:panel header="Add/Edit Shipments">
+                <p:messages />
+                <h:panelGrid columns="8">				                	
+                	<h:outputText value="Supplier *" />			                	
+			        <p:selectOneMenu id="supplierSelect" value="#{ShipmentWizard.selectedSupplierVO}" converter="#{SupplierConverter}" >
+			        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}" itemDisabled="#{ShipmentWizard.invokedFromInvoiceWizard eq true ? true:false}"/>
+			            <f:selectItems value="#{ReferenceDataController.supplierVOList}" var="supplier" itemLabel="#{supplier.name}" itemValue="#{supplier}" 
+			            	itemDisabled="#{ShipmentWizard.invokedFromInvoiceWizard eq true ? supplier != ShipmentWizard.selectedSupplierVO : false}"/>
+			           	<p:ajax event="change" update="invoiceSelect shipmentSelect shipmentList" listener="#{ShipmentWizard.findAllInvoicesForSupplier}" />
+			        </p:selectOneMenu>
+			        
+			        <p:spacer width="50px"/>
+			        
+                	<h:outputText value="Invoices *" />		                	
+			        <p:selectOneMenu id="invoiceSelect" value="#{ShipmentWizard.selectedInvoiceId}" >
+			        	<f:selectItem itemValue="#{null}" itemLabel="Select one" itemDisabled="#{ShipmentWizard.invokedFromInvoiceWizard eq true ? true:false}" />			        	
+			            <f:selectItems value="#{ShipmentWizard.supplierInvoiceList}" var="invoice" itemLabel="#{invoice.formattedLabel}" itemValue="#{invoice.invoiceId}"
+			            itemDisabled="#{ShipmentWizard.invokedFromInvoiceWizard eq true ? invoice.invoiceId != ShipmentWizard.selectedInvoiceId : false}"/>	
+			            <p:ajax event="change" update="shipmentSelect shipmentList" listener="#{ShipmentWizard.findAllShipmentsForInvoice}" />		            
+			        </p:selectOneMenu>
+			        
+			        <p:spacer width="50px"/>
+			        
+                	<h:outputText value="Shipments *" />				                	
+			        <p:selectOneMenu id="shipmentSelect" value="#{ShipmentWizard.selectedShipment}" disabled="#{ShipmentWizard.selectedInvoiceId eq null}" converter="#{ShipmentConverter}" >	
+			        	<f:selectItem itemValue="#{null}" itemLabel="Select one" noSelectionOption="true"/>
+			            <f:selectItems value="#{ShipmentWizard.selectedInvoiceVO.shipment}" var="shipmentSel" itemLabel="#{shipmentSel.formattedLabel}" itemValue="#{shipmentSel}"/>
+			            <f:selectItem  itemValue="#{ShipmentWizard.addNewShipment}"  itemLabel="Add New Shipment .."  itemDisabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete == 1}"/>
+			            <p:ajax event="change" update="shipmentList" listener="#{ShipmentWizard.addNewShipment}" oncomplete="clickPencil();" />			            
+			        </p:selectOneMenu>				        			        
+			        						        				                	
+             	</h:panelGrid>
+			</p:panel>
+             
+          	<p:panel header="Shipment Information">
+				<p:dataTable var="shipments" value="#{ShipmentWizard.selectedShipment}" id="shipmentList" 
+					editable="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete !=1}" emptyMessage="" reflow="true" style="margin: 0 auto;" > 
+					
+			        <f:facet  name="header" styleClass="ui-column-title">  
+			            <p:outputLabel value="Shipments" />
+			        </f:facet> 						
+			        <!-- 	        
+					<p:ajax event="rowEdit" listener="#{ShipmentWizard.onShipmentsEdit}" update=":messages" oncomplete="showHideNextButton();"/> 
+                    <p:ajax event="rowEditCancel" listener="#{ShipmentWizard.onShipmentsCancel}" update="shipmentList"  /> 		        
+			         -->
+			        <p:column headerText="Shipment No.">  
+			            <p:cellEditor>  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{shipments.shipmentNumber}" />  
+			                </f:facet>  
+			                <f:facet name="input">  
+			                    <p:inputText value="#{shipments.shipmentNumber}" id="courierName" required="true" readonly="true"/>	
+			                </f:facet>  							                
+			            </p:cellEditor>  
+			        </p:column>			
+			        <p:column headerText="Shipment Date *">  
+			            <p:cellEditor>  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{shipments.shipmentDate}">  
+			                    	<f:convertDateTime pattern="dd/MM/yyyy"/>  
+			                    </h:outputText>
+			                </f:facet>  
+			                <f:facet name="input">  
+			                    <p:calendar id="shipdate" pattern="dd/MM/yyyy" value="#{shipments.shipmentDate}" required="true" 
+			                    	mindate="#{ShipmentWizard.selectedInvoiceVO.invoiceDate}" maxdate="#{ReferenceDataController.today}">
+			                    	<p:ajax event="dateSelect" update="deliveryDate" />
+			                    </p:calendar>			
+			                </f:facet>  
+			            </p:cellEditor>  
+			        </p:column>
+			        <p:column headerText="Courier *">  
+			            <p:cellEditor>  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{shipments.courier.name}" />  
+			                </f:facet>  
+			                <f:facet name="input">  
+						        <p:selectOneMenu id="courierSelect" value="#{shipments.courier}" converter="#{CourierConverter}" style="width:150px;" required="true">
+						        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}" />
+						            <f:selectItems value="#{ReferenceDataController.courierVOList}" var="courier" itemLabel="#{courier.name}" itemValue="#{courier}"/>
+						        </p:selectOneMenu>								        										        
+			                </f:facet>  
+			            </p:cellEditor>  
+			        </p:column>
+			        <p:column headerText="Tracking No.">  
+			            <p:cellEditor >  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{shipments.trackingNumber}" />  
+			                </f:facet>  
+			                <f:facet name="input">  
+			                    <p:inputText value="#{shipments.trackingNumber}" id="trackingNumber" converter="#{toUpperCaseConverter}">	
+			                    	<f:ajax event="blur" render="@this" />
+			                    </p:inputText>	
+			                </f:facet>  
+			            </p:cellEditor>  
+			        </p:column>				        
+			        <p:column headerText="Delivery Date *">  
+			            <p:cellEditor>  
+			                <f:facet name="output">  
+			                    <h:outputText value="#{shipments.deliveryDate}">  
+			                    	<f:convertDateTime pattern="dd/MM/yyyy"/>  
+			                    </h:outputText>
+			                </f:facet>  
+			                <f:facet name="input">  
+			                    <p:calendar id="deliveryDate" pattern="dd/MM/yyyy" value="#{shipments.deliveryDate}" mindate="#{shipments.shipmentDate}" required="true"/>	
+			                </f:facet>  
+			            </p:cellEditor>  
+			        </p:column>	
+				    <p:column headerText="#{bundle.btn_label_amend}">  
+				    	<p:rowEditor/>  
+				    </p:column>  					    
+				</p:dataTable>
+            </p:panel>   
+        </p:tab>				        
+</ui:composition>				        

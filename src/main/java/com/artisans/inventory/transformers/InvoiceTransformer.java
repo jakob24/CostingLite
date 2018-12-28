@@ -12,6 +12,7 @@ import com.artisans.inventory.vo.InvoiceVO;
 /**
  * @author bjacob
  *
+ * Convert Invoice to InvoiceVO 
  */
 public class InvoiceTransformer implements Transformer {
 

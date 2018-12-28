@@ -4,6 +4,7 @@
 package com.artisans.inventory.vo;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -54,7 +55,7 @@ public class ProductVO extends BaseVO implements Serializable {
     
     private String ean;
        
-    private Set<ShipmentProductVO> shipmentProductVO;
+    private List<ShipmentProductVO> shipmentProductVO;
 
 	/**
 	 * @return the productId
@@ -298,14 +299,14 @@ public class ProductVO extends BaseVO implements Serializable {
 	/**
 	 * @return the shipmentProductVO
 	 */
-	public Set<ShipmentProductVO> getShipmentProductVO() {
+	public List<ShipmentProductVO> getShipmentProductVO() {
 		return shipmentProductVO;
 	}
 
 	/**
 	 * @param shipmentProductVO the shipmentProductVO to set
 	 */
-	public void setShipmentProductVO(Set<ShipmentProductVO> shipmentProductVO) {
+	public void setShipmentProductVO(List<ShipmentProductVO> shipmentProductVO) {
 		this.shipmentProductVO = shipmentProductVO;
 	}
 

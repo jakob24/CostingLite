@@ -4,6 +4,7 @@
 package com.artisans.inventory.controller;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.artisans.inventory.helper.ApplicationConfiguration;
+import com.artisans.inventory.helper.BeanHelper;
 import com.artisans.inventory.service.api.StandingDataService;
 import com.artisans.inventory.vo.CourierVO;
 import com.artisans.inventory.vo.ProductVO;
@@ -44,6 +46,9 @@ public class ReferenceDataController implements Serializable {
 	
 	private List<ProductVO> productVOList;
 	
+	private Date today;
+	
+	
 	@PostConstruct
 	public void init() 
 	{					
@@ -58,6 +63,8 @@ public class ReferenceDataController implements Serializable {
 		//Get All Couriers
 		List<ProductVO> productVOList = standingDataService.findProducts();
 		setProductVOList(productVOList);		
+		
+		setToday(BeanHelper.getToday());
 	}
 
 	/**
@@ -100,6 +107,20 @@ public class ReferenceDataController implements Serializable {
 	 */
 	public void setProductVOList(List<ProductVO> productVOList) {
 		this.productVOList = productVOList;
+	}
+
+	/**
+	 * @return the today
+	 */
+	public Date getToday() {
+		return today;
+	}
+
+	/**
+	 * @param today the today to set
+	 */
+	public void setToday(Date today) {
+		this.today = today;
 	}
 	
 	

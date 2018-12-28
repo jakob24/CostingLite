@@ -5,6 +5,7 @@ package com.artisans.inventory.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,12 +34,16 @@ public class Courier implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="courier_id", unique=true, nullable=false, length=10)
     private int courierId;
+    
     @Column(length=45)
     private String name;
+    
     @Column(name="modified_on")
     private Timestamp modifiedOn;
+    
     @OneToMany(mappedBy="courier")
-    private Set<Shipment> shipment;
+    private List<Shipment> shipment;
+    
     @ManyToOne
     @JoinColumn(name="modified_by")
     private User user;
@@ -98,26 +103,22 @@ public class Courier implements Serializable {
 	public void setModifiedOn(Timestamp modifiedOn) {
 		this.modifiedOn = modifiedOn;
 	}
+	
+    /**
+	 * @return the shipment
+	 */
+	public List<Shipment> getShipment() {
+		return shipment;
+	}
 
 	/**
-     * Access method for shipment.
-     *
-     * @return the current value of shipment
-     */
-    public Set<Shipment> getShipment() {
-        return shipment;
-    }
+	 * @param shipment the shipment to set
+	 */
+	public void setShipment(List<Shipment> shipment) {
+		this.shipment = shipment;
+	}
 
-    /**
-     * Setter method for shipment.
-     *
-     * @param aShipment the new value for shipment
-     */
-    public void setShipment(Set<Shipment> aShipment) {
-        shipment = aShipment;
-    }
-
-    /**
+	/**
      * Access method for user.
      *
      * @return the current value of user

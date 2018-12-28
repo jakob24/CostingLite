@@ -31,23 +31,32 @@ public class ShipmentProduct implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="shipment_product_id", unique=true, nullable=false, length=10)
     private int shipmentProductId;
+    
     private Date date;
+    
     @Column(name="cost_price_usd", precision=22)
     private double costPriceUsd;
+    
     @Column(name="cost_price_gbp", precision=22)
     private double costPriceGbp;
+    
     @Column(name="landing_cost_gbp", precision=22)
     private double landingCostGbp;
+    
     @Column(name="product_qty", length=10)
     private int productQty;
+    
     @Column(name="modified_on")
     private Timestamp modifiedOn;
+    
     @ManyToOne
     @JoinColumn(name="product")
     private Product product;
+    
     @ManyToOne
     @JoinColumn(name="shipment")
     private Shipment shipment;
+    
     @ManyToOne
     @JoinColumn(name="modified_by")
     private User user;

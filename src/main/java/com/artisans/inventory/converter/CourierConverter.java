@@ -43,7 +43,7 @@ public class CourierConverter implements Converter, Serializable {
 		List<CourierVO>courier = referenceDataController.getCourierVOList();			
 		for(CourierVO courierVO : courier)
 		{
-			if(courierVO.getCourierId() == new Long(value).longValue())
+			if(courierVO.getCourierId().intValue() == new Integer(value).intValue())
 			{
 				selectedCourier = courierVO;
 				break;
@@ -57,7 +57,7 @@ public class CourierConverter implements Converter, Serializable {
 	{
 		if( null != value && value != "")
 		{
-			return new Long(((CourierVO) value).getCourierId()).toString(); 
+			return new Integer(((CourierVO) value).getCourierId()).toString(); 
 		}
 		else
 		{

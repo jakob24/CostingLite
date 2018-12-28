@@ -6,7 +6,6 @@ package com.artisans.inventory.transformers;
 import org.apache.commons.collections.Transformer;
 import org.dozer.DozerBeanMapper;
 
-import com.artisans.inventory.model.Invoice;
 import com.artisans.inventory.model.Payment;
 import com.artisans.inventory.vo.PaymentVO;
 
@@ -22,7 +21,7 @@ public class PaymentsTransformer implements Transformer {
     	{
     		throw new IllegalArgumentException("The input paymentObj is empty.");
     	}
-    	else if(! (paymentObj instanceof Invoice))
+    	else if(! (paymentObj instanceof Payment))
     	{
     		throw new IllegalArgumentException("Invalid object passed for transformation");
     	}

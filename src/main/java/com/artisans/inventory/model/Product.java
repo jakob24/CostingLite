@@ -5,8 +5,8 @@ package com.artisans.inventory.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,37 +32,53 @@ public class Product implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="product_id", unique=true, nullable=false, length=10)
     private int productId;
+    
     @Column(length=45)
     private String name;
+    
     @Column(name="ASIN", length=45)
     private String asin;
+    
     @Column(length=10)
     private int inventory;
+    
     @Column(name="min_inventory", length=10)
     private int minInventory;
+    
     @Column(length=500)
     private String description;
+    
     private byte[] image;
     @Column(name="modified_on")
     private Timestamp modifiedOn;
+    
     @Column(name="postage_charges", precision=22)
     private Double postageCharges;	
+    
     @Column(name="packing_charges", precision=22)
     private Double packingCharges;	
+    
     @Column(name="other_charges", precision=22)
-    private Double otherCharges;		
+    private Double otherCharges;	
+    
     @Column(name="web_rrp", precision=22)
     private Double webRrp;	
+    
     @Column(name="web_pp_charge", precision=22)
     private Double webPpCharge;	
+    
     @Column(name="ebay_rrp", precision=22)
     private Double ebayRrp;		
+    
     @Column(name="ebay_fees", precision=22)
     private Double ebayFees;	
+    
     @Column(name="amz_rrp", precision=22)
     private Double amzRrp;	
+    
     @Column(name="amz_fees", precision=22)
     private Double amzFees;		
+    
     @Column(name="amz_fba_fees", precision=22)
     private Double amzFbaFees;    
     
@@ -70,7 +86,8 @@ public class Product implements Serializable {
     private String ean;
                   
     @OneToMany(mappedBy="product")
-    private Set<ShipmentProduct> shipmentProduct;
+    private List<ShipmentProduct> shipmentProduct;
+    
     @ManyToOne
     @JoinColumn(name="modified_by")
     private User user;
@@ -379,27 +396,23 @@ public class Product implements Serializable {
     public void setModifiedOn(Timestamp aModifiedOn) {
         modifiedOn = aModifiedOn;
     }
-    
- 
+        
+
+    /**
+	 * @return the shipmentProduct
+	 */
+	public List<ShipmentProduct> getShipmentProduct() {
+		return shipmentProduct;
+	}
+
 	/**
-     * Access method for shipmentProduct.
-     *
-     * @return the current value of shipmentProduct
-     */
-    public Set<ShipmentProduct> getShipmentProduct() {
-        return shipmentProduct;
-    }
+	 * @param shipmentProduct the shipmentProduct to set
+	 */
+	public void setShipmentProduct(List<ShipmentProduct> shipmentProduct) {
+		this.shipmentProduct = shipmentProduct;
+	}
 
-    /**
-     * Setter method for shipmentProduct.
-     *
-     * @param aShipmentProduct the new value for shipmentProduct
-     */
-    public void setShipmentProduct(Set<ShipmentProduct> aShipmentProduct) {
-        shipmentProduct = aShipmentProduct;
-    }
-
-    /**
+	/**
      * Access method for user.
      *
      * @return the current value of user

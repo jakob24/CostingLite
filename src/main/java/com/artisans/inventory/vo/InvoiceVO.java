@@ -4,7 +4,10 @@
 package com.artisans.inventory.vo;
 
 import java.io.Serializable;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,14 +32,27 @@ public class InvoiceVO extends BaseVO implements Serializable {
     private Double invAmount;
 
     private Double invAmountUsd;
-
-    private Set<PaymentVO> paymentsVO;
-
-    private Set<ShipmentVO> shipmentsVO;
-
-    private SupplierVO supplierVO;
     
-    private String comments;      
+    private List<PaymentVO> payment;
+
+    private List<ShipmentVO> shipment;
+
+    private SupplierVO supplier;
+    
+    private String comments;    
+    
+    private Short shipmentComplete;
+    
+    
+    /**
+     * Method to format the invoice number + date to be 
+     * shown in dropdown
+     * @return
+     */
+    public String getFormattedLabel() {
+    	Format formatter = new SimpleDateFormat("dd/MM/yyyy"); 
+    	return getInvoiceNumber() + " - " + formatter.format(getInvoiceDate());
+    }
 
 	/**
 	 * @return the invoiceId
@@ -122,46 +138,47 @@ public class InvoiceVO extends BaseVO implements Serializable {
 		this.invAmountUsd = invAmountUsd;
 	}
 
+	
 	/**
-	 * @return the paymentsVO
+	 * @return the payment
 	 */
-	public Set<PaymentVO> getPaymentsVO() {
-		return paymentsVO;
+	public List<PaymentVO> getPayment() {
+		return payment;
 	}
 
 	/**
-	 * @param paymentsVO the paymentsVO to set
+	 * @param payment the payment to set
 	 */
-	public void setPaymentsVO(Set<PaymentVO> paymentsVO) {
-		this.paymentsVO = paymentsVO;
+	public void setPayment(List<PaymentVO> payment) {
+		this.payment = payment;
 	}
 
 	/**
-	 * @return the shipmentsVO
+	 * @return the shipment
 	 */
-	public Set<ShipmentVO> getShipmentsVO() {
-		return shipmentsVO;
+	public List<ShipmentVO> getShipment() {
+		return shipment;
 	}
 
 	/**
-	 * @param shipmentsVO the shipmentsVO to set
+	 * @param shipment the shipment to set
 	 */
-	public void setShipmentsVO(Set<ShipmentVO> shipmentsVO) {
-		this.shipmentsVO = shipmentsVO;
+	public void setShipment(List<ShipmentVO> shipment) {
+		this.shipment = shipment;
 	}
 
 	/**
-	 * @return the supplierVO
+	 * @return the supplier
 	 */
-	public SupplierVO getSupplierVO() {
-		return supplierVO;
+	public SupplierVO getSupplier() {
+		return supplier;
 	}
 
 	/**
-	 * @param supplierVO the supplierVO to set
+	 * @param supplier the supplier to set
 	 */
-	public void setSupplierVO(SupplierVO supplierVO) {
-		this.supplierVO = supplierVO;
+	public void setSupplier(SupplierVO supplier) {
+		this.supplier = supplier;
 	}
 
 	/**
@@ -176,6 +193,22 @@ public class InvoiceVO extends BaseVO implements Serializable {
 	 */
 	public void setComments(String comments) {
 		this.comments = comments;
-	}	
+	}
+
+	/**
+	 * @return the shipmentComplete
+	 */
+	public Short getShipmentComplete() {
+		return shipmentComplete;
+	}
+
+	/**
+	 * @param shipmentComplete the shipmentComplete to set
+	 */
+	public void setShipmentComplete(Short shipmentComplete) {
+		this.shipmentComplete = shipmentComplete;
+	}
+	
+	
 
 }

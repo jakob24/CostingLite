@@ -5,6 +5,7 @@ package com.artisans.inventory.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,14 +33,19 @@ public class Supplier implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="supplier_id", unique=true, nullable=false, length=10)
     private int supplierId;
+    
     @Column(length=45)
     private String name;
+    
     @Column(length=45)
     private String location;
+    
     @Column(name="modified_on")
     private Timestamp modifiedOn;
+    
     @OneToMany(mappedBy="supplier")
-    private Set<Invoice> invoice;
+    private List<Invoice> invoice;
+    
     @ManyToOne
     @JoinColumn(name="modified_by")
     private User user;
@@ -122,24 +128,20 @@ public class Supplier implements Serializable {
     }
 
     /**
-     * Access method for invoice.
-     *
-     * @return the current value of invoice
-     */
-    public Set<Invoice> getInvoice() {
-        return invoice;
-    }
+	 * @return the invoice
+	 */
+	public List<Invoice> getInvoice() {
+		return invoice;
+	}
 
-    /**
-     * Setter method for invoice.
-     *
-     * @param aInvoice the new value for invoice
-     */
-    public void setInvoice(Set<Invoice> aInvoice) {
-        invoice = aInvoice;
-    }
+	/**
+	 * @param invoice the invoice to set
+	 */
+	public void setInvoice(List<Invoice> invoice) {
+		this.invoice = invoice;
+	}
 
-    /**
+	/**
      * Access method for user.
      *
      * @return the current value of user

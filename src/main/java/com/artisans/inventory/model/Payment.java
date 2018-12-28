@@ -17,7 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity(name="payments")
-public class Payment implements Serializable {
+public class Payment implements Serializable, Comparable<Payment>  {
 
     /**
 	 * 
@@ -423,5 +423,16 @@ public class Payment implements Serializable {
         ret.put("paymentId", Integer.valueOf(getPaymentId()));
         return ret;
     }
+
+	@Override
+	public int compareTo(Payment o) {
+		   if (this.getDatePaid() == null && o.getDatePaid() == null)
+			   return 0;            // make null==null
+		   if (this.getDatePaid() == null)
+			   return 1;     // this null < other not null
+		   if (o.getDatePaid() == null)
+			   return 1;  // this not null > other null				
+			return this.getDatePaid().compareTo(o.getDatePaid());
+	}
 
 }

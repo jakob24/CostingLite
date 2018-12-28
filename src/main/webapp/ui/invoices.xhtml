@@ -22,36 +22,17 @@
 					else
 					{
 						PF('wizard').nextNav.show();
-					}
-									
-					$('#productAdd').prop('hidden', true); 	
-					$("#addNewProduct").click(function()
-					{				    
-					    $('#productAdd').prop('hidden', false);
-					    $('#editProduct').prop('disabled', true);
-					    
-					});	
-					$("#editProduct").click(function()
-					{				    
-					    $('#productAdd').prop('hidden', false);
-					    $('#addNewProduct').prop('disabled', true);					    
-					});											  				  
-				});	
-				
-				function showInitState()
-                {
-                	$('#productAdd').prop('hidden', true);
-                }		
+					}									
+										  				  
+				});					
+
                 
 				function blink() { 
 				  $('#amendTool').fadeOut(500).fadeIn(500, blink); 
 				}
 				
 				function showHideNextButton()
-				{
-					//#{facesContext.postback});
-					//PF('wizard').backNav.show();
-					
+				{					
 					if(#{facesContext.validationFailed}) 
 					{
 						PF('wizard').nextNav.hide();
@@ -61,37 +42,23 @@
 						PF('wizard').nextNav.show();
 					}
 				}
+				
+				function clickPencil()
+				{
+					$('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){$(this).click()});
+				}
 					
 			</h:outputScript>	
     
 		<div class="container-fluid">
 			<div class="ui-g-12 ui-md-4 ui-lg-8" id="dataEditDiv">				
-				<h:form>         
+				<h:form id="invoiceForm">         
 				    <p:growl id="growl" sticky="true" showDetail="true"/>			 
 				 	<p:importConstants type="com.artisans.inventory.controller.InvoiceWizard" var="WizardController"/>				 	
 				    <p:wizard flowListener="#{InvoiceWizard.onFlowProcess}" widgetVar="wizard">
 						
-						<ui:include src="invoiceTab.xhtml"/>
-						
-						
-				 
-				 		<!-- 
-				 		<ui:include src="invoicePaymentTab.xhtml"/>
-				 		
-				 		<ui:include src="shipmentTab.xhtml"/>
-				        				        
-						<ui:include src="shipmentPaymentTab.xhtml"/>
-				        				        				        
-				        <p:tab id="shipProductsTab" title="Shipment Products">
-				            <p:panel header="Shipment Products Information">
-				                <p:messages />
-				                <h:panelGrid columns="2" columnClasses="label, value">
-
-				                </h:panelGrid>
-				            </p:panel>
-				        </p:tab>
-				         -->
-				        				        				        
+						<ui:include src="invoiceTab.xhtml"/>						
+				 		<ui:include src="invoicePaymentTab.xhtml"/>				        				        				        
 				 				 
 				        <p:tab id="confirmTab" title="Confirmation">
 				            <p:panel header="Confirmation">

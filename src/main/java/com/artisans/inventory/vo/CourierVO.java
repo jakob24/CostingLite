@@ -4,7 +4,7 @@
 package com.artisans.inventory.vo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author Jacob
@@ -17,24 +17,24 @@ public class CourierVO extends BaseVO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int courierId;
+	private Integer courierId;
 
     private String name;
 
-    private Set<ShipmentVO> shipmentVO;
+    private List<ShipmentVO> shipmentVO;
 
 
 	/**
 	 * @return the courierId
 	 */
-	public int getCourierId() {
+	public Integer getCourierId() {
 		return courierId;
 	}
 
 	/**
 	 * @param courierId the courierId to set
 	 */
-	public void setCourierId(int courierId) {
+	public void setCourierId(Integer courierId) {
 		this.courierId = courierId;
 	}
 
@@ -55,14 +55,16 @@ public class CourierVO extends BaseVO implements Serializable {
 	/**
 	 * @return the shipmentVO
 	 */
-	public Set<ShipmentVO> getShipmentVO() {
+	public List<ShipmentVO> getShipmentVO() {
 		return shipmentVO;
 	}
 
 	/**
 	 * @param shipmentVO the shipmentVO to set
 	 */
-	public void setShipmentVO(Set<ShipmentVO> shipmentVO) {
+	public void setShipmentVO(List<ShipmentVO> shipmentVO) {
 		this.shipmentVO = shipmentVO;
 	}
+
+
 }

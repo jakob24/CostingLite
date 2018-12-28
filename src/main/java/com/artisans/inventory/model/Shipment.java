@@ -6,11 +6,13 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity(name="shipment")
-public class Shipment implements Serializable {
+public class Shipment implements Serializable, Comparable<Shipment> {
 
 	/**
 	 * 
@@ -58,14 +60,15 @@ public class Shipment implements Serializable {
     private Invoice invoice;
     
     @OneToMany(mappedBy="shipment")
-    private Set<ShipmentProduct> shipmentProduct;
+    private List<ShipmentProduct> shipmentProduct;
     
     @ManyToOne
     @JoinColumn(name="modified_by")
     private User user;
     
     @OneToMany(mappedBy="shipment")
-    private Set<Payment> payment;
+    private List<Payment> payment;
+            
 
     /** Default constructor. */
     public Shipment() {
@@ -214,40 +217,37 @@ public class Shipment implements Serializable {
     public void setInvoice(Invoice aInvoice) {
         invoice = aInvoice;
     }
-
+  
+    
     /**
-     * Access method for shipmentProduct.
-     *
-     * @return the current value of shipmentProduct
-     */
-    public Set<ShipmentProduct> getShipmentProduct() {
-        return shipmentProduct;
-    }
+	 * @return the shipmentProduct
+	 */
+	public List<ShipmentProduct> getShipmentProduct() {
+		return shipmentProduct;
+	}
 
-    /**
-     * Setter method for shipmentProduct.
-     *
-     * @param aShipmentProduct the new value for shipmentProduct
-     */
-    public void setShipmentProduct(Set<ShipmentProduct> aShipmentProduct) {
-        shipmentProduct = aShipmentProduct;
-    }
+	/**
+	 * @param shipmentProduct the shipmentProduct to set
+	 */
+	public void setShipmentProduct(List<ShipmentProduct> shipmentProduct) {
+		this.shipmentProduct = shipmentProduct;
+	}
 
-    /**
+	/**
 	 * @return the payment
 	 */
-	public Set<Payment> getPayment() {
+	public List<Payment> getPayment() {
 		return payment;
 	}
 
 	/**
 	 * @param payment the payment to set
 	 */
-	public void setPayment(Set<Payment> payment) {
+	public void setPayment(List<Payment> payment) {
 		this.payment = payment;
-	}    
-    
-    /**
+	}
+
+	/**
      * Access method for user.
      *
      * @return the current value of user
@@ -265,8 +265,7 @@ public class Shipment implements Serializable {
         user = aUser;
     }
 
-
-    /**
+	/**
      * Compares the key for this instance with another Shipment.
      *
      * @param other The object to compare to
@@ -335,5 +334,16 @@ public class Shipment implements Serializable {
         ret.put("shipmentId", Integer.valueOf(getShipmentId()));
         return ret;
     }
+
+	@Override
+	public int compareTo(Shipment o) {
+	   if (this.getShipmentDate() == null && o.getShipmentDate() == null)
+		   return 0;            // make null==null
+	   if (this.getShipmentDate() == null)
+		   return 1;     // this null < other not null
+	   if (o.getShipmentDate() == null)
+		   return 1;  // this not null > other null				
+		return this.getShipmentDate().compareTo(o.getShipmentDate());
+	}
 
 }

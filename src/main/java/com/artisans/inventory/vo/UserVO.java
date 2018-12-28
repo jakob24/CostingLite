@@ -4,6 +4,7 @@
 package com.artisans.inventory.vo;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -25,19 +26,19 @@ public class UserVO extends BaseVO implements Serializable {
 
     private boolean admin;
 
-    private Set<CourierVO> courierVO;
+    private List<CourierVO> courierVO;
 
-    private Set<InvoiceVO> invoiceVO;
+    private List<InvoiceVO> invoiceVO;
 
-    private Set<PaymentVO> paymentVO;
+    private List<PaymentVO> paymentVO;
 
-    private Set<ProductVO> productVO;
+    private List<ProductVO> productVO;
 
-    private Set<ShipmentProductVO> shipmentProductVO;
+    private List<ShipmentProductVO> shipmentProductVO;
 
-    private Set<ShipmentVO> shipmentVO;
+    private List<ShipmentVO> shipmentVO;
 
-    private Set<SupplierVO> supplierVO;
+    private List<SupplierVO> supplierVO;
 
 	/**
 	 * @return the userId
@@ -94,102 +95,102 @@ public class UserVO extends BaseVO implements Serializable {
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
-
+	
 	/**
 	 * @return the courierVO
 	 */
-	public Set<CourierVO> getCourierVO() {
+	public List<CourierVO> getCourierVO() {
 		return courierVO;
 	}
 
 	/**
 	 * @param courierVO the courierVO to set
 	 */
-	public void setCourierVO(Set<CourierVO> courierVO) {
+	public void setCourierVO(List<CourierVO> courierVO) {
 		this.courierVO = courierVO;
 	}
 
 	/**
 	 * @return the invoiceVO
 	 */
-	public Set<InvoiceVO> getInvoiceVO() {
+	public List<InvoiceVO> getInvoiceVO() {
 		return invoiceVO;
 	}
 
 	/**
 	 * @param invoiceVO the invoiceVO to set
 	 */
-	public void setInvoiceVO(Set<InvoiceVO> invoiceVO) {
+	public void setInvoiceVO(List<InvoiceVO> invoiceVO) {
 		this.invoiceVO = invoiceVO;
 	}
 
 	/**
-	 * @return the paymentsVO
+	 * @return the paymentVO
 	 */
-	public Set<PaymentVO> getPaymentsVO() {
+	public List<PaymentVO> getPaymentVO() {
 		return paymentVO;
 	}
 
 	/**
-	 * @param paymentVO the paymentsVO to set
+	 * @param paymentVO the paymentVO to set
 	 */
-	public void setPaymentsVO(Set<PaymentVO> paymentVO) {
+	public void setPaymentVO(List<PaymentVO> paymentVO) {
 		this.paymentVO = paymentVO;
 	}
 
 	/**
 	 * @return the productVO
 	 */
-	public Set<ProductVO> getProductVO() {
+	public List<ProductVO> getProductVO() {
 		return productVO;
 	}
 
 	/**
 	 * @param productVO the productVO to set
 	 */
-	public void setProductVO(Set<ProductVO> productVO) {
+	public void setProductVO(List<ProductVO> productVO) {
 		this.productVO = productVO;
 	}
 
 	/**
 	 * @return the shipmentProductVO
 	 */
-	public Set<ShipmentProductVO> getShipmentProductVO() {
+	public List<ShipmentProductVO> getShipmentProductVO() {
 		return shipmentProductVO;
 	}
 
 	/**
 	 * @param shipmentProductVO the shipmentProductVO to set
 	 */
-	public void setShipmentProductVO(Set<ShipmentProductVO> shipmentProductVO) {
+	public void setShipmentProductVO(List<ShipmentProductVO> shipmentProductVO) {
 		this.shipmentProductVO = shipmentProductVO;
 	}
 
 	/**
 	 * @return the shipmentVO
 	 */
-	public Set<ShipmentVO> getShipmentVO() {
+	public List<ShipmentVO> getShipmentVO() {
 		return shipmentVO;
 	}
 
 	/**
 	 * @param shipmentVO the shipmentVO to set
 	 */
-	public void setShipmentVO(Set<ShipmentVO> shipmentVO) {
+	public void setShipmentVO(List<ShipmentVO> shipmentVO) {
 		this.shipmentVO = shipmentVO;
 	}
 
 	/**
 	 * @return the supplierVO
 	 */
-	public Set<SupplierVO> getSupplierVO() {
+	public List<SupplierVO> getSupplierVO() {
 		return supplierVO;
 	}
 
 	/**
 	 * @param supplierVO the supplierVO to set
 	 */
-	public void setSupplierVO(Set<SupplierVO> supplierVO) {
+	public void setSupplierVO(List<SupplierVO> supplierVO) {
 		this.supplierVO = supplierVO;
 	}
 

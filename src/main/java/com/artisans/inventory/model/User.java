@@ -5,8 +5,8 @@ package com.artisans.inventory.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="user")
 public class User implements Serializable {
@@ -45,25 +43,25 @@ public class User implements Serializable {
     private short admin;
     
     @OneToMany(mappedBy="user")
-    private Set<Courier> courier;
+    private List<Courier> courier;
     
     @OneToMany(mappedBy="user")
-    private Set<Invoice> invoice;
+    private List<Invoice> invoice;
     
     @OneToMany(mappedBy="user")
-    private Set<Payment> payment;
+    private List<Payment> payment;
     
     @OneToMany(mappedBy="user")
-    private Set<Product> product;
+    private List<Product> product;
     
     @OneToMany(mappedBy="user")
-    private Set<ShipmentProduct> shipmentProduct;
+    private List<ShipmentProduct> shipmentProduct;
     
     @OneToMany(mappedBy="user")
-    private Set<Shipment> shipment;
+    private List<Shipment> shipment;
     
     @OneToMany(mappedBy="user")
-    private Set<Supplier> supplier;
+    private List<Supplier> supplier;
 
     /** Default constructor. */
     public User() {
@@ -164,141 +162,93 @@ public class User implements Serializable {
     public void setAdmin(short aAdmin) {
         admin = aAdmin;
     }
-
+  
+    
     /**
-     * Access method for courier.
-     *
-     * @return the current value of courier
-     */
-    @JsonIgnore
-    public Set<Courier> getCourier() {
-        return courier;
-    }
+	 * @return the invoice
+	 */
+	public List<Invoice> getInvoice() {
+		return invoice;
+	}
 
-    /**
-     * Setter method for courier.
-     *
-     * @param aCourier the new value for courier
-     */
-    public void setCourier(Set<Courier> aCourier) {
-        courier = aCourier;
-    }
+	/**
+	 * @param invoice the invoice to set
+	 */
+	public void setInvoice(List<Invoice> invoice) {
+		this.invoice = invoice;
+	}
 
-    /**
-     * Access method for invoice.
-     *
-     * @return the current value of invoice
-     */
-    @JsonIgnore
-    public Set<Invoice> getInvoice() {
-        return invoice;
-    }
+	/**
+	 * @return the payment
+	 */
+	public List<Payment> getPayment() {
+		return payment;
+	}
 
-    /**
-     * Setter method for invoice.
-     *
-     * @param aInvoice the new value for invoice
-     */
-    public void setInvoice(Set<Invoice> aInvoice) {
-        invoice = aInvoice;
-    }
+	/**
+	 * @param payment the payment to set
+	 */
+	public void setPayment(List<Payment> payment) {
+		this.payment = payment;
+	}
 
-    /**
-     * Access method for payments.
-     *
-     * @return the current value of payments
-     */
-    @JsonIgnore
-    public Set<Payment> getPayments() {
-        return payment;
-    }
+	/**
+	 * @return the product
+	 */
+	public List<Product> getProduct() {
+		return product;
+	}
 
-    /**
-     * Setter method for payments.
-     *
-     * @param aPayments the new value for payments
-     */
-    public void setPayments(Set<Payment> aPayments) {
-        payment = aPayments;
-    }
+	/**
+	 * @param product the product to set
+	 */
+	public void setProduct(List<Product> product) {
+		this.product = product;
+	}
 
-    /**
-     * Access method for product.
-     *
-     * @return the current value of product
-     */
-    @JsonIgnore
-    public Set<Product> getProduct() {
-        return product;
-    }
+	/**
+	 * @return the shipmentProduct
+	 */
+	public List<ShipmentProduct> getShipmentProduct() {
+		return shipmentProduct;
+	}
 
-    /**
-     * Setter method for product.
-     *
-     * @param aProduct the new value for product
-     */
-    public void setProduct(Set<Product> aProduct) {
-        product = aProduct;
-    }
+	/**
+	 * @param shipmentProduct the shipmentProduct to set
+	 */
+	public void setShipmentProduct(List<ShipmentProduct> shipmentProduct) {
+		this.shipmentProduct = shipmentProduct;
+	}
 
-    /**
-     * Access method for shipmentProduct.
-     *
-     * @return the current value of shipmentProduct
-     */
-    @JsonIgnore
-    public Set<ShipmentProduct> getShipmentProduct() {
-        return shipmentProduct;
-    }
+	/**
+	 * @return the shipment
+	 */
+	public List<Shipment> getShipment() {
+		return shipment;
+	}
 
-    /**
-     * Setter method for shipmentProduct.
-     *
-     * @param aShipmentProduct the new value for shipmentProduct
-     */
-    public void setShipmentProduct(Set<ShipmentProduct> aShipmentProduct) {
-        shipmentProduct = aShipmentProduct;
-    }
+	/**
+	 * @param shipment the shipment to set
+	 */
+	public void setShipment(List<Shipment> shipment) {
+		this.shipment = shipment;
+	}
 
-    /**
-     * Access method for shipment.
-     *
-     * @return the current value of shipment
-     */
-    @JsonIgnore
-    public Set<Shipment> getShipment() {
-        return shipment;
-    }
+	/**
+	 * @return the supplier
+	 */
+	public List<Supplier> getSupplier() {
+		return supplier;
+	}
 
-    /**
-     * Setter method for shipment.
-     *
-     * @param aShipment the new value for shipment
-     */
-    public void setShipment(Set<Shipment> aShipment) {
-        shipment = aShipment;
-    }
+	/**
+	 * @param supplier the supplier to set
+	 */
+	public void setSupplier(List<Supplier> supplier) {
+		this.supplier = supplier;
+	}
 
-    /**
-     * Access method for supplier.
-     *
-     * @return the current value of supplier
-     */
-    @JsonIgnore
-    public Set<Supplier> getSupplier() {
-        return supplier;
-    }
-
-    /**
-     * Setter method for supplier.
-     *
-     * @param aSupplier the new value for supplier
-     */
-    public void setSupplier(Set<Supplier> aSupplier) {
-        supplier = aSupplier;
-    }
-
-    /**
+	/**
      * Compares the key for this instance with another User.
      *
      * @param other The object to compare to
