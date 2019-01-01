@@ -67,21 +67,24 @@
 		                    <h:outputText value="Description *" styleClass="labelx"/>
 		                    <p:inputText value="#{StandingDataController.newProduct.description}" required="true" label="Lastname" styleClass="customTxtWidth150px"/>		                    
 		                    
-		                    <h:outputText value="Image *" />
-		 					<p:fileUpload id="fileIdPhoto" fileUploadListener="#{StandingDataController.uploadPhoto}" mode="advanced" dragDropSupport="false" update="messages" 
-		 						sizeLimit="3000000" fileLimit="1" multiple="false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
+		                    <h:outputText value="SKU" />
+		                    <p:inputTextarea value="#{StandingDataController.newProduct.sku}"  label="SKU" />			                    		                 
 		 					
 		 					<h:outputText value="Image *" />	
-		 					<p:graphicImage value="#{StandingDataController.image}" height="50px" width="50px">
-		 						<f:param name="product" value="#{StandingDataController.newProduct.productId}" />
-		 					</p:graphicImage>
+		 					<p:graphicImage url="#{StandingDataController.newProduct.image}" height="50px" width="50px"/>
 		 					
-		                    <h:outputText value="ASIN List *" />
-		                    <p:inputTextarea value="#{StandingDataController.newProduct.asin}" required="true" label="asin" />	
+		                    <h:outputText value="ASIN (Amazon)" />
+		                    <p:inputText value="#{StandingDataController.newProduct.asin}"  label="asin" />	
+		                    
+			                <h:outputText value="Image URL *" />
+		                    <p:inputText value="#{StandingDataController.newProduct.image}" required="true" label="Image Url" styleClass="customTxtWidth150px"/>
 		                    
 		                    <h:outputText value="EAN *" />
-		                    <p:inputText value="#{StandingDataController.newProduct.ean}" required="true" label="ean" />			                    
-		                    
+		                    <p:inputText value="#{StandingDataController.newProduct.ean}" required="true" label="ean" />	
+		                    		                    
+	                    	<h:outputText value="Inactive Date *" />
+		                    <p:calendar value="#{StandingDataController.newProduct.inactiveFrom}" required="true" label="InactiveeDate" pattern="dd/MM/yyyy" /> 
+		                                  		                    
 		                    <h:outputText value="Inventory" />
 		                    <p:inputText value="#{StandingDataController.newProduct.inventory}" required="true">
 		                    	<f:validateDoubleRange minimum="0" />
@@ -90,8 +93,8 @@
 		                    <h:outputText value="Min Inventory" />
 		                    <p:inputText value="#{StandingDataController.newProduct.minInventory}">
 		                    	<f:validateDoubleRange minimum="1" maximum="200" />
-		                    </p:inputText>  	  
-		                                      
+		                    </p:inputText> 	                    
+		                     	  		                                      
 		 					<p:separator/><p:separator/><p:separator/><p:separator/>
 		 						
 		                    <h:outputText value="Web Retail Price" />
@@ -114,12 +117,12 @@
 		                    	<f:validateDoubleRange minimum="0" maximum="200" />
 		                    </p:inputText> 	
 		                    
-		                    <h:outputText value="Stripe Charges" />
+		                    <h:outputText value="Stripe Charges %" />
 		                    <p:inputText value="#{StandingDataController.newProduct.webPpCharge}" required="true">
 		                    	<f:validateDoubleRange minimum="0" />
 		                    </p:inputText>  		                    	                    
 		 					
-		 					<h:panelGroup /><h:panelGroup />		 					
+		 					<h:panelGroup/><h:panelGroup />		 					
 		 					<p:separator/><p:separator/><p:separator/><p:separator/>            				
 		 					
 		                    <h:outputText value="Ebay Retail Price" />

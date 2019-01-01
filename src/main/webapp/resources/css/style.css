@@ -299,13 +299,13 @@ body {
 
 /* Inventory Lite */
     .labelx {
-        width:40%;
+        width:50%;
         min-width:100px !important;
         padding:2px;
     }
  
     .valuex {
-        width:60%;
+        width:50%;
         padding:2px;
     }
  

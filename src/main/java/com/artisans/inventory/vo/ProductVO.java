@@ -4,8 +4,8 @@
 package com.artisans.inventory.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Jacob
@@ -24,6 +24,12 @@ public class ProductVO extends BaseVO implements Serializable {
     private String name;
 
     private String asin;
+    
+    private String ean;
+    
+    private String sku;
+    
+    private Date inactiveFrom;
 
     private int inventory;
 
@@ -31,7 +37,7 @@ public class ProductVO extends BaseVO implements Serializable {
 
     private String description;
     
-    private byte[] image;
+    private String image;
     
     private Double postageCharges;	
     
@@ -53,7 +59,7 @@ public class ProductVO extends BaseVO implements Serializable {
     
     private Double amzFbaFees;   
     
-    private String ean;
+    
        
     private List<ShipmentProductVO> shipmentProductVO;
 
@@ -140,22 +146,21 @@ public class ProductVO extends BaseVO implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	
 	/**
 	 * @return the image
 	 */
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 
 	/**
 	 * @param image the image to set
 	 */
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
-	
-	
+
 	/**
 	 * @return the postageCharges
 	 */
@@ -323,7 +328,33 @@ public class ProductVO extends BaseVO implements Serializable {
 	public void setEan(String ean) {
 		this.ean = ean;
 	}
-	
-	
 
+	/**
+	 * @return the sku
+	 */
+	public String getSku() {
+		return sku;
+	}
+
+	/**
+	 * @param sku the sku to set
+	 */
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
+
+	/**
+	 * @return the inactiveFrom
+	 */
+	public Date getInactiveFrom() {
+		return inactiveFrom;
+	}
+
+	/**
+	 * @param inactiveFrom the inactiveFrom to set
+	 */
+	public void setInactiveFrom(Date inactiveFrom) {
+		this.inactiveFrom = inactiveFrom;
+	}
+	
 }

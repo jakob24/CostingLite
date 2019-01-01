@@ -64,8 +64,39 @@ ADD COLUMN `shipment_complete` TINYINT(2) NULL AFTER `comments`;
 ALTER TABLE `costing_lite`.`invoice` 
 CHANGE COLUMN `shipment_complete` `shipment_complete` TINYINT(2) NULL DEFAULT 0 ;
 
-
 DROP TABLE `costing_lite`.`payment`;
+
+ALTER TABLE `costing_lite`.`product` 
+ADD COLUMN `sku` VARCHAR(45) NOT NULL AFTER `ean`;
+
+ALTER TABLE `costing_lite`.`product` 
+CHANGE COLUMN `image` `image` VARCHAR(500) NULL DEFAULT NULL ;
+
+ALTER TABLE `costing_lite`.`product` 
+CHANGE COLUMN `sku` `sku` VARCHAR(45) NULL ;
+
+ALTER TABLE `costing_lite`.`product` 
+CHANGE COLUMN `ASIN` `ASIN` VARCHAR(45) NULL DEFAULT NULL ,
+CHANGE COLUMN `sku` `sku` VARCHAR(400) NULL DEFAULT NULL ;
+
+ALTER TABLE `costing_lite`.`product` 
+ADD COLUMN `inactive_from` TIMESTAMP NULL AFTER `sku`;
+
+DELETE FROM `costing_lite`.`product` WHERE `product_id`='1';
+DELETE FROM `costing_lite`.`product` WHERE `product_id`='2';
+DELETE FROM `costing_lite`.`product` WHERE `product_id`='3';
+
+ALTER TABLE `costing_lite`.`product` 
+CHANGE COLUMN `name` `name` VARCHAR(150) NULL DEFAULT NULL ;
+
+LOAD DATA INFILE 'C:/Users/Jacob/Desktop/ExportData.csv' 
+INTO TABLE product 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+
+
 
 
 

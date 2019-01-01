@@ -9,7 +9,7 @@
         <p:tab id="InvoicePaymentTab" title="Invoice Payments">				        	
         	 <p:panel id="PaymentsTab" header="Add / Edit Invoice Payments" style="margin-bottom:10px" >				        	 
 				<p:dataTable var="payments" value="#{InvoiceWizard.selectedInvoiceVO.payment}" id="paymentList" 
-					editable="true" emptyMessage="" reflow="true" style="margin: 0 auto;" > 
+					editable="#{InvoiceWizard.selectedInvoiceVO.datePaid == null}" emptyMessage="" reflow="true" style="margin: 0 auto;"> 
 					
 			        <f:facet  name="header" styleClass="ui-column-title">  
 			            <p:outputLabel value="Invoices" />

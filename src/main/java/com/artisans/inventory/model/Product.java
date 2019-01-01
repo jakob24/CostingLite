@@ -48,7 +48,9 @@ public class Product implements Serializable {
     @Column(length=500)
     private String description;
     
-    private byte[] image;
+    @Column(length=500)
+    private String image;
+    
     @Column(name="modified_on")
     private Timestamp modifiedOn;
     
@@ -87,6 +89,12 @@ public class Product implements Serializable {
                   
     @OneToMany(mappedBy="product")
     private List<ShipmentProduct> shipmentProduct;
+    
+    @Column(name="sku", length=400)
+    private String sku;
+    
+    @Column(name="inactive_from")
+    private Timestamp inactiveFrom;
     
     @ManyToOne
     @JoinColumn(name="modified_by")
@@ -204,27 +212,23 @@ public class Product implements Serializable {
     public void setDescription(String aDescription) {
         description = aDescription;
     }
+ 
 
     /**
-     * Access method for image.
-     *
-     * @return the current value of image
-     */
-    public byte[] getImage() {
-        return image;
-    }
+	 * @return the image
+	 */
+	public String getImage() {
+		return image;
+	}
 
-    /**
-     * Setter method for image.
-     *
-     * @param aImage the new value for image
-     */
-    public void setImage(byte[] aImage) {
-        image = aImage;
-    }
-            
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(String image) {
+		this.image = image;
+	}
 
-    /**
+	/**
 	 * @return the postageCharges
 	 */
 	public Double getPostageCharges() {
@@ -411,6 +415,20 @@ public class Product implements Serializable {
 	public void setShipmentProduct(List<ShipmentProduct> shipmentProduct) {
 		this.shipmentProduct = shipmentProduct;
 	}
+	
+	/**
+	 * @return the sku
+	 */
+	public String getSku() {
+		return sku;
+	}
+
+	/**
+	 * @param sku the sku to set
+	 */
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
 
 	/**
      * Access method for user.
@@ -429,8 +447,23 @@ public class Product implements Serializable {
     public void setUser(User aUser) {
         user = aUser;
     }
+        
 
     /**
+	 * @return the inactiveFrom
+	 */
+	public Timestamp getInactiveFrom() {
+		return inactiveFrom;
+	}
+
+	/**
+	 * @param inactiveFrom the inactiveFrom to set
+	 */
+	public void setInactiveFrom(Timestamp inactiveFrom) {
+		this.inactiveFrom = inactiveFrom;
+	}
+
+	/**
      * Compares the key for this instance with another Product.
      *
      * @param other The object to compare to

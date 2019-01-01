@@ -12,7 +12,7 @@
 				<ui:repeat var="shipmenPayTable" value="#{ShipmentWizard.selectedInvoiceVO.shipment}" >
 				  										
 					<p:dataTable var="shipPayments" value="#{shipmenPayTable.payment}" id="shipmenPaySubTable" 
-						editable="true" emptyMessage="" reflow="true" style="margin: 20px auto;  border-spacing: 10px"> 	
+						editable="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete !=1}" emptyMessage="" reflow="true" style="margin: 20px auto;  border-spacing: 10px"> 	
 						 													
 						<p:ajax event="rowEdit" listener="#{ShipmentWizard.onShipmentPaymentEdit}" update=":messages" oncomplete="showHideNextButton();"  />
 		                <p:ajax event="rowEditCancel" listener="#{ShipmentWizard.onShipmentPaymentCancel}" update="shipmenPaySubTable"  /> 	
@@ -132,15 +132,15 @@
 	                    <p:commandButton
 	                        value="Add Payment" id="newShipPayment"
 	                        actionListener="#{ShipmentWizard.addNewShipPayment(shipmenPayTable)}"
-	                        ajax="true" update="shipmenPaySubTable" oncomplete="clickPencil();"/>
+	                        ajax="true" update="shipmenPaySubTable" oncomplete="clickPencil();" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}"/>
                    	</div> 
 				</ui:repeat>
             </p:panel>
             <p:spacer></p:spacer>
-		    <p:panel style="margin-bottom:10px" cellpadding="5">
+		    <p:panel style="margin-bottom:10px" cellpadding="5" >
 		        <p:outputLabel for="shipComplete" value="Is Shipment Complete" />
-		        <p:selectOneRadio id="shipComplete" value="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete}">
-		            <f:selectItem itemLabel="Yes" itemValue="1"  />
+		        <p:selectOneRadio id="shipComplete" value="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete}" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}">
+		            <f:selectItem itemLabel="Yes" itemValue="1" />
 		            <f:selectItem itemLabel="No" itemValue="0" />
 		        </p:selectOneRadio>
 		    </p:panel>

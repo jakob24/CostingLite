@@ -12,7 +12,6 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -59,11 +58,6 @@ public class StandingDataController implements Serializable {
 	
 	//Product to Save
 	private ProductVO newProduct;	
-	
-	//Image 
-	private byte[] imageContent;
-	
-    private UploadedFile imageFile;
 	
 
 	/**
@@ -210,19 +204,12 @@ public class StandingDataController implements Serializable {
     	prod.setWebPpCharge(new Double(configUtil.getProperty("web.payment.processor.charge")));
     	setNewProduct(prod);    	
     }
-    
-    
-    public void uploadPhoto(FileUploadEvent event) {
-        UploadedFile uploadedFile = event.getFile();
-        setImageContent(uploadedFile.getContents()); // Or getInputStream()
-    }
-    
+        
     /**
      * Save the product details
      */
     public void onSaveProduct() {  
     	ProductVO thisProduct = getNewProduct();
-    	thisProduct.setImage(getImageContent());
     	if(isUniqueProductName(thisProduct)) {
     		standingDataService.saveProduct(thisProduct);
     		UIMessageHelper.getInstance().displayUIMessage("msg_group_name_saved", FacesMessage.SEVERITY_INFO);
@@ -230,20 +217,7 @@ public class StandingDataController implements Serializable {
     		UIMessageHelper.getInstance().displayUIMessage("uniqie_supplier_name", FacesMessage.SEVERITY_ERROR);
     	}  
     }
-    
-    public StreamedContent getImage() throws IOException {
-        FacesContext context = FacesContext.getCurrentInstance();
-
-        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
-            // So, we're rendering the HTML. Return a stub StreamedContent so that it will generate right URL.
-            return new DefaultStreamedContent();
-        }
-        else {
-            // So, browser is requesting the image. Return a real StreamedContent with the image bytes.
-        	byte[] bytes = getNewProduct() == null? null: getNewProduct().getImage();
-            return bytes==null? new DefaultStreamedContent(): new DefaultStreamedContent(new ByteArrayInputStream(bytes));
-        }
-    }    
+      
     
     public void refresh() {
 		 UIViewRoot viewRoot =  FacesContext.getCurrentInstance().getViewRoot();
@@ -310,34 +284,6 @@ public class StandingDataController implements Serializable {
 	 */
 	public void setNewProduct(ProductVO newProduct) {
 		this.newProduct = newProduct;
-	}
-
-	/**
-	 * @return the imageContent
-	 */
-	public byte[] getImageContent() {
-		return imageContent;
-	}
-
-	/**
-	 * @param imageContent the imageContent to set
-	 */
-	public void setImageContent(byte[] imageContent) {
-		this.imageContent = imageContent;
-	}
-
-	/**
-	 * @return the imageFile
-	 */
-	public UploadedFile getImageFile() {
-		return imageFile;
-	}
-
-	/**
-	 * @param imageFile the imageFile to set
-	 */
-	public void setImageFile(UploadedFile imageFile) {
-		this.imageFile = imageFile;
 	}
 
 

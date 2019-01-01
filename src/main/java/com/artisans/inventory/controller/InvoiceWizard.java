@@ -47,8 +47,7 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 			
 	@Autowired
 	private ApplicationConfiguration configUtil;
-		
-	
+			
 	private Double totalInvoicePaymentAmount;
 	
 	private boolean enableAddInvoice;
@@ -59,9 +58,9 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 	
 	private InvoiceVO selectedInvoiceVO;
 	
-/*	private List<SupplierVO> supplierVOList;*/
-	
 	private List<InvoiceVO> supplierInvoiceList;
+	
+	private boolean invoicePaymentComplete;
 	
 			
 	/**
@@ -133,6 +132,8 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 	 */
 	public void findAllInvoicesForSupplier()
 	{
+		setSelectedInvoiceId(null);
+		setSelectedInvoiceVO(null);
 		setSupplierInvoiceList(findAllInvoicesForSupplier(getSelectedSupplierVO()));		
 	}
 	
@@ -246,6 +247,9 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
      */
     public void saveInvoiceData() 
     {    	
+    	if(isInvoicePaymentComplete()) {
+    		getSelectedInvoiceVO().setDatePaid(BeanHelper.getToday());
+    	}
     	InvoiceVO savedInvoiceVO = invoiceService.SaveInvoiceAndPayments(getSelectedInvoiceVO());
     	UIMessageHelper.getInstance().displayUIMessage("invoice_saved", FacesMessage.SEVERITY_INFO);
     }
@@ -285,23 +289,6 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 		}
     }
     
-    
-/*	*//**
-	 * @return the supplierVOList
-	 *//*
-	public List<SupplierVO> getSupplierVOList() {
-		return supplierVOList;
-	}
-
-
-	*//**
-	 * @param supplierVOList the supplierVOList to set
-	 *//*
-	public void setSupplierVOList(List<SupplierVO> supplierVOList) {
-		this.supplierVOList = supplierVOList;
-	}*/
-
-
 	/**
 	 * @return the configUtil
 	 */
@@ -357,14 +344,12 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 		return selectedSupplierVO;
 	}
 
-
 	/**
 	 * @param selectedSupplierVO the selectedSupplierVO to set
 	 */
 	public void setSelectedSupplierVO(SupplierVO selectedSupplierVO) {
 		this.selectedSupplierVO = selectedSupplierVO;
 	}
-
 
 	/**
 	 * @return the selectedInvoiceVO
@@ -373,14 +358,12 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 		return selectedInvoiceVO;
 	}
 
-
 	/**
 	 * @param selectedInvoiceVO the selectedInvoiceVO to set
 	 */
 	public void setSelectedInvoiceVO(InvoiceVO selectedInvoiceVO) {
 		this.selectedInvoiceVO = selectedInvoiceVO;
 	}
-
 
 	/**
 	 * @return the selectedInvoiceId
@@ -389,14 +372,12 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 		return selectedInvoiceId;
 	}
 
-
 	/**
 	 * @param selectedInvoiceId the selectedInvoiceId to set
 	 */
 	public void setSelectedInvoiceId(Integer selectedInvoiceId) {
 		this.selectedInvoiceId = selectedInvoiceId;
 	}
-
 
 	/**
 	 * @return the enableAddInvoice
@@ -405,12 +386,25 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 		return enableAddInvoice;
 	}
 
-
 	/**
 	 * @param enableAddInvoice the enableAddInvoice to set
 	 */
 	public void setEnableAddInvoice(boolean enableAddInvoice) {
 		this.enableAddInvoice = enableAddInvoice;
-	}	
+	}
 
+	/**
+	 * @return the invoicePaymentComplete
+	 */
+	public boolean isInvoicePaymentComplete() {
+		return invoicePaymentComplete;
+	}
+
+	/**
+	 * @param invoicePaymentComplete the invoicePaymentComplete to set
+	 */
+	public void setInvoicePaymentComplete(boolean invoicePaymentComplete) {
+		this.invoicePaymentComplete = invoicePaymentComplete;
+	}		
+	
 }
