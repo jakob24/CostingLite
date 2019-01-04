@@ -1,7 +1,5 @@
 package com.artisans.inventory.controller;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,12 +8,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseId;
 
 import org.primefaces.event.RowEditEvent;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
-import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -142,6 +136,7 @@ public class StandingDataController implements Serializable {
     		UIMessageHelper.getInstance().displayUIMessage("uniqie_supplier_name", FacesMessage.SEVERITY_ERROR);
     	}    	
     }	
+          
     
     /**
      * Check for unique Courier Name

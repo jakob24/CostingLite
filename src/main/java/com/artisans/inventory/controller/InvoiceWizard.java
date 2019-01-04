@@ -3,7 +3,6 @@
  */
 package com.artisans.inventory.controller;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,7 +10,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.FlowEvent;
@@ -151,7 +149,7 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 		
 		if(null != getSelectedInvoiceVO().getPayment() && ! getSelectedInvoiceVO().getPayment().isEmpty()) {
 			List<PaymentVO> paymentList = new ArrayList<PaymentVO>(getSelectedInvoiceVO().getPayment());
-			paymentList.stream().filter(i -> i.getPaymentType().equalsIgnoreCase("INVOICE"));
+			paymentList.stream().filter(i -> i.getPaymentType().equalsIgnoreCase(PAY_TYPE_INVOICE));
 			
 			for(PaymentVO payment : paymentList)
 			{
@@ -191,7 +189,7 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 		
 		if(null != getSelectedInvoiceVO().getPayment() && ! getSelectedInvoiceVO().getPayment().isEmpty()) {
 			List<PaymentVO> paymentList = new ArrayList<PaymentVO>(getSelectedInvoiceVO().getPayment());
-			paymentList.stream().filter(i -> i.getPaymentType().equalsIgnoreCase("INVOICE"));
+			paymentList.stream().filter(i -> i.getPaymentType().equalsIgnoreCase(PAY_TYPE_INVOICE));
 			
 			for(PaymentVO payment : paymentList)
 			{
@@ -211,7 +209,7 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 		}
 		invoicePaymentVO.setAmountUsd(getSelectedInvoiceVO().getInvAmountUsd()==null? 0:getSelectedInvoiceVO().getInvAmountUsd()-totalPaidIinvAmountUSD);
 		invoicePaymentVO.setAmount(getSelectedInvoiceVO().getInvAmount()==null? 0: getSelectedInvoiceVO().getInvAmount()-totalPaidIinvAmount);		
-		invoicePaymentVO.setPaymentType("INVOICE");
+		invoicePaymentVO.setPaymentType(PAY_TYPE_INVOICE);
 		setTotalInvoicePaymentAmount(totalPayment);
 		
 		calculatePaymentsAndAddPayButton();
@@ -262,7 +260,7 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
     	Double invAmount = 0.0;
     	
     	for(PaymentVO payment : getSelectedInvoiceVO().getPayment()) {
-    		if (payment.getPaymentId() == 0  && payment.getPaymentType().equalsIgnoreCase("INVOICE")) {
+    		if (payment.getPaymentId() == 0  && payment.getPaymentType().equalsIgnoreCase(PAY_TYPE_INVOICE)) {
     			//Updating only unsaved Data    			
 				if(null != payment.getAmountUsd() && null != payment.getGbpToUsd()) {
 					payment.setAmount(payment.getAmountUsd()/payment.getGbpToUsd());    				
@@ -277,16 +275,10 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
      * Method to navigate to the shipments page
      */
     public void addShipment() {
-    	 try {
-    		 ShipmentWizard shipmentWizard = BeanHelper.findBean("ShipmentWizard");
-    		 //Pre populate Data for Shipment Wizard 
-    		 shipmentWizard.invokeFromInvoice();
-    		 shipmentWizard.setInvokedFromInvoiceWizard(true);    		 
-    		 FacesContext.getCurrentInstance().getExternalContext().redirect("shipments.xhtml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		 ShipmentWizard shipmentWizard = BeanHelper.findBean("ShipmentWizard");
+		 //Pre populate Data for Shipment Wizard 
+		 shipmentWizard.invokeFromInvoice();
+		 shipmentWizard.setInvokedFromInvoiceWizard(true);    		 
     }
     
 	/**

@@ -37,16 +37,15 @@
     
 		<div class="container-fluid">
 			<div class="ui-g-12 ui-md-4 ui-lg-7" id="dataEditDiv">
-				<h:form id="dataSettings" prependId="false" enctype="multipart/form-data">
+				<h:form id="dataSettings" prependId="false">
 					<p:growl id="growl" showDetail="true" sticky="true" />  
 					
 				    <p:panel id="productSelection" header="Select a Product" style="margin-bottom:10px">
 				        <h:panelGrid columns="3" cellpadding="10">		
-				        	 		           
 					        <p:selectOneMenu id="console" value="#{StandingDataController.selectedProduct}" converter="#{ProductConverter}" style="width:250px;">
 					        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}" />
 					            <f:selectItems value="#{ReferenceDataController.productVOList}" var="product" itemLabel="#{product.name}" itemValue="#{product}"/>
-					             <p:ajax update="editProduct" oncomplete="$('#editProduct').prop('disabled', false); $('#addNewProduct').prop('disabled', true); " />
+					            <p:ajax update="editProduct" oncomplete="$('#editProduct').prop('disabled', false); $('#addNewProduct').prop('disabled', true); " />
 					        </p:selectOneMenu>
 					    					    	
 							<p:commandButton value="#{bundle.btn_edit_product}" id="editProduct" action="#{StandingDataController.onEditProduct}" process="@this"
@@ -54,7 +53,6 @@
 								
 							<p:commandButton value="#{bundle.btn_add_new_product}" id="addNewProduct" action="#{StandingDataController.onAddProduct}" process="@this"
 								styleClass="btn ui-state-default" update="productAdd"/>										
-										        
 				        </h:panelGrid>
 				    </p:panel>
             
@@ -151,9 +149,7 @@
 		                    <p:inputText value="#{StandingDataController.newProduct.amzFbaFees}" required="true">
 		                    	<f:validateDoubleRange minimum="0" />
 		                    </p:inputText> 		                     		                    
-		                                        
 		                    <h:panelGroup /><h:panelGroup />	
-		                                  				        	
 				        </h:panelGrid>
 				        
 					    <div style="margin-top: 20px;" class="pull-right">
@@ -164,7 +160,6 @@
 					    		styleClass="btn ui-state-default" update="productSelection productAdd"/>									
 						</div>					        
 				    </p:panel>
-											
 				</h:form>
 				
 			    <div class="row">			      

@@ -15,7 +15,7 @@
 			        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}" itemDisabled="#{ShipmentWizard.invokedFromInvoiceWizard eq true ? true:false}"/>
 			            <f:selectItems value="#{ReferenceDataController.supplierVOList}" var="supplier" itemLabel="#{supplier.name}" itemValue="#{supplier}" 
 			            	itemDisabled="#{ShipmentWizard.invokedFromInvoiceWizard eq true ? supplier != ShipmentWizard.selectedSupplierVO : false}"/>
-			           	<p:ajax event="change" update="invoiceSelect shipmentSelect shipmentList" listener="#{ShipmentWizard.findAllInvoicesForSupplier}" />
+			           	<p:ajax event="change" update="invoiceSelect shipmentList shipmentForm:allShipmentList" listener="#{ShipmentWizard.findAllInvoicesForSupplier}" />
 			        </p:selectOneMenu>
 			        
 			        <p:spacer width="50px"/>
@@ -25,33 +25,69 @@
 			        	<f:selectItem itemValue="#{null}" itemLabel="Select one" itemDisabled="#{ShipmentWizard.invokedFromInvoiceWizard eq true ? true:false}" />			        	
 			            <f:selectItems value="#{ShipmentWizard.supplierInvoiceList}" var="invoice" itemLabel="#{invoice.formattedLabel}" itemValue="#{invoice.invoiceId}"
 			            itemDisabled="#{ShipmentWizard.invokedFromInvoiceWizard eq true ? invoice.invoiceId != ShipmentWizard.selectedInvoiceId : false}"/>	
-			            <p:ajax event="change" update="shipmentSelect shipmentList" listener="#{ShipmentWizard.findAllShipmentsForInvoice}" />		            
+			            <p:ajax event="change" update="shipmentList allShipmentList" listener="#{ShipmentWizard.findAllShipmentsForInvoice}" />		            
 			        </p:selectOneMenu>
 			        
 			        <p:spacer width="50px"/>
 			        
+			    	<div class="pull-right">	
+					    <p:commandButton value="Add Shipment" id="addshipmentBtn" actionListener="#{ShipmentWizard.addNewShipment}" ajax="true" 
+					    styleClass="btn btn-block ui-state-default" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete == 1}" 
+					    onclick="this.disabled=true;" update="shipmentList shipmentForm:allShipmentList"/> 
+				    </div>
+				    			        
+			        <!-- 
                 	<h:outputText value="Shipments *" />				                	
 			        <p:selectOneMenu id="shipmentSelect" value="#{ShipmentWizard.selectedShipment}" disabled="#{ShipmentWizard.selectedInvoiceId eq null}" converter="#{ShipmentConverter}" >	
 			        	<f:selectItem itemValue="#{null}" itemLabel="Select one" noSelectionOption="true"/>
 			            <f:selectItems value="#{ShipmentWizard.selectedInvoiceVO.shipment}" var="shipmentSel" itemLabel="#{shipmentSel.formattedLabel}" itemValue="#{shipmentSel}"/>
 			            <f:selectItem  itemValue="#{ShipmentWizard.addNewShipment}"  itemLabel="Add New Shipment .."  itemDisabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete == 1}"/>
 			            <p:ajax event="change" update="shipmentList" listener="#{ShipmentWizard.addNewShipment}" oncomplete="clickPencil();" />			            
-			        </p:selectOneMenu>				        			        
+			        </p:selectOneMenu>	
+			         -->			        			        
 			        						        				                	
              	</h:panelGrid>
 			</p:panel>
-             
+			
+			
           	<p:panel header="Shipment Information">
-				<p:dataTable var="shipments" value="#{ShipmentWizard.selectedShipment}" id="shipmentList" 
+				<p:dataTable var="allShipments" value="#{ShipmentWizard.selectedInvoiceVO.shipment}" selection="#{ShipmentWizard.selectedShipment}"
+					id="allShipmentList" rowKey="#{allShipments.shipmentNumber}" style="margin: 0 auto;"> 
+			        <p:column selectionMode="single" style="width:16px;text-align:center"/>
+			        <p:column headerText="Shipment No.">  
+				    	<h:outputText value="#{allShipments.shipmentNumber}" /> 
+			        </p:column>		
+			        <p:column headerText="Shipment Date *">  
+			          	<h:outputText value="#{allShipments.shipmentDate}">  
+			            	<f:convertDateTime pattern="dd/MM/yyyy"/>  
+			           	</h:outputText> 
+			        </p:column>
+			        <p:column headerText="Courier *"> 
+			        	<h:outputText value="#{allShipments.courier.name}" />  
+			        </p:column>			        
+			        <p:column headerText="Tracking No.">  
+			        	<h:outputText value="#{allShipments.trackingNumber}" /> 
+			        </p:column>		
+			        <p:column headerText="Delivery Date *">  
+			        	<h:outputText value="#{allShipments.deliveryDate}">  
+			             <f:convertDateTime pattern="dd/MM/yyyy"/>  
+			            </h:outputText>
+			        </p:column>	
+			        <p:ajax event="rowSelectRadio" listener="#{ShipmentWizard.onShipmentRowSelect}" update="shipmentForm:shipmentList"/>			        				    				    
+				</p:dataTable>
+            </p:panel>   			
+			
+			<p:spacer></p:spacer>
+             
+          	<p:panel header="Amend Shipment Details">
+				<p:dataTable var="shipments" value="#{ShipmentWizard.selectedShipment}" id="shipmentList"  rowKey="#{shipments.shipmentId}"
 					editable="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete !=1}" emptyMessage="" reflow="true" style="margin: 0 auto;" > 
-					
-			        <f:facet  name="header" styleClass="ui-column-title">  
-			            <p:outputLabel value="Shipments" />
-			        </f:facet> 						
-			        <!-- 	        
-					<p:ajax event="rowEdit" listener="#{ShipmentWizard.onShipmentsEdit}" update=":messages" oncomplete="showHideNextButton();"/> 
-                    <p:ajax event="rowEditCancel" listener="#{ShipmentWizard.onShipmentsCancel}" update="shipmentList"  /> 		        
-			         -->
+							        	        
+					<p:ajax event="rowEdit" listener="#{ShipmentWizard.onShipmentsEdit}" update=":messages shipmentForm:allShipmentList shipmentForm:addshipmentBtn" 
+						oncomplete="showHideNextButton();enableAddShipmentButton();"/> 
+						
+                    <p:ajax event="rowEditCancel" listener="#{ShipmentWizard.onDeleteShipment}" update="@this shipmentForm:allShipmentList"  /> 		        
+			        
 			        <p:column headerText="Shipment No.">  
 			            <p:cellEditor>  
 			                <f:facet name="output">  

@@ -10,22 +10,23 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.component.UIInput;
-import javax.faces.event.AjaxBehaviorEvent;
 
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.artisans.inventory.helper.ApplicationConfiguration;
+import com.artisans.inventory.helper.ProductShipmentHelper;
 import com.artisans.inventory.helper.UIMessageHelper;
 import com.artisans.inventory.service.api.InvoiceService;
 import com.artisans.inventory.service.api.ShipmentService;
 import com.artisans.inventory.vo.InvoiceVO;
 import com.artisans.inventory.vo.PaymentVO;
+import com.artisans.inventory.vo.ProductVO;
+import com.artisans.inventory.vo.ShipmentProductVO;
 import com.artisans.inventory.vo.ShipmentVO;
 import com.artisans.inventory.vo.SupplierVO;
 
@@ -48,10 +49,7 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	
 	@Autowired
 	InvoiceService invoiceService;
-		
-	@Autowired
-	private ApplicationConfiguration configUtil;
-		
+				
 	@Autowired
 	private InvoiceWizard invoiceWizard;
 	
@@ -69,6 +67,13 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	
 	private ShipmentVO addNewShipment;
 	
+	private ProductVO selectedProductVO;
+	
+	private boolean invokedFromShipmentWizard;
+	
+	private ShipmentProductVO selectedShipmentProductVO;
+	
+	
 	/**
 	 * Initial method to load data on the screen
 	 */
@@ -79,26 +84,23 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 		addNewShipment.setShipmentId(0);
 	}
 	
-	
+	/**
+	 * Method called when invoked from the invocie screen.
+	 * Most of the data is pre populated
+	 */
 	public void invokeFromInvoice() {
 		//Get selected data from InvoiceWizard
-		setSelectedSupplierVO(invoiceWizard.getSelectedSupplierVO());
-		
-		setSupplierInvoiceList(findAllInvoicesForSupplier(getSelectedSupplierVO()));
-		
-		setSelectedInvoiceId(invoiceWizard.getSelectedInvoiceId());
-		
-		setSelectedInvoiceVO(invoiceWizard.getSelectedInvoiceVO());	
-		
+		setSelectedSupplierVO(invoiceWizard.getSelectedSupplierVO());		
+		setSupplierInvoiceList(findAllInvoicesForSupplier(getSelectedSupplierVO()));		
+		setSelectedInvoiceId(invoiceWizard.getSelectedInvoiceId());		
+		setSelectedInvoiceVO(invoiceWizard.getSelectedInvoiceVO());			
 		getSelectedInvoiceVO().setShipment(shipmentService.findAllShipmentsForInvoice(getSelectedInvoiceVO()));
-		
 	}
 	
 	/**
 	 * Invoked on selection of supplier
 	 */
-	public void findAllInvoicesForSupplier() {
-		
+	public void findAllInvoicesForSupplier() {		
 		setSelectedInvoiceVO(null);
 		setSelectedInvoiceId(null);		
 		setSelectedShipment(null);
@@ -128,48 +130,47 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 		}
 	}
 	
-
+	
+	/**
+	 * Invoked on selection of a shipment(From radio Button)
+	 * @param selectEvent
+	 */
+    public void onShipmentRowSelect(SelectEvent selectEvent) {
+       
+        ShipmentVO shipmentVO = (ShipmentVO) selectEvent.getObject();
+        setSelectedShipment(shipmentVO);        
+    }
 	
 	
 	/**
 	 * Method invoked to create a new Invoice.
-	 * Invoked on selection of 'New Shipment'
+	 * Invoked on Add Shipment button'
 	 */
-	public void addNewShipment(AjaxBehaviorEvent event) {
+	public void addNewShipment() {
 		
 		List<ShipmentVO> shipments = null;	
-		
-		if(null != getSelectedShipment()) {			
-			//Add New - Functionality is linked to its converter and setShipmentId =0
-			if (addNewShipment.equals(((UIInput) event.getComponent()).getValue())) {
-	    		//Add a new Shipment
-				ShipmentVO shipmentVO = new ShipmentVO();
-				shipmentVO.setShipmentDate(new Date());
-				shipmentVO.setInvoice(getSelectedInvoiceVO());  
-	    			
-	    		//Add a new ShipmentVO	to existing List
-				if(null != selectedInvoiceVO.getShipment() && ! selectedInvoiceVO.getShipment().isEmpty()) {
-					shipments = selectedInvoiceVO.getShipment();     				
-					shipmentVO.setShipmentNumber(selectedInvoiceVO.getShipment().size()+1);
-					shipments.add(shipmentVO);
-				}
-				else {
-					//Add First Shipment for the Invoice
-					shipments = new ArrayList<ShipmentVO>();
-					shipmentVO.setShipmentNumber(1);
-	      			shipments.add(shipmentVO);    
-				}   		
-				selectedInvoiceVO.setShipment(shipments); 
-				setSelectedShipment(shipmentVO);
-			} else {
-				//get Existing Shipment Info
-	    		//Get details of Existing SHipment
-	    		ShipmentVO existingShipment = shipmentService.findShipment(getSelectedShipment().getShipmentId());
-	    		setSelectedShipment(existingShipment);
-			}
-		}   	
+
+		//Add a new Shipment
+		ShipmentVO shipmentVO = new ShipmentVO();
+		shipmentVO.setShipmentDate(new Date());
+		shipmentVO.setInvoice(getSelectedInvoiceVO());  
+			
+		//Add a new ShipmentVO	to existing List
+		if(null != selectedInvoiceVO.getShipment() && ! selectedInvoiceVO.getShipment().isEmpty()) {
+			shipments = selectedInvoiceVO.getShipment();     				
+			shipmentVO.setShipmentNumber(selectedInvoiceVO.getShipment().size()+1);
+			shipments.add(shipmentVO);
+		}
+		else {
+			//Add First Shipment for the Invoice
+			shipments = new ArrayList<ShipmentVO>();
+			shipmentVO.setShipmentNumber(1);
+  			shipments.add(shipmentVO);    
+		}   		
+		selectedInvoiceVO.setShipment(shipments); 
+		setSelectedShipment(shipmentVO); 	
 	}
-	
+		
 	/**
 	 * Method to save Shipment and all its payments
 	 */
@@ -178,21 +179,48 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 		UIMessageHelper.getInstance().displayUIMessage("shipment_saved", FacesMessage.SEVERITY_INFO);
 	}
 	
+	/**
+	 * Method to update the Shipment record
+	 * @param event
+	 */
 	public void onShipmentsEdit(RowEditEvent event) {
+		//TODO
 		ShipmentVO shipmentVO = (ShipmentVO) event.getObject(); 
 		System.out.println(shipmentVO);
 	}
 	
-	public void onShipmentsCancel(RowEditEvent event) {
+	/**
+	 * Method to delete a shipment and reorder the existing shipments
+	 * @param event
+	 */
+	public void onDeleteShipment(RowEditEvent event) {		
 		ShipmentVO shipmentVO = (ShipmentVO) event.getObject(); 
-		System.out.println(shipmentVO);
+		shipmentService.deleteShipment(shipmentVO);
+		
+		//Fetch the data from db
+		List <ShipmentVO> shipmentList = shipmentService.findAllShipmentsForInvoice(getSelectedInvoiceVO());		
+		if(null == shipmentList || shipmentList.isEmpty()) {
+			shipmentList = new ArrayList<ShipmentVO>();					
+		}
+		getSelectedInvoiceVO().setShipment(shipmentList);
+		
+		UIMessageHelper.getInstance().displayUIMessage("shipment_deleted", FacesMessage.SEVERITY_INFO);
 	}
 	
+	/**
+	 * Method to update the Shipment Payment record
+	 * @param event
+	 */
 	public void onShipmentPaymentEdit(RowEditEvent event) {
+		//TODO
 		PaymentVO paymentVO = (PaymentVO) event.getObject(); 
 		System.out.println(paymentVO);
 	}
 	
+	/**
+	 * Method to delete the Shipment Payment record
+	 * @param event
+	 */	
 	public void onShipmentPaymentCancel(RowEditEvent event) {
 		PaymentVO paymentVO = (PaymentVO) event.getObject(); 
 		System.out.println(paymentVO);
@@ -261,7 +289,10 @@ public class ShipmentWizard extends BaseWizard implements Serializable
     	}        
     }
 
-	
+	/**
+	 * Create a new blank Shipment payment
+	 * @return
+	 */
 	private PaymentVO createNewShipmentPayment() {
 		PaymentVO newShipPayment = new PaymentVO();
 		newShipPayment.setAmountUsd(0D);
@@ -269,8 +300,49 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 		newShipPayment.setAmount(0D);
 		newShipPayment.setOtherCharges(0D);
 		newShipPayment.setBankCharges(0D);
-		newShipPayment.setPaymentType("SHIPMENT");
+		newShipPayment.setPaymentType(PAY_TYPE_SHIPMENT);
 		return newShipPayment;
+	}
+	
+	
+	//*********Shipment Product *********************//
+	
+	/**
+	 * Add a blank ShipmentProduct record to the SelectedShipment
+	 * 
+	 * @param producVO
+	 */
+	public void addNewShipmentProduct() {
+		
+		ProductVO producVO = getSelectedProductVO();
+		
+		ShipmentProductVO shipmentProductVO = new ShipmentProductVO();
+		shipmentProductVO.setShipmentVO(getSelectedShipment());		
+		
+		shipmentProductVO = ProductShipmentHelper.populateDefaultProductValues(producVO, shipmentProductVO);
+		List<ShipmentProductVO> shipmentProductVOList = new ArrayList<ShipmentProductVO>();
+		
+		if(null != getSelectedShipment().getShipmentProduct() && ! getSelectedShipment().getShipmentProduct().isEmpty()) {
+			// Add the product to existing list 
+			shipmentProductVOList = getSelectedShipment().getShipmentProduct();
+			shipmentProductVOList.add(shipmentProductVO);			
+		} else {
+			//Create a new item and set in the getSelectedShipment().getShipmentProduct()			
+			shipmentProductVOList = new ArrayList<ShipmentProductVO>();
+			shipmentProductVOList.add(shipmentProductVO);
+		}
+		getSelectedShipment().setShipmentProduct(shipmentProductVOList);
+		setSelectedShipmentProductVO(shipmentProductVO);
+	}
+	
+	/*
+	 * Method to save Shipment Product
+	 */
+	public void saveShipmentProduct() {
+		
+		ShipmentProductVO saveProduct = getSelectedShipmentProductVO();
+		
+		System.out.println(saveProduct);
 	}
 	
 	/**
@@ -389,7 +461,53 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	public void setAddNewShipment(ShipmentVO addNewShipment) {
 		this.addNewShipment = addNewShipment;
 	}
-	
-	
 
+
+	/**
+	 * @return the selectedProductVO
+	 */
+	public ProductVO getSelectedProductVO() {
+		return selectedProductVO;
+	}
+
+
+	/**
+	 * @param selectedProductVO the selectedProductVO to set
+	 */
+	public void setSelectedProductVO(ProductVO selectedProductVO) {
+		this.selectedProductVO = selectedProductVO;
+	}
+
+
+	/**
+	 * @return the invokedFromShipmentWizard
+	 */
+	public boolean isInvokedFromShipmentWizard() {
+		return invokedFromShipmentWizard;
+	}
+
+
+	/**
+	 * @param invokedFromShipmentWizard the invokedFromShipmentWizard to set
+	 */
+	public void setInvokedFromShipmentWizard(boolean invokedFromShipmentWizard) {
+		this.invokedFromShipmentWizard = invokedFromShipmentWizard;
+	}
+
+	/**
+	 * @return the selectedShipmentProductVO
+	 */
+	public ShipmentProductVO getSelectedShipmentProductVO() {
+		return selectedShipmentProductVO;
+	}
+
+	/**
+	 * @param selectedShipmentProductVO the selectedShipmentProductVO to set
+	 */
+	public void setSelectedShipmentProductVO(ShipmentProductVO selectedShipmentProductVO) {
+		this.selectedShipmentProductVO = selectedShipmentProductVO;
+	}
+	
+	
+			
 }

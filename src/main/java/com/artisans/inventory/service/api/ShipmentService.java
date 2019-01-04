@@ -21,10 +21,10 @@ import com.artisans.inventory.vo.ShipmentVO;
 public interface ShipmentService {
 
 	public List<ShipmentVO> findAllShipmentsForInvoice(InvoiceVO invoiceVO);
-	
-	
+		
 	public ShipmentVO findShipment(Integer shipmentId);
-	
-	
+		
 	public InvoiceVO saveShipments(InvoiceVO invoiceVO);
+	
+	public void deleteShipment(ShipmentVO shipmentVO);
 }

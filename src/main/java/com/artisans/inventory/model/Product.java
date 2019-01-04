@@ -93,6 +93,12 @@ public class Product implements Serializable {
     @Column(name="sku", length=400)
     private String sku;
     
+    @Column(name="cost_price_usd", precision=22)
+    private double costPriceUsd;
+    
+    @Column(name="cost_price_gbp", precision=22)
+    private double costPriceGbp;    
+    
     @Column(name="inactive_from")
     private Timestamp inactiveFrom;
     
@@ -461,6 +467,37 @@ public class Product implements Serializable {
 	 */
 	public void setInactiveFrom(Timestamp inactiveFrom) {
 		this.inactiveFrom = inactiveFrom;
+	}
+	
+	
+	
+
+	/**
+	 * @return the costPriceUsd
+	 */
+	public double getCostPriceUsd() {
+		return costPriceUsd;
+	}
+
+	/**
+	 * @param costPriceUsd the costPriceUsd to set
+	 */
+	public void setCostPriceUsd(double costPriceUsd) {
+		this.costPriceUsd = costPriceUsd;
+	}
+
+	/**
+	 * @return the costPriceGbp
+	 */
+	public double getCostPriceGbp() {
+		return costPriceGbp;
+	}
+
+	/**
+	 * @param costPriceGbp the costPriceGbp to set
+	 */
+	public void setCostPriceGbp(double costPriceGbp) {
+		this.costPriceGbp = costPriceGbp;
 	}
 
 	/**

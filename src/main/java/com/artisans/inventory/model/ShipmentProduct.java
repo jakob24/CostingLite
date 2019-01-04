@@ -45,7 +45,28 @@ public class ShipmentProduct implements Serializable {
     
     @Column(name="product_qty", length=10)
     private int productQty;
+        
+    @Column(name="other_charges", precision=22)
+    private Double otherCharges;	
     
+    @Column(name="web_rrp", precision=22)
+    private Double webRrp;	
+    
+    @Column(name="ebay_rrp", precision=22)
+    private Double ebayRrp;		
+    
+    @Column(name="ebay_fees", precision=22)
+    private Double ebayFees;	
+    
+    @Column(name="amz_rrp", precision=22)
+    private Double amzRrp;	
+    
+    @Column(name="amz_fees", precision=22)
+    private Double amzFees;		
+    
+    @Column(name="amz_fba_fees", precision=22)
+    private Double amzFbaFees;    
+        
     @Column(name="modified_on")
     private Timestamp modifiedOn;
     
@@ -244,9 +265,107 @@ public class ShipmentProduct implements Serializable {
      */
     public void setUser(User aUser) {
         user = aUser;
-    }
+    }    
 
     /**
+	 * @return the otherCharges
+	 */
+	public Double getOtherCharges() {
+		return otherCharges;
+	}
+
+	/**
+	 * @param otherCharges the otherCharges to set
+	 */
+	public void setOtherCharges(Double otherCharges) {
+		this.otherCharges = otherCharges;
+	}
+
+	/**
+	 * @return the webRrp
+	 */
+	public Double getWebRrp() {
+		return webRrp;
+	}
+
+	/**
+	 * @param webRrp the webRrp to set
+	 */
+	public void setWebRrp(Double webRrp) {
+		this.webRrp = webRrp;
+	}
+
+	/**
+	 * @return the ebayRrp
+	 */
+	public Double getEbayRrp() {
+		return ebayRrp;
+	}
+
+	/**
+	 * @param ebayRrp the ebayRrp to set
+	 */
+	public void setEbayRrp(Double ebayRrp) {
+		this.ebayRrp = ebayRrp;
+	}
+
+	/**
+	 * @return the ebayFees
+	 */
+	public Double getEbayFees() {
+		return ebayFees;
+	}
+
+	/**
+	 * @param ebayFees the ebayFees to set
+	 */
+	public void setEbayFees(Double ebayFees) {
+		this.ebayFees = ebayFees;
+	}
+
+	/**
+	 * @return the amzRrp
+	 */
+	public Double getAmzRrp() {
+		return amzRrp;
+	}
+
+	/**
+	 * @param amzRrp the amzRrp to set
+	 */
+	public void setAmzRrp(Double amzRrp) {
+		this.amzRrp = amzRrp;
+	}
+
+	/**
+	 * @return the amzFees
+	 */
+	public Double getAmzFees() {
+		return amzFees;
+	}
+
+	/**
+	 * @param amzFees the amzFees to set
+	 */
+	public void setAmzFees(Double amzFees) {
+		this.amzFees = amzFees;
+	}
+
+	/**
+	 * @return the amzFbaFees
+	 */
+	public Double getAmzFbaFees() {
+		return amzFbaFees;
+	}
+
+	/**
+	 * @param amzFbaFees the amzFbaFees to set
+	 */
+	public void setAmzFbaFees(Double amzFbaFees) {
+		this.amzFbaFees = amzFbaFees;
+	}
+
+	/**
      * Compares the key for this instance with another ShipmentProduct.
      *
      * @param other The object to compare to

@@ -91,10 +91,32 @@ public class ShipmentServiceImpl implements ShipmentService {
 				
 			}			
 		}
-		
-		
 		InvoiceVO invoiceVOObj = new DozerBeanMapper().map(invoice, InvoiceVO.class); 
 		return invoiceVOObj;		
 	}
-
+	
+	/**
+	 * Method to delete a shipment
+	 */
+	@Transactional(readOnly=false)
+	public void deleteShipment(ShipmentVO shipmentVO) {
+		Shipment shipment = new DozerBeanMapper().map(shipmentVO, Shipment.class);
+		
+		//Get All shipments for invoice
+		Invoice invoice = shipment.getInvoice();		
+		Integer deletedShipmentId = shipment.getShipmentId();
+				
+		shipmentRepository.delete(shipment);
+		
+		//Get all Shipments for the invoice and update with new shipment numbers
+		int shipmentNumber = 1;
+		List<Shipment>shipments = invoice.getShipment();	
+		for(Shipment thisShipment : shipments) {
+			if(thisShipment.getShipmentId() != deletedShipmentId) {
+				thisShipment.setShipmentNumber(shipmentNumber);				
+				shipmentRepository.saveAndFlush(thisShipment);
+				shipmentNumber++;
+			}
+		}		
+	}
 }

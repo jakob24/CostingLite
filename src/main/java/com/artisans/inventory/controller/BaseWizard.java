@@ -31,6 +31,10 @@ public class BaseWizard implements Serializable
 	
 	public static final Short SHIPMENT_NOT_COMPLETE = 0;
 	
+	public static final String PAY_TYPE_INVOICE = "INVOICE";
+	
+	public static final String PAY_TYPE_SHIPMENT = "SHIPMENT";
+	
 	/**
 	 * Get All Invoices for the supplier
 	 */

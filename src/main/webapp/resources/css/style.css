@@ -318,6 +318,23 @@ body {
         width:80%;
         padding:4px;
     }
+    
+    .col1 {
+        width:15%;
+        padding:4px;
+    } 
+    .col2 {
+        width:25%;
+        padding:4px;
+    } 
+    .col3 {
+        width:15%;
+        padding:4px;
+    } 
+    .col4 {
+        width:20%;
+        padding:4px;
+    }            
      
     .grid {
         width:100%;
@@ -332,7 +349,6 @@ body {
     }
  
     .grid {
-
     }
 
 	.customTxtWidth150px{

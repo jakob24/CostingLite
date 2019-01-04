@@ -57,10 +57,12 @@ public class ProductVO extends BaseVO implements Serializable {
     
     private Double amzFees;		
     
-    private Double amzFbaFees;   
-    
-    
-       
+    private Double amzFbaFees;  
+
+    private Double costPriceUsd;
+
+    private Double costPriceGbp;    
+                   
     private List<ShipmentProductVO> shipmentProductVO;
 
 	/**
@@ -356,5 +358,33 @@ public class ProductVO extends BaseVO implements Serializable {
 	public void setInactiveFrom(Date inactiveFrom) {
 		this.inactiveFrom = inactiveFrom;
 	}
+
+	/**
+	 * @return the costPriceUsd
+	 */
+	public Double getCostPriceUsd() {
+		return costPriceUsd;
+	}
+
+	/**
+	 * @param costPriceUsd the costPriceUsd to set
+	 */
+	public void setCostPriceUsd(Double costPriceUsd) {
+		this.costPriceUsd = costPriceUsd;
+	}
+
+	/**
+	 * @return the costPriceGbp
+	 */
+	public Double getCostPriceGbp() {
+		return costPriceGbp;
+	}
+
+	/**
+	 * @param costPriceGbp the costPriceGbp to set
+	 */
+	public void setCostPriceGbp(Double costPriceGbp) {
+		this.costPriceGbp = costPriceGbp;
+	}	
 	
 }

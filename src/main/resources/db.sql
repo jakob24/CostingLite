@@ -96,8 +96,22 @@ ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 
+#03/02/2019
+ALTER TABLE `costing_lite`.`shipment_product` 
+ADD COLUMN `other_charges` DOUBLE NULL AFTER `modified_on`,
+ADD COLUMN `web_rrp` DOUBLE NULL AFTER `other_charges`,
+ADD COLUMN `ebay_rrp` DOUBLE NULL AFTER `web_rrp`,
+ADD COLUMN `ebay_fees` DOUBLE NULL AFTER `ebay_rrp`,
+ADD COLUMN `amz_rrp` DOUBLE NULL AFTER `ebay_fees`,
+ADD COLUMN `amz_fees` DOUBLE NULL AFTER `amz_rrp`,
+ADD COLUMN `amz_fba_fees` DOUBLE NULL AFTER `amz_fees`;
 
 
+ALTER TABLE `costing_lite`.`product` 
+ADD COLUMN `cost_price_gbp` DOUBLE NULL AFTER `inactive_from`,
+ADD COLUMN `cost_price_usd` DOUBLE NULL AFTER `cost_price_gbp`;
 
 
+SET SQL_SAFE_UPDATES = 0;
+update costing_lite.product set cost_price_usd = (web_rrp * 0.3) where cost_price_usd is null
 

@@ -9,9 +9,11 @@
     <ui:define name="content">
     
 			<h:outputScript target="body">
-
+												
  				$(document).ready(function()
-				{							
+				{	
+					PF('wizard').nextNav.hide();	
+					
 					//Enable Last pencil on Grid editor
 					$('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){$(this).click()});
 					
@@ -19,7 +21,7 @@
 					{
 						PF('wizard').nextNav.hide();
 					}
-					else
+					else if ($('.ui-datatable-data tr').length >1 )
 					{
 						PF('wizard').nextNav.show();
 					}											  				  
@@ -41,6 +43,16 @@
 						PF('wizard').nextNav.show();
 					}
 				}
+				
+				function enableAddShipmentButton()
+				{					
+					$('#shipmentForm.addshipmentBtn').removeAttr('disabled');
+				}
+				
+				function enableAddProductButton()
+				{					
+					$('#shipmentForm.addProductsBtn').removeAttr('disabled');
+				}				
 				
 				function clickPencil()
 				{
@@ -65,7 +77,10 @@
 				            <p:panel header="Confirmation">
 				                <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
 				                </h:panelGrid>				 
-				                <p:commandButton value="Submit" action="#{ShipmentWizard.saveshipmentData}" update="growl" process="@this"/>
+				                <p:commandButton value="Submit" action="#{ShipmentWizard.saveshipmentData}" update="growl" process="@this" oncomplete="enableAddProductButton();" ajax="true"/>
+				                <p:spacer/>				                
+				                <p:commandButton id="addProductsBtn" value="Add Products" action="shipmentProduct.xhtml" disabled="false"/>			                
+				                
 				            </p:panel>
 				        </p:tab>
 				    </p:wizard>
