@@ -12,16 +12,16 @@
 												
  				$(document).ready(function()
 				{	
-					PF('wizard').nextNav.hide();	
+					//PF('wizard').nextNav.hide();	
 					
 					//Enable Last pencil on Grid editor
-					$('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){$(this).click()});
+					//$('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){$(this).click()});
 					
 					if(#{facesContext.validationFailed}) 
 					{
 						PF('wizard').nextNav.hide();
 					}
-					else if ($('.ui-datatable-data tr').length >1 )
+					else if ($('.ui-datatable-data tr').length >2 )
 					{
 						PF('wizard').nextNav.show();
 					}											  				  

@@ -44,10 +44,10 @@ public class Invoice implements Serializable {
     @Column(name="date_paid")
     private Date datePaid;
     
-    @Column(name="inv_amount", precision=22)
+    @Column(name="inv_amount", precision=5, scale=2)
     private double invAmount;
     
-    @Column(name="inv_amount_usd", precision=22)
+    @Column(name="inv_amount_usd", precision=5, scale=2)
     private double invAmountUsd;
     
     @Column(name="modified_on")

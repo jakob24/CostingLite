@@ -18,57 +18,62 @@
 			
 		<div class="container-fluid">
 			<div class="ui-g-12 ui-md-4 ui-lg-6" id="dataEditDiv">
-				<h:form id="dataSettings" prependId="false">
+				<h:form id="shipmentProductForm" prependId="false">
 					<p:growl id="growl" showDetail="true" sticky="true" />  						        
          	
-		        	<p:panel header="Select Shipment">
-		                <p:messages />
+		        	<p:panel header="Select Shipment">		                
 		                <h:panelGrid columns="8">				                	
 		                	<h:outputText value="Supplier *" />			                	
 					        <p:selectOneMenu id="supplierSelect" value="#{ShipmentWizard.selectedSupplierVO}" converter="#{SupplierConverter}" >
 					        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}" itemDisabled="#{ShipmentWizard.invokedFromInvoiceWizard eq true ? true:false}"/>
 					            <f:selectItems value="#{ReferenceDataController.supplierVOList}" var="supplier" itemLabel="#{supplier.name}" itemValue="#{supplier}" 
 					            	itemDisabled="#{ShipmentWizard.invokedFromInvoiceWizard eq true ? supplier != ShipmentWizard.selectedSupplierVO : false}"/>
-					           	<p:ajax event="change" update="invoiceSelect shipmentSelect" listener="#{ShipmentWizard.findAllInvoicesForSupplier}" />
+					           	<p:ajax event="change" 
+					           	update="invoiceSelect shipmentSelect shipmentProductForm:allShipProductsList shipmentProductForm:productSelect shipmentProductForm:shipProductPanel"  
+					           	listener="#{ShipmentWizard.findAllInvoicesForSupplier}" />
 					        </p:selectOneMenu>
+					        
 					        <p:spacer width="50px"/>
+					        
 		                	<h:outputText value="Invoices *" />		                	
 					        <p:selectOneMenu id="invoiceSelect" value="#{ShipmentWizard.selectedInvoiceId}" >
 					        	<f:selectItem itemValue="#{null}" itemLabel="Select one" itemDisabled="#{ShipmentWizard.invokedFromInvoiceWizard eq true ? true:false}" />			        	
 					            <f:selectItems value="#{ShipmentWizard.supplierInvoiceList}" var="invoice" itemLabel="#{invoice.formattedLabel}" itemValue="#{invoice.invoiceId}"
 					            itemDisabled="#{ShipmentWizard.invokedFromInvoiceWizard eq true ? invoice.invoiceId != ShipmentWizard.selectedInvoiceId : false}"/>	
-					            <p:ajax event="change" update="shipmentSelect" listener="#{ShipmentWizard.findAllShipmentsForInvoice}" />		            
+					            <p:ajax event="change" update="shipmentSelect shipmentProductForm:allShipProductsList shipmentProductForm:productSelect shipmentProductForm:shipProductPanel"  
+					            	listener="#{ShipmentWizard.findAllShipmentsForInvoice}" />		            
 					        </p:selectOneMenu>
+					        
 					        <p:spacer width="50px"/>
+					        
 		                	<h:outputText value="Shipments *" />				                	
 					        <p:selectOneMenu id="shipmentSelect" value="#{ShipmentWizard.selectedShipment}" disabled="#{ShipmentWizard.selectedInvoiceId eq null}" converter="#{ShipmentConverter}" >	
 					        	<f:selectItem itemValue="#{null}" itemLabel="Select one" noSelectionOption="true"/>
 					            <f:selectItems value="#{ShipmentWizard.selectedInvoiceVO.shipment}" var="shipmentSel" itemLabel="#{shipmentSel.formattedLabel}" itemValue="#{shipmentSel}"/>
-					            <p:ajax event="change" update="productSelect" oncomplete="clickPencil();"  />			            
+					            <p:ajax event="change" listener="#{ShipmentWizard.findAllproductsForShipment}"  update="productSelect allShipProductsList" oncomplete="clickPencil();"  />			            
 					        </p:selectOneMenu>				        			        
 		             	</h:panelGrid>
 					</p:panel>
 					<p:spacer/>
+					
 		          	<p:panel header="Shipment Products">
 						<p:dataTable var="allShipProducts" value="#{ShipmentWizard.selectedShipment.shipmentProduct}" selection="#{ShipmentWizard.selectedShipmentProductVO}"
-							id="allShipProductsList" rowKey="#{allShipProducts.shipmentProductId}" style="margin: 0 auto;" editable="false"> 							
-				        		
-					        <p:column selectionMode="single" style="width:16px;text-align:center"/>
-					        <p:column headerText="Shipment No.">  
-					        	<h:outputText value="#{allShipProducts.shipmentVO.shipmentNumber}" /> 
-					        </p:column>						        					        
-					        <p:column headerText="Name">  
-						    	<h:outputText value="#{allShipProducts.productVO.name}" /> 
+							id="allShipProductsList" rowKey="#{allShipProducts.product.productId}" style="margin: 0 auto;"> 
+											        		
+					        <p:column selectionMode="single" style="width:16px;text-align:center"/>					        
+					        <p:column headerText="Shipment Product Id" visible="false">  
+					        	<h:outputText value="#{allShipProducts.product.productId}" /> 
 					        </p:column>	
-					        <p:column headerText="Quantity"> 
+					        <p:column headerText="Name" style="width:60%">  
+						    	<h:outputText value="#{allShipProducts.product.name}" /> 
+					        </p:column>	
+					        <p:column headerText="SKU" style="width:20%;text-align: center">  
+						    	<h:outputText value="#{allShipProducts.product.sku}" /> 
+					        </p:column>						        
+					        <p:column headerText="Quantity" style="width:20%;text-align: center"> 
 					        	<h:outputText value="#{allShipProducts.productQty}" />  
 					        </p:column>
-					        <p:column headerText="Date">  
-					          	<h:outputText value="#{allShipProducts.date}">  
-					            	<f:convertDateTime pattern="dd/MM/yyyy"/>  
-					           	</h:outputText> 
-					        </p:column>
-					        <p:ajax event="rowSelectRadio" listener="#{ShipmentWizard.onShipmentRowSelect}" update="shipProductPanel"/>			        				    				    
+					        <p:ajax event="rowSelectRadio" listener="#{ShipmentWizard.onShipmentProductRowSelect}" update="shipProductPanel"/>			        				    				    
 						</p:dataTable>
 		            </p:panel>  					
 					<p:spacer/>
@@ -78,35 +83,35 @@
 		                	<h:outputText value="Select Product *" />			                	
 					        <p:selectOneMenu id="productSelect" value="#{ShipmentWizard.selectedProductVO}" converter="#{ProductConverter}"  disabled="#{ShipmentWizard.selectedShipment ==null}">
 					        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}"/>
-					            <f:selectItems value="#{ReferenceDataController.productVOList}" var="product" itemLabel="#{product.name}" itemValue="#{product}"/>
+					            <f:selectItems value="#{ReferenceDataController.productVOList}" var="product" itemLabel="#{product.name} - #{product.sku}" itemValue="#{product}"/>
 					           	<p:ajax event="change" update="@this addProductBtn"/>
 					        </p:selectOneMenu>
 					        <p:spacer width="50px"/>					        			    
 					    	
 							<p:commandButton value="Add Product" id="addProductBtn" actionListener="#{ShipmentWizard.addNewShipmentProduct}" ajax="true" 
-							    styleClass="btn btn-block ui-state-default" disabled="#{ShipmentWizard.selectedProductVO == null}" process="@this" update="shipProductPanel" /> 							    
+							    styleClass="btn btn-block ui-state-default" disabled="#{ShipmentWizard.selectedProductVO == null}" process="@this" update="allShipProductsList shipProductPanel" /> 							    
 		             	</h:panelGrid>
 					</p:panel>	
 					<p:spacer/>
 					
 		            <p:panel header="Product Details" id="shipProductPanel"  >	   
 		             	             
-		                <h:panelGrid columns="4" columnClasses="col1, col2, col3, col4" >	
+		                <h:panelGrid columns="4" columnClasses="col1, col2, col3, col4" rendered="#{ShipmentWizard.selectedShipmentProductVO !=null}" >	
 		                    <h:outputText value="Qty *" />
 		                    
 		                    <p:inputNumber id="qty" value="#{ShipmentWizard.selectedShipmentProductVO.productQty}" required="true" label="Qty" requiredMessage="Qty is mandatory" 
 		                    	minValue="1" maxlength="4" decimalPlaces="0" >
-		                    <p:ajax update="@this"/>
+		                    <p:ajax update="@this shipmentProductForm:allShipProductsList"/>
 		                    </p:inputNumber>
 		                    			                    	
 		                    <h:outputText value="Landing Cost" />
-		                    <p:inputNumber id="landingcost" value="#{ShipmentWizard.selectedShipmentProductVO.landingCostGbp}" readonly="true" decimalPlaces="2"/>			                    	
+		                    <p:inputNumber id="landingcost" value="#{ShipmentWizard.selectedShipmentProductVO.landingCostGbp}" readonly="true" decimalPlaces="2" inputStyle="background-color:#d1d1d1;"/>			                    	
 		                   		                    		                   
 		                    <h:outputText value="Cost Price (USD)" />
 		                    <p:inputNumber id="cpusd" value="#{ShipmentWizard.selectedShipmentProductVO.costPriceUsd}" decimalPlaces="2" symbol="$"/>
 		                    	
-		                    <h:outputText value="GBP To USD)" />
-		                    <p:inputNumber id="gbptousd" value="#{ShipmentWizard.selectedShipmentProductVO.gbpToUsd}" readonly="true" decimalPlaces="4" />	
+		                    <h:outputText value="GBP To USD" />
+		                    <p:inputNumber id="gbptousd" value="#{ShipmentWizard.selectedShipmentProductVO.gbpToUsd}" readonly="true" decimalPlaces="4" inputStyle="background-color:#d1d1d1;"  />	
 		                    
 		                    <h:outputText value="Cost Price" />
 		                    <p:inputNumber id="costPriceGbp" value="#{ShipmentWizard.selectedShipmentProductVO.costPriceGbp}" decimalPlaces="2" symbol="£"/>		                    
@@ -136,14 +141,27 @@
 		                    <h:outputText value="FBA Fees" />
 		                    <p:inputNumber id="amzFbaFees" value="#{ShipmentWizard.selectedShipmentProductVO.amzFbaFees}" decimalPlaces="2" />	
 		                </h:panelGrid>
-		                
+		                		                		       		                
 		                <div class="row">
+		                
+			   		 	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-left">	
+			        		<p:outputLabel for="shipComplete" value="Is Shipment Complete" />
+				        		<p:selectOneRadio id="shipComplete" value="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete}" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}">
+				            	<f:selectItem itemLabel="Yes" itemValue="1" />
+				            	<f:selectItem itemLabel="No" itemValue="0" />
+				       		</p:selectOneRadio>
+				      </div>
+				       		                
 					    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
-							    <p:commandButton value="Save" id="saveShipProductBtn" actionListener="#{ShipmentWizard.saveShipmentProduct(ShipmentWizard.selectedShipmentProductVO)}" 
-									ajax="false" styleClass="btn btn-block ui-state-default" /> <!-- onclick="this.disabled=true;"  -->
+							    <p:commandButton value="Save" id="saveShipProductBtn" actionListener="#{ShipmentWizard.saveShipmentProduct(ShipmentWizard.selectedShipment.shipmentProduct)}" 
+							    	rendered="#{ShipmentWizard.selectedShipmentProductVO !=null}"
+									ajax="true" styleClass="btn btn-block ui-state-default" immediate="true" update="messages shipmentProductForm:allShipProductsList shipmentProductForm:shipProductPanel" /> <!-- onclick="this.disabled=true;"  -->
 						    </div>
 					    </div>					    		                
 		            </p:panel>	
+		            <div class="row">			      
+						<p:messages id="messages" showDetail="true" autoUpdate="true"/>	
+					</div>
 				</h:form>
 			</div>
 		</div>

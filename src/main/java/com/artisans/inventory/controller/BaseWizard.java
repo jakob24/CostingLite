@@ -3,8 +3,12 @@
  */
 package com.artisans.inventory.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,6 +39,15 @@ public class BaseWizard implements Serializable
 	
 	public static final String PAY_TYPE_SHIPMENT = "SHIPMENT";
 	
+	public static final String SHIPMENT_ENTRY_PAGE="/ui/shipments.xhtml";
+	
+	public static final String SHIPMENT_ENTRY_METHOD="#{ShipmentWizard.invokedFromMenu}";
+	
+	public static final String INVOICE_ENTRY_PAGE="/ui/invoices.xhtml";
+	
+	public static final String INVOICE_ENTRY_METHOD="#{InvoiceWizard.invokedFromMenu}";	
+	
+	
 	/**
 	 * Get All Invoices for the supplier
 	 */
@@ -42,5 +55,20 @@ public class BaseWizard implements Serializable
 	{
 		List<InvoiceVO> invoiceVOList = invoiceService.findAllActiveInvoicesForSupplier(supplierVO);
 		return invoiceVOList;
+	}
+	
+	/**
+	 * Method invoked when called from menu.Reset the session
+	 * @param url
+	 */
+	public void resetAndNavigateTo(String url) {
+	    try {
+		    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		    ec.invalidateSession();	    	
+			ec.redirect(ec.getRequestContextPath() + url);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}			
 	}
 }

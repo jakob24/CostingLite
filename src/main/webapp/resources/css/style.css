@@ -388,3 +388,6 @@ body {
     border: 0 none;
 }	
 
+.disabledText {
+	background-color:#d1d1d1;
+}

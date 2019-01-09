@@ -46,8 +46,7 @@ public class InvoiceServiceImpl implements InvoiceService
 	{
 		Invoice invoice = invoiceRepository.findById(invoiceId).orElse(null);
 		InvoiceVO invoiceVO = new DozerBeanMapper().map(invoice, InvoiceVO.class); 		
-		return invoiceVO;
-		
+		return invoiceVO;		
 	}
 	
 	
@@ -63,8 +62,7 @@ public class InvoiceServiceImpl implements InvoiceService
 		List<?> invoiceList = invoiceRepository.findAllInvoicesForSupplier(supplierVO.getSupplierId());
 		CollectionUtils.transform(invoiceList, new InvoiceTransformer());
 		invoiceVOList = (List<InvoiceVO>) invoiceList;
-		return invoiceVOList;
-		
+		return invoiceVOList;		
 	}
 	
 	/**

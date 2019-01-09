@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -109,7 +110,7 @@ public class StandingDataServiceImpl extends BaseServiceImpl implements Standing
 	public List<ProductVO> findProducts()
 	{
 		List<ProductVO> productVOList = new ArrayList<ProductVO>();
-		List<?> productList = productRepository.findAll();
+		List<?> productList = productRepository.findAll(sortByProductNameAsc());
 		if(null != productList && ! productList.isEmpty())
 		{
 			CollectionUtils.transform(productList, new ProductTransformer());
@@ -117,6 +118,15 @@ public class StandingDataServiceImpl extends BaseServiceImpl implements Standing
 		}		
 		return productVOList;	
 	}
+	
+	/**
+	 * Sorter for product name
+	 * @return
+	 */
+	private Sort sortByProductNameAsc() {
+        return new Sort(Sort.Direction.ASC, "name");
+    }
+	
 	
 	/**
 	 * Create or update Courier

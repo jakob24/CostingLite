@@ -6,6 +6,7 @@ package com.artisans.inventory.service.api;
 import java.util.List;
 
 import com.artisans.inventory.vo.InvoiceVO;
+import com.artisans.inventory.vo.ShipmentProductVO;
 import com.artisans.inventory.vo.ShipmentVO;
 
 /**
@@ -27,4 +28,8 @@ public interface ShipmentService {
 	public InvoiceVO saveShipments(InvoiceVO invoiceVO);
 	
 	public void deleteShipment(ShipmentVO shipmentVO);
+	
+	public void saveShipmentProduct(List<ShipmentProductVO> shipmentProductVOList);
+	
+	public List<ShipmentProductVO> findAllproductsForShipment(ShipmentVO shipmentVO);
 }

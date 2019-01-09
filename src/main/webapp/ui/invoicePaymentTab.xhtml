@@ -95,11 +95,11 @@
 				    
 			        <f:facet name="footer" styleClass="ui-column-title">  
 			        	<h:outputText value="Invoice Total " style="text-align:left"/>
-			        	<h:outputText value="$ : "  rendered="#{InvoiceWizard.selectedInvoiceVO.invAmount ==null }"/>
-			        	<h:outputText value="#{InvoiceWizard.selectedInvoiceVO.invAmount !=null ? InvoiceWizard.selectedInvoiceVO.invAmount :InvoiceWizard.selectedInvoiceVO.invAmountUsd }"/>
+			        	<h:outputText value="$ : "/>
+			        	<h:outputText value="#{InvoiceWizard.totalInvoiceToPayAmount }"/>
 			        	<p:spacer width="30px"/>
-			            <h:outputText value="Total : "/>
-			            <h:outputText value="#{InvoiceWizard.totalInvoicePaymentAmount}" id="totalPaidText">
+			            <h:outputText value="Paid Total $ : "/>
+			            <h:outputText value="#{InvoiceWizard.totalInvoicePaidAmount}" id="totalPaidText">
 			            	<f:convertNumber pattern="#0.00" locale="en_GB"/>
 			            </h:outputText>
 			        </f:facet> 				        				    			    

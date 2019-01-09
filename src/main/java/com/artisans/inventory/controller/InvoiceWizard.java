@@ -46,7 +46,9 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 	@Autowired
 	private ApplicationConfiguration configUtil;
 			
-	private Double totalInvoicePaymentAmount;
+	private Double totalInvoicePaidAmount;
+	
+	private Double totalInvoiceToPayAmount;
 	
 	private boolean enableAddInvoice;
 		//	
@@ -69,6 +71,13 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 	{	
 	}
 	
+	/**
+	 * Method to reset session and navigate to the link page
+	 */
+	public void invokedFromMenu() {
+		resetAndNavigateTo(INVOICE_ENTRY_PAGE);
+	}
+	
 
  	/**
  	 * Invoked for Next/Previous step of the flow
@@ -77,8 +86,8 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
  	 */
 	public String onFlowProcess(FlowEvent flowEvent) {      	
     	String queryScriptConfirm= "PF('wizard').backNav.show();PF('wizard').nextNav.hide();PF('wizard').cfg.showNavBar = false;";
-    	String queryFirstTab = "PF('wizard').backNav.hide();PF('wizard').nextNav.show();PF('wizard').cfg.showNavBar = true;";
-    	String queryScript= "PF('wizard').backNav.show();PF('wizard').nextNav.hide();PF('wizard').cfg.showNavBar = false;$('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){$(this).click()});";
+    	String queryFirstTab = "PF('wizard').nextNav.show();PF('wizard').cfg.showNavBar = true;";
+    	String queryScript= "PF('wizard').backNav.show();PF('wizard').nextNav.hide();PF('wizard').cfg.showNavBar = false;";
     	
     	if (flowEvent.getNewStep().equals("confirmTab"))
     	{
@@ -157,7 +166,8 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 				paidAmount += payment.getAmount()==null? 0:payment.getAmount();
 			}			
 		}
-		setTotalInvoicePaymentAmount(paidAmount);
+		setTotalInvoicePaidAmount(paidAmount);
+		setTotalInvoiceToPayAmount(invoiceAmount==0 ? invoiceAmountUSD :invoiceAmount);
 		
 		if(invoiceAmount == 0) {
 			//Was paid in USD
@@ -210,7 +220,7 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 		invoicePaymentVO.setAmountUsd(getSelectedInvoiceVO().getInvAmountUsd()==null? 0:getSelectedInvoiceVO().getInvAmountUsd()-totalPaidIinvAmountUSD);
 		invoicePaymentVO.setAmount(getSelectedInvoiceVO().getInvAmount()==null? 0: getSelectedInvoiceVO().getInvAmount()-totalPaidIinvAmount);		
 		invoicePaymentVO.setPaymentType(PAY_TYPE_INVOICE);
-		setTotalInvoicePaymentAmount(totalPayment);
+		setTotalInvoicePaidAmount(totalPayment);
 		
 		calculatePaymentsAndAddPayButton();
 	}
@@ -268,7 +278,7 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
     		}
     		invAmount += payment.getAmount();
     	}
-    	setTotalInvoicePaymentAmount(invAmount);
+    	setTotalInvoicePaidAmount(invAmount);
     }
 
     /**
@@ -297,20 +307,7 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 	}
 
 
-	/**
-	 * @return the totalInvoicePaymentAmount
-	 */
-	public Double getTotalInvoicePaymentAmount() {
-		return totalInvoicePaymentAmount;
-	}
 
-
-	/**
-	 * @param totalInvoicePaymentAmount the totalInvoicePaymentAmount to set
-	 */
-	public void setTotalInvoicePaymentAmount(Double totalInvoicePaymentAmount) {
-		this.totalInvoicePaymentAmount = totalInvoicePaymentAmount;
-	}
 
 
 	/**
@@ -397,6 +394,36 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 	 */
 	public void setInvoicePaymentComplete(boolean invoicePaymentComplete) {
 		this.invoicePaymentComplete = invoicePaymentComplete;
+	}
+
+	/**
+	 * @return the totalInvoicePaidAmount
+	 */
+	public Double getTotalInvoicePaidAmount() {
+		return totalInvoicePaidAmount;
+	}
+
+	/**
+	 * @param totalInvoicePaidAmount the totalInvoicePaidAmount to set
+	 */
+	public void setTotalInvoicePaidAmount(Double totalInvoicePaidAmount) {
+		this.totalInvoicePaidAmount = totalInvoicePaidAmount;
+	}
+
+	/**
+	 * @return the totalInvoiceToPayAmount
+	 */
+	public Double getTotalInvoiceToPayAmount() {
+		return totalInvoiceToPayAmount;
+	}
+
+	/**
+	 * @param totalInvoiceToPayAmount the totalInvoiceToPayAmount to set
+	 */
+	public void setTotalInvoiceToPayAmount(Double totalInvoiceToPayAmount) {
+		this.totalInvoiceToPayAmount = totalInvoiceToPayAmount;
 	}		
+	
+	
 	
 }

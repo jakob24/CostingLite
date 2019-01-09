@@ -129,20 +129,15 @@
 					    </p:column> 
 			        </p:dataTable>			                 				                 
 		   			<div>	
-	                    <p:commandButton
-	                        value="Add Payment" id="newShipPayment"
-	                        actionListener="#{ShipmentWizard.addNewShipPayment(shipmenPayTable)}"
-	                        ajax="true" update="shipmenPaySubTable" oncomplete="clickPencil();" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}"/>
+
+		        
+                   <p:commandButton
+                       value="Add Payment" id="newShipPayment"
+                       actionListener="#{ShipmentWizard.addNewShipPayment(shipmenPayTable)}"
+                       ajax="true" update="shipmenPaySubTable" oncomplete="clickPencil();" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}"/>
                    	</div> 
 				</ui:repeat>
             </p:panel>
             <p:spacer></p:spacer>
-		    <p:panel style="margin-bottom:10px" cellpadding="5" >
-		        <p:outputLabel for="shipComplete" value="Is Shipment Complete" />
-		        <p:selectOneRadio id="shipComplete" value="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete}" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}">
-		            <f:selectItem itemLabel="Yes" itemValue="1" />
-		            <f:selectItem itemLabel="No" itemValue="0" />
-		        </p:selectOneRadio>
-		    </p:panel>
         </p:tab>
 </ui:composition>				        

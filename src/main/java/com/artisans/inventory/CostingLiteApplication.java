@@ -44,11 +44,13 @@ public class CostingLiteApplication implements ServletContextAware {
 		// Iniciar el contexto de JSF
 		// http://stackoverflow.com/a/25509937/1199132		
         servletContext.setInitParameter("com.sun.faces.forceLoadConfiguration", Boolean.TRUE.toString());
-        servletContext.setInitParameter("primefaces.THEME", "afternoon");//hot-sneaks, bootstrap,smoothness,sunny
+        servletContext.setInitParameter("primefaces.THEME", "sunny");//hot-sneaks, bootstrap,smoothness,sunny
         servletContext.setInitParameter("primefaces.CLIENT_SIDE_VALIDATION", Boolean.TRUE.toString());
         servletContext.setInitParameter("javax.faces.FACELETS_SKIP_COMMENTS", Boolean.TRUE.toString());
         servletContext.setInitParameter("primefaces.FONT_AWESOME", Boolean.TRUE.toString());
         servletContext.setInitParameter("primefaces.UPLOADER", "commons");
+        //https://github.com/primefaces/primefaces/issues/3457
+        servletContext.setInitParameter("primefaces.MOVE_SCRIPTS_TO_BOTTOM", Boolean.TRUE.toString());
 	}
 	
     @Bean

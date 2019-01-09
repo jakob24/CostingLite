@@ -24,9 +24,9 @@ public class ShipmentProductVO extends BaseVO implements Serializable {
 
     private int productQty;
 
-    private ProductVO productVO;
+    private ProductVO product;
 
-    private ShipmentVO shipmentVO;
+    private ShipmentVO shipment;
             
     private Double costPriceUsd;
 
@@ -96,31 +96,31 @@ public class ShipmentProductVO extends BaseVO implements Serializable {
 	}
 
 	/**
-	 * @return the productVO
+	 * @return the product
 	 */
-	public ProductVO getProductVO() {
-		return productVO;
+	public ProductVO getProduct() {
+		return product;
 	}
 
 	/**
-	 * @param productVO the productVO to set
+	 * @param product the product to set
 	 */
-	public void setProductVO(ProductVO productVO) {
-		this.productVO = productVO;
+	public void setProduct(ProductVO product) {
+		this.product = product;
 	}
 
 	/**
-	 * @return the shipmentVO
+	 * @return the shipment
 	 */
-	public ShipmentVO getShipmentVO() {
-		return shipmentVO;
+	public ShipmentVO getShipment() {
+		return shipment;
 	}
 
 	/**
-	 * @param shipmentVO the shipmentVO to set
+	 * @param shipment the shipment to set
 	 */
-	public void setShipmentVO(ShipmentVO shipmentVO) {
-		this.shipmentVO = shipmentVO;
+	public void setShipment(ShipmentVO shipment) {
+		this.shipment = shipment;
 	}
 
 	/**

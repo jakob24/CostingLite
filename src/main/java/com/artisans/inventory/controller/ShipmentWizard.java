@@ -3,6 +3,7 @@
  */
 package com.artisans.inventory.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,6 +11,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.FlowEvent;
@@ -85,6 +88,13 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	}
 	
 	/**
+	 * Method to reset session and navigate to the link page
+	 */
+	public void invokedFromMenu() {
+		resetAndNavigateTo(SHIPMENT_ENTRY_PAGE);
+	}
+	
+	/**
 	 * Method called when invoked from the invocie screen.
 	 * Most of the data is pre populated
 	 */
@@ -95,6 +105,7 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 		setSelectedInvoiceId(invoiceWizard.getSelectedInvoiceId());		
 		setSelectedInvoiceVO(invoiceWizard.getSelectedInvoiceVO());			
 		getSelectedInvoiceVO().setShipment(shipmentService.findAllShipmentsForInvoice(getSelectedInvoiceVO()));
+		setSelectedShipment(null);
 	}
 	
 	/**
@@ -104,6 +115,7 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 		setSelectedInvoiceVO(null);
 		setSelectedInvoiceId(null);		
 		setSelectedShipment(null);
+		setSelectedShipmentProductVO(null);
 		setSupplierInvoiceList(findAllInvoicesForSupplier(getSelectedSupplierVO()));
 	}
 	
@@ -130,6 +142,17 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 		}
 	}
 	
+	
+	/**
+	 * Method to retrieve all products for the shipment
+	 */
+	public void findAllproductsForShipment() {
+		ShipmentVO selectedShipment = getSelectedShipment();		
+		if(null != selectedShipment) {
+			List<ShipmentProductVO> shipmentProductVOList = shipmentService.findAllproductsForShipment(selectedShipment);
+			selectedShipment.setShipmentProduct(shipmentProductVOList); 
+		}		
+	}
 	
 	/**
 	 * Invoked on selection of a shipment(From radio Button)
@@ -177,6 +200,14 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	public void saveshipmentData() {
 		shipmentService.saveShipments(getSelectedInvoiceVO());
 		UIMessageHelper.getInstance().displayUIMessage("shipment_saved", FacesMessage.SEVERITY_INFO);
+	}
+	
+	/**
+	 * Method invoked when a shipment product selected from the List for update
+	 */
+	public void onShipmentProductRowSelect(SelectEvent selectEvent) {
+		//ShipmentProductVO shipmentProductVO = (ShipmentProductVO) selectEvent.getObject();
+		//Do nothing
 	}
 	
 	/**
@@ -265,7 +296,7 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	public String onFlowProcess(FlowEvent flowEvent) {      	
     	String queryScriptConfirm= "PF('wizard').backNav.show();PF('wizard').nextNav.hide();PF('wizard').cfg.showNavBar = false;";
     	String queryFirstTab = "PF('wizard').backNav.hide();PF('wizard').nextNav.show();PF('wizard').cfg.showNavBar = true;";
-    	String queryScript= "PF('wizard').backNav.show();PF('wizard').nextNav.hide();PF('wizard').cfg.showNavBar = false;$('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){$(this).click()});";
+    	String queryScript= "PF('wizard').backNav.show();PF('wizard').cfg.showNavBar = false;";
     	
     	if (flowEvent.getNewStep().equals("confirmTab"))
     	{
@@ -314,35 +345,57 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	 */
 	public void addNewShipmentProduct() {
 		
-		ProductVO producVO = getSelectedProductVO();
+		ProductVO productVO = getSelectedProductVO();
 		
-		ShipmentProductVO shipmentProductVO = new ShipmentProductVO();
-		shipmentProductVO.setShipmentVO(getSelectedShipment());		
-		
-		shipmentProductVO = ProductShipmentHelper.populateDefaultProductValues(producVO, shipmentProductVO);
-		List<ShipmentProductVO> shipmentProductVOList = new ArrayList<ShipmentProductVO>();
+		if(isProductAlreadyAdded(productVO)) {
+			UIMessageHelper.getInstance().displayUIMessage("product_already_added", FacesMessage.SEVERITY_INFO);
+		}
+		else {
+			ShipmentProductVO shipmentProductVO = new ShipmentProductVO();
+			shipmentProductVO.setShipment(getSelectedShipment());	
+			shipmentProductVO.setProduct(productVO);
+			
+			shipmentProductVO = ProductShipmentHelper.populateDefaultProductValues(productVO, shipmentProductVO);
+			List<ShipmentProductVO> shipmentProductVOList = new ArrayList<ShipmentProductVO>();
+			
+			if(null != getSelectedShipment().getShipmentProduct() && ! getSelectedShipment().getShipmentProduct().isEmpty()) {
+				// Add the product to existing list 
+				shipmentProductVOList = getSelectedShipment().getShipmentProduct();
+				shipmentProductVOList.add(shipmentProductVO);			
+			} else {
+				//Create a new item and set in the getSelectedShipment().getShipmentProduct()		
+				shipmentProductVOList = new ArrayList<ShipmentProductVO>();
+				shipmentProductVOList.add(shipmentProductVO);
+			}
+			getSelectedShipment().setShipmentProduct(shipmentProductVOList);
+			setSelectedShipmentProductVO(shipmentProductVO);			
+		}
+	}
+	
+	/**
+	 * Prevent same product being added in the shipment list
+	 * @param productVO
+	 * @return
+	 */
+	private boolean isProductAlreadyAdded(ProductVO productVO ) {
 		
 		if(null != getSelectedShipment().getShipmentProduct() && ! getSelectedShipment().getShipmentProduct().isEmpty()) {
-			// Add the product to existing list 
-			shipmentProductVOList = getSelectedShipment().getShipmentProduct();
-			shipmentProductVOList.add(shipmentProductVO);			
-		} else {
-			//Create a new item and set in the getSelectedShipment().getShipmentProduct()			
-			shipmentProductVOList = new ArrayList<ShipmentProductVO>();
-			shipmentProductVOList.add(shipmentProductVO);
+			List<ShipmentProductVO> shipmentProductList = getSelectedShipment().getShipmentProduct();			
+			long count = shipmentProductList.stream().filter(i -> i.getProduct().getProductId() == productVO.getProductId()).count();
+			if(count > 0)
+				return true;
 		}
-		getSelectedShipment().setShipmentProduct(shipmentProductVOList);
-		setSelectedShipmentProductVO(shipmentProductVO);
+		return false;
 	}
 	
 	/*
 	 * Method to save Shipment Product
 	 */
-	public void saveShipmentProduct() {
+	public void saveShipmentProduct(List<ShipmentProductVO> saveProduct) {
 		
-		ShipmentProductVO saveProduct = getSelectedShipmentProductVO();
-		
-		System.out.println(saveProduct);
+		ProductShipmentHelper.calculateShipmentProductprices(saveProduct);
+		shipmentService.saveShipmentProduct(saveProduct);
+		UIMessageHelper.getInstance().displayUIMessage("product_saved", FacesMessage.SEVERITY_INFO);
 	}
 	
 	/**

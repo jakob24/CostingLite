@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  */
 @Scope(value = "session")
 @Component(value = "loginController")
-public class LoginController implements Serializable {
+public class LoginController extends BaseWizard implements Serializable {
 
 	/**
 	 * 
@@ -59,15 +59,17 @@ public class LoginController implements Serializable {
 				
 		DefaultSubMenu invoiceSubmenu = new DefaultSubMenu("Invoices");		
 		item = new DefaultMenuItem("Manageme Invoices");		
-		item.setHref("invoices.xhtml");
+		//item.setHref("invoices.xhtml");
+		item.setCommand(INVOICE_ENTRY_METHOD);
 		item.setIcon("fa fa-user");
 		invoiceSubmenu.addElement(item);
 		topMenu.addElement(invoiceSubmenu);	
 		
 		DefaultSubMenu ShipmentSubmenu = new DefaultSubMenu("Shipments");		
 		item = new DefaultMenuItem("Manage Shipments");		
-		item.setHref("shipments.xhtml");
+		//item.setHref("shipments.xhtml");
 		item.setIcon("fa fa-user");
+		item.setCommand(SHIPMENT_ENTRY_METHOD);		
 		ShipmentSubmenu.addElement(item);
 		topMenu.addElement(ShipmentSubmenu);			
 						

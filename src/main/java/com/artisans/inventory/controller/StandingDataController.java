@@ -207,9 +207,9 @@ public class StandingDataController implements Serializable {
     	ProductVO thisProduct = getNewProduct();
     	if(isUniqueProductName(thisProduct)) {
     		standingDataService.saveProduct(thisProduct);
-    		UIMessageHelper.getInstance().displayUIMessage("msg_group_name_saved", FacesMessage.SEVERITY_INFO);
+    		UIMessageHelper.getInstance().displayUIMessage("product_saved", FacesMessage.SEVERITY_INFO);
     	} else {
-    		UIMessageHelper.getInstance().displayUIMessage("uniqie_supplier_name", FacesMessage.SEVERITY_ERROR);
+    		UIMessageHelper.getInstance().displayUIMessage("uniqie_product_name", FacesMessage.SEVERITY_ERROR);
     	}  
     }
       
@@ -264,9 +264,6 @@ public class StandingDataController implements Serializable {
 		this.productVOList = productVOList;
 	}
 	
-
-
-
 	/**
 	 * @return the newProduct
 	 */

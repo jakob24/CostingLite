@@ -62,13 +62,13 @@
 		                    <h:outputText value="Name: *" />
 		                    <p:inputText value="#{StandingDataController.newProduct.name}" required="true" label="Firstname" styleClass="customTxtWidth150px"/>
 		                    
-		                    <h:outputText value="Description *" styleClass="labelx"/>
-		                    <p:inputText value="#{StandingDataController.newProduct.description}" required="true" label="Lastname" styleClass="customTxtWidth150px"/>		                    
+		                    <h:outputText value="Description" styleClass="labelx"/>
+		                    <p:inputText value="#{StandingDataController.newProduct.description}" label="Lastname" styleClass="customTxtWidth150px"/>		                    
 		                    
-		                    <h:outputText value="SKU" />
-		                    <p:inputTextarea value="#{StandingDataController.newProduct.sku}"  label="SKU" />			                    		                 
+		                    <h:outputText value="SKU *" />
+		                    <p:inputTextarea value="#{StandingDataController.newProduct.sku}"  label="SKU"  required="true" />			                    		                 
 		 					
-		 					<h:outputText value="Image *" />	
+		 					<h:outputText value="Image" />	
 		 					<p:graphicImage url="#{StandingDataController.newProduct.image}" height="50px" width="50px"/>
 		 					
 		                    <h:outputText value="ASIN (Amazon)" />
@@ -80,32 +80,42 @@
 		                    <h:outputText value="EAN *" />
 		                    <p:inputText value="#{StandingDataController.newProduct.ean}" required="true" label="ean" />	
 		                    		                    
-	                    	<h:outputText value="Inactive Date *" />
-		                    <p:calendar value="#{StandingDataController.newProduct.inactiveFrom}" required="true" label="InactiveeDate" pattern="dd/MM/yyyy" /> 
+	                    	<h:outputText value="Inactive Date" />
+		                    <p:calendar value="#{StandingDataController.newProduct.inactiveFrom}" label="InactiveeDate" pattern="dd/MM/yyyy" /> 
 		                                  		                    
 		                    <h:outputText value="Inventory" />
 		                    <p:inputText value="#{StandingDataController.newProduct.inventory}" required="true">
 		                    	<f:validateDoubleRange minimum="0" />
 		                    </p:inputText>  		                    	                    
 		 
-		                    <h:outputText value="Min Inventory" />
-		                    <p:inputText value="#{StandingDataController.newProduct.minInventory}">
-		                    	<f:validateDoubleRange minimum="1" maximum="200" />
+		                    <h:outputText value="Min Inventory *" />
+		                    <p:inputText value="#{StandingDataController.newProduct.minInventory}" required="true">
+		                    	<f:validateDoubleRange minimum="0" maximum="200" />
 		                    </p:inputText> 	                    
 		                     	  		                                      
 		 					<p:separator/><p:separator/><p:separator/><p:separator/>
+		 					
+		                    <h:outputText value="Cost Price (USD)" />
+		                    <p:inputText value="#{StandingDataController.newProduct.costPriceUsd}" >
+		                    	<f:validateDoubleRange minimum="0" maximum="200" />
+		                    </p:inputText> 		                    
+		                    
+		                    <h:outputText value="Cost Price (GBP) *" />
+		                    <p:inputText value="#{StandingDataController.newProduct.postageCharges}" required="true">
+		                    	<f:validateDoubleRange minimum="0" />
+		                    </p:inputText>  		                    		 					
 		 						
-		                    <h:outputText value="Web Retail Price" />
-		                    <p:inputText value="#{StandingDataController.newProduct.webRrp}">
+		                    <h:outputText value="Web Retail Price *" />
+		                    <p:inputText value="#{StandingDataController.newProduct.webRrp}" required="true">
 		                    	<f:validateDoubleRange minimum="1" maximum="200" />
 		                    </p:inputText> 
 		                    
-		                    <h:outputText value="Postal Charges" />
+		                    <h:outputText value="Postal Charges *" />
 		                    <p:inputText value="#{StandingDataController.newProduct.postageCharges}" required="true">
 		                    	<f:validateDoubleRange minimum="0" />
 		                    </p:inputText>  			                    
 		                    
-		                    <h:outputText value="Packing Charges" />
+		                    <h:outputText value="Packing Charges *" />
 		                    <p:inputText value="#{StandingDataController.newProduct.packingCharges}" required="true">
 		                    	<f:validateDoubleRange minimum="0" />
 		                    </p:inputText>  		                    	                    
@@ -129,7 +139,7 @@
 		                    </p:inputText> 
 		                    
 		                    <h:outputText value="Ebay Fees" />
-		                    <p:inputText value="#{StandingDataController.newProduct.ebayFees}" required="true">
+		                    <p:inputText value="#{StandingDataController.newProduct.ebayFees}">
 		                    	<f:validateDoubleRange minimum="0" />
 		                    </p:inputText>  		
 		                    
@@ -141,12 +151,12 @@
 		                    </p:inputText> 
 		                    
 		                    <h:outputText value="Amazon Fees" />
-		                    <p:inputText value="#{StandingDataController.newProduct.amzFees}" required="true">
+		                    <p:inputText value="#{StandingDataController.newProduct.amzFees}">
 		                    	<f:validateDoubleRange minimum="0" />
 		                    </p:inputText> 
 		                    
 		                    <h:outputText value="Amazon FBA Fees" />
-		                    <p:inputText value="#{StandingDataController.newProduct.amzFbaFees}" required="true">
+		                    <p:inputText value="#{StandingDataController.newProduct.amzFbaFees}">
 		                    	<f:validateDoubleRange minimum="0" />
 		                    </p:inputText> 		                     		                    
 		                    <h:panelGroup /><h:panelGroup />	

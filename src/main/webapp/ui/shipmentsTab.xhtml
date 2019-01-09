@@ -25,7 +25,7 @@
 			        	<f:selectItem itemValue="#{null}" itemLabel="Select one" itemDisabled="#{ShipmentWizard.invokedFromInvoiceWizard eq true ? true:false}" />			        	
 			            <f:selectItems value="#{ShipmentWizard.supplierInvoiceList}" var="invoice" itemLabel="#{invoice.formattedLabel}" itemValue="#{invoice.invoiceId}"
 			            itemDisabled="#{ShipmentWizard.invokedFromInvoiceWizard eq true ? invoice.invoiceId != ShipmentWizard.selectedInvoiceId : false}"/>	
-			            <p:ajax event="change" update="shipmentList allShipmentList" listener="#{ShipmentWizard.findAllShipmentsForInvoice}" />		            
+			            <p:ajax event="change" update="shipmentForm shipmentList allShipmentList addshipmentBtn" listener="#{ShipmentWizard.findAllShipmentsForInvoice}" />		            
 			        </p:selectOneMenu>
 			        
 			        <p:spacer width="50px"/>
@@ -34,18 +34,7 @@
 					    <p:commandButton value="Add Shipment" id="addshipmentBtn" actionListener="#{ShipmentWizard.addNewShipment}" ajax="true" 
 					    styleClass="btn btn-block ui-state-default" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete == 1}" 
 					    onclick="this.disabled=true;" update="shipmentList shipmentForm:allShipmentList"/> 
-				    </div>
-				    			        
-			        <!-- 
-                	<h:outputText value="Shipments *" />				                	
-			        <p:selectOneMenu id="shipmentSelect" value="#{ShipmentWizard.selectedShipment}" disabled="#{ShipmentWizard.selectedInvoiceId eq null}" converter="#{ShipmentConverter}" >	
-			        	<f:selectItem itemValue="#{null}" itemLabel="Select one" noSelectionOption="true"/>
-			            <f:selectItems value="#{ShipmentWizard.selectedInvoiceVO.shipment}" var="shipmentSel" itemLabel="#{shipmentSel.formattedLabel}" itemValue="#{shipmentSel}"/>
-			            <f:selectItem  itemValue="#{ShipmentWizard.addNewShipment}"  itemLabel="Add New Shipment .."  itemDisabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete == 1}"/>
-			            <p:ajax event="change" update="shipmentList" listener="#{ShipmentWizard.addNewShipment}" oncomplete="clickPencil();" />			            
-			        </p:selectOneMenu>	
-			         -->			        			        
-			        						        				                	
+				    </div>	       			        
              	</h:panelGrid>
 			</p:panel>
 			
