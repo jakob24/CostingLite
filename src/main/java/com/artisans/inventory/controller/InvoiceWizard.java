@@ -50,7 +50,7 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 	
 	private Double totalInvoiceToPayAmount;
 	
-	private boolean enableAddInvoice;
+	private boolean enableAddInvoiceButton;
 		//	
 	private Integer selectedInvoiceId;
 	
@@ -166,23 +166,24 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 				paidAmount += payment.getAmount()==null? 0:payment.getAmount();
 			}			
 		}
-		setTotalInvoicePaidAmount(paidAmount);
+				
+		setTotalInvoicePaidAmount(invoiceAmountUSD > 0 ? paidAmountUSD : paidAmount);
 		setTotalInvoiceToPayAmount(invoiceAmount==0 ? invoiceAmountUSD :invoiceAmount);
 		
 		if(invoiceAmount == 0) {
 			//Was paid in USD
 			if (paidAmountUSD < invoiceAmountUSD){
-				setEnableAddInvoice(true);
+				setEnableAddInvoiceButton(true);
 			}else {
-				setEnableAddInvoice(false);
+				setEnableAddInvoiceButton(false);
 			}			
 		}
 		else
 		{
 			if(paidAmount < invoiceAmount ){
-				setEnableAddInvoice(true);
+				setEnableAddInvoiceButton(true);
 			}else {
-				setEnableAddInvoice(false);
+				setEnableAddInvoiceButton(false);
 			}			
 		}
 	}
@@ -369,17 +370,17 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 	}
 
 	/**
-	 * @return the enableAddInvoice
+	 * @return the enableAddInvoiceButton
 	 */
-	public boolean isEnableAddInvoice() {
-		return enableAddInvoice;
+	public boolean isEnableAddInvoiceButton() {
+		return enableAddInvoiceButton;
 	}
 
 	/**
-	 * @param enableAddInvoice the enableAddInvoice to set
+	 * @param enableAddInvoiceButton the enableAddInvoiceButton to set
 	 */
-	public void setEnableAddInvoice(boolean enableAddInvoice) {
-		this.enableAddInvoice = enableAddInvoice;
+	public void setEnableAddInvoiceButton(boolean enableAddInvoiceButton) {
+		this.enableAddInvoiceButton = enableAddInvoiceButton;
 	}
 
 	/**

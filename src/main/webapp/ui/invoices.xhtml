@@ -65,7 +65,7 @@
 						        <p:outputLabel for="payInvComplete" value="Is Invoice Fully Paid ?" />
 						        <p:spacer></p:spacer>	
 						        <p:selectBooleanCheckbox id="payInvComplete" value="#{InvoiceWizard.invoicePaymentComplete}" 
-						        	disabled="#{InvoiceWizard.selectedInvoiceVO.datePaid != null}" rendered="#{! InvoiceWizard.enableAddInvoice}">
+						        	disabled="#{InvoiceWizard.selectedInvoiceVO.datePaid != null}" rendered="#{! InvoiceWizard.enableAddInvoiceButton}">
 						        	<p:ajax event="change" immediate="true" update="@this"/> 
 						        </p:selectBooleanCheckbox>
 						        							        	

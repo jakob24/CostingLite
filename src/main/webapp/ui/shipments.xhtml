@@ -8,40 +8,16 @@
 <ui:composition template="layout.xhtml">
     <ui:define name="content">
     
-			<h:outputScript target="body">
-												
+			<h:outputScript target="body">						
  				$(document).ready(function()
-				{	
-					//PF('wizard').nextNav.hide();	
-					
+				{						
 					//Enable Last pencil on Grid editor
 					//$('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){$(this).click()});
 					
-					if(#{facesContext.validationFailed}) 
-					{
-						PF('wizard').nextNav.hide();
-					}
-					else if ($('.ui-datatable-data tr').length >2 )
-					{
-						PF('wizard').nextNav.show();
-					}											  				  
-				});					
-
+				});		
                 
 				function blink() { 
 				  $('#amendTool').fadeOut(500).fadeIn(500, blink); 
-				}
-				
-				function showHideNextButton()
-				{					
-					if(#{facesContext.validationFailed}) 
-					{
-						PF('wizard').nextNav.hide();
-					}
-					else
-					{
-						PF('wizard').nextNav.show();
-					}
 				}
 				
 				function enableAddShipmentButton()
@@ -71,7 +47,7 @@
 				    <p:wizard flowListener="#{ShipmentWizard.onFlowProcess}" widgetVar="wizard">
 										 						 		
 				 		<ui:include src="shipmentsTab.xhtml"/>					 					        				        
-						<ui:include src="shipmentPaymentTab.xhtml"/>			        		        			        
+						<ui:include src="shipmentPaymentTab.xhtml"/>		        		        			        
 				 						 		 	 
 				        <p:tab id="confirmTab" title="Confirmation">
 				            <p:panel header="Confirmation">

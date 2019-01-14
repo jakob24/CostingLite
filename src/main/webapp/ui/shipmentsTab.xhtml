@@ -6,7 +6,30 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="http://java.sun.com/jsp/jstl/core">				        
 				        
-        <p:tab id="ShipmentTab" title="Shipments">        	
+        <p:tab id="ShipmentTab" title="Shipments">     
+		    <script type="text/javascript">
+		        $(document).ready(function() {
+					PF('wizard').nextNav.hide();										
+					showHideNextButtonForFirstTab();	
+		        });
+		        
+				function showHideNextButtonForFirstTab()
+				{			
+ 					if(#{facesContext.validationFailed}) 
+					{						
+						PF('wizard').nextNav.hide();
+					}				
+					else if ($('.ui-radiobutton-box').length == '0'  )
+					{						
+						PF('wizard').nextNav.hide();
+					}
+					else if (($('.ui-radiobutton-box').length != '0' ))
+					{
+						PF('wizard').nextNav.show();
+					} 
+				}        
+		    </script>
+	               	
         	<p:panel header="Add/Edit Shipments">
                 <p:messages />
                 <h:panelGrid columns="8">				                	
@@ -25,7 +48,7 @@
 			        	<f:selectItem itemValue="#{null}" itemLabel="Select one" itemDisabled="#{ShipmentWizard.invokedFromInvoiceWizard eq true ? true:false}" />			        	
 			            <f:selectItems value="#{ShipmentWizard.supplierInvoiceList}" var="invoice" itemLabel="#{invoice.formattedLabel}" itemValue="#{invoice.invoiceId}"
 			            itemDisabled="#{ShipmentWizard.invokedFromInvoiceWizard eq true ? invoice.invoiceId != ShipmentWizard.selectedInvoiceId : false}"/>	
-			            <p:ajax event="change" update="shipmentForm shipmentList allShipmentList addshipmentBtn" listener="#{ShipmentWizard.findAllShipmentsForInvoice}" />		            
+			            <p:ajax event="change" update="shipmentList allShipmentList addshipmentBtn" listener="#{ShipmentWizard.findAllShipmentsForInvoice}" oncomplete="showHideNextButtonForFirstTab();"/>		            
 			        </p:selectOneMenu>
 			        
 			        <p:spacer width="50px"/>
@@ -72,10 +95,11 @@
 				<p:dataTable var="shipments" value="#{ShipmentWizard.selectedShipment}" id="shipmentList"  rowKey="#{shipments.shipmentId}"
 					editable="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete !=1}" emptyMessage="" reflow="true" style="margin: 0 auto;" > 
 							        	        
-					<p:ajax event="rowEdit" listener="#{ShipmentWizard.onShipmentsEdit}" update=":messages shipmentForm:allShipmentList shipmentForm:addshipmentBtn" 
-						oncomplete="showHideNextButton();enableAddShipmentButton();"/> 
+					<p:ajax event="rowEdit" listener="#{ShipmentWizard.onShipmentsEdit}" update=":messages shipmentForm:allShipmentList shipmentList shipmentForm:addshipmentBtn" 
+						oncomplete="showHideNextButtonForFirstTab(); enableAddShipmentButton();"/> 
 						
-                    <p:ajax event="rowEditCancel" listener="#{ShipmentWizard.onDeleteShipment}" update="@this shipmentForm:allShipmentList"  /> 		        
+                    <p:ajax event="rowEditCancel" listener="#{ShipmentWizard.onDeleteShipment}" 
+                    	update=":messages shipmentForm:allShipmentList shipmentList" oncomplete="showHideNextButtonForFirstTab();" /> 		        
 			        
 			        <p:column headerText="Shipment No.">  
 			            <p:cellEditor>  

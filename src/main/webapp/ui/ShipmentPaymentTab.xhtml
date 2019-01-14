@@ -7,15 +7,44 @@
     xmlns:c="http://java.sun.com/jsp/jstl/core">					        
 				        
         <p:tab id="ShipmentPaymentTab" title="Shipment Payments">
-            <p:panel header="Shipment Payment Information">            		           		
+        
+	    <script type="text/javascript">
+	        $(document).ready(function() {
+	        	showHideNextButtonForShipPayTab();
+	        });
+	        
+			function showHideNextButtonForShipPayTab()
+			{						
+				var payCount = $('#shipmentForm\\:shipPayCount').val();				
+				//alert(PF('noOfPayments').jq.val()); -Alternative way
+				 
+				if(#{facesContext.validationFailed}) 
+				{			
+					PF('wizard').nextNav.hide();
+				}				
+				else if (payCount > '0' )
+				{				
+					PF('wizard').nextNav.show();
+				}
+				else if (payCount == '0' )
+				{
+					PF('wizard').nextNav.hide();
+				}
+			}	        
+	    </script>
+            
+            <p:panel header="Shipment Payment Information" >            		           		
             		
+            	<p:inputText value="#{ShipmentWizard.shipmentPaymentCount}" id="shipPayCount" widgetVar="noOfPayments" type="hidden"/>
 				<ui:repeat var="shipmenPayTable" value="#{ShipmentWizard.selectedInvoiceVO.shipment}" >
 				  										
 					<p:dataTable var="shipPayments" value="#{shipmenPayTable.payment}" id="shipmenPaySubTable" 
-						editable="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete !=1}" emptyMessage="" reflow="true" style="margin: 20px auto;  border-spacing: 10px"> 	
+						editable="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete !=1}" emptyMessage="" reflow="true" style="margin: 20px auto;  border-spacing: 10px" widgetVar="shipPayTable"> 	
 						 													
-						<p:ajax event="rowEdit" listener="#{ShipmentWizard.onShipmentPaymentEdit}" update=":messages" oncomplete="showHideNextButton();"  />
-		                <p:ajax event="rowEditCancel" listener="#{ShipmentWizard.onShipmentPaymentCancel}" update="shipmenPaySubTable"  /> 	
+						<p:ajax event="rowEdit" listener="#{ShipmentWizard.onShipmentPaymentEdit}" update=":messages shipmenPaySubTable shipmentForm:shipPayCount" 
+							oncomplete="showHideNextButtonForShipPayTab();" onsuccess="showHideNextButtonForShipPayTab();"/>
+		                <p:ajax event="rowEditCancel" listener="#{ShipmentWizard.onShipmentPaymentDelete}" update=":messages shipmenPaySubTable shipmentForm:shipPayCount" 
+		                	oncomplete="showHideNextButtonForShipPayTab();" onsuccess="showHideNextButtonForShipPayTab();" /> 	
 		                 							
 					    <p:columnGroup type="header"> 
 				  			<p:row>  
@@ -120,7 +149,7 @@
 				                </f:facet>  
 				                <f:facet name="input">  
 				                    <p:calendar pattern="dd/MM/yyyy" value="#{shipPayments.datePaid}" mindate="#{ShipmentWizard.selectedInvoiceVO.invoiceDate}" 
-				                    	maxdate="#{ReferenceDataController.today}"/>		
+				                    	maxdate="#{ReferenceDataController.today}" required="true"/>		
 				                </f:facet>  
 				            </p:cellEditor>  
 				        </p:column>				        					        
@@ -129,12 +158,11 @@
 					    </p:column> 
 			        </p:dataTable>			                 				                 
 		   			<div>	
-
 		        
                    <p:commandButton
                        value="Add Payment" id="newShipPayment"
                        actionListener="#{ShipmentWizard.addNewShipPayment(shipmenPayTable)}"
-                       ajax="true" update="shipmenPaySubTable" oncomplete="clickPencil();" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}"/>
+                       ajax="true" update="shipmenPaySubTable" oncomplete="clickPencil();showHideNextButtonForShipPayTab();" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}"/>
                    	</div> 
 				</ui:repeat>
             </p:panel>

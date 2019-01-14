@@ -19,7 +19,7 @@ public class PaymentVO extends BaseVO implements Serializable, Comparable<Paymen
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int paymentId;
+	private Integer paymentId;
 
     private Double amount;
 
@@ -41,21 +41,21 @@ public class PaymentVO extends BaseVO implements Serializable, Comparable<Paymen
 
     private short paid;
 
-    private InvoiceVO invoiceVO;
+    private InvoiceVO invoice;
 
-    private ShipmentVO shipmentVO;
+    private ShipmentVO shipment;
 
 	/**
 	 * @return the paymentId
 	 */
-	public int getPaymentId() {
+	public Integer getPaymentId() {
 		return paymentId;
 	}
 
 	/**
 	 * @param paymentId the paymentId to set
 	 */
-	public void setPaymentId(int paymentId) {
+	public void setPaymentId(Integer paymentId) {
 		this.paymentId = paymentId;
 	}
 
@@ -200,31 +200,31 @@ public class PaymentVO extends BaseVO implements Serializable, Comparable<Paymen
 	}
 
 	/**
-	 * @return the invoiceVO
+	 * @return the invoice
 	 */
-	public InvoiceVO getInvoiceVO() {
-		return invoiceVO;
+	public InvoiceVO getInvoice() {
+		return invoice;
 	}
 
 	/**
-	 * @param invoiceVO the invoiceVO to set
+	 * @param invoice the invoice to set
 	 */
-	public void setInvoiceVO(InvoiceVO invoiceVO) {
-		this.invoiceVO = invoiceVO;
+	public void setInvoice(InvoiceVO invoice) {
+		this.invoice = invoice;
 	}
 
 	/**
-	 * @return the shipmentVO
+	 * @return the shipment
 	 */
-	public ShipmentVO getShipmentVO() {
-		return shipmentVO;
+	public ShipmentVO getShipment() {
+		return shipment;
 	}
 
 	/**
-	 * @param shipmentVO the shipmentVO to set
+	 * @param shipment the shipment to set
 	 */
-	public void setShipmentVO(ShipmentVO shipmentVO) {
-		this.shipmentVO = shipmentVO;
+	public void setShipment(ShipmentVO shipment) {
+		this.shipment = shipment;
 	}
 
 	@Override

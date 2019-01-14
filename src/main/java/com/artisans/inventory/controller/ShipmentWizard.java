@@ -3,7 +3,6 @@
  */
 package com.artisans.inventory.controller;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,8 +10,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.FlowEvent;
@@ -75,6 +72,8 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	private boolean invokedFromShipmentWizard;
 	
 	private ShipmentProductVO selectedShipmentProductVO;
+	
+	private int shipmentPaymentCount;
 	
 	
 	/**
@@ -139,6 +138,7 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 				shipmentList = new ArrayList<ShipmentVO>();					
 			}
 			getSelectedInvoiceVO().setShipment(shipmentList);
+			setShipPaymentCount();
 		}
 	}
 	
@@ -201,23 +201,24 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 		shipmentService.saveShipments(getSelectedInvoiceVO());
 		UIMessageHelper.getInstance().displayUIMessage("shipment_saved", FacesMessage.SEVERITY_INFO);
 	}
-	
-	/**
-	 * Method invoked when a shipment product selected from the List for update
-	 */
-	public void onShipmentProductRowSelect(SelectEvent selectEvent) {
-		//ShipmentProductVO shipmentProductVO = (ShipmentProductVO) selectEvent.getObject();
-		//Do nothing
-	}
-	
+
 	/**
 	 * Method to update the Shipment record
 	 * @param event
 	 */
-	public void onShipmentsEdit(RowEditEvent event) {
-		//TODO
+	public void onShipmentsEdit(RowEditEvent event) {		
 		ShipmentVO shipmentVO = (ShipmentVO) event.getObject(); 
-		System.out.println(shipmentVO);
+		
+		if(shipmentVO.getInvoice().getShipmentComplete()==SHIPMENT_COMPLETE) {
+			UIMessageHelper.getInstance().displayUIMessage("shipment_complete", FacesMessage.SEVERITY_ERROR);
+		}
+		else {			
+			ShipmentVO newShipment = shipmentService.saveShipment(shipmentVO);
+			//Fetch the data from db
+			refreshInvoiceData(getSelectedInvoiceVO());		
+			setSelectedShipment(newShipment);
+			UIMessageHelper.getInstance().displayUIMessage("shipment_update", FacesMessage.SEVERITY_INFO);
+		}
 	}
 	
 	/**
@@ -226,16 +227,33 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	 */
 	public void onDeleteShipment(RowEditEvent event) {		
 		ShipmentVO shipmentVO = (ShipmentVO) event.getObject(); 
-		shipmentService.deleteShipment(shipmentVO);
 		
-		//Fetch the data from db
-		List <ShipmentVO> shipmentList = shipmentService.findAllShipmentsForInvoice(getSelectedInvoiceVO());		
+		if(shipmentVO.getInvoice().getShipmentComplete()==SHIPMENT_COMPLETE) {
+			UIMessageHelper.getInstance().displayUIMessage("shipment_complete", FacesMessage.SEVERITY_ERROR);
+		} else {
+			
+			if(null != shipmentVO.getShipmentId() && shipmentVO.getShipmentId().intValue() > 0 ) {
+				shipmentService.deleteShipment(shipmentVO);			
+				//Fetch the data from db
+				refreshInvoiceData(getSelectedInvoiceVO());		
+				setSelectedShipment(null);
+				UIMessageHelper.getInstance().displayUIMessage("shipment_deleted", FacesMessage.SEVERITY_INFO);		
+			}
+		}		
+	}
+	
+	
+	/**
+	 * Method to fetch the shipment data for the invoice and update form data
+	 * @param invoiceVO
+	 */
+	private void refreshInvoiceData(InvoiceVO invoiceVO) {
+		
+		List <ShipmentVO> shipmentList = shipmentService.findAllShipmentsForInvoice(invoiceVO);		
 		if(null == shipmentList || shipmentList.isEmpty()) {
 			shipmentList = new ArrayList<ShipmentVO>();					
 		}
-		getSelectedInvoiceVO().setShipment(shipmentList);
-		
-		UIMessageHelper.getInstance().displayUIMessage("shipment_deleted", FacesMessage.SEVERITY_INFO);
+		getSelectedInvoiceVO().setShipment(shipmentList);		
 	}
 	
 	/**
@@ -243,18 +261,37 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	 * @param event
 	 */
 	public void onShipmentPaymentEdit(RowEditEvent event) {
-		//TODO
 		PaymentVO paymentVO = (PaymentVO) event.getObject(); 
-		System.out.println(paymentVO);
+		
+		if(getSelectedInvoiceVO().getShipmentComplete()==SHIPMENT_COMPLETE) {
+			UIMessageHelper.getInstance().displayUIMessage("shipment_complete", FacesMessage.SEVERITY_ERROR);
+		} else {		
+			shipmentService.updateShipmentPayment(paymentVO);
+			refreshInvoiceData(getSelectedInvoiceVO());	
+			UIMessageHelper.getInstance().displayUIMessage("payment_update", FacesMessage.SEVERITY_INFO);
+		}
+		setShipPaymentCount();
 	}
 	
 	/**
 	 * Method to delete the Shipment Payment record
 	 * @param event
 	 */	
-	public void onShipmentPaymentCancel(RowEditEvent event) {
-		PaymentVO paymentVO = (PaymentVO) event.getObject(); 
-		System.out.println(paymentVO);
+	public void onShipmentPaymentDelete(RowEditEvent event) {
+		PaymentVO paymentVO = (PaymentVO) event.getObject(); 		
+		if(null != paymentVO.getPaymentId() && paymentVO.getPaymentId().intValue() > 0) {
+			if(getSelectedInvoiceVO().getShipmentComplete()==SHIPMENT_COMPLETE) {
+				UIMessageHelper.getInstance().displayUIMessage("shipment_complete", FacesMessage.SEVERITY_ERROR);
+			} else {		
+				shipmentService.deleteShipmentPayment(paymentVO);
+				refreshInvoiceData(getSelectedInvoiceVO());	
+				UIMessageHelper.getInstance().displayUIMessage("payment_delete", FacesMessage.SEVERITY_INFO);
+			}
+		} else {
+			ShipmentVO shipmentVO = paymentVO.getShipment();
+			shipmentVO.getPayment().remove(paymentVO);
+		}	
+		setShipPaymentCount();
 	}	
 	
 		
@@ -264,19 +301,37 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	 */
 	public void addNewShipPayment(ShipmentVO shipmentVO) {
 								
-		//Iterate through the selectedInvoiceVO.shipment
-		for(ShipmentVO shipment : selectedInvoiceVO.getShipment()) {
-			if(shipment == shipmentVO) {				
-				if(null != shipmentVO.getPayment() && ! shipmentVO.getPayment().isEmpty()) {
-					shipmentVO.getPayment().add(createNewShipmentPayment());
-				} else {
-					List<PaymentVO> paymentList = new ArrayList<PaymentVO>();
-					paymentList.add(createNewShipmentPayment());					
-					shipmentVO.setPayment(paymentList);
-				}			
+		if(shipmentVO.getInvoice().getShipmentComplete()==SHIPMENT_COMPLETE) {
+			UIMessageHelper.getInstance().displayUIMessage("shipment_complete", FacesMessage.SEVERITY_ERROR);
+		}
+		else {
+			//Iterate through the selectedInvoiceVO.shipment
+			for(ShipmentVO shipment : selectedInvoiceVO.getShipment()) {
+				if(shipment == shipmentVO) {				
+					if(null != shipmentVO.getPayment() && ! shipmentVO.getPayment().isEmpty()) {
+						shipmentVO.getPayment().add(createNewShipmentPayment(shipmentVO));
+					} else {
+						List<PaymentVO> paymentList = new ArrayList<PaymentVO>();
+						paymentList.add(createNewShipmentPayment(shipmentVO));					
+						shipmentVO.setPayment(paymentList);
+					}			
+				}
 			}
 		}
+		setShipPaymentCount();
 	}
+	
+	private void setShipPaymentCount() {
+		
+		int count = 0;
+		for(ShipmentVO shipment : selectedInvoiceVO.getShipment()) {
+			if(null != shipment.getPayment() && ! shipment.getPayment().isEmpty()) {
+				count += shipment.getPayment().size();
+			}
+		}
+		setShipmentPaymentCount(count);
+	}
+	
 	
     /**
      * Method to convert USD TO GBP and update the total payment Amount
@@ -294,9 +349,9 @@ public class ShipmentWizard extends BaseWizard implements Serializable
  	 * @return
  	 */
 	public String onFlowProcess(FlowEvent flowEvent) {      	
-    	String queryScriptConfirm= "PF('wizard').backNav.show();PF('wizard').nextNav.hide();PF('wizard').cfg.showNavBar = false;";
-    	String queryFirstTab = "PF('wizard').backNav.hide();PF('wizard').nextNav.show();PF('wizard').cfg.showNavBar = true;";
-    	String queryScript= "PF('wizard').backNav.show();PF('wizard').cfg.showNavBar = false;";
+    	String queryScriptConfirm= "PF('wizard').backNav.show();PF('wizard').nextNav.hide();";
+    	String queryShipmentTab = "PF('wizard').backNav.hide();PF('wizard').backNav.hide();";
+    	String queryShipmentPayTab= "PF('wizard').backNav.show();PF('wizard').nextNav.hide();";
     	
     	if (flowEvent.getNewStep().equals("confirmTab"))
     	{
@@ -305,17 +360,17 @@ public class ShipmentWizard extends BaseWizard implements Serializable
     	}
     	else if (flowEvent.getNewStep().equals("ShipmentTab"))
     	{
-    		PrimeFaces.current().executeScript(queryFirstTab);  
+    		PrimeFaces.current().executeScript(queryShipmentTab);  
     		return flowEvent.getNewStep();
     	}      
     	else if (flowEvent.getNewStep().equals("ShipmentPaymentTab"))
     	{
-    		PrimeFaces.current().executeScript(queryScript);  
+    		PrimeFaces.current().executeScript(queryShipmentPayTab);  
     		return flowEvent.getNewStep();
     	}     
     	else 
     	{
-    		PrimeFaces.current().executeScript(queryScript);  
+    		PrimeFaces.current().executeScript(queryShipmentPayTab);  
     		return flowEvent.getNewStep();        		
     	}        
     }
@@ -324,7 +379,7 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	 * Create a new blank Shipment payment
 	 * @return
 	 */
-	private PaymentVO createNewShipmentPayment() {
+	private PaymentVO createNewShipmentPayment(ShipmentVO shipmentVO) {
 		PaymentVO newShipPayment = new PaymentVO();
 		newShipPayment.setAmountUsd(0D);
 		newShipPayment.setGbpToUsd(0D);
@@ -332,6 +387,7 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 		newShipPayment.setOtherCharges(0D);
 		newShipPayment.setBankCharges(0D);
 		newShipPayment.setPaymentType(PAY_TYPE_SHIPMENT);
+		newShipPayment.setShipment(shipmentVO);
 		return newShipPayment;
 	}
 	
@@ -345,31 +401,37 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	 */
 	public void addNewShipmentProduct() {
 		
-		ProductVO productVO = getSelectedProductVO();
-		
-		if(isProductAlreadyAdded(productVO)) {
-			UIMessageHelper.getInstance().displayUIMessage("product_already_added", FacesMessage.SEVERITY_INFO);
+		if(getSelectedShipment().getInvoice().getShipmentComplete() == SHIPMENT_NOT_COMPLETE)
+		{
+			ProductVO productVO = getSelectedProductVO();				
+			if(isProductAlreadyAdded(productVO)) {
+				UIMessageHelper.getInstance().displayUIMessage("product_already_added", FacesMessage.SEVERITY_INFO);
+			}
+			else {
+				ShipmentProductVO shipmentProductVO = new ShipmentProductVO();
+				shipmentProductVO.setShipment(getSelectedShipment());	
+				shipmentProductVO.setProduct(productVO);
+				
+				shipmentProductVO = ProductShipmentHelper.populateDefaultProductValues(productVO, shipmentProductVO);
+				List<ShipmentProductVO> shipmentProductVOList = new ArrayList<ShipmentProductVO>();
+				
+				if(null != getSelectedShipment().getShipmentProduct() && ! getSelectedShipment().getShipmentProduct().isEmpty()) {
+					// Add the product to existing list 
+					shipmentProductVOList = getSelectedShipment().getShipmentProduct();
+					shipmentProductVOList.add(shipmentProductVO);			
+				} else {
+					//Create a new item and set in the getSelectedShipment().getShipmentProduct()		
+					shipmentProductVOList = new ArrayList<ShipmentProductVO>();
+					shipmentProductVOList.add(shipmentProductVO);
+				}
+				getSelectedShipment().setShipmentProduct(shipmentProductVOList);
+				setSelectedShipmentProductVO(shipmentProductVO);			
+			}			
 		}
 		else {
-			ShipmentProductVO shipmentProductVO = new ShipmentProductVO();
-			shipmentProductVO.setShipment(getSelectedShipment());	
-			shipmentProductVO.setProduct(productVO);
-			
-			shipmentProductVO = ProductShipmentHelper.populateDefaultProductValues(productVO, shipmentProductVO);
-			List<ShipmentProductVO> shipmentProductVOList = new ArrayList<ShipmentProductVO>();
-			
-			if(null != getSelectedShipment().getShipmentProduct() && ! getSelectedShipment().getShipmentProduct().isEmpty()) {
-				// Add the product to existing list 
-				shipmentProductVOList = getSelectedShipment().getShipmentProduct();
-				shipmentProductVOList.add(shipmentProductVO);			
-			} else {
-				//Create a new item and set in the getSelectedShipment().getShipmentProduct()		
-				shipmentProductVOList = new ArrayList<ShipmentProductVO>();
-				shipmentProductVOList.add(shipmentProductVO);
-			}
-			getSelectedShipment().setShipmentProduct(shipmentProductVOList);
-			setSelectedShipmentProductVO(shipmentProductVO);			
+			UIMessageHelper.getInstance().displayUIMessage("product_add_ship_complete", FacesMessage.SEVERITY_ERROR);
 		}
+
 	}
 	
 	/**
@@ -388,16 +450,35 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 		return false;
 	}
 	
-	/*
-	 * Method to save Shipment Product
+	/**
+	 * Method to save Shipment Product and re calculate all the landing costs and update them
+	 * @param saveProduct
 	 */
-	public void saveShipmentProduct(List<ShipmentProductVO> saveProduct) {
+	public void saveShipmentProduct(List<ShipmentProductVO> saveProduct) {	
 		
-		ProductShipmentHelper.calculateShipmentProductprices(saveProduct);
-		shipmentService.saveShipmentProduct(saveProduct);
-		UIMessageHelper.getInstance().displayUIMessage("product_saved", FacesMessage.SEVERITY_INFO);
+		if(getSelectedShipment().getInvoice().getShipmentComplete() == SHIPMENT_NOT_COMPLETE) {		
+			shipmentService.saveShipmentProduct(saveProduct);
+			UIMessageHelper.getInstance().displayUIMessage("product_saved", FacesMessage.SEVERITY_INFO);
+		} else {
+			UIMessageHelper.getInstance().displayUIMessage("product_add_ship_complete", FacesMessage.SEVERITY_ERROR);
+		}
 	}
 	
+	
+	/**
+	 * Method to delete an existing shipment Product and re calculate 
+	 * the landing costs for remaining products within the shipment and update them
+	 */
+	public void deleteShipmentProduct(ShipmentProductVO shipmentProductVO) {	
+		
+		if(getSelectedShipment().getInvoice().getShipmentComplete() == SHIPMENT_NOT_COMPLETE) {			
+			//Delete this product.
+			shipmentService.deleteShipmentProduct(shipmentProductVO);	
+		} else {
+			UIMessageHelper.getInstance().displayUIMessage("product_add_ship_complete", FacesMessage.SEVERITY_ERROR);
+		}
+	}	
+		
 	/**
 	 * @return the invoiceService
 	 */
@@ -559,6 +640,20 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	 */
 	public void setSelectedShipmentProductVO(ShipmentProductVO selectedShipmentProductVO) {
 		this.selectedShipmentProductVO = selectedShipmentProductVO;
+	}
+
+	/**
+	 * @return the shipmentPaymentCount
+	 */
+	public int getShipmentPaymentCount() {
+		return shipmentPaymentCount;
+	}
+
+	/**
+	 * @param shipmentPaymentCount the shipmentPaymentCount to set
+	 */
+	public void setShipmentPaymentCount(int shipmentPaymentCount) {
+		this.shipmentPaymentCount = shipmentPaymentCount;
 	}
 	
 	

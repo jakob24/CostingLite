@@ -29,6 +29,7 @@ import com.artisans.inventory.service.api.ShipmentService;
 import com.artisans.inventory.transformers.ShipmentProductTransformer;
 import com.artisans.inventory.transformers.ShipmentTransformer;
 import com.artisans.inventory.vo.InvoiceVO;
+import com.artisans.inventory.vo.PaymentVO;
 import com.artisans.inventory.vo.ShipmentProductVO;
 import com.artisans.inventory.vo.ShipmentVO;
 
@@ -107,6 +108,18 @@ public class ShipmentServiceImpl implements ShipmentService {
 	}
 	
 	/**
+	 * Method to save a shipment
+	 */
+	@Transactional(readOnly=false)
+	public ShipmentVO saveShipment(ShipmentVO shipmentVO) {		
+		Shipment shipment = new DozerBeanMapper().map(shipmentVO, Shipment.class); 		
+		//Save Shipment
+		shipment = shipmentRepository.saveAndFlush(shipment);			
+		return new DozerBeanMapper().map(shipment, ShipmentVO.class); 
+		
+	}	
+	
+	/**
 	 * Method to delete a shipment
 	 */
 	@Transactional(readOnly=false)
@@ -132,11 +145,37 @@ public class ShipmentServiceImpl implements ShipmentService {
 	}
 	
 	/**
-	 * Method to save the list of ShipmentProductVO
+	 * Method to update an existing Shipment Payment
+	 * @param paymentVO
+	 */
+	@Transactional(readOnly=false)
+	public void updateShipmentPayment(PaymentVO paymentVO) {
+		Payment payment = new DozerBeanMapper().map(paymentVO, Payment.class);
+		paymentsRepository.saveAndFlush(payment);		
+	}	
+	
+	
+	/**
+	 * Method to delete an existing Shipment Payment
+	 * @param paymentVO
+	 */
+	@Transactional(readOnly=false)
+	public void deleteShipmentPayment(PaymentVO paymentVO) {
+		Payment payment = new DozerBeanMapper().map(paymentVO, Payment.class);
+		paymentsRepository.delete(payment);
+	}
+	
+	
+	
+	/**
+	 * Method to save Shipment Product and re calculate all the landing costs and update them
 	 */
 	@Transactional(readOnly=false)
 	public void saveShipmentProduct(List<ShipmentProductVO> shipmentProductVOList) {
 				
+		//Calculate Landing Costs
+		ProductShipmentHelper.calculateShipmentProductprices(shipmentProductVOList);
+		
 		for(ShipmentProductVO shipmentProductVO : shipmentProductVOList) {
 			
 			ShipmentProduct shipmentProduct = new DozerBeanMapper().map(shipmentProductVO, ShipmentProduct.class);
@@ -148,6 +187,26 @@ public class ShipmentServiceImpl implements ShipmentService {
 			thisProduct.setInventory(newQty);
 			productRepository.saveAndFlush(thisProduct);
 		}			
+	}
+	
+
+	/**
+	 * Method to delete an existing shipment Product and re calculate 
+	 * the landing costs for remaining products within the shipment and update them
+	 */
+	@Transactional(readOnly=false)
+	public void deleteShipmentProduct(ShipmentProductVO shipmentProductVO) {
+		ShipmentProduct shipmentProduct = new DozerBeanMapper().map(shipmentProductVO, ShipmentProduct.class);
+		shipmentProductRepository.delete(shipmentProduct);
+		
+		//Now get all other products within same shipment and recalculate the price
+		List<ShipmentProductVO> existingProducts = findAllproductsForShipment(shipmentProductVO.getShipment());
+		
+		//Calculate Landing Costs
+		ProductShipmentHelper.calculateShipmentProductprices(existingProducts);	
+		
+		//Update the products costs
+		saveShipmentProduct(existingProducts);
 	}
 	
 	/**

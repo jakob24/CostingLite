@@ -6,6 +6,7 @@ package com.artisans.inventory.service.api;
 import java.util.List;
 
 import com.artisans.inventory.vo.InvoiceVO;
+import com.artisans.inventory.vo.PaymentVO;
 import com.artisans.inventory.vo.ShipmentProductVO;
 import com.artisans.inventory.vo.ShipmentVO;
 
@@ -28,8 +29,27 @@ public interface ShipmentService {
 	public InvoiceVO saveShipments(InvoiceVO invoiceVO);
 	
 	public void deleteShipment(ShipmentVO shipmentVO);
+
+	
+	public List<ShipmentProductVO> findAllproductsForShipment(ShipmentVO shipmentVO);
+
+	public ShipmentVO saveShipment(ShipmentVO shipmentVO);		
+	
+	/**
+	 * Method to delete an existing Shipment Payment
+	 * @param paymentVO
+	 */
+	public void deleteShipmentPayment(PaymentVO paymentVO)	;
+	
+	/**
+	 * Method to update an existing Shipment Payment
+	 * @param paymentVO
+	 */
+	public void updateShipmentPayment(PaymentVO paymentVO)	;	
+	
 	
 	public void saveShipmentProduct(List<ShipmentProductVO> shipmentProductVOList);
 	
-	public List<ShipmentProductVO> findAllproductsForShipment(ShipmentVO shipmentVO);
+	public void deleteShipmentProduct(ShipmentProductVO shipmentProductVO);
+	
 }

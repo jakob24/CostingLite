@@ -50,7 +50,7 @@
 					        <p:selectOneMenu id="shipmentSelect" value="#{ShipmentWizard.selectedShipment}" disabled="#{ShipmentWizard.selectedInvoiceId eq null}" converter="#{ShipmentConverter}" >	
 					        	<f:selectItem itemValue="#{null}" itemLabel="Select one" noSelectionOption="true"/>
 					            <f:selectItems value="#{ShipmentWizard.selectedInvoiceVO.shipment}" var="shipmentSel" itemLabel="#{shipmentSel.formattedLabel}" itemValue="#{shipmentSel}"/>
-					            <p:ajax event="change" listener="#{ShipmentWizard.findAllproductsForShipment}"  update="productSelect allShipProductsList" oncomplete="clickPencil();"  />			            
+					            <p:ajax event="change" listener="#{ShipmentWizard.findAllproductsForShipment}"  update="@this productSelect allShipProductsList" oncomplete="clickPencil();"  />			            
 					        </p:selectOneMenu>				        			        
 		             	</h:panelGrid>
 					</p:panel>
@@ -142,23 +142,30 @@
 		                    <p:inputNumber id="amzFbaFees" value="#{ShipmentWizard.selectedShipmentProductVO.amzFbaFees}" decimalPlaces="2" />	
 		                </h:panelGrid>
 		                		                		       		                
-		                <div class="row">
-		                
-			   		 	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-left">	
-			        		<p:outputLabel for="shipComplete" value="Is Shipment Complete" />
-				        		<p:selectOneRadio id="shipComplete" value="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete}" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}">
-				            	<f:selectItem itemLabel="Yes" itemValue="1" />
-				            	<f:selectItem itemLabel="No" itemValue="0" />
-				       		</p:selectOneRadio>
-				      </div>
-				       		                
-					    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
+		                <div class="row">	
+		                			                	                
+				   		 	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-left">	
+				        		<p:outputLabel for="shipComplete" value="Is Shipment Complete" />
+					        		<p:selectOneRadio id="shipComplete" value="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete}" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}">
+					            	<f:selectItem itemLabel="Yes" itemValue="1" />
+					            	<f:selectItem itemLabel="No" itemValue="0" />
+					       		</p:selectOneRadio>
+					      	</div>	
+					      							      	 		       		                
+					    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">						    	
+							    <p:commandButton value="Delete" id="deleteShipProductBtn" actionListener="#{ShipmentWizard.deleteShipmentProduct(ShipmentWizard.selectedShipmentProductVO)}" 
+							    	rendered="#{ShipmentWizard.selectedShipmentProductVO !=null}" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}"
+									ajax="true" styleClass="btn btn-block ui-state-default" immediate="true" update="messages shipmentProductForm:allShipProductsList shipmentProductForm:shipProductPanel" /> <!-- onclick="this.disabled=true;"  -->
+					    	</div>
+					    	
+					    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">
 							    <p:commandButton value="Save" id="saveShipProductBtn" actionListener="#{ShipmentWizard.saveShipmentProduct(ShipmentWizard.selectedShipment.shipmentProduct)}" 
-							    	rendered="#{ShipmentWizard.selectedShipmentProductVO !=null}"
+							    	rendered="#{ShipmentWizard.selectedShipmentProductVO !=null}" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}"
 									ajax="true" styleClass="btn btn-block ui-state-default" immediate="true" update="messages shipmentProductForm:allShipProductsList shipmentProductForm:shipProductPanel" /> <!-- onclick="this.disabled=true;"  -->
 						    </div>
 					    </div>					    		                
 		            </p:panel>	
+		            
 		            <div class="row">			      
 						<p:messages id="messages" showDetail="true" autoUpdate="true"/>	
 					</div>

@@ -92,13 +92,16 @@
 				    <p:column headerText="#{bundle.btn_label_amend}" style="color:red;" id="amendTool">  
 				    	<p:rowEditor />  
 				    </p:column> 	
-				    
+				    				    
 			        <f:facet name="footer" styleClass="ui-column-title">  
 			        	<h:outputText value="Invoice Total " style="text-align:left"/>
-			        	<h:outputText value="$ : "/>
-			        	<h:outputText value="#{InvoiceWizard.totalInvoiceToPayAmount }"/>
+			        	<h:outputText value=" : "/>
+			        	<h:outputText value="#{InvoiceWizard.totalInvoiceToPayAmount }">
+			        		<f:convertNumber pattern="#0.00" locale="en_GB"/>
+			        	</h:outputText>
 			        	<p:spacer width="30px"/>
-			            <h:outputText value="Paid Total $ : "/>
+			            <h:outputText value="Paid Total "/>
+			            <h:outputText value=" : "/>
 			            <h:outputText value="#{InvoiceWizard.totalInvoicePaidAmount}" id="totalPaidText">
 			            	<f:convertNumber pattern="#0.00" locale="en_GB"/>
 			            </h:outputText>
@@ -107,15 +110,13 @@
 				
 			    <div class="row">
 			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
-					    <p:commandButton value="Add Shipments" id="newShipmentBtn" actionListener="#{InvoiceWizard.addShipment}" action="shipments.xhtml"
-							ajax="true" styleClass="btn btn-block ui-state-default" disabled="#{InvoiceWizard.enableAddInvoice}" onclick="this.disabled=true;"/> 
-				    </div>	
-				    			    
-			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
 					    <p:commandButton value="Add New Payment" id="newInvPaymentBtn" update="paymentList" actionListener="#{InvoiceWizard.addNewInvoicePayment}" 
-							ajax="true" styleClass="btn btn-block ui-state-default" disabled="#{! InvoiceWizard.enableAddInvoice}" oncomplete="clickPencil()"/> 
-				    </div>
-				    	
+							ajax="true" styleClass="btn btn-block ui-state-default" disabled="#{! InvoiceWizard.enableAddInvoiceButton}" oncomplete="clickPencil()"/> 
+				    </div>				    			    			    	 		    
+			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
+					    <p:commandButton value="Shipments" id="newShipmentBtn" actionListener="#{InvoiceWizard.addShipment}" action="shipments.xhtml"
+							ajax="true" styleClass="btn btn-block ui-state-default" onclick="this.disabled=true;"/> 
+				    </div>					    			    
 				 </div>								
 			</p:panel>
         </p:tab>
