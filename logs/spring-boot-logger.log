@@ -1,0 +1,110 @@
+2019-01-17 10:35:24,889 INFO org.springframework.boot.StartupInfoLogger [main] Starting CostingLiteApplication on CCRSL301 with PID 6900 (C:\DEV\projects\CostingLite-master\target\classes started by bjacob in C:\DEV\projects\CostingLite-master)
+2019-01-17 10:35:24,897 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.0.3.RELEASE, Spring v5.0.7.RELEASE
+2019-01-17 10:35:24,898 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-01-17 10:35:27,515 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2019-01-17 10:35:27,519 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet Engine: Apache Tomcat/8.5.31
+2019-01-17 10:35:27,526 INFO org.apache.juli.logging.DirectJDKLog [localhost-startStop-1] The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\DEV\INSTALLS\java\jdk1.8.0_131\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\DEV\INSTALLS\java\jdk1.8.0_131\jre\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\TortoiseSVN\bin;C:\Program Files\Git\cmd;C:\DEV\INSTALLS\apache-ant-1.10.1\bin;C:\DEV\INSTALLS\java\jdk1.8.0_131/bin;C:\Program Files (x86)\OpenSSH\bin;C:\DEV\INSTALLS\apache-maven-3.5.0\bin;C:\Program Files\TortoiseGit\bin;C:\DEV\INSTALLS\packer;C:\HashiCorp\Vagrant\bin;C:\Program Files\MySQL\MySQL Utilities 1.6\;C:\Users\bjacob\AppData\Local\Microsoft\WindowsApps;C:\development\tools\apache-maven-3.5.0\bin;C:\DEV\INSTALLS\instantclient_12_2;C:\Users\bjacob\AppData\Local\GitHubDesktop\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;.]
+2019-01-17 10:35:28,003 INFO org.apache.juli.logging.DirectJDKLog [localhost-startStop-1] At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2019-01-17 10:35:28,029 INFO org.apache.juli.logging.DirectJDKLog [localhost-startStop-1] Initializing Spring embedded WebApplicationContext
+2019-01-17 10:35:28,436 INFO com.sun.faces.config.ConfigureListener [localhost-startStop-1] Initializing Mojarra 2.3.5 ( 20180516-1910 bf35b0f6c540c69e80e6da962a2b62756838ac41) for context '/inventory'
+2019-01-17 10:35:28,702 INFO com.sun.faces.spi.InjectionProviderFactory [localhost-startStop-1] JSF1048: PostConstruct/PreDestroy annotations present.  ManagedBeans methods marked with these annotations will have said annotations processed.
+2019-01-17 10:35:29,812 INFO org.primefaces.webapp.PostConstructApplicationEventListener [localhost-startStop-1] Running on PrimeFaces 6.2
+2019-01-17 10:35:30,019 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2019-01-17 10:35:30,241 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2019-01-17 10:35:33,117 INFO org.dozer.config.GlobalSettings [main] Trying to find Dozer configuration file: dozer.properties
+2019-01-17 10:35:33,126 WARN org.dozer.config.GlobalSettings [main] Dozer configuration file not found: dozer.properties.  Using defaults for all Dozer global properties.
+2019-01-17 10:35:33,129 INFO org.dozer.DozerInitializer [main] Initializing Dozer. Version: 5.5.0, Thread Name: main
+2019-01-17 10:35:33,134 INFO org.dozer.jmx.JMXPlatformImpl [main] Dozer JMX MBean [org.dozer.jmx:type=DozerStatisticsController] auto registered with the Platform MBean Server
+2019-01-17 10:35:33,136 INFO org.dozer.jmx.JMXPlatformImpl [main] Dozer JMX MBean [org.dozer.jmx:type=DozerAdminController] auto registered with the Platform MBean Server
+2019-01-17 10:35:33,138 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,496 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,498 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,563 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,575 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,581 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,583 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,585 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,632 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,646 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,654 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,657 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,660 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,665 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,670 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,674 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,682 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,686 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,688 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,691 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,693 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,696 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,699 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,702 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,714 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,716 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,718 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,720 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,722 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,724 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,727 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,728 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,731 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,734 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,736 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,739 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,740 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,742 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,745 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,746 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,748 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,750 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,751 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,752 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,754 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,755 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,757 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,759 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,761 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,763 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,765 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,767 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,768 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,770 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,772 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,774 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,775 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,777 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,778 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,780 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,782 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,783 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,785 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,787 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,789 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,790 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,792 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,793 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,795 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,796 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,798 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,799 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,801 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,803 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,805 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,808 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,811 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:33,813 INFO org.dozer.DozerBeanMapper [main] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:35:35,964 INFO org.springframework.boot.StartupInfoLogger [main] Started CostingLiteApplication in 11.746 seconds (JVM running for 13.076)
+2019-01-17 10:37:57,917 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8090-exec-5] Initializing Spring FrameworkServlet 'dispatcherServlet'
+2019-01-17 10:37:59,790 WARN com.artisans.inventory.controller.ShipmentWizard [http-nio-8090-exec-4] *** In ShipmentWizard init() *** 
+2019-01-17 10:38:00,352 WARN com.artisans.inventory.controller.ShipmentWizard [http-nio-8090-exec-9] *** In ShipmentWizard init() *** 
+2019-01-17 10:38:00,433 INFO org.primefaces.component.messages.MessagesRenderer [http-nio-8090-exec-9] autoUpdate attribute is deprecated and will be removed in a future version, use p:autoUpdate component instead.
+2019-01-17 10:38:03,754 INFO org.dozer.DozerBeanMapper [http-nio-8090-exec-6] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:38:03,808 INFO org.primefaces.component.messages.MessagesRenderer [http-nio-8090-exec-6] autoUpdate attribute is deprecated and will be removed in a future version, use p:autoUpdate component instead.
+2019-01-17 10:38:05,326 INFO org.dozer.DozerBeanMapper [http-nio-8090-exec-10] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:38:05,356 INFO org.dozer.DozerBeanMapper [http-nio-8090-exec-10] Initializing a new instance of dozer bean mapper.
+2019-01-17 10:38:05,387 INFO org.primefaces.component.messages.MessagesRenderer [http-nio-8090-exec-10] autoUpdate attribute is deprecated and will be removed in a future version, use p:autoUpdate component instead.
+2019-01-17 10:41:49,460 WARN com.artisans.inventory.controller.ShipmentWizard [http-nio-8090-exec-7] *** In ShipmentWizard init() *** 
+2019-01-17 10:41:50,002 WARN com.artisans.inventory.controller.ShipmentWizard [http-nio-8090-exec-8] *** In ShipmentWizard init() *** 
+2019-01-17 16:30:25,326 WARN com.artisans.inventory.controller.ShipmentWizard [http-nio-8090-exec-9] *** In ShipmentWizard init() *** 
+2019-01-17 16:30:25,424 WARN com.artisans.inventory.controller.ShipmentWizard [http-nio-8090-exec-7] *** In ShipmentWizard init() *** 

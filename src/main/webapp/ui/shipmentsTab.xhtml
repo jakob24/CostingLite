@@ -65,7 +65,7 @@
           	<p:panel header="Shipment Information">
 				<p:dataTable var="allShipments" value="#{ShipmentWizard.selectedInvoiceVO.shipment}" selection="#{ShipmentWizard.selectedShipment}"
 					id="allShipmentList" rowKey="#{allShipments.shipmentNumber}" style="margin: 0 auto;"> 
-			        <p:column selectionMode="single" style="width:16px;text-align:center"/>
+			        <p:column selectionMode="single" style="width:16px;text-align:center" />
 			        <p:column headerText="Shipment No.">  
 				    	<h:outputText value="#{allShipments.shipmentNumber}" /> 
 			        </p:column>		

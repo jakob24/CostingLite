@@ -59,6 +59,9 @@ public class ProductShipmentHelper {
 		
 		for(ShipmentProductVO shipmentProductVO : shipmentProductVOList) {
 			
+			
+			
+			
 			shipmentProductVO.setLandingCostGbp(12D);
 		}		
 		return shipmentProductVOList;

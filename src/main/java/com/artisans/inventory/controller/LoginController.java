@@ -52,7 +52,7 @@ public class LoginController extends BaseWizard implements Serializable {
 		
 		DefaultSubMenu firstSubmenu = new DefaultSubMenu("Home");
 		DefaultMenuItem item = new DefaultMenuItem("Home");	
-		item.setIcon("fa fa-automobile");
+		item.setIcon("fa fa-home");
 		item.setHref("index.xhtml");
 		firstSubmenu.addElement(item);
 		topMenu.addElement(firstSubmenu);
@@ -61,37 +61,44 @@ public class LoginController extends BaseWizard implements Serializable {
 		item = new DefaultMenuItem("Manageme Invoices");		
 		//item.setHref("invoices.xhtml");
 		item.setCommand(INVOICE_ENTRY_METHOD);
-		item.setIcon("fa fa-user");
+		item.setIcon("fa fa-book");
 		invoiceSubmenu.addElement(item);
 		topMenu.addElement(invoiceSubmenu);	
 		
-		DefaultSubMenu ShipmentSubmenu = new DefaultSubMenu("Shipments");		
+		DefaultSubMenu shipmentSubmenu = new DefaultSubMenu("Shipments");		
 		item = new DefaultMenuItem("Manage Shipments");		
 		//item.setHref("shipments.xhtml");
-		item.setIcon("fa fa-user");
+		item.setIcon("fa fa-ship");
 		item.setCommand(SHIPMENT_ENTRY_METHOD);		
-		ShipmentSubmenu.addElement(item);
-		topMenu.addElement(ShipmentSubmenu);			
+		shipmentSubmenu.addElement(item);		
+		
+		item = new DefaultMenuItem("Manage Shipment Products");		
+		item.setHref("shipmentProduct.xhtml");
+		item.setIcon("fa fa-cart-plus");
+		//item.setCommand(SHIPMENT_ENTRY_METHOD);		
+		shipmentSubmenu.addElement(item);
+		topMenu.addElement(shipmentSubmenu);
+		
 						
 		DefaultSubMenu dataSubmenu = new DefaultSubMenu("Data");		
 		item = new DefaultMenuItem("Maintain Product");		
 		item.setHref("product.xhtml");
-		item.setIcon("fa fa-user");
+		item.setIcon("fa fa-cart-plus");
 		dataSubmenu.addElement(item);	
 				
 		item = new DefaultMenuItem("Maintain Courier");		
 		item.setHref("courier.xhtml");
-		item.setIcon("fa fa-cogs");
+		item.setIcon("fa fa-ship");
 		dataSubmenu.addElement(item);	
 		
 		item = new DefaultMenuItem("Maintain Supplier");		
 		item.setHref("supplier.xhtml");
-		item.setIcon("fa fa-file-archive-o");
+		item.setIcon("fa fa-user-secret");
 		dataSubmenu.addElement(item);
 		
 		item = new DefaultMenuItem("Maintain User");		
 		//item.setOutcome("subscription");
-		item.setIcon("fa fa-paypal");
+		item.setIcon("fa fa-user-plus");
 		dataSubmenu.addElement(item);	
 							
 		topMenu.addElement(dataSubmenu);			

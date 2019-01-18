@@ -391,3 +391,9 @@ body {
 .disabledText {
 	background-color:#d1d1d1;
 }
+
+/* Menu bar conent width */
+.ui-menu-child {
+    white-space: nowrap;
+    width: auto !important;
+}

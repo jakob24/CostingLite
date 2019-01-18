@@ -22,7 +22,7 @@ public class ShipmentProductVO extends BaseVO implements Serializable {
     
     private Date date;
 
-    private int productQty;
+    private Integer productQty;
 
     private ProductVO product;
 
@@ -84,14 +84,14 @@ public class ShipmentProductVO extends BaseVO implements Serializable {
 	/**
 	 * @return the productQty
 	 */
-	public int getProductQty() {
+	public Integer getProductQty() {
 		return productQty;
 	}
 
 	/**
 	 * @param productQty the productQty to set
 	 */
-	public void setProductQty(int productQty) {
+	public void setProductQty(Integer productQty) {
 		this.productQty = productQty;
 	}
 
