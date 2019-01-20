@@ -51,29 +51,16 @@
 			</h:outputScript>	
     
 		<div class="container-fluid">
-			<div class="ui-g-12 ui-md-4 ui-lg-7" id="dataEditDiv">				
+			<div class="ui-g-12 ui-md-4 ui-lg-6" id="dataEditDiv">				
 				<h:form id="invoiceForm">         
 				    <p:growl id="growl" sticky="true" showDetail="true"/>			 
 				 	<p:importConstants type="com.artisans.inventory.controller.InvoiceWizard" var="WizardController"/>				 	
 				    <p:wizard flowListener="#{InvoiceWizard.onFlowProcess}" widgetVar="wizard">
 						
 						<ui:include src="invoiceTab.xhtml"/>						
-				 		<ui:include src="invoicePaymentTab.xhtml"/>				        				        				        
-				 				 
-				        <p:tab id="confirmTab" title="Confirmation">
-				            <p:panel header="Confirmation">				               
-						        <p:outputLabel for="payInvComplete" value="Is Invoice Fully Paid ?" />
-						        <p:spacer></p:spacer>	
-						        <p:selectBooleanCheckbox id="payInvComplete" value="#{InvoiceWizard.invoicePaymentComplete}" 
-						        	disabled="#{InvoiceWizard.selectedInvoiceVO.datePaid != null}" rendered="#{! InvoiceWizard.enableAddInvoiceButton}">
-						        	<p:ajax event="change" immediate="true" update="@this"/> 
-						        </p:selectBooleanCheckbox>
-						        							        	
-						        <p:separator></p:separator>                
-				               	<p:spacer ></p:spacer>		 
-				                <p:commandButton value="Submit" action="#{InvoiceWizard.saveInvoiceData}" update="growl" process="@this"/>
-				            </p:panel>
-				        </p:tab>
+				 		<ui:include src="invoicePaymentTab.xhtml"/>				
+				 		<ui:include src="invoiceConfirmTab.xhtml"/>	
+
 				    </p:wizard>
 				</h:form>
 				

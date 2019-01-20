@@ -5,7 +5,10 @@ package com.artisans.inventory.service.api;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.artisans.inventory.vo.InvoiceVO;
+import com.artisans.inventory.vo.PaymentVO;
 import com.artisans.inventory.vo.SupplierVO;
 
 /**
@@ -44,5 +47,19 @@ public interface InvoiceService
 	 * @param drivePattern
 	 * @return Invoice List
 	 */
-	public InvoiceVO SaveInvoiceAndPayments(InvoiceVO invoiceVO);
+	public InvoiceVO saveInvoiceAndPayments(InvoiceVO invoiceVO);
+	
+	/**
+	 * Update an Invoice Payment
+	 * @param PaymentVO
+	 * @return PaymentVO
+	 */
+	public PaymentVO updateInvoicePayment(PaymentVO paymentVO);
+	
+	/**
+	 * Delete an Invoice Payment
+	 * @param PaymentVO
+	 * @return PaymentVO
+	 */
+	public void deleteInvoicePayment(PaymentVO paymentVO);	
 }

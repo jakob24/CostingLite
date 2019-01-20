@@ -1,0 +1,74 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">					        
+		
+        <p:tab id="confirmTab" title="Confirmation">
+	                         	
+			<p:panel header="Confirmation">
+			
+                <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                
+                    <h:panelGrid columns="2" columnClasses="labelX, valueX">
+                        <h:outputText value="Invoice No." />
+                        <h:outputText value="#{InvoiceWizard.selectedInvoiceVO.invoiceNumber}" styleClass="outputLabel"/>
+                                            
+                        <h:outputText value="Invoice Amount $" />
+                        <h:outputText value="#{InvoiceWizard.selectedInvoiceVO.invAmountUsd}" styleClass="outputLabel"/>
+ 
+                        <h:outputText value="Invoice Amount £ " />
+                        <h:outputText value="#{InvoiceWizard.selectedInvoiceVO.invAmount}" styleClass="outputLabel"/> 
+                    </h:panelGrid>
+                </h:panelGrid>
+ 				
+ 				<p:spacer height="20px"/>
+ 				
+ 				<h:panelGrid id="confirmationPay" columns="5" columnClasses="grid,grid,grid,grid,grid"> 	
+					<p:dataTable var="paymentListConf" value="#{InvoiceWizard.selectedInvoiceVO.payment}" rendered="#{InvoiceWizard.selectedInvoiceVO.payment !=null}"
+						editable="false" style="margin: 0 auto;" > 
+								       			        
+				        <p:column headerText="Invoice Amount ($)">  
+				         	<h:outputText value="#{paymentListConf.amountUsd}" />  
+				        </p:column>	
+				        <p:column headerText="GBP To USD"> 
+				        	<h:outputText value="#{paymentListConf.gbpToUsd}" />  
+				        </p:column>			        
+				        <p:column headerText="Invoice Amount *"> 
+				        	<h:outputText value="#{paymentListConf.amount}">  
+				            	<f:convertNumber pattern="#0.00" locale="en_GB"/>
+				            </h:outputText>
+				        </p:column>				        					        
+				        <p:column headerText="Bank Charges">  
+				        	<h:outputText value="#{paymentListConf.bankCharges}" />  
+				        </p:column>			        	
+				        <p:column headerText="Other Charges">  
+				        	<h:outputText value="#{paymentListConf.otherCharges}" />  
+						</p:column>			    				    
+					</p:dataTable>
+                </h:panelGrid>
+                                               
+                <p:spacer height="20px"/>
+                
+
+               	 
+			    <div class="row">
+			    	<div class="ui-g-7 ui-md-3 ui-lg-3 pull-left">	
+				        <p:outputLabel for="payInvComplete" value="Is Invoice Fully Paid ?" style="padding:10px;"/>
+				        <p:selectBooleanCheckbox id="payInvComplete" value="#{InvoiceWizard.invoicePaymentComplete}" 
+				        	disabled="#{InvoiceWizard.selectedInvoiceVO.datePaid != null}" rendered="#{! InvoiceWizard.enableAddInvoiceButton}">
+				        	<p:ajax event="change" immediate="true" update="@this"/> 
+				        </p:selectBooleanCheckbox>
+				    </div>	
+				    			    
+			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
+					   <p:commandButton value="Submit" action="#{InvoiceWizard.saveInvoiceData}" update="growl" process="@this"/>
+				    </div>	
+				</div>                   	            
+
+            </p:panel>            
+        </p:tab>					        
+     
+</ui:composition>				        

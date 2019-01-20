@@ -19,6 +19,7 @@ import com.artisans.inventory.repository.PaymentsRepository;
 import com.artisans.inventory.service.api.InvoiceService;
 import com.artisans.inventory.transformers.InvoiceTransformer;
 import com.artisans.inventory.vo.InvoiceVO;
+import com.artisans.inventory.vo.PaymentVO;
 import com.artisans.inventory.vo.SupplierVO;
 
 /**
@@ -88,7 +89,7 @@ public class InvoiceServiceImpl implements InvoiceService
 	 * @return Invoice List
 	 */
 	@Transactional(readOnly=false)
-	public InvoiceVO SaveInvoiceAndPayments(InvoiceVO invoiceVO)
+	public InvoiceVO saveInvoiceAndPayments(InvoiceVO invoiceVO)
 	{
 		Invoice invoice = new DozerBeanMapper().map(invoiceVO, Invoice.class); 			
 		invoice = invoiceRepository.saveAndFlush(invoice);		
@@ -98,5 +99,30 @@ public class InvoiceServiceImpl implements InvoiceService
     	}		
 		paymentRepository.saveAll(invoice.getPayment());		
 		return new DozerBeanMapper().map(invoice, InvoiceVO.class);
+	}
+	
+	/**
+	 * Update an Invoice Payment
+	 * @param PaymentVO
+	 * @return PaymentVO
+	 */
+	@Transactional(readOnly=false)
+	public PaymentVO updateInvoicePayment(PaymentVO paymentVO)
+	{
+		Payment payment = new DozerBeanMapper().map(paymentVO, Payment.class); 			
+		paymentRepository.saveAndFlush(payment);		
+		return new DozerBeanMapper().map(payment, PaymentVO.class);
+	}
+	
+	
+	/**
+	 * Delete an Invoice Payment
+	 * @param PaymentVO
+	 * @return PaymentVO
+	 */
+	@Transactional(readOnly=false)
+	public void deleteInvoicePayment(PaymentVO paymentVO) {
+		Payment payment = new DozerBeanMapper().map(paymentVO, Payment.class); 	
+		paymentRepository.delete(payment);
 	}
 }

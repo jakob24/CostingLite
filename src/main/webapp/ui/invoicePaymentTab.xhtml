@@ -27,7 +27,7 @@
 			                <f:facet name="input">  
 			                    <p:inputNumber value="#{payments.amountUsd}" id="paymentAmountUSD" decimalPlaces="2" maxValue="#{InvoiceWizard.selectedInvoiceVO.invAmountUsd}" 
 			                    	required="#{InvoiceWizard.selectedInvoiceVO.invAmountUsd !=null}">
-			                    	<p:ajax event="change"  process="@this" update="paymentAmountUSD"/>  
+			                    	<p:ajax event="change"  process="@this" update="paymentAmountUSD invAmount"  listener="#{InvoiceWizard.updateInvoiceAmountBasedoUSD}" />  
 			                    </p:inputNumber>
 			                </f:facet>  
 			            </p:cellEditor>  
@@ -48,12 +48,14 @@
 			        <p:column headerText="Invoice Amount *">  
 			            <p:cellEditor>  
 			                <f:facet name="output">  
-			                    <h:outputText value="#{payments.amount}" >  
+			                    <h:outputText value="#{payments.amount}">  
 			                    	<f:convertNumber pattern="#0.00" locale="en_GB"/>
 			                    </h:outputText>
 			                </f:facet>  
 			                <f:facet name="input">  
-			                    <p:inputNumber value="#{payments.amount}" decimalPlaces="2" required="true" id="invAmount" /> 	
+			                    <p:inputNumber value="#{payments.amount}" decimalPlaces="2" required="true" id="invAmount"> 
+			                    	<p:ajax event="change" listener="#{InvoiceWizard.onUpdateGBPPrice}" process="@this" update="invAmount paymentAmountUSD"/> 
+			                    </p:inputNumber> 	
 			                </f:facet>  
 			            </p:cellEditor>  
 			        </p:column>						        
@@ -115,7 +117,7 @@
 				    </div>				    			    			    	 		    
 			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
 					    <p:commandButton value="Shipments" id="newShipmentBtn" actionListener="#{InvoiceWizard.addShipment}" action="shipments.xhtml"
-							ajax="true" styleClass="btn btn-block ui-state-default" onclick="this.disabled=true;"/> 
+							ajax="true" styleClass="btn btn-block ui-state-default" onclick="this.disabled=true;" disabled="#{! InvoiceWizard.enableAddShipmentsButton}"/> 
 				    </div>					    			    
 				 </div>								
 			</p:panel>

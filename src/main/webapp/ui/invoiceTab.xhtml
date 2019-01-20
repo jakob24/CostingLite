@@ -23,7 +23,7 @@
 			        	<f:selectItem itemValue="#{null}" itemLabel="Select one" />			        	
 			            <f:selectItems value="#{InvoiceWizard.supplierInvoiceList}" var="invoice" itemLabel="#{invoice.formattedLabel}" itemValue="#{invoice.invoiceId}"/>	
 			            <f:selectItem  itemValue="0" itemLabel="Add New Invoice .."/>		            
-			            <p:ajax event="change" update="invoicePanel" listener="#{InvoiceWizard.addNewInvoice}" />			            
+			            <p:ajax event="change" update="invoicePanel" listener="#{InvoiceWizard.addNewInvoice}"/>			            
 			        </p:selectOneMenu>			        
 			        						        				                	
              	</h:panelGrid>
@@ -52,7 +52,8 @@
 		                    	 					 					 
 	                    <h:outputText value="Invoice Amount *" />				                    
 	                    <p:inputNumber id ="invAmount" value="#{InvoiceWizard.selectedInvoiceVO.invAmount}" decimalPlaces="2" maxlength="5" 
-	                    	required="#{InvoiceWizard.selectedInvoiceVO.invAmountUsd eq null}" readonly="#{InvoiceWizard.selectedInvoiceVO.datePaid != null}">
+	                    	required="#{InvoiceWizard.selectedInvoiceVO.invAmountUsd eq null}" readonly="#{InvoiceWizard.selectedInvoiceVO.datePaid != null}" 
+	                    	disabled="#{InvoiceWizard.selectedInvoiceVO.invAmountUsd != null}">
 	                    	<p:ajax event="blur" process="@this" update="invAmount" />  
 	                    </p:inputNumber>
 	                    	                     	                     

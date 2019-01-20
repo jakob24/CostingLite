@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.CustomScopeConfigurer;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -18,6 +19,10 @@ import com.artisans.inventory.controller.ViewScope;
 import com.google.common.collect.ImmutableMap;
 
 @SpringBootApplication
+
+@EnableAutoConfiguration(exclude = {
+	    org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class
+})
 public class CostingLiteApplication implements ServletContextAware {
 		
 	public static void main(String[] args) {
@@ -44,7 +49,7 @@ public class CostingLiteApplication implements ServletContextAware {
 		// Iniciar el contexto de JSF
 		// http://stackoverflow.com/a/25509937/1199132		
         servletContext.setInitParameter("com.sun.faces.forceLoadConfiguration", Boolean.TRUE.toString());
-        servletContext.setInitParameter("primefaces.THEME", "afternoon");//home hot-sneaks, bootstrap,smoothness,sunny,start,afternoon,overcast
+        servletContext.setInitParameter("primefaces.THEME", "sunny");//home hot-sneaks, bootstrap,smoothness,sunny,start,afternoon,overcast
         servletContext.setInitParameter("primefaces.CLIENT_SIDE_VALIDATION", Boolean.TRUE.toString());
         servletContext.setInitParameter("javax.faces.FACELETS_SKIP_COMMENTS", Boolean.TRUE.toString());
         servletContext.setInitParameter("primefaces.FONT_AWESOME", Boolean.TRUE.toString());

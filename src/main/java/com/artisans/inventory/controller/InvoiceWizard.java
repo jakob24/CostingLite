@@ -229,26 +229,35 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 	
 	
     /**
-     * Update Group Name
+     * Invoked when user edits the invoice payments row
      * @param event
      */
     public void onPaymentsEdit(RowEditEvent event) 
     {
     	PaymentVO paymentVO = (PaymentVO) event.getObject();  
-    	if(paymentVO.getPaymentId() == 0)
-    	{
-    		//New payment, add to invoice payments
-    		getSelectedInvoiceVO().getPayment().add(paymentVO);
-    	}    	
+    	if(null == paymentVO.getPaymentId() || paymentVO.getPaymentId().intValue() == 0) {
+    		//New payment, dont do anything
+    	} else {
+    		//Update the Invoice Payment
+    		invoiceService.updateInvoicePayment(paymentVO);
+    	}
     	calculatePaymentsAndAddPayButton();
     }	
     
     /**
-     * Update Group Name
+     * Invoked when user deletes the invoice payments row
      * @param event
      */
     public void onPaymentsCancel(RowEditEvent event) 
     {
+    	PaymentVO paymentVO = (PaymentVO) event.getObject();  
+    	if(null == paymentVO.getPaymentId() || paymentVO.getPaymentId().intValue() == 0) {
+    		//Deletion of unsaved invoice
+    		getSelectedInvoiceVO().getPayment().remove(paymentVO);
+    	} else {
+    		invoiceService.deleteInvoicePayment(paymentVO);
+    	}
+    	calculatePaymentsAndAddPayButton();
     }    
     
     /**
@@ -259,7 +268,7 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
     	if(isInvoicePaymentComplete()) {
     		getSelectedInvoiceVO().setDatePaid(BeanHelper.getToday());
     	}
-    	InvoiceVO savedInvoiceVO = invoiceService.SaveInvoiceAndPayments(getSelectedInvoiceVO());
+    	invoiceService.saveInvoiceAndPayments(getSelectedInvoiceVO());
     	UIMessageHelper.getInstance().displayUIMessage("invoice_saved", FacesMessage.SEVERITY_INFO);
     }
     
@@ -268,10 +277,9 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
      */
     public void updateInvoiceAmountBasedoUSD() 
     {
-    	Double invAmount = 0.0;
-    	
+    	Double invAmount = 0.0;    	
     	for(PaymentVO payment : getSelectedInvoiceVO().getPayment()) {
-    		if (payment.getPaymentId() == 0  && payment.getPaymentType().equalsIgnoreCase(PAY_TYPE_INVOICE)) {
+    		if ((null == payment.getPaymentId() || payment.getPaymentId().intValue() == 0)  && payment.getPaymentType().equalsIgnoreCase(PAY_TYPE_INVOICE)) {
     			//Updating only unsaved Data    			
 				if(null != payment.getAmountUsd() && null != payment.getGbpToUsd()) {
 					payment.setAmount(payment.getAmountUsd()/payment.getGbpToUsd());    				
@@ -280,6 +288,31 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
     		invAmount += payment.getAmount();
     	}
     	setTotalInvoicePaidAmount(invAmount);
+    }
+    
+    
+    public void onUpdateGBPPrice() {
+    	//TODO
+    }
+    
+    
+    /** Logic to decide enabling or disabling of Add SHipments Button
+     * Only enabled if invoice and all payments have been saved.
+     * @return
+     */
+    public boolean isEnableAddShipmentsButton() {
+    	boolean enable = true;
+    	if(getSelectedInvoiceVO().getInvoiceId() == 0 || (null == getSelectedInvoiceVO().getPayment() || getSelectedInvoiceVO().getPayment().isEmpty())) {
+    		enable =  false;
+    	} else {
+    		for(PaymentVO paymentVO : getSelectedInvoiceVO().getPayment()) {
+    			if(null == paymentVO.getPaymentId() || paymentVO.getPaymentId().intValue() == 0) {   				
+    				enable = false;
+    				break;
+    			}
+    		}
+    	}    	
+    	return enable;
     }
 
     /**
@@ -306,9 +339,6 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 	public void setConfigUtil(ApplicationConfiguration configUtil) {
 		this.configUtil = configUtil;
 	}
-
-
-
 
 
 	/**
