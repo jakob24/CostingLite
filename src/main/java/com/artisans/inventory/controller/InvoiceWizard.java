@@ -264,13 +264,65 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
      * Save Invoice,Invoice Payments
      */
     public void saveInvoiceData() 
-    {    	
-    	if(isInvoicePaymentComplete()) {
-    		getSelectedInvoiceVO().setDatePaid(BeanHelper.getToday());
+    {    	    	
+    	if(verifyInvoiceData(getSelectedInvoiceVO())) {    		
+
+        	if(isInvoicePaymentComplete()) {
+        		getSelectedInvoiceVO().setDatePaid(BeanHelper.getToday());
+        	}        	
+        	
+        	invoiceService.saveInvoiceAndPayments(getSelectedInvoiceVO());
+        	UIMessageHelper.getInstance().displayUIMessage("invoice_saved", FacesMessage.SEVERITY_INFO);    		
     	}
-    	invoiceService.saveInvoiceAndPayments(getSelectedInvoiceVO());
-    	UIMessageHelper.getInstance().displayUIMessage("invoice_saved", FacesMessage.SEVERITY_INFO);
     }
+    
+    
+    
+    /**
+     * Method to check the integrity of the invoice payments data
+     */
+    private boolean verifyInvoiceData(InvoiceVO invoiceVO) {
+    	Double invAmountUSD = 0D;
+    	Double invAmount =0D;    	
+    	Double totalPaymentAmountUSD = 0D;
+    	Double totalPayAmount =0D;    	
+    	boolean invoiceInUSD = false;
+    	boolean valid = true;
+    	
+    	if(null != invoiceVO.getInvAmountUsd() && invoiceVO.getInvAmountUsd().doubleValue() > 0) {
+    		invAmountUSD = invoiceVO.getInvAmountUsd();
+    		invoiceInUSD = true;
+    	} else {
+    		invAmount = invoiceVO.getInvAmount();
+    	}
+    	
+    	//Iterate through Payments
+    	for(PaymentVO paymentVO : invoiceVO.getPayment()) {
+    		if((invoiceInUSD)) {
+    			totalPaymentAmountUSD += paymentVO.getAmountUsd();
+    			totalPayAmount += paymentVO.getAmount();
+    			
+    			if(paymentVO.getAmount() - (paymentVO.getAmountUsd()/paymentVO.getGbpToUsd()) >1 ) {
+    				//conversion Difference is greater than 1, Flag up error
+    				valid = false;
+    				UIMessageHelper.getInstance().displayUIMessage("invoice_payment_incorrect1", FacesMessage.SEVERITY_ERROR);  
+    			}
+    		}
+    	}    	
+    	if((invoiceInUSD)) {
+        	if(totalPaymentAmountUSD > invAmountUSD) {
+        		//Paying more USD, Flag up error 
+        		UIMessageHelper.getInstance().displayUIMessage("invoice_payment_incorrect2", FacesMessage.SEVERITY_ERROR);  
+        		valid = false;        		
+        	}
+    	} else if(totalPayAmount > invAmount) { 
+    		//Paying more GBP, Flag up error
+    		UIMessageHelper.getInstance().displayUIMessage("invoice_payment_incorrect31", FacesMessage.SEVERITY_ERROR);  
+    		valid = false;
+    	}   	    	
+    	return valid;
+    }
+    
     
     /**
      * Method to convert USD TO GBP and update the total payment Amount
