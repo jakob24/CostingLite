@@ -265,12 +265,10 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
      */
     public void saveInvoiceData() 
     {    	    	
-    	if(verifyInvoiceData(getSelectedInvoiceVO())) {    		
-
+    	if(verifyInvoiceData(getSelectedInvoiceVO())) {    	
         	if(isInvoicePaymentComplete()) {
         		getSelectedInvoiceVO().setDatePaid(BeanHelper.getToday());
         	}        	
-        	
         	invoiceService.saveInvoiceAndPayments(getSelectedInvoiceVO());
         	UIMessageHelper.getInstance().displayUIMessage("invoice_saved", FacesMessage.SEVERITY_INFO);    		
     	}

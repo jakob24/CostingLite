@@ -2311,3 +2311,6 @@ Caused by: java.sql.SQLException: 'Infinity' is not a valid numeric or approxima
 	at org.hibernate.id.insert.AbstractReturningDelegate.performInsert(AbstractReturningDelegate.java:41)
 	... 115 more
 
+2019-01-22 06:29:48,065 WARN com.artisans.inventory.controller.ShipmentWizard [http-nio-8090-exec-8] *** In ShipmentWizard init() *** 
+2019-01-22 06:29:48,155 WARN com.artisans.inventory.controller.ShipmentWizard [http-nio-8090-exec-5] *** In ShipmentWizard init() *** 
+2019-01-22 06:55:51,737 WARN com.artisans.inventory.controller.ShipmentWizard [http-nio-8090-exec-4] *** In ShipmentWizard init() *** 

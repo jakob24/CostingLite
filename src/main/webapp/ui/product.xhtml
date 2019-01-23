@@ -68,11 +68,9 @@
 		                    <h:outputText value="SKU *" />
 		                    <p:inputTextarea value="#{StandingDataController.newProduct.sku}"  label="SKU"  required="true" />			                    		                 
 		 					
-		 					<h:outputText value="Image" />	
-		 					<!-- TODO
+		 					<h:outputText value="Image" />			 					
 		 					<p:graphicImage url="#{StandingDataController.newProduct.image}" height="50px" width="50px"/>
-		 					 -->
-		 					
+		 							 					
 		                    <h:outputText value="ASIN (Amazon)" />
 		                    <p:inputText value="#{StandingDataController.newProduct.asin}"  label="asin" />	
 		                    
@@ -102,8 +100,8 @@
 		                    	<f:validateDoubleRange minimum="0" maximum="200" />
 		                    </p:inputText> 		                    
 		                    
-		                    <h:outputText value="Cost Price (GBP) *" />
-		                    <p:inputText value="#{StandingDataController.newProduct.postageCharges}" required="true">
+		                    <h:outputText value="Cost Price (GBP)" />
+		                    <p:inputText value="#{StandingDataController.newProduct.costPriceGbp}">
 		                    	<f:validateDoubleRange minimum="0" />
 		                    </p:inputText>  		                    		 					
 		 						

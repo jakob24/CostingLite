@@ -70,7 +70,7 @@ public class ProductShipmentHelper {
 			}			
 			
 			Double landingCostpercentage = calculateLandingCostPercentage(invoiceVO, shipmentProductVO.getShipment());		
-			shipmentProductVO.setLandingCostGbp(Precision.round((shipmentProductVO.getCostPriceGbp() * landingCostpercentage),2));
+			shipmentProductVO.setLandingCostGbp(Precision.round(((shipmentProductVO.getCostPriceGbp() * landingCostpercentage)/100),2));
 		}		
 		return shipmentProductVOList;		
 	}
