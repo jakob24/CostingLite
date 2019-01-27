@@ -74,7 +74,9 @@
 					        	<h:outputText value="#{allShipProducts.productQty}" />  
 					        </p:column>
 					        <p:column headerText="Cost Price $" style="width:10%;text-align: center">  
-						    	<h:outputText value="#{allShipProducts.product.costPriceUsd}" /> 
+						    	<h:outputText value="#{allShipProducts.product.costPriceUsd}"> 
+						    		<f:convertNumber pattern="#0.00" locale="en_GB"/>
+						    	</h:outputText>
 					        </p:column>						        
 					        <p:column headerText="Cost Price" style="width:10%;text-align: center">  
 						    	<h:outputText value="#{allShipProducts.product.costPriceGbp}" /> 

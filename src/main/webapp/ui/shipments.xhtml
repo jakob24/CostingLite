@@ -44,25 +44,11 @@
 				<h:form id="shipmentForm">         
 				    <p:growl id="growl" sticky="true" showDetail="true"/>			 
 				 	<p:importConstants type="com.artisans.inventory.controller.ShipmentWizard" var="WizardController"/>				 	
-				    <p:wizard flowListener="#{ShipmentWizard.onFlowProcess}" widgetVar="wizard">
-										 						 		
+				    <p:wizard flowListener="#{ShipmentWizard.onFlowProcess}" widgetVar="wizard">										 						 		
 				 		<ui:include src="shipmentsTab.xhtml"/>					 					        				        
-						<ui:include src="shipmentPaymentTab.xhtml"/>		        		        			        
-				 						 		 	 
-				        <p:tab id="confirmTab" title="Confirmation">
-				            <p:panel header="Confirmation">
-				                <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
-				                </h:panelGrid>				 
-				                <p:commandButton value="Submit" action="#{ShipmentWizard.saveshipmentData}" update="growl" process="@this" oncomplete="enableAddProductButton();" ajax="true" 
-				                	rendered="#{ShipmentWizard.selectedShipment.invoice.shipmentComplete == 0}"/>				                
-				                <b><h:outputText value="#{bundle.shipment_pay_complete}" rendered="#{ShipmentWizard.selectedShipment.invoice.shipmentComplete == 1}" /></b><br/><p/>
-				                <p:spacer/>				                
-				                <p:commandButton id="addProductsBtn" value="Add Products" action="shipmentProduct.xhtml" disabled="false"/>			                
-				                
-				            </p:panel>
-				        </p:tab>
-				    </p:wizard>
-				 
+						<ui:include src="shipmentPaymentTab.xhtml"/>	
+						<ui:include src="shipmentConfirm.xhtml"/>
+				    </p:wizard>				 
 				</h:form>
 				
 			    <div class="row">			      

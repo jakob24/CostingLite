@@ -36,15 +36,17 @@
             <p:panel header="Shipment Payment Information" >            		           		
             		
             	<p:inputText value="#{ShipmentWizard.shipmentPaymentCount}" id="shipPayCount" widgetVar="noOfPayments" type="hidden"/>
-				<ui:repeat var="shipmenPayTable" value="#{ShipmentWizard.selectedInvoiceVO.shipment}" >
+				<ui:repeat var="shipmenPayTable" value="#{ShipmentWizard.selectedInvoiceVO.shipment}" varStatus="rowStatus">
 				  										
 					<p:dataTable var="shipPayments" value="#{shipmenPayTable.payment}" id="shipmenPaySubTable" 
-						editable="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete !=1}" emptyMessage="" reflow="true" style="margin: 20px auto;  border-spacing: 10px" widgetVar="shipPayTable"> 	
+						editable="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete !=1}" emptyMessage="" reflow="true" style="margin: 20px auto;  
+						border-spacing: 10px" widgetVar="shipPayTable_#{rowStatus.index}" initMode="immediate" rowStatePreserved="true"> 	
 						 													
 						<p:ajax event="rowEdit" listener="#{ShipmentWizard.onShipmentPaymentEdit}" update=":messages shipmenPaySubTable shipmentForm:shipPayCount" 
-							oncomplete="showHideNextButtonForShipPayTab();" onsuccess="showHideNextButtonForShipPayTab();"/>
+							oncomplete="showHideNextButtonForShipPayTab();" onsuccess="showHideNextButtonForShipPayTab();" immediate="true" />
+							
 		                <p:ajax event="rowEditCancel" listener="#{ShipmentWizard.onShipmentPaymentDelete}" update=":messages shipmenPaySubTable shipmentForm:shipPayCount" 
-		                	oncomplete="showHideNextButtonForShipPayTab();" onsuccess="showHideNextButtonForShipPayTab();" /> 	
+		                	oncomplete="showHideNextButtonForShipPayTab();" onsuccess="showHideNextButtonForShipPayTab();" immediate="true" /> 	
 		                 							
 					    <p:columnGroup type="header"> 
 				  			<p:row>  
@@ -154,7 +156,7 @@
 				            </p:cellEditor>  
 				        </p:column>				        					        
 					    <p:column>  
-					    	<p:rowEditor />  
+					    	<p:rowEditor  />  <!-- id="rowkey#{rowStatus.index}" -->
 					    </p:column> 
 			        </p:dataTable>			                 				                 
 		   			<div>	

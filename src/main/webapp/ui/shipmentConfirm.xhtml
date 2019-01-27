@@ -1,0 +1,114 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">					        
+		
+        <p:tab id="confirmTab" title="Confirmation">
+	                         	
+			<p:panel header="Confirmation">
+			
+                <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+					<p:dataTable var="allShipmentsConf" value="#{ShipmentWizard.selectedInvoiceVO.shipment}" selection="#{ShipmentWizard.selectedShipment}"
+						id="allShipmentListConf" style="margin: 0 auto;" editable="false"> 				        
+				        <p:column headerText="Shipment No.">  
+					    	<h:outputText value="#{allShipmentsConf.shipmentNumber}" /> 
+				        </p:column>		
+				        <p:column headerText="Shipment Date *">  
+				          	<h:outputText value="#{allShipmentsConf.shipmentDate}">  
+				            	<f:convertDateTime pattern="dd/MM/yyyy"/>  
+				           	</h:outputText> 
+				        </p:column>
+				        <p:column headerText="Courier *"> 
+				        	<h:outputText value="#{allShipmentsConf.courier.name}" />  
+				        </p:column>			        
+				        <p:column headerText="Tracking No.">  
+				        	<h:outputText value="#{allShipmentsConf.trackingNumber}" /> 
+				        </p:column>		
+				        <p:column headerText="Delivery Date *">  
+				        	<h:outputText value="#{allShipmentsConf.deliveryDate}">  
+				             <f:convertDateTime pattern="dd/MM/yyyy"/>  
+				            </h:outputText>
+				        </p:column>		        				    				    
+					</p:dataTable>
+                </h:panelGrid>
+ 				
+ 				<p:spacer height="40px"/>
+ 				
+ 				<p:panel header="Shipment Payments">
+	 				<h:panelGrid id="confirmationShipPay" columns="8" columnClasses="grid"> 
+	 					
+						<ui:repeat var="shipmenPayTableConf" value="#{ShipmentWizard.selectedInvoiceVO.shipment}" varStatus="rowStatus" >
+						
+							<p:dataTable var="shipPaymentsConf" value="#{shipmenPayTableConf.payment}" id="shipmenPaySubTableConf" editable="false">	
+							    <p:columnGroup type="header" rendered="#{rowStatus.index=='0'}"> 
+						  			<p:row>  
+							            <p:column headerText="Invoice Amount ($)"/>  
+							            <p:column headerText="GBP To USD"/>  
+							            <p:column headerText="Invoice Amount *"/>
+							            <p:column headerText="Bank Charges" />  
+							            <p:column headerText="Other Charges"/>    
+							            <p:column headerText="Disburse Charges"/>  
+							            <p:column headerText="VAT"/>  
+							            <p:column headerText="Date Paid"/>		
+							        </p:row>  
+							    </p:columnGroup> 	
+								<p:column>
+								 	<h:outputText value="#{shipPaymentsConf.amountUsd}" />  
+								</p:column>	
+								<p:column>
+									<h:outputText value="#{shipPaymentsConf.gbpToUsd}" /> 
+								</p:column>					       			        
+						        <p:column>
+						        	<h:outputText value="#{shipPaymentsConf.amount}" >  
+						            	<f:convertNumber pattern="#0.00" locale="en_GB"/>
+						            </h:outputText>				             
+						        </p:column>				        			        
+						        <p:column>
+						        	<h:outputText value="#{shipPaymentsConf.bankCharges}" />  
+						        </p:column>				        
+						        <p:column>
+						       		<h:outputText value="#{shipPaymentsConf.otherCharges}" />
+						        </p:column>	
+						        <p:column>
+						        	<h:outputText value="#{shipPaymentsConf.disbursementCharges}" />
+						        </p:column>
+						        <p:column>
+						        	<h:outputText value="#{shipPaymentsConf.vat}" />
+						        </p:column>				        
+						        <p:column>
+						        	<h:outputText value="#{shipPaymentsConf.datePaid}">  
+						            	<f:convertDateTime pattern="dd/MM/yyyy"/>  
+						            </h:outputText>
+						         </p:column>				        					        
+					        </p:dataTable>	
+					        <p:spacer/>				
+						</ui:repeat>
+	                </h:panelGrid>
+                </p:panel>
+                                               
+                <p:spacer height="20px"/>
+                              	 
+			    <div class="row">
+			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-left">	
+				        <p:outputLabel for="payInvComplete" value="Is Invoice Fully Paid ?" style="padding:10px;"/>
+				        <p:selectBooleanCheckbox id="payInvComplete" value="#{InvoiceWizard.invoicePaymentComplete}" 
+				        	disabled="#{InvoiceWizard.selectedInvoiceVO.datePaid != null}" rendered="#{! InvoiceWizard.enableAddInvoiceButton}">
+				        	<p:ajax event="change" immediate="true" update="@this"/> 
+				        </p:selectBooleanCheckbox>
+				    </div>	
+				    			    
+			    	<div class="ui-g-7 ui-md-3 ui-lg-3 pull-right">
+			    		<p:commandButton id="addProductsBtn" value="Add Products" action="shipmentProduct.xhtml" disabled="false"/>	
+			    			
+			    		<b><h:outputText value="#{bundle.shipment_pay_complete}" rendered="#{ShipmentWizard.selectedShipment.invoice.shipmentComplete == 1}" /></b>
+			    		
+						<p:commandButton value="Submit" action="#{ShipmentWizard.saveshipmentData}" update="growl" process="@this" oncomplete="enableAddProductButton();" ajax="true" 
+				        	rendered="#{ShipmentWizard.selectedShipment.invoice.shipmentComplete == 0}"/>		                
+				    </div>	
+				</div>                  	            
+            </p:panel>            
+        </p:tab>					        
+</ui:composition>				        

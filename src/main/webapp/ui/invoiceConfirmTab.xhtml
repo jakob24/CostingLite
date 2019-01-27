@@ -12,14 +12,14 @@
 			
                 <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
                 
-                    <h:panelGrid columns="2" columnClasses="labelX, valueX">
-                        <h:outputText value="Invoice No." />
+                    <h:panelGrid columns="3" columnClasses="labelX, valueX, labelX">
+                        <h:outputText value="Invoice No. " /><p:spacer/>
                         <h:outputText value="#{InvoiceWizard.selectedInvoiceVO.invoiceNumber}" styleClass="outputLabel"/>
                                             
-                        <h:outputText value="Invoice Amount $" />
+                        <h:outputText value="Invoice Amount $  " /><p:spacer/>
                         <h:outputText value="#{InvoiceWizard.selectedInvoiceVO.invAmountUsd}" styleClass="outputLabel"/>
  
-                        <h:outputText value="Invoice Amount £ " />
+                        <h:outputText value="Invoice Amount £  " /><p:spacer/>
                         <h:outputText value="#{InvoiceWizard.selectedInvoiceVO.invAmount}" styleClass="outputLabel"/> 
                     </h:panelGrid>
                 </h:panelGrid>
