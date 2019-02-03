@@ -430,6 +430,15 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	//*********Shipment Product *********************//
 	
 	/**
+	 * Method to preselect the shipment on clicking 'Add Products from Shipment Confirmation Tab
+	 */
+	public void preselectShipment() {
+		if(getSelectedInvoiceVO().getShipment().size() ==1) {
+			setSelectedShipment(getSelectedInvoiceVO().getShipment().get(0));
+		}		
+	}
+	
+	/**
 	 * Add a blank ShipmentProduct record to the SelectedShipment
 	 * 
 	 * @param producVO

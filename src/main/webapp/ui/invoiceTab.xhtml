@@ -52,8 +52,7 @@
 		                    	 					 					 
 	                    <h:outputText value="Invoice Amount *" />				                    
 	                    <p:inputNumber id ="invAmount" value="#{InvoiceWizard.selectedInvoiceVO.invAmount}" decimalPlaces="2" maxlength="5" 
-	                    	required="#{InvoiceWizard.selectedInvoiceVO.invAmountUsd eq null}" readonly="#{InvoiceWizard.selectedInvoiceVO.datePaid != null}" 
-	                    	disabled="#{InvoiceWizard.selectedInvoiceVO.invAmountUsd != null}">
+	                    	required="#{InvoiceWizard.selectedInvoiceVO.invAmountUsd eq null}" readonly="#{InvoiceWizard.selectedInvoiceVO.datePaid != null}">
 	                    	<p:ajax event="blur" process="@this" update="invAmount" />  
 	                    </p:inputNumber>
 	                    	                     	                     

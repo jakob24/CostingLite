@@ -101,13 +101,15 @@
 				    </div>	
 				    			    
 			    	<div class="ui-g-7 ui-md-3 ui-lg-3 pull-right">
-			    		<p:commandButton id="addProductsBtn" value="Add Products" action="shipmentProduct.xhtml" disabled="false"/>	
-			    			
-			    		<b><h:outputText value="#{bundle.shipment_pay_complete}" rendered="#{ShipmentWizard.selectedShipment.invoice.shipmentComplete == 1}" /></b>
-			    		
+			    		<p:commandButton id="addProductsBtn" value="Add Products" action="shipmentProduct.xhtml" disabled="false"  actionListener="#{ShipmentWizard.preselectShipment()}" />  					    		
+			    		<p:spacer width="20px"></p:spacer>
 						<p:commandButton value="Submit" action="#{ShipmentWizard.saveshipmentData}" update="growl" process="@this" oncomplete="enableAddProductButton();" ajax="true" 
-				        	rendered="#{ShipmentWizard.selectedShipment.invoice.shipmentComplete == 0}"/>		                
-				    </div>	
+				        	disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete == 1}"/>		                
+				    </div>
+				    
+			    	<div class="ui-g-7 ui-md-3 ui-lg-3 pull-right">
+						<b><h:outputText value="#{bundle.shipment_pay_complete}" rendered="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete == 1}" /></b>	                
+				    </div>				    	
 				</div>                  	            
             </p:panel>            
         </p:tab>					        

@@ -4,6 +4,8 @@
 package com.artisans.inventory.vo;
 
 import java.io.Serializable;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -64,6 +66,16 @@ public class ProductVO extends BaseVO implements Serializable {
     private Double costPriceGbp;    
                    
     private List<ShipmentProductVO> shipmentProductVO;
+    
+    
+	/**
+	 * Method to format the Shipment number + date to be 
+	 * shown in dropdown
+	 * @return
+	 */
+	public String getFormattedLabel() {
+		return getSku() + " - " + getName();
+	}    
 
 	/**
 	 * @return the productId

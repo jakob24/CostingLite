@@ -239,8 +239,9 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
     		//New payment, dont do anything
     	} else {
     		//Update the Invoice Payment
-    		invoiceService.updateInvoicePayment(paymentVO);
-    	}
+    		paymentVO = invoiceService.updateInvoicePayment(paymentVO);
+    		refreshSelectedInvoiceData(paymentVO.getInvoice().getInvoiceId());
+    	}    	
     	calculatePaymentsAndAddPayButton();
     }	
     
@@ -269,11 +270,21 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
         	if(isInvoicePaymentComplete()) {
         		getSelectedInvoiceVO().setDatePaid(BeanHelper.getToday());
         	}        	
-        	invoiceService.saveInvoiceAndPayments(getSelectedInvoiceVO());
+        	InvoiceVO invoiceVO = invoiceService.saveInvoiceAndPayments(getSelectedInvoiceVO());
         	UIMessageHelper.getInstance().displayUIMessage("invoice_saved", FacesMessage.SEVERITY_INFO);    		
+        	
+        	//Refresh Data on screen
+        	refreshSelectedInvoiceData(invoiceVO.getInvoiceId());        	
     	}
     }
     
+    /**
+     * Method to get latest data from db
+     * @param invoiceId
+     */
+    private void refreshSelectedInvoiceData(Integer invoiceId) {
+    	setSelectedInvoiceVO(invoiceService.findInvoice(invoiceId));
+    }
     
     
     /**

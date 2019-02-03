@@ -94,7 +94,7 @@
 		                	<h:outputText value="Select Product *" />			                	
 					        <p:selectOneMenu id="productSelect" value="#{ShipmentWizard.selectedProductVO}" converter="#{ProductConverter}"  disabled="#{ShipmentWizard.selectedShipment ==null}">
 					        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}"/>
-					            <f:selectItems value="#{ReferenceDataController.productVOList}" var="productSel" itemLabel="#{productSel.name}" itemValue="#{productSel}"/>
+					            <f:selectItems value="#{ReferenceDataController.productVOList}" var="productSel" itemLabel="#{productSel.formattedLabel}" itemValue="#{productSel}"/>
 					           	<p:ajax event="change" listener="#{ShipmentWizard.onSelectingProductToAdd}" update="@this addProductBtn" process="@this"/>
 					        </p:selectOneMenu>
 					    					    					        
