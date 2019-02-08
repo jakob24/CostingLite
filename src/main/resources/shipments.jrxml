@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="shipments" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="54ac46c7-69be-4e48-973a-7b8f40f44540">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Inv Lite"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM shipment sh inner join courier cr on cr.courier_id = sh.courier]]>
+	</queryString>
+	<field name="shipment_number" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="shipment_number"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment"/>
+	</field>
+	<field name="shipment_date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="shipment_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment"/>
+	</field>
+	<field name="delivery_date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="delivery_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment"/>
+	</field>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="courier"/>
+	</field>
+	<group name="shipment_number">
+		<groupExpression><![CDATA[$F{shipment_number}]]></groupExpression>
+	</group>
+	<group name="shipment_date">
+		<groupExpression><![CDATA[$F{shipment_date}]]></groupExpression>
+	</group>
+	<group name="delivery_date">
+		<groupExpression><![CDATA[$F{delivery_date}]]></groupExpression>
+	</group>
+	<group name="name">
+		<groupExpression><![CDATA[$F{name}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

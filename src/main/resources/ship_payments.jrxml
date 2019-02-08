@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ship_payments" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2035807f-f771-4c0b-8629-b18cafe09364">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Inv Lite"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="274"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="716"/>
+	<parameter name="invoice_id" class="java.lang.Integer"/>
+	<queryString language="SQL">
+		<![CDATA[select py.* from invoice inv 
+inner join shipment sh on inv.invoice_id = sh.invoice 
+inner join payments py on py.shipment=sh.shipment_id
+where inv.invoice_id= $P{invoice_id} ]]>
+	</queryString>
+	<field name="payment_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="payment_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payments"/>
+	</field>
+	<field name="amount" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="amount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payments"/>
+	</field>
+	<field name="amount_usd" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="amount_usd"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payments"/>
+	</field>
+	<field name="bank_charges" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="bank_charges"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payments"/>
+	</field>
+	<field name="date_paid" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="date_paid"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payments"/>
+	</field>
+	<field name="disbursement_charges" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="disbursement_charges"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payments"/>
+	</field>
+	<field name="gbp_to_usd" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="gbp_to_usd"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payments"/>
+	</field>
+	<field name="modified_on" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="modified_on"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payments"/>
+	</field>
+	<field name="other_charges" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="other_charges"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payments"/>
+	</field>
+	<field name="paid" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="paid"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payments"/>
+	</field>
+	<field name="payment_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="payment_type"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payments"/>
+	</field>
+	<field name="vat" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="vat"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payments"/>
+	</field>
+	<field name="invoice" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="invoice"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payments"/>
+	</field>
+	<field name="shipment" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="shipment"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payments"/>
+	</field>
+	<field name="modified_by" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="modified_by"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="payments"/>
+	</field>
+	<group name="amount_usd">
+		<groupExpression><![CDATA[$F{amount_usd}]]></groupExpression>
+	</group>
+	<group name="gbp_to_usd">
+		<groupExpression><![CDATA[$F{gbp_to_usd}]]></groupExpression>
+	</group>
+	<group name="amount">
+		<groupExpression><![CDATA[$F{amount}]]></groupExpression>
+	</group>
+	<group name="disbursement_charges">
+		<groupExpression><![CDATA[$F{disbursement_charges}]]></groupExpression>
+	</group>
+	<group name="other_charges">
+		<groupExpression><![CDATA[$F{other_charges}]]></groupExpression>
+	</group>
+	<group name="vat">
+		<groupExpression><![CDATA[$F{vat}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="270" y="-20" width="216" height="30" uuid="f07f9e4c-3364-49a9-b8a8-404f29cd38b5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<text><![CDATA[Shipment Payments]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="e1775eaa-8012-4ae4-a9b2-f041427609bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount ($)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="0" width="100" height="20" uuid="ad725147-5344-4c3d-b66e-2ff670d845bf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GBP - USD]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="6" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="26ae7b58-8fcb-4fae-9993-71d6386e07c9"/>
+				<textFieldExpression><![CDATA[$F{amount_usd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="100" height="20" uuid="63a640f4-4313-4790-97da-e9338820a679"/>
+				<textFieldExpression><![CDATA[$F{gbp_to_usd}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
