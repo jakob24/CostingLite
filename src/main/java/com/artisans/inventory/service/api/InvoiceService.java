@@ -3,13 +3,18 @@
  */
 package com.artisans.inventory.service.api;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
-
-import org.springframework.transaction.annotation.Transactional;
+import java.util.Map;
 
 import com.artisans.inventory.vo.InvoiceVO;
 import com.artisans.inventory.vo.PaymentVO;
 import com.artisans.inventory.vo.SupplierVO;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
 /**
  * @author Jacob
@@ -57,9 +62,30 @@ public interface InvoiceService
 	public PaymentVO updateInvoicePayment(PaymentVO paymentVO);
 	
 	/**
+	 * Update the invoice 
+	 * @param supplierId
+	 * @param drivePattern
+	 * @return Invoice List
+	 */
+	public void updateInvoice(InvoiceVO invoiceVO);
+
+	/**
 	 * Delete an Invoice Payment
 	 * @param PaymentVO
 	 * @return PaymentVO
 	 */
 	public void deleteInvoicePayment(PaymentVO paymentVO);	
+	
+	/**
+	 * Method to generate the Invoice report
+	 * @param jasperReport
+	 * @param parameterMap
+	 * @return
+	 * @throws SQLException
+	 * @throws JRException
+	 * @throws IOException
+	 */
+	public JasperPrint exportInvoicePdfFile(JasperReport jasperReport, Map<String, Object> parameterMap) 
+			throws SQLException, JRException, IOException ;
+
 }

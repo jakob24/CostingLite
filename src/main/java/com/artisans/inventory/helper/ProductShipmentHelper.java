@@ -39,6 +39,7 @@ public class ProductShipmentHelper {
 		shipmentProductVO.setCostPriceUsd(productVO.getCostPriceUsd());
 		shipmentProductVO.setCostPriceGbp(productVO.getCostPriceGbp());
 		shipmentProductVO.setDate(shipmentProductVO.getShipment().getDeliveryDate());
+		shipmentProductVO.setInventory(productVO.getInventory());
 		return shipmentProductVO;
 	}
 	
@@ -95,7 +96,7 @@ public class ProductShipmentHelper {
 		
 		//Get all Payments related to Shipment
 		for (PaymentVO paymentVO : shipmentVO.getPayment()) {
-			totalOtherCosts += 	paymentVO.getAmount() + paymentVO.getBankCharges() + paymentVO.getOtherCharges() +  paymentVO.getDisbursementCharges();
+			totalOtherCosts += 	paymentVO.getAmount() + paymentVO.getBankCharges() + paymentVO.getOtherCharges() +  paymentVO.getDisbursementCharges() + paymentVO.getVat();
 		}	
 		
 		Double totalShipmentAmount = invoiceAmount + totalOtherCosts;

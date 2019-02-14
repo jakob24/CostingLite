@@ -52,6 +52,9 @@ public class ShipmentProductVO extends BaseVO implements Serializable {
     //Calculated from Invoice payment
     private Double gbpToUsd;
     
+    //Quantity in inventory
+    private Integer inventory;
+    
     
 	/**
 	 * @return the shipmentProductId
@@ -276,7 +279,20 @@ public class ShipmentProductVO extends BaseVO implements Serializable {
 	 */
 	public Double getLandingCostGbp() {
 		return landingCostGbp;
-	}  
-	
+	}
+
+	/**
+	 * @return the inventory
+	 */
+	public Integer getInventory() {
+		return inventory;
+	}
+
+	/**
+	 * @param inventory the inventory to set
+	 */
+	public void setInventory(Integer inventory) {
+		this.inventory = inventory;
+	}
 		    
 }

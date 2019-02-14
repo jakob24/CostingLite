@@ -5,16 +5,31 @@ package com.artisans.inventory.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 
+import com.artisans.inventory.helper.ApplicationConfiguration;
+import com.artisans.inventory.helper.BeanHelper;
 import com.artisans.inventory.service.api.InvoiceService;
 import com.artisans.inventory.vo.InvoiceVO;
 import com.artisans.inventory.vo.SupplierVO;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
 /**
  * @author Jacob
@@ -30,6 +45,11 @@ public class BaseWizard implements Serializable
 	@Autowired
 	InvoiceService invoiceService;
 	
+	@Autowired
+	private ApplicationConfiguration configUtil;	
+	
+	 @Autowired
+	 private ResourceLoader resourceLoader;		
 	
 	public static final Short SHIPMENT_COMPLETE = 1;
 	
@@ -67,8 +87,40 @@ public class BaseWizard implements Serializable
 		    ec.invalidateSession();	    	
 			ec.redirect(ec.getRequestContextPath() + url);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}			
 	}
+	
+    /**
+     * Generate Invoice Report
+     */
+    public void generateInvoiceReport(InvoiceVO invoiceVO) {
+    	    		
+    	//configUtil.getProperty("invoice.report")
+		try {
+			String reportName= invoiceVO.getSupplier().getName() + "_invoice_" + BeanHelper.getDisplayDate(new Date()) + ".pdf";
+			
+			FacesContext context = FacesContext.getCurrentInstance();
+			HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();   
+			response.reset();
+			response.setContentType("application/pdf");	
+			response.setHeader("Content-disposition", "attachment; filename= "+ reportName);
+			
+			String path = resourceLoader.getResource("classpath:invoice.jrxml").getURI().getPath();
+			JasperReport jasperReport = JasperCompileManager.compileReport(path);
+			// Parameters for report
+			Map<String, Object> parameter = new HashMap<String, Object>();
+			parameter.put("invoice_id", invoiceVO.getInvoiceId());			
+			
+			ServletOutputStream stream = response.getOutputStream();				
+			JasperPrint jasperPrint = invoiceService.exportInvoicePdfFile(jasperReport, parameter);
+			
+			JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+			stream.flush();
+			stream.close();
+			FacesContext.getCurrentInstance().responseComplete();				
+		} catch (SQLException | JRException | IOException e) {
+			e.printStackTrace();
+		}		
+    }		    
 }

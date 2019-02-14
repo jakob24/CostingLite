@@ -159,13 +159,17 @@
 					    	<p:rowEditor  />  <!-- id="rowkey#{rowStatus.index}" -->
 					    </p:column> 
 			        </p:dataTable>			                 				                 
-		   			<div>	
-		        
-                   <p:commandButton
-                       value="Add Payment" id="newShipPayment"
-                       actionListener="#{ShipmentWizard.addNewShipPayment(shipmenPayTable)}"
-                       ajax="true" update="shipmenPaySubTable" oncomplete="clickPencil();showHideNextButtonForShipPayTab();" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}"/>
+		   				
+		        	
+		        	<div class="row">	
+					<div class="ui-g-12 ui-md-4 ui-lg-2 pull-right">
+	                   	<p:commandButton styleClass="btn btn-block ui-state-default"
+	                       value="Add Payment" id="newShipPayment"
+	                       actionListener="#{ShipmentWizard.addNewShipPayment(shipmenPayTable)}"
+	                       ajax="true" update="shipmenPaySubTable" oncomplete="clickPencil();showHideNextButtonForShipPayTab();" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}"/>
+                    
                    	</div> 
+                   	</div>
 				</ui:repeat>
             </p:panel>
             <p:spacer></p:spacer>

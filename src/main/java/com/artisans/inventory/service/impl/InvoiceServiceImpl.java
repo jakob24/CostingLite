@@ -3,8 +3,13 @@
  */
 package com.artisans.inventory.service.impl;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import javax.sql.DataSource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.dozer.DozerBeanMapper;
@@ -22,6 +27,11 @@ import com.artisans.inventory.vo.InvoiceVO;
 import com.artisans.inventory.vo.PaymentVO;
 import com.artisans.inventory.vo.SupplierVO;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+
 /**
  * @author Jacob
  *
@@ -37,6 +47,11 @@ public class InvoiceServiceImpl implements InvoiceService
 	
 	@Autowired
 	private PaymentsRepository paymentRepository;	
+	
+
+	 
+	 @Autowired
+	 private DataSource dataSource;
 	
 	/**
 	 * Get the specified Invoice Details
@@ -101,6 +116,20 @@ public class InvoiceServiceImpl implements InvoiceService
 		return new DozerBeanMapper().map(invoice, InvoiceVO.class);
 	}
 	
+	
+	/**
+	 * Update the invoice 
+	 * @param supplierId
+	 * @param drivePattern
+	 * @return Invoice List
+	 */
+	@Transactional(readOnly=false)
+	public void updateInvoice(InvoiceVO invoiceVO)
+	{
+		Invoice invoice = new DozerBeanMapper().map(invoiceVO, Invoice.class); 			
+		invoiceRepository.saveAndFlush(invoice);	
+	}	
+	
 	/**
 	 * Update an Invoice Payment
 	 * @param PaymentVO
@@ -125,4 +154,20 @@ public class InvoiceServiceImpl implements InvoiceService
 		Payment payment = new DozerBeanMapper().map(paymentVO, Payment.class); 	
 		paymentRepository.delete(payment);
 	}
+	
+	
+	/**
+	 * Method to generate the Invoice report
+	 * @param jasperReport
+	 * @param parameterMap
+	 * @return
+	 * @throws SQLException
+	 * @throws JRException
+	 * @throws IOException
+	 */
+	public JasperPrint exportInvoicePdfFile(JasperReport jasperReport, Map<String, Object> parameterMap) throws SQLException, JRException, IOException {
+		JasperPrint print = JasperFillManager.fillReport(jasperReport, parameterMap, dataSource.getConnection());
+		return print;		 
+	}
+	
 }

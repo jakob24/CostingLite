@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity(name="shipment")
 public class Shipment implements Serializable, Comparable<Shipment> {
@@ -57,6 +58,7 @@ public class Shipment implements Serializable, Comparable<Shipment> {
     @JoinColumn(name="invoice")
     private Invoice invoice;
     
+    @Transient
     @OneToMany(mappedBy="shipment")
     private List<ShipmentProduct> shipmentProduct;
     

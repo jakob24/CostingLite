@@ -8,7 +8,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.artisans.inventory.model.Shipment;
 import com.artisans.inventory.model.ShipmentProduct;
 
 /**
@@ -23,6 +22,7 @@ public interface ShipmentProductRepository extends JpaRepository<ShipmentProduct
 	 * @param drivePattern
 	 * @return Invoice List
 	 */
-	@Query(value= "SELECT * FROM costing_lite.shipment_product where shipment = ?1 order by shipment_product_id asc", nativeQuery=true)
+	@Query(value= "select sp.*, p.inventory FROM costing_lite.shipment_product sp inner join product p on p.product_id=sp.product where sp.shipment = ?1 order by shipment_product_id asc", 
+			nativeQuery=true)
 	public List<ShipmentProduct> findAllproductsForShipment(Integer shipmentId);
 }

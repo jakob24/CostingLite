@@ -60,6 +60,9 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	@Autowired
 	private InvoiceWizard invoiceWizard;
 	
+	@Autowired
+	private ReferenceDataController referenceDataController;	
+	
 	private SupplierVO selectedSupplierVO;	
 		
 	private InvoiceVO selectedInvoiceVO;
@@ -82,8 +85,8 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	
 	private int shipmentPaymentCount;
 	
-	
-	
+	private boolean invoiceFullyPaid;
+			
 	
 	/**
 	 * Initial method to load data on the screen
@@ -121,6 +124,7 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 				getSelectedInvoiceVO().getShipment().size()==1) {			
 			ShipmentVO currentShipment = getSelectedInvoiceVO().getShipment().get(0);
 			setSelectedShipment(currentShipment);
+			setInvoiceFullyPaidValue();
 		}
 		
 		setShipPaymentCount();
@@ -161,6 +165,7 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 			if(! shipmentList.isEmpty()) {
 				setSelectedShipment(shipmentList.get(0));
 			}
+			setInvoiceFullyPaidValue();
 			setShipPaymentCount();
 		}
 	}
@@ -172,7 +177,7 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	public void findAllproductsForShipment() {
 		ShipmentVO selectedShipment = getSelectedShipment();		
 		if(null != selectedShipment) {
-			List<ShipmentProductVO> shipmentProductVOList = shipmentService.findAllproductsForShipment(selectedShipment);
+			List<ShipmentProductVO> shipmentProductVOList = shipmentService.findAllproductsForShipment(selectedShipment.getShipmentId());
 			selectedShipment.setShipmentProduct(shipmentProductVOList); 
 		}		
 	}
@@ -221,6 +226,7 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	 * Method to save Shipment and all its payments
 	 */
 	public void saveshipmentData() {
+		setInvoiceFullPaidValue(getSelectedInvoiceVO());
 		shipmentService.saveShipments(getSelectedInvoiceVO());
 		UIMessageHelper.getInstance().displayUIMessage("shipment_saved", FacesMessage.SEVERITY_INFO);
 	}
@@ -235,7 +241,9 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 		if(shipmentVO.getInvoice().getShipmentComplete()==SHIPMENT_COMPLETE) {
 			UIMessageHelper.getInstance().displayUIMessage("shipment_complete", FacesMessage.SEVERITY_ERROR);
 		}
-		else {			
+		else {		
+			InvoiceVO invoiceVO = shipmentVO.getInvoice();
+			setInvoiceFullPaidValue(invoiceVO);
 			ShipmentVO newShipment = shipmentService.saveShipment(shipmentVO);
 			//Fetch the data from db
 			refreshInvoiceData(getSelectedInvoiceVO());		
@@ -256,11 +264,15 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 		} else {
 			
 			if(null != shipmentVO.getShipmentId() && shipmentVO.getShipmentId().intValue() > 0 ) {
-				shipmentService.deleteShipment(shipmentVO);			
-				//Fetch the data from db
-				refreshInvoiceData(getSelectedInvoiceVO());		
-				setSelectedShipment(null);
-				UIMessageHelper.getInstance().displayUIMessage("shipment_deleted", FacesMessage.SEVERITY_INFO);		
+				boolean deleted = shipmentService.deleteShipment(shipmentVO);		
+				if(deleted) {
+					//Fetch the data from db
+					refreshInvoiceData(getSelectedInvoiceVO());		
+					setSelectedShipment(null);
+					UIMessageHelper.getInstance().displayUIMessage("shipment_deleted", FacesMessage.SEVERITY_INFO);		
+				} else {
+					UIMessageHelper.getInstance().displayUIMessage("shipment_not_deleted", FacesMessage.SEVERITY_ERROR);	
+				}
 			} else {
 				getSelectedInvoiceVO().getShipment().remove(shipmentVO);
 				
@@ -275,6 +287,16 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 				setSelectedShipment(null);
 			}			
 		}		
+	}
+	
+	/**
+	 * Set the date paid on invoice
+	 * @param invoiceVO
+	 */
+	private void setInvoiceFullPaidValue(InvoiceVO invoiceVO) {
+		if(isInvoiceFullyPaid()) {
+			invoiceVO.setDatePaid(new Date());
+		}
 	}
 	
 	
@@ -506,6 +528,15 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 				UIMessageHelper.getInstance().displayUIMessage("product_qty_not_set", FacesMessage.SEVERITY_INFO);
 			} else {			
 				shipmentService.saveShipmentProduct(saveProduct);
+								
+				//Update Invoice if shipment set to complete
+				if(getSelectedInvoiceVO().getShipmentComplete() == SHIPMENT_COMPLETE) {
+					if(null == getSelectedInvoiceVO().getDatePaid()) {
+						//Also set date paid on invoice if empty
+						getSelectedInvoiceVO().setDatePaid(new Date());
+						invoiceService.updateInvoice(getSelectedInvoiceVO());
+					}
+				}
 				refreshShipmentProductScreen();
 				UIMessageHelper.getInstance().displayUIMessage("product_saved", FacesMessage.SEVERITY_INFO);
 			}			
@@ -516,7 +547,7 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	
 	
 	/**
-	 * Method to delete an existing shipment Product and re calculate 
+	 * Method to delete an existing shipment Product and recalculate 
 	 * the landing costs for remaining products within the shipment and update them
 	 */
 	public void deleteShipmentProduct(ShipmentProductVO shipmentProductVO) {	
@@ -549,8 +580,24 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	private void refreshShipmentProductScreen() {
 		findAllproductsForShipment();
 		setSelectedShipmentProductVO(null);
+		refreshProductStandingData();
 	}
 	
+	
+	/**
+	 * Method to refresh the standing data on the StandingDataController
+	 */
+	private void refreshProductStandingData() {		
+		referenceDataController.refreshProductData();
+	}
+	
+	
+	/**
+	 * Get the value fomr the selected Invocie
+	 */
+	private void setInvoiceFullyPaidValue() {
+		setInvoiceFullyPaid(null == getSelectedInvoiceVO().getDatePaid() ? false : true );
+	}
 	
 	/**
 	 * Method invoked when a shipment product selected from the List for update
@@ -739,6 +786,20 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	 */
 	public void setShipmentPaymentCount(int shipmentPaymentCount) {
 		this.shipmentPaymentCount = shipmentPaymentCount;
+	}
+
+	/**
+	 * @return the invoiceFullyPaid
+	 */
+	public boolean isInvoiceFullyPaid() {
+		return invoiceFullyPaid;
+	}
+
+	/**
+	 * @param invoiceFullyPaid the invoiceFullyPaid to set
+	 */
+	public void setInvoiceFullyPaid(boolean invoiceFullyPaid) {
+		this.invoiceFullyPaid = invoiceFullyPaid;
 	}
 	
 	

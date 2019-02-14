@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.artisans.inventory.helper.ProductShipmentHelper;
+import com.artisans.inventory.model.Courier;
 import com.artisans.inventory.model.Invoice;
 import com.artisans.inventory.model.Payment;
 import com.artisans.inventory.model.Product;
@@ -25,11 +26,13 @@ import com.artisans.inventory.repository.PaymentsRepository;
 import com.artisans.inventory.repository.ProductRepository;
 import com.artisans.inventory.repository.ShipmentProductRepository;
 import com.artisans.inventory.repository.ShipmentRepository;
+import com.artisans.inventory.service.api.InvoiceService;
 import com.artisans.inventory.service.api.ShipmentService;
 import com.artisans.inventory.transformers.ShipmentProductTransformer;
 import com.artisans.inventory.transformers.ShipmentTransformer;
 import com.artisans.inventory.vo.InvoiceVO;
 import com.artisans.inventory.vo.PaymentVO;
+import com.artisans.inventory.vo.ProductVO;
 import com.artisans.inventory.vo.ShipmentProductVO;
 import com.artisans.inventory.vo.ShipmentVO;
 
@@ -56,6 +59,9 @@ public class ShipmentServiceImpl implements ShipmentService {
 	@Autowired
 	private ProductRepository productRepository;
 	
+	@Autowired
+	private InvoiceService invoiceService;
+	
 	/**
 	 * Get all the shipments for the selected Invoice
 	 * @param invoiceVO
@@ -65,9 +71,14 @@ public class ShipmentServiceImpl implements ShipmentService {
 	public List<ShipmentVO> findAllShipmentsForInvoice(InvoiceVO invoiceVO){
 		
 		List<ShipmentVO> shipmentVOList = new ArrayList<ShipmentVO>();
-		List<?> shipmentList = shipmentRepository.findAllShipmentsForInvoice(invoiceVO.getInvoiceId());
+		List<?> shipmentList = shipmentRepository.findAllShipmentsForInvoice(invoiceVO.getInvoiceId());		
 		CollectionUtils.transform(shipmentList, new ShipmentTransformer());
 		shipmentVOList = (List<ShipmentVO>) shipmentList;
+		
+		for(ShipmentVO shipmentVO : shipmentVOList) {			
+			//Get the products, not through lazy loading
+			shipmentVO.setShipmentProduct(findAllproductsForShipment(shipmentVO.getShipmentId()));			
+		}		
 		return shipmentVOList;		
 	}
 	
@@ -87,9 +98,9 @@ public class ShipmentServiceImpl implements ShipmentService {
 	@Transactional(readOnly=false)
 	public InvoiceVO saveShipments(InvoiceVO invoiceVO) {
 		
-		Invoice invoice = new DozerBeanMapper().map(invoiceVO, Invoice.class);		
-		if(null != invoice.getShipmentComplete() && invoice.getShipmentComplete() == 1) {			
-			//Update Invoice
+		Invoice invoice = new DozerBeanMapper().map(invoiceVO, Invoice.class);	
+		//Update Invoice Paid Date
+		if(null != invoice.getDatePaid()) {			
 			invoiceRepository.saveAndFlush(invoice);
 		}		
 		
@@ -114,18 +125,31 @@ public class ShipmentServiceImpl implements ShipmentService {
 	public ShipmentVO saveShipment(ShipmentVO shipmentVO) {		
 		Shipment shipment = new DozerBeanMapper().map(shipmentVO, Shipment.class); 		
 		//Save Shipment
-		shipment = shipmentRepository.saveAndFlush(shipment);			
+		shipment = shipmentRepository.saveAndFlush(shipment);	
+		
+		//Update Invoice Paid Date
+		if(null != shipmentVO.getInvoice().getDatePaid()) {			
+			invoiceRepository.save(shipment.getInvoice());
+		}
 		return new DozerBeanMapper().map(shipment, ShipmentVO.class); 
 		
 	}	
 	
 	/**
 	 * Method to delete a shipment
+	 * returns false if shipment cannot be deleted
 	 */
 	@Transactional(readOnly=false)
-	public void deleteShipment(ShipmentVO shipmentVO) {
+	public boolean deleteShipment(ShipmentVO shipmentVO) {
 		Shipment shipment = new DozerBeanMapper().map(shipmentVO, Shipment.class);
 		
+		List<Shipment> existingShipments = shipmentRepository.findAllShipmentsForInvoice(shipmentVO.getInvoice().getInvoiceId());
+		
+		for(Shipment aShipment : existingShipments) {
+			if(aShipment.getShipmentId() == shipmentVO.getShipmentId()) {
+				return false;
+			}
+		}
 		//Get All shipments for invoice
 		Invoice invoice = shipment.getInvoice();		
 		Integer deletedShipmentId = shipment.getShipmentId();
@@ -141,7 +165,8 @@ public class ShipmentServiceImpl implements ShipmentService {
 				shipmentRepository.saveAndFlush(thisShipment);
 				shipmentNumber++;
 			}
-		}		
+		}
+		return true;
 	}
 	
 	/**
@@ -182,8 +207,10 @@ public class ShipmentServiceImpl implements ShipmentService {
 			shipmentProduct = shipmentProductRepository.saveAndFlush(shipmentProduct);
 					
 			//Update inventory Stock in Product
-			Product thisProduct = productRepository.findById(shipmentProductVO.getProduct().getProductId()).orElse(null);		
-			Integer newQty = thisProduct.getInventory() + shipmentProductVO.getProductQty();
+			Product thisProduct = productRepository.findById(shipmentProductVO.getProduct().getProductId()).orElse(null);	
+			
+			//Shipment qty was subtracted from inventory when loading data
+			Integer newQty = shipmentProductVO.getInventory() + shipmentProductVO.getProductQty();
 			thisProduct.setInventory(newQty);
 			productRepository.saveAndFlush(thisProduct);
 		}			
@@ -200,29 +227,39 @@ public class ShipmentServiceImpl implements ShipmentService {
 		shipmentProductRepository.delete(shipmentProduct);
 		
 		//Now get all other products within same shipment and recalculate the price
-		List<ShipmentProductVO> existingProducts = findAllproductsForShipment(shipmentProductVO.getShipment());
+		List<ShipmentProductVO> existingProducts = findAllproductsForShipment(shipmentProductVO.getShipment().getShipmentId());
 		
 		//Calculate Landing Costs
 		ProductShipmentHelper.calculateShipmentProductprices(existingProducts);	
 		
 		//Update the products costs
 		saveShipmentProduct(existingProducts);
+		
+		//Update Product Inventory
+		invoiceService.updateInvoice(shipmentProductVO.getShipment().getInvoice());
 	}
 	
 	/**
 	 * Method to get all ShipmentProductVO for a shipment
 	 */
 	@SuppressWarnings("unchecked")
-	public List<ShipmentProductVO> findAllproductsForShipment(ShipmentVO shipmentVO) {
+	public List<ShipmentProductVO> findAllproductsForShipment(Integer shipmentId) {
 		
 		List<ShipmentProductVO> shipmentProductVOList = new ArrayList<ShipmentProductVO>();
-		List<?> shipmentProductList = shipmentProductRepository.findAllproductsForShipment(shipmentVO.getShipmentId());
+		List<?> shipmentProductList = shipmentProductRepository.findAllproductsForShipment(shipmentId);
 		CollectionUtils.transform(shipmentProductList, new ShipmentProductTransformer());
 		shipmentProductVOList =  (List<ShipmentProductVO>) shipmentProductList;
 		
 		//Set the USD Conversion Rate from the invoice on the ShipmentProductVO
 		for(ShipmentProductVO shipmentProductVO : shipmentProductVOList) {
+			
 			shipmentProductVO.setGbpToUsd(ProductShipmentHelper.getInvoiceConversionRate(shipmentProductVO));
+			
+			Product product = productRepository.findById(shipmentProductVO.getProduct().getProductId()).orElse(new Product());
+			ProductVO productVO = new DozerBeanMapper().map(product, ProductVO.class); 
+			
+			//Reduce the qty from main inventory for the product, when saving will add it to inventory
+			shipmentProductVO.setInventory(productVO.getInventory()-shipmentProductVO.getProductQty());
 		}		
 		return shipmentProductVOList;		
 	}

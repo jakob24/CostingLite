@@ -44,7 +44,7 @@
 				        <h:panelGrid columns="3" cellpadding="10">		
 					        <p:selectOneMenu id="console" value="#{StandingDataController.selectedProduct}" converter="#{ProductConverter}" style="width:250px;">
 					        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}" />
-					            <f:selectItems value="#{ReferenceDataController.productVOList}" var="product" itemLabel="#{product.name}" itemValue="#{product}"/>
+					            <f:selectItems value="#{ReferenceDataController.productVOList}" var="product" itemLabel="#{product.formattedLabel}" itemValue="#{product}"/>
 					            <p:ajax update="editProduct" oncomplete="$('#editProduct').prop('disabled', false); $('#addNewProduct').prop('disabled', true); " />
 					        </p:selectOneMenu>
 					    					    	
@@ -68,9 +68,11 @@
 		                    <h:outputText value="SKU *" />
 		                    <p:inputTextarea value="#{StandingDataController.newProduct.sku}"  label="SKU"  required="true" />			                    		                 
 		 					
-		 					<h:outputText value="Image" />			 					
+		 					<h:outputText value="Image" />	
+		 					<!-- 		 					
 		 					<p:graphicImage url="#{StandingDataController.newProduct.image}" height="50px" width="50px"/>
-		 							 					
+		 					 -->		 	
+		 					 TODO				
 		                    <h:outputText value="ASIN (Amazon)" />
 		                    <p:inputText value="#{StandingDataController.newProduct.asin}"  label="asin" />	
 		                    
@@ -95,12 +97,12 @@
 		                     	  		                                      
 		 					<p:separator/><p:separator/><p:separator/><p:separator/>
 		 					
-		                    <h:outputText value="Cost Price (USD)" />
+		                    <h:outputText value="Cost Price ($)" />
 		                    <p:inputText value="#{StandingDataController.newProduct.costPriceUsd}" >
 		                    	<f:validateDoubleRange minimum="0" maximum="200" />
 		                    </p:inputText> 		                    
 		                    
-		                    <h:outputText value="Cost Price (GBP)" />
+		                    <h:outputText value="Cost Price (£)" />
 		                    <p:inputText value="#{StandingDataController.newProduct.costPriceGbp}">
 		                    	<f:validateDoubleRange minimum="0" />
 		                    </p:inputText>  		                    		 					

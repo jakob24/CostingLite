@@ -111,11 +111,11 @@
 				</p:dataTable>
 				
 			    <div class="row">
-			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
+			    	<div class="ui-g-12 ui-md-4 ui-lg-2 pull-right">	
 					    <p:commandButton value="Add New Payment" id="newInvPaymentBtn" update="paymentList" actionListener="#{InvoiceWizard.addNewInvoicePayment}" 
 							ajax="true" styleClass="btn btn-block ui-state-default" disabled="#{! InvoiceWizard.enableAddInvoiceButton}" oncomplete="clickPencil()"/> 
 				    </div>				    			    			    	 		    
-			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
+			    	<div class="ui-g-12 ui-md-4 ui-lg-2 pull-right">	
 					    <p:commandButton value="Shipments" id="newShipmentBtn" actionListener="#{InvoiceWizard.addShipment}" action="shipments.xhtml"
 							ajax="true" styleClass="btn btn-block ui-state-default" onclick="this.disabled=true;" disabled="#{! InvoiceWizard.enableAddShipmentsButton}"/> 
 				    </div>					    			    

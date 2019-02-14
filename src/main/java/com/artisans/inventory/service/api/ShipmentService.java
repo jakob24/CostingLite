@@ -28,10 +28,10 @@ public interface ShipmentService {
 		
 	public InvoiceVO saveShipments(InvoiceVO invoiceVO);
 	
-	public void deleteShipment(ShipmentVO shipmentVO);
+	public boolean deleteShipment(ShipmentVO shipmentVO);
 
 	
-	public List<ShipmentProductVO> findAllproductsForShipment(ShipmentVO shipmentVO);
+	public List<ShipmentProductVO> findAllproductsForShipment(Integer shipmentId);
 
 	public ShipmentVO saveShipment(ShipmentVO shipmentVO);		
 	

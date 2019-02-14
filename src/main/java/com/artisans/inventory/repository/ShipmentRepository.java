@@ -18,10 +18,10 @@ public interface ShipmentRepository extends JpaRepository<Shipment, Integer> {
 
 	/**
 	 * Returns all invoices for the supplier
-	 * @param supplierId
-	 * @param drivePattern
-	 * @return Invoice List
+	 * @param invoiceId
+	 * @return Shipment List
 	 */
 	@Query(value= "SELECT * FROM costing_lite.shipment where invoice = ?1 order by shipment_number asc", nativeQuery=true)
 	public List<Shipment> findAllShipmentsForInvoice(Integer invoiceId);
+			
 }

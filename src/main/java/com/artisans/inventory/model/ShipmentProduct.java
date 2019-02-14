@@ -81,6 +81,7 @@ public class ShipmentProduct implements Serializable {
     @ManyToOne
     @JoinColumn(name="modified_by")
     private User user;
+    
 
     /** Default constructor. */
     public ShipmentProduct() {

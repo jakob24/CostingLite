@@ -39,8 +39,7 @@ public class StandingDataController implements Serializable {
 	
 	@Autowired
 	private ReferenceDataController referenceDataController;
-	
-	
+		
 	private List<SupplierVO> supplierVOList;
 	
 	private List<CourierVO> courierVOList;

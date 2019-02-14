@@ -110,7 +110,7 @@ public class StandingDataServiceImpl extends BaseServiceImpl implements Standing
 	public List<ProductVO> findProducts()
 	{
 		List<ProductVO> productVOList = new ArrayList<ProductVO>();
-		List<?> productList = productRepository.findAll(sortByProductNameAsc());
+		List<?> productList = productRepository.findAll(sortBySKU());
 		if(null != productList && ! productList.isEmpty())
 		{
 			CollectionUtils.transform(productList, new ProductTransformer());
@@ -120,11 +120,11 @@ public class StandingDataServiceImpl extends BaseServiceImpl implements Standing
 	}
 	
 	/**
-	 * Sorter for product name
+	 * Sorter for SKU
 	 * @return
 	 */
-	private Sort sortByProductNameAsc() {
-        return new Sort(Sort.Direction.ASC, "name");
+	private Sort sortBySKU() {
+        return new Sort(Sort.Direction.ASC, "sku");
     }
 	
 	

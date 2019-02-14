@@ -66,6 +66,11 @@
 			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
 					   <p:commandButton value="Submit" action="#{InvoiceWizard.saveInvoiceData}" update="growl" process="@this"/>
 				    </div>	
+				    
+			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
+					    <p:commandButton value="Shipments" id="newShipmentBtn2" actionListener="#{InvoiceWizard.addShipment}" action="shipments.xhtml"
+							ajax="true" styleClass="btn btn-block ui-state-default" onclick="this.disabled=true;" disabled="#{! InvoiceWizard.enableAddShipmentsButton}"/> 
+				    </div>					    
 				</div>                   	            
 
             </p:panel>            

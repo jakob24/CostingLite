@@ -67,6 +67,16 @@ public class ReferenceDataController implements Serializable {
 		setToday(BeanHelper.getToday());
 	}
 
+	
+	/**
+	 * Method to refresh product Data being held in cache
+	 */
+	public void refreshProductData() {
+		//Get All Products
+		setProductVOList(standingDataService.findProducts());		
+	}
+	
+	
 	/**
 	 * @return the supplierVOList
 	 */

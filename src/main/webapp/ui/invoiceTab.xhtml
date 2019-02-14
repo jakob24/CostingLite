@@ -8,7 +8,7 @@
 				        
         <p:tab id="InvoiceTab" title="Invoice">        	
         	<p:panel header="Add/Edit Invoice">               
-                <h:panelGrid columns="5">				                	
+                <h:panelGrid columns="3">				                	
                 	<h:outputText value="Supplier *" />				                	
 			        <p:selectOneMenu id="supplierSelect" value="#{InvoiceWizard.selectedSupplierVO}" converter="#{SupplierConverter}" style="width:150px;">
 			        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}" />
@@ -23,8 +23,8 @@
 			        	<f:selectItem itemValue="#{null}" itemLabel="Select one" />			        	
 			            <f:selectItems value="#{InvoiceWizard.supplierInvoiceList}" var="invoice" itemLabel="#{invoice.formattedLabel}" itemValue="#{invoice.invoiceId}"/>	
 			            <f:selectItem  itemValue="0" itemLabel="Add New Invoice .."/>		            
-			            <p:ajax event="change" update="invoicePanel" listener="#{InvoiceWizard.addNewInvoice}"/>			            
-			        </p:selectOneMenu>			        
+			            <p:ajax event="change" update="invoicePanel invoiceReport" listener="#{InvoiceWizard.addNewInvoice}"/>			            
+			        </p:selectOneMenu>				        	        
 			        						        				                	
              	</h:panelGrid>
              	   
@@ -62,6 +62,19 @@
 	                    </h:outputText>
 	                    			                    
 	                </h:panelGrid>
+	                
+			    	<div class="row">
+				    	<div class="ui-g-12 ui-md-4 ui-lg-2 pull-right">	
+				    		<!-- 
+							<p:commandLink actionListener="#{InvoiceWizard.generateInvoiceReport}" id="invoiceReport" disabled="#{InvoiceWizard.selectedInvoiceId ==null}" ajax="false"> 
+								Download <h:graphicImage name="/images/pdf.png" />
+							</p:commandLink> 
+							 -->
+							<p:commandButton id="invoiceReport" value= "Download" disabled="#{InvoiceWizard.selectedInvoiceId ==null}" style="width: 90%;"
+								styleClass="btn btn-block ui-state-default" icon="fa fa-file-pdf-o" 
+								actionListener="#{InvoiceWizard.generateInvoiceReport}" ajax="false"/> 								
+					    </div>			    			    			    	 		    
+					</div>		                
 	            </p:panel>
             </p:panel>
         </p:tab>				        

@@ -94,16 +94,17 @@
 			    <div class="row">
 			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-left">	
 				        <p:outputLabel for="payInvComplete" value="Is Invoice Fully Paid ?" style="padding:10px;"/>
-				        <p:selectBooleanCheckbox id="payInvComplete" value="#{InvoiceWizard.invoicePaymentComplete}" 
-				        	disabled="#{InvoiceWizard.selectedInvoiceVO.datePaid != null}" rendered="#{! InvoiceWizard.enableAddInvoiceButton}">
+				        <p:selectBooleanCheckbox id="payInvComplete" value="#{ShipmentWizard.invoiceFullyPaid}" disabled="#{ShipmentWizard.invoiceFullyPaid}">
 				        	<p:ajax event="change" immediate="true" update="@this"/> 
 				        </p:selectBooleanCheckbox>
 				    </div>	
 				    			    
 			    	<div class="ui-g-7 ui-md-3 ui-lg-3 pull-right">
-			    		<p:commandButton id="addProductsBtn" value="Add Products" action="shipmentProduct.xhtml" disabled="false"  actionListener="#{ShipmentWizard.preselectShipment()}" />  					    		
-			    		<p:spacer width="20px"></p:spacer>
-						<p:commandButton value="Submit" action="#{ShipmentWizard.saveshipmentData}" update="growl" process="@this" oncomplete="enableAddProductButton();" ajax="true" 
+			    		<p:commandButton id="addProductsBtn" value="Add Products" action="shipmentProduct.xhtml" disabled="false" styleClass="btn btn-block ui-state-default" 
+			    			actionListener="#{ShipmentWizard.preselectShipment()}" />  					    		
+			    		
+						<p:commandButton value="Submit" action="#{ShipmentWizard.saveshipmentData}" update="growl" process="@this" styleClass="btn btn-block ui-state-default"
+							oncomplete="enableAddProductButton();" ajax="true" 
 				        	disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete == 1}"/>		                
 				    </div>
 				    

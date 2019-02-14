@@ -122,6 +122,13 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- Jasper Reports -->
+		<dependency>
+		    <groupId>net.sf.jasperreports</groupId>
+		    <artifactId>jasperreports</artifactId>
+		    <version>6.7.0</version>
+		</dependency>		
+		
 		<!-- For Rounding -->
 		<dependency>
 		    <groupId>org.apache.commons</groupId>

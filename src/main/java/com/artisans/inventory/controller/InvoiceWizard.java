@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.artisans.inventory.helper.ApplicationConfiguration;
 import com.artisans.inventory.helper.BeanHelper;
 import com.artisans.inventory.helper.UIMessageHelper;
 import com.artisans.inventory.service.api.InvoiceService;
@@ -42,10 +41,7 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 	
 	@Autowired
 	InvoiceService invoiceService;
-			
-	@Autowired
-	private ApplicationConfiguration configUtil;
-			
+						
 	private Double totalInvoicePaidAmount;
 	
 	private Double totalInvoiceToPayAmount;
@@ -386,20 +382,16 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 		 shipmentWizard.setInvokedFromInvoiceWizard(true);    		 
     }
     
-	/**
-	 * @return the configUtil
-	 */
-	public ApplicationConfiguration getConfigUtil() {
-		return configUtil;
-	}
-
-
-	/**
-	 * @param configUtil the configUtil to set
-	 */
-	public void setConfigUtil(ApplicationConfiguration configUtil) {
-		this.configUtil = configUtil;
-	}
+    
+    /**
+     * Generate Invoice Report
+     */
+    public void generateInvoiceReport() {
+    	
+    	if(null != getSelectedInvoiceId() && getSelectedInvoiceId().intValue() > 0 ) {    		
+    		super.generateInvoiceReport(getSelectedInvoiceVO());		
+    	}
+    }
 
 
 	/**
