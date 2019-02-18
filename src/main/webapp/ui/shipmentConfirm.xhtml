@@ -101,8 +101,10 @@
 				    			    
 			    	<div class="ui-g-7 ui-md-3 ui-lg-3 pull-right">
 			    		<p:commandButton id="addProductsBtn" value="Add Products" action="shipmentProduct.xhtml" disabled="false" styleClass="btn btn-block ui-state-default" 
-			    			actionListener="#{ShipmentWizard.preselectShipment()}" />  					    		
-			    		
+			    			actionListener="#{ShipmentWizard.preselectShipment()}" />
+			    	</div>  					    		
+			    	
+			    	<div class="ui-g-7 ui-md-3 ui-lg-3 pull-right">	
 						<p:commandButton value="Submit" action="#{ShipmentWizard.saveshipmentData}" update="growl" process="@this" styleClass="btn btn-block ui-state-default"
 							oncomplete="enableAddProductButton();" ajax="true" 
 				        	disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete == 1}"/>		                

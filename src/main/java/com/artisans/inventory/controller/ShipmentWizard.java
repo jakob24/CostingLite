@@ -520,7 +520,9 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	 * Method to save Shipment Product and re calculate all the landing costs and update them
 	 * @param saveProduct
 	 */
-	public void saveShipmentProduct(List<ShipmentProductVO> saveProduct) {		
+	public void saveShipmentProduct() {		
+		
+		List<ShipmentProductVO> saveProduct = getSelectedShipment().getShipmentProduct();
 		
 		if(getSelectedShipment().getInvoice().getShipmentComplete() == SHIPMENT_NOT_COMPLETE) {		
 			long noQty = saveProduct.stream().filter(i -> (i.getProductQty()==null || (i.getProductQty().intValue() == 0))).count();
