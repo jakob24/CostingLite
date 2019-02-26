@@ -89,7 +89,7 @@ public class StandingDataController implements Serializable {
      * @param event
      * @return
      */
-    private boolean isUniqueSupplierName(SupplierVO newSupplier) {    	
+    public boolean isUniqueSupplierName(SupplierVO newSupplier) {    	
     	if(! supplierVOList.isEmpty() && supplierVOList.size() > 1) {
     		for(SupplierVO supplierVO : supplierVOList) {
     			if(!(newSupplier.getSupplierId() == supplierVO.getSupplierId())) {
@@ -204,12 +204,14 @@ public class StandingDataController implements Serializable {
      */
     public void onSaveProduct() {  
     	ProductVO thisProduct = getNewProduct();
-    	if(isUniqueProductName(thisProduct)) {
-    		standingDataService.saveProduct(thisProduct);
-    		UIMessageHelper.getInstance().displayUIMessage("product_saved", FacesMessage.SEVERITY_INFO);
-    	} else {
-    		UIMessageHelper.getInstance().displayUIMessage("uniqie_product_name", FacesMessage.SEVERITY_ERROR);
-    	}  
+    	if(thisProduct.getProductId() == 0 ) {
+    		if( ! isUniqueProductName(thisProduct)) {
+    			UIMessageHelper.getInstance().displayUIMessage("uniqie_product_name", FacesMessage.SEVERITY_ERROR);    	
+    			return;
+    		}
+    	}
+    	standingDataService.saveProduct(thisProduct);
+    	UIMessageHelper.getInstance().displayUIMessage("product_saved", FacesMessage.SEVERITY_INFO); 
     }
       
     

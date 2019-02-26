@@ -68,11 +68,9 @@
 		                    <h:outputText value="SKU *" />
 		                    <p:inputTextarea value="#{StandingDataController.newProduct.sku}"  label="SKU"  required="true" />			                    		                 
 		 					
-		 					<h:outputText value="Image" />	
-		 					<!-- 		 					
+		 					<h:outputText value="Image" />		 							 					
 		 					<p:graphicImage url="#{StandingDataController.newProduct.image}" height="50px" width="50px"/>
-		 					 -->		 	
-		 					 TODO				
+		 								
 		                    <h:outputText value="ASIN (Amazon)" />
 		                    <p:inputText value="#{StandingDataController.newProduct.asin}"  label="asin" />	
 		                    
@@ -102,7 +100,7 @@
 		                    	<f:validateDoubleRange minimum="0" maximum="200" />
 		                    </p:inputText> 		                    
 		                    
-		                    <h:outputText value="Cost Price (£)" />
+		                    <h:outputText value="Landing Cost (£)" />
 		                    <p:inputText value="#{StandingDataController.newProduct.costPriceGbp}">
 		                    	<f:validateDoubleRange minimum="0" />
 		                    </p:inputText>  		                    		 					
@@ -161,7 +159,13 @@
 		                    <p:inputText value="#{StandingDataController.newProduct.amzFbaFees}">
 		                    	<f:validateDoubleRange minimum="0" />
 		                    </p:inputText> 		                     		                    
-		                    <h:panelGroup /><h:panelGroup />	
+		                   
+		                    <h:outputText value="Primary Supplier" />		                    
+					        <p:selectOneMenu id="productSupplier" value="#{StandingDataController.newProduct.supplier}" converter="#{SupplierConverter}" style="width:150px;">
+					        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}" />
+					            <f:selectItems value="#{ReferenceDataController.supplierVOList}" var="supplier" itemLabel="#{supplier.name}" itemValue="#{supplier}"/>					            
+					        </p:selectOneMenu>		                    
+		                    
 				        </h:panelGrid>
 				        
 					    <div style="margin-top: 20px;" class="pull-right">

@@ -42,7 +42,7 @@
 				                </f:facet>  
 				                <f:facet name="input">  
 				                    <p:inputText value="#{supplier.name}" id="supplierName" required="true">		
-				                    	<p:ajax event="change" listener="#{StandingDataController.isUniqueSupplierName}" process="@this" update="messages"/>                              			
+				                    	<p:ajax event="change" listener="#{StandingDataController.isUniqueSupplierName(supplier)}" process="@this" update="messages"/>                              			
 				                    </p:inputText>	
 				                    <p:tooltip id="toolTipTrack" for="supplierName" value="#{bundle.msg_unique_supplier_name}" trackMouse="true" />	                  				                     
 				                </f:facet>  

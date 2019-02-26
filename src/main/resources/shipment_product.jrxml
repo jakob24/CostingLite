@@ -44,6 +44,9 @@ where inv.invoice_id=  $P{invoice_id}]]>
 		<property name="com.jaspersoft.studio.field.label" value="landing_cost_gbp"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
 	</field>
+	<variable name="Date" class="java.lang.String">
+		<variableExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new Date())]]></variableExpression>
+	</variable>
 	<group name="name">
 		<groupExpression><![CDATA[$F{name}]]></groupExpression>
 	</group>
@@ -66,15 +69,7 @@ where inv.invoice_id=  $P{invoice_id}]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="10" splitType="Stretch">
-			<staticText>
-				<reportElement x="207" y="-20" width="180" height="20" uuid="31f5471c-c14c-4f22-8f19-b43dc0e56cca"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Elephant" size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Shipment Products]]></text>
-			</staticText>
-		</band>
+		<band height="16" splitType="Stretch"/>
 	</title>
 	<pageHeader>
 		<band splitType="Stretch"/>
@@ -135,10 +130,17 @@ where inv.invoice_id=  $P{invoice_id}]]>
 				</textElement>
 				<text><![CDATA[Landing Cost]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="207" y="-26" width="180" height="20" uuid="31f5471c-c14c-4f22-8f19-b43dc0e56cca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Elephant" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Shipment Products]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="30" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
 				<reportElement x="170" y="0" width="70" height="20" uuid="935ba5f8-056b-4b1c-a9d1-3c1fcf253170">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0c36c1fe-757b-4641-8ae2-44eba55846e3"/>
@@ -202,6 +204,24 @@ where inv.invoice_id=  $P{invoice_id}]]>
 		<band splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band splitType="Stretch"/>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="20" width="30" height="20" uuid="40d396b2-557d-411e-94a5-4e6413d9f0c7"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="40" y="20" width="50" height="20" uuid="52312cd5-49f3-426d-a2d4-805c55a667fa"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Date}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="9" y="10" width="559" height="1" uuid="79e8fd4a-8dfc-4a8b-a16f-3c7407cec6d9"/>
+			</line>
+		</band>
 	</summary>
 </jasperReport>

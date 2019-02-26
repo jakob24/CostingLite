@@ -14,6 +14,7 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<style name="MyElephant14" hTextAlign="Center" vTextAlign="Middle" fontName="MyElephant" fontSize="14" pdfFontName="Helvetica" pdfEncoding="Identity-H (Unicode with horizontal writing)" isPdfEmbedded="true"/>
 	<parameter name="invoice_id" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[7]]></defaultValueExpression>
 	</parameter>
@@ -48,12 +49,12 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="31" splitType="Stretch">
+		<band height="50" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="31" uuid="8de38aeb-5ad8-4479-a5c3-2a0e4490cf51"/>
+				<reportElement x="0" y="0" width="555" height="50" uuid="2be11f8b-10b3-428a-977c-84233a7ec5e2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Elephant" size="14" isBold="false"/>
+					<font fontName="Elephant" size="14"/>
 				</textElement>
 				<text><![CDATA[Invoice]]></text>
 			</staticText>

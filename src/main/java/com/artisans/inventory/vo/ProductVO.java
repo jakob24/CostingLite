@@ -4,8 +4,6 @@
 package com.artisans.inventory.vo;
 
 import java.io.Serializable;
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -66,6 +64,8 @@ public class ProductVO extends BaseVO implements Serializable {
     private Double costPriceGbp;    
                    
     private List<ShipmentProductVO> shipmentProductVO;
+    
+    private SupplierVO supplier;
     
     
 	/**
@@ -397,6 +397,20 @@ public class ProductVO extends BaseVO implements Serializable {
 	 */
 	public void setCostPriceGbp(Double costPriceGbp) {
 		this.costPriceGbp = costPriceGbp;
-	}	
+	}
+
+	/**
+	 * @return the supplier
+	 */
+	public SupplierVO getSupplier() {
+		return supplier;
+	}
+
+	/**
+	 * @param supplier the supplier to set
+	 */
+	public void setSupplier(SupplierVO supplier) {
+		this.supplier = supplier;
+	}			
 	
 }

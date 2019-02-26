@@ -173,9 +173,10 @@
 				   		 	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-left">	
 				        		<p:outputLabel for="shipComplete" value="Is Shipment Complete" />
 					        		<p:selectOneRadio id="shipComplete" value="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete}" 
-					        			disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}" immediate="true" >
-					            	<f:selectItem itemLabel="Yes" itemValue="1" />
-					            	<f:selectItem itemLabel="No" itemValue="0" />
+					        			immediate="true" >
+					            	<f:selectItem itemLabel="Yes" itemValue="1" id="yesbox"  />
+					            	<f:selectItem itemLabel="No" itemValue="0" id="nobox"/>					            	
+					            	<p:ajax immediate="true"/>
 					       		</p:selectOneRadio>
 					      	</div>	
 					      							      	 		       		                
@@ -187,7 +188,7 @@
 					    						    	
 					    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">
 							    <p:commandButton value="Save" id="saveShipProductBtn" actionListener="#{ShipmentWizard.saveShipmentProduct}" 
-							    	rendered="#{ShipmentWizard.selectedShipmentProductVO !=null}" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}"
+							    	rendered="#{ShipmentWizard.selectedShipmentProductVO !=null}" 
 									ajax="true" styleClass="btn btn-block ui-state-default" immediate="true" update="messages shipmentProductForm:allShipProductsList shipmentProductForm:shipProductPanel" /> <!-- onclick="this.disabled=true;"  -->
 						    </div>
 					    </div>					    		                

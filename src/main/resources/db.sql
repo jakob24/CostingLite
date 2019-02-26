@@ -115,3 +115,14 @@ ADD COLUMN `cost_price_usd` DOUBLE NULL AFTER `cost_price_gbp`;
 SET SQL_SAFE_UPDATES = 0;
 update costing_lite.product set cost_price_usd = (web_rrp * 0.3) where cost_price_usd is null
 
+#21/02/2019
+ALTER TABLE `costing_lite`.`product` 
+ADD COLUMN `supplier` INT(11) NULL AFTER `cost_price_usd`;
+
+ALTER TABLE `costing_lite`.`product` 
+ADD CONSTRAINT `product_supplier_fk`
+  FOREIGN KEY (`supplier`)
+  REFERENCES `costing_lite`.`supplier` (`supplier_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+

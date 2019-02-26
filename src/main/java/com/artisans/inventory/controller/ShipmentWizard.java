@@ -535,9 +535,9 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 				if(getSelectedInvoiceVO().getShipmentComplete() == SHIPMENT_COMPLETE) {
 					if(null == getSelectedInvoiceVO().getDatePaid()) {
 						//Also set date paid on invoice if empty
-						getSelectedInvoiceVO().setDatePaid(new Date());
-						invoiceService.updateInvoice(getSelectedInvoiceVO());
+						getSelectedInvoiceVO().setDatePaid(new Date());						
 					}
+					invoiceService.updateInvoice(getSelectedInvoiceVO());
 				}
 				refreshShipmentProductScreen();
 				UIMessageHelper.getInstance().displayUIMessage("product_saved", FacesMessage.SEVERITY_INFO);

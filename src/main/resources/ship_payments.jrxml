@@ -187,7 +187,7 @@ where inv.invoice_id= $P{invoice_id}]]>
 		<band height="5" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="29" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
 				<reportElement x="5" y="0" width="70" height="20" uuid="26ae7b58-8fcb-4fae-9993-71d6386e07c9"/>
 				<textElement textAlignment="Center">
@@ -256,7 +256,7 @@ where inv.invoice_id= $P{invoice_id}]]>
 		<band splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="22" splitType="Stretch">
+		<band height="39" splitType="Stretch">
 			<textField>
 				<reportElement x="160" y="2" width="48" height="18" uuid="b4b73ede-5609-4ad8-8c3e-517e5c0593c6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -307,7 +307,7 @@ where inv.invoice_id= $P{invoice_id}]]>
 				<textFieldExpression><![CDATA[$V{SumAmountUSD}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="0" width="552" height="3" uuid="484009a7-0785-4744-9c88-4a007d553150"/>
+				<reportElement x="0" y="0" width="552" height="1" uuid="484009a7-0785-4744-9c88-4a007d553150"/>
 				<graphicElement>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
@@ -319,6 +319,9 @@ where inv.invoice_id= $P{invoice_id}]]>
 				</textElement>
 				<text><![CDATA[$]]></text>
 			</staticText>
+			<line>
+				<reportElement x="0" y="30" width="551" height="1" uuid="f21e2177-7a85-4761-a079-234ffa226592"/>
+			</line>
 		</band>
 	</summary>
 </jasperReport>

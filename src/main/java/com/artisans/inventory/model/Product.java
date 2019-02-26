@@ -105,6 +105,10 @@ public class Product implements Serializable {
     @ManyToOne
     @JoinColumn(name="modified_by")
     private User user;
+    
+    @ManyToOne
+    @JoinColumn(name="supplier")
+    private Supplier supplier;    
 
     /** Default constructor. */
     public Product() {
@@ -498,6 +502,20 @@ public class Product implements Serializable {
 	 */
 	public void setCostPriceGbp(double costPriceGbp) {
 		this.costPriceGbp = costPriceGbp;
+	}
+		
+	/**
+	 * @return the supplier
+	 */
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	/**
+	 * @param supplier the supplier to set
+	 */
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 
 	/**
