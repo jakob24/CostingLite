@@ -22,6 +22,7 @@ import org.springframework.core.io.ResourceLoader;
 import com.artisans.inventory.helper.ApplicationConfiguration;
 import com.artisans.inventory.helper.BeanHelper;
 import com.artisans.inventory.service.api.InvoiceService;
+import com.artisans.inventory.service.api.ReportsService;
 import com.artisans.inventory.vo.InvoiceVO;
 import com.artisans.inventory.vo.SupplierVO;
 
@@ -44,6 +45,9 @@ public class BaseWizard implements Serializable
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	InvoiceService invoiceService;
+	
+	@Autowired
+	ReportsService reportService;
 	
 	@Autowired
 	private ApplicationConfiguration configUtil;	
@@ -89,38 +93,6 @@ public class BaseWizard implements Serializable
 		} catch (IOException e) {
 			e.printStackTrace();
 		}			
-	}
-	
-    /**
-     * Generate Invoice Report
-     */
-    public void generateInvoiceReport(InvoiceVO invoiceVO) {
-    	    		
-    	//configUtil.getProperty("invoice.report")
-		try {
-			String reportName= invoiceVO.getSupplier().getName() + "_invoice_" + BeanHelper.getDisplayDate(new Date()) + ".pdf";
-			
-			FacesContext context = FacesContext.getCurrentInstance();
-			HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();   
-			response.reset();
-			response.setContentType("application/pdf");	
-			response.setHeader("Content-disposition", "attachment; filename= "+ reportName);
-			
-			String path = resourceLoader.getResource("classpath:invoice.jrxml").getURI().getPath();
-			JasperReport jasperReport = JasperCompileManager.compileReport(path);
-			// Parameters for report
-			Map<String, Object> parameter = new HashMap<String, Object>();
-			parameter.put("invoice_id", invoiceVO.getInvoiceId());			
-			
-			ServletOutputStream stream = response.getOutputStream();				
-			JasperPrint jasperPrint = invoiceService.exportInvoicePdfFile(jasperReport, parameter);
-			
-			JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
-			stream.flush();
-			stream.close();
-			FacesContext.getCurrentInstance().responseComplete();				
-		} catch (SQLException | JRException | IOException e) {
-			e.printStackTrace();
-		}		
-    }		    
+	}	
+	    
 }

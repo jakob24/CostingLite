@@ -26,9 +26,9 @@ public class LoginController extends BaseWizard implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	
 	private MenuModel topMenu;
+
 	
 	/**
 	 * @return the topMenu
@@ -43,6 +43,7 @@ public class LoginController extends BaseWizard implements Serializable {
 	public void setTopMenu(MenuModel topMenu) {
 		this.topMenu = topMenu;
 	}
+
 
 
 	@PostConstruct
@@ -100,7 +101,19 @@ public class LoginController extends BaseWizard implements Serializable {
 		//item.setOutcome("subscription");
 		item.setIcon("fa fa-user-plus");
 		dataSubmenu.addElement(item);	
+		
+		DefaultSubMenu reportSubmenu = new DefaultSubMenu("Reports");		
+		item = new DefaultMenuItem("Full Inventory Report");
+		item.setCommand("#{ReportsController.generateInventoryReport}");
+		item.setIcon("fa fa-cart-plus");
+		item.setAjax(false);
+		reportSubmenu.addElement(item);	
+				
+		item = new DefaultMenuItem("Shipment Product Report");		
+		item.setHref("courier.xhtml");
+		item.setIcon("fa fa-ship");
+		reportSubmenu.addElement(item);						
 							
-		topMenu.addElement(dataSubmenu);			
-	}
+		topMenu.addElement(reportSubmenu);			
+	}	 	
 }

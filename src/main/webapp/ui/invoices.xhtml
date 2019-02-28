@@ -55,8 +55,7 @@
 				<h:form id="invoiceForm">         
 				    <p:growl id="growl" sticky="true" showDetail="true"/>			 
 				 	<p:importConstants type="com.artisans.inventory.controller.InvoiceWizard" var="WizardController"/>				 	
-				    <p:wizard flowListener="#{InvoiceWizard.onFlowProcess}" widgetVar="wizard">
-						
+				    <p:wizard flowListener="#{InvoiceWizard.onFlowProcess}" widgetVar="wizard" showNavBar="true" showStepStatus="true">						
 						<ui:include src="invoiceTab.xhtml"/>						
 				 		<ui:include src="invoicePaymentTab.xhtml"/>				
 				 		<ui:include src="invoiceConfirmTab.xhtml"/>	

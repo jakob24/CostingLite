@@ -93,7 +93,7 @@
              
           	<p:panel header="Amend Shipment Details">
 				<p:dataTable var="shipments" value="#{ShipmentWizard.selectedShipment}" id="shipmentList"  rowKey="#{shipments.shipmentId}"
-					editable="#{! ShipmentWizard.selectedInvoiceVO.shipmentComplete.toString() == '1'}" emptyMessage="" reflow="true" style="margin: 0 auto;" > 
+					editable="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete.toString() == '0'}" emptyMessage="" reflow="true" style="margin: 0 auto;" > 
 							        	        
 					<p:ajax event="rowEdit" listener="#{ShipmentWizard.onShipmentsEdit}" update=":messages shipmentForm:allShipmentList shipmentList shipmentForm:addshipmentBtn" 
 						oncomplete="showHideNextButtonForFirstTab(); enableAddShipmentButton();"/> 

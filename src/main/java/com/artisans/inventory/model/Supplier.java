@@ -46,6 +46,9 @@ public class Supplier implements Serializable {
     @OneToMany(mappedBy="supplier")
     private List<Invoice> invoice;
     
+    @Column(length=4000)
+    private String comments;    
+    
     @ManyToOne
     @JoinColumn(name="modified_by")
     private User user;
@@ -158,8 +161,23 @@ public class Supplier implements Serializable {
     public void setUser(User aUser) {
         user = aUser;
     }
-
+    
+    
     /**
+	 * @return the comments
+	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	/**
      * Compares the key for this instance with another Supplier.
      *
      * @param other The object to compare to

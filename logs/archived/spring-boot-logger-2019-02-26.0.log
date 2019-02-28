@@ -1,0 +1,2316 @@
+2019-01-20 07:29:26,012 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8090-exec-2] Servlet.service() for servlet [facesServlet] in context with path [/inventory] threw exception [Error Parsing /ui/invoiceConfirmTab.xhtml: Error Traced[line: 70] The element type "h:panelGrid" must be terminated by the matching end-tag "</h:panelGrid>".] with root cause
+javax.faces.view.facelets.FaceletException: Error Parsing /ui/invoiceConfirmTab.xhtml: Error Traced[line: 70] The element type "h:panelGrid" must be terminated by the matching end-tag "</h:panelGrid>".
+	at com.sun.faces.facelets.compiler.SAXCompiler.doCompile(SAXCompiler.java:487)
+	at com.sun.faces.facelets.compiler.SAXCompiler.doCompile(SAXCompiler.java:460)
+	at com.sun.faces.facelets.compiler.Compiler.compile(Compiler.java:124)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory.createFacelet(DefaultFaceletFactory.java:475)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory.access$100(DefaultFaceletFactory.java:107)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory$1.newInstance(DefaultFaceletFactory.java:201)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory$1.newInstance(DefaultFaceletFactory.java:198)
+	at com.sun.faces.facelets.impl.DefaultFaceletCache$1.newInstance(DefaultFaceletCache.java:88)
+	at com.sun.faces.facelets.impl.DefaultFaceletCache$1.newInstance(DefaultFaceletCache.java:81)
+	at com.sun.faces.util.ExpiringConcurrentCache$1.call(ExpiringConcurrentCache.java:100)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at com.sun.faces.util.ExpiringConcurrentCache.get(ExpiringConcurrentCache.java:115)
+	at com.sun.faces.facelets.impl.DefaultFaceletCache.getFacelet(DefaultFaceletCache.java:126)
+	at com.sun.faces.facelets.impl.DefaultFaceletCache.getFacelet(DefaultFaceletCache.java:63)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory.getFacelet(DefaultFaceletFactory.java:289)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:371)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:351)
+	at com.sun.faces.facelets.impl.DefaultFaceletContext.includeFacelet(DefaultFaceletContext.java:204)
+	at com.sun.faces.facelets.tag.ui.IncludeHandler.apply(IncludeHandler.java:125)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at com.sun.faces.facelets.tag.ui.DefineHandler.applyDefinition(DefineHandler.java:107)
+	at com.sun.faces.facelets.tag.ui.CompositionHandler.apply(CompositionHandler.java:208)
+	at com.sun.faces.facelets.impl.DefaultFaceletContext$TemplateManager.apply(DefaultFaceletContext.java:414)
+	at com.sun.faces.facelets.impl.DefaultFaceletContext.includeDefinition(DefaultFaceletContext.java:384)
+	at com.sun.faces.facelets.tag.ui.InsertHandler.apply(InsertHandler.java:112)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at com.sun.faces.facelets.compiler.NamespaceHandler.apply(NamespaceHandler.java:94)
+	at com.sun.faces.facelets.compiler.EncodingHandler.apply(EncodingHandler.java:88)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:313)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:372)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:351)
+	at com.sun.faces.facelets.impl.DefaultFaceletContext.includeFacelet(DefaultFaceletContext.java:204)
+	at com.sun.faces.facelets.tag.ui.CompositionHandler.apply(CompositionHandler.java:175)
+	at com.sun.faces.facelets.compiler.NamespaceHandler.apply(NamespaceHandler.java:94)
+	at com.sun.faces.facelets.compiler.EncodingHandler.apply(EncodingHandler.java:88)
+	at com.sun.faces.facelets.impl.DefaultFacelet.apply(DefaultFacelet.java:162)
+	at com.sun.faces.application.view.FaceletViewHandlingStrategy.buildView(FaceletViewHandlingStrategy.java:381)
+	at com.sun.faces.lifecycle.RenderResponsePhase.execute(RenderResponsePhase.java:102)
+	at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:100)
+	at com.sun.faces.lifecycle.LifecycleImpl.render(LifecycleImpl.java:223)
+	at javax.faces.webapp.FacesServlet.service(FacesServlet.java:671)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.primefaces.webapp.filter.FileUploadFilter.doFilter(FileUploadFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1468)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-01-20 07:31:31,077 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8090-exec-1] Servlet.service() for servlet [facesServlet] in context with path [/inventory] threw exception [Error Parsing /ui/invoiceConfirmTab.xhtml: Error Traced[line: 41] The element type "h:panelGrid" must be terminated by the matching end-tag "</h:panelGrid>".] with root cause
+javax.faces.view.facelets.FaceletException: Error Parsing /ui/invoiceConfirmTab.xhtml: Error Traced[line: 41] The element type "h:panelGrid" must be terminated by the matching end-tag "</h:panelGrid>".
+	at com.sun.faces.facelets.compiler.SAXCompiler.doCompile(SAXCompiler.java:487)
+	at com.sun.faces.facelets.compiler.SAXCompiler.doCompile(SAXCompiler.java:460)
+	at com.sun.faces.facelets.compiler.Compiler.compile(Compiler.java:124)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory.createFacelet(DefaultFaceletFactory.java:475)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory.access$100(DefaultFaceletFactory.java:107)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory$1.newInstance(DefaultFaceletFactory.java:201)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory$1.newInstance(DefaultFaceletFactory.java:198)
+	at com.sun.faces.facelets.impl.DefaultFaceletCache$1.newInstance(DefaultFaceletCache.java:88)
+	at com.sun.faces.facelets.impl.DefaultFaceletCache$1.newInstance(DefaultFaceletCache.java:81)
+	at com.sun.faces.util.ExpiringConcurrentCache$1.call(ExpiringConcurrentCache.java:100)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at com.sun.faces.util.ExpiringConcurrentCache.get(ExpiringConcurrentCache.java:115)
+	at com.sun.faces.facelets.impl.DefaultFaceletCache.getFacelet(DefaultFaceletCache.java:126)
+	at com.sun.faces.facelets.impl.DefaultFaceletCache.getFacelet(DefaultFaceletCache.java:63)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory.getFacelet(DefaultFaceletFactory.java:289)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:371)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:351)
+	at com.sun.faces.facelets.impl.DefaultFaceletContext.includeFacelet(DefaultFaceletContext.java:204)
+	at com.sun.faces.facelets.tag.ui.IncludeHandler.apply(IncludeHandler.java:125)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at com.sun.faces.facelets.tag.ui.DefineHandler.applyDefinition(DefineHandler.java:107)
+	at com.sun.faces.facelets.tag.ui.CompositionHandler.apply(CompositionHandler.java:208)
+	at com.sun.faces.facelets.impl.DefaultFaceletContext$TemplateManager.apply(DefaultFaceletContext.java:414)
+	at com.sun.faces.facelets.impl.DefaultFaceletContext.includeDefinition(DefaultFaceletContext.java:384)
+	at com.sun.faces.facelets.tag.ui.InsertHandler.apply(InsertHandler.java:112)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at com.sun.faces.facelets.compiler.NamespaceHandler.apply(NamespaceHandler.java:94)
+	at com.sun.faces.facelets.compiler.EncodingHandler.apply(EncodingHandler.java:88)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:313)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:372)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:351)
+	at com.sun.faces.facelets.impl.DefaultFaceletContext.includeFacelet(DefaultFaceletContext.java:204)
+	at com.sun.faces.facelets.tag.ui.CompositionHandler.apply(CompositionHandler.java:175)
+	at com.sun.faces.facelets.compiler.NamespaceHandler.apply(NamespaceHandler.java:94)
+	at com.sun.faces.facelets.compiler.EncodingHandler.apply(EncodingHandler.java:88)
+	at com.sun.faces.facelets.impl.DefaultFacelet.apply(DefaultFacelet.java:162)
+	at com.sun.faces.application.view.FaceletViewHandlingStrategy.buildView(FaceletViewHandlingStrategy.java:381)
+	at com.sun.faces.lifecycle.RenderResponsePhase.execute(RenderResponsePhase.java:102)
+	at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:100)
+	at com.sun.faces.lifecycle.LifecycleImpl.render(LifecycleImpl.java:223)
+	at javax.faces.webapp.FacesServlet.service(FacesServlet.java:671)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.primefaces.webapp.filter.FileUploadFilter.doFilter(FileUploadFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1468)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-01-20 07:31:32,428 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8090-exec-9] Servlet.service() for servlet [facesServlet] in context with path [/inventory] threw exception [Error Parsing /ui/invoiceConfirmTab.xhtml: Error Traced[line: 41] The element type "h:panelGrid" must be terminated by the matching end-tag "</h:panelGrid>".] with root cause
+javax.faces.view.facelets.FaceletException: Error Parsing /ui/invoiceConfirmTab.xhtml: Error Traced[line: 41] The element type "h:panelGrid" must be terminated by the matching end-tag "</h:panelGrid>".
+	at com.sun.faces.facelets.compiler.SAXCompiler.doCompile(SAXCompiler.java:487)
+	at com.sun.faces.facelets.compiler.SAXCompiler.doCompile(SAXCompiler.java:460)
+	at com.sun.faces.facelets.compiler.Compiler.compile(Compiler.java:124)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory.createFacelet(DefaultFaceletFactory.java:475)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory.access$100(DefaultFaceletFactory.java:107)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory$1.newInstance(DefaultFaceletFactory.java:201)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory$1.newInstance(DefaultFaceletFactory.java:198)
+	at com.sun.faces.facelets.impl.DefaultFaceletCache$1.newInstance(DefaultFaceletCache.java:88)
+	at com.sun.faces.facelets.impl.DefaultFaceletCache$1.newInstance(DefaultFaceletCache.java:81)
+	at com.sun.faces.util.ExpiringConcurrentCache$1.call(ExpiringConcurrentCache.java:100)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at com.sun.faces.util.ExpiringConcurrentCache.get(ExpiringConcurrentCache.java:115)
+	at com.sun.faces.facelets.impl.DefaultFaceletCache.getFacelet(DefaultFaceletCache.java:126)
+	at com.sun.faces.facelets.impl.DefaultFaceletCache.getFacelet(DefaultFaceletCache.java:63)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory.getFacelet(DefaultFaceletFactory.java:289)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:371)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:351)
+	at com.sun.faces.facelets.impl.DefaultFaceletContext.includeFacelet(DefaultFaceletContext.java:204)
+	at com.sun.faces.facelets.tag.ui.IncludeHandler.apply(IncludeHandler.java:125)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at com.sun.faces.facelets.tag.ui.DefineHandler.applyDefinition(DefineHandler.java:107)
+	at com.sun.faces.facelets.tag.ui.CompositionHandler.apply(CompositionHandler.java:208)
+	at com.sun.faces.facelets.impl.DefaultFaceletContext$TemplateManager.apply(DefaultFaceletContext.java:414)
+	at com.sun.faces.facelets.impl.DefaultFaceletContext.includeDefinition(DefaultFaceletContext.java:384)
+	at com.sun.faces.facelets.tag.ui.InsertHandler.apply(InsertHandler.java:112)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at com.sun.faces.facelets.compiler.NamespaceHandler.apply(NamespaceHandler.java:94)
+	at com.sun.faces.facelets.compiler.EncodingHandler.apply(EncodingHandler.java:88)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:313)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:372)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:351)
+	at com.sun.faces.facelets.impl.DefaultFaceletContext.includeFacelet(DefaultFaceletContext.java:204)
+	at com.sun.faces.facelets.tag.ui.CompositionHandler.apply(CompositionHandler.java:175)
+	at com.sun.faces.facelets.compiler.NamespaceHandler.apply(NamespaceHandler.java:94)
+	at com.sun.faces.facelets.compiler.EncodingHandler.apply(EncodingHandler.java:88)
+	at com.sun.faces.facelets.impl.DefaultFacelet.apply(DefaultFacelet.java:162)
+	at com.sun.faces.application.view.FaceletViewHandlingStrategy.buildView(FaceletViewHandlingStrategy.java:381)
+	at com.sun.faces.lifecycle.RenderResponsePhase.execute(RenderResponsePhase.java:102)
+	at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:100)
+	at com.sun.faces.lifecycle.LifecycleImpl.render(LifecycleImpl.java:223)
+	at javax.faces.webapp.FacesServlet.service(FacesServlet.java:671)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.primefaces.webapp.filter.FileUploadFilter.doFilter(FileUploadFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1468)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-01-20 07:31:33,304 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8090-exec-3] Servlet.service() for servlet [facesServlet] in context with path [/inventory] threw exception [Error Parsing /ui/invoiceConfirmTab.xhtml: Error Traced[line: 41] The element type "h:panelGrid" must be terminated by the matching end-tag "</h:panelGrid>".] with root cause
+javax.faces.view.facelets.FaceletException: Error Parsing /ui/invoiceConfirmTab.xhtml: Error Traced[line: 41] The element type "h:panelGrid" must be terminated by the matching end-tag "</h:panelGrid>".
+	at com.sun.faces.facelets.compiler.SAXCompiler.doCompile(SAXCompiler.java:487)
+	at com.sun.faces.facelets.compiler.SAXCompiler.doCompile(SAXCompiler.java:460)
+	at com.sun.faces.facelets.compiler.Compiler.compile(Compiler.java:124)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory.createFacelet(DefaultFaceletFactory.java:475)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory.access$100(DefaultFaceletFactory.java:107)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory$1.newInstance(DefaultFaceletFactory.java:201)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory$1.newInstance(DefaultFaceletFactory.java:198)
+	at com.sun.faces.facelets.impl.DefaultFaceletCache$1.newInstance(DefaultFaceletCache.java:88)
+	at com.sun.faces.facelets.impl.DefaultFaceletCache$1.newInstance(DefaultFaceletCache.java:81)
+	at com.sun.faces.util.ExpiringConcurrentCache$1.call(ExpiringConcurrentCache.java:100)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at com.sun.faces.util.ExpiringConcurrentCache.get(ExpiringConcurrentCache.java:115)
+	at com.sun.faces.facelets.impl.DefaultFaceletCache.getFacelet(DefaultFaceletCache.java:126)
+	at com.sun.faces.facelets.impl.DefaultFaceletCache.getFacelet(DefaultFaceletCache.java:63)
+	at com.sun.faces.facelets.impl.DefaultFaceletFactory.getFacelet(DefaultFaceletFactory.java:289)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:371)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:351)
+	at com.sun.faces.facelets.impl.DefaultFaceletContext.includeFacelet(DefaultFaceletContext.java:204)
+	at com.sun.faces.facelets.tag.ui.IncludeHandler.apply(IncludeHandler.java:125)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at com.sun.faces.facelets.tag.ui.DefineHandler.applyDefinition(DefineHandler.java:107)
+	at com.sun.faces.facelets.tag.ui.CompositionHandler.apply(CompositionHandler.java:208)
+	at com.sun.faces.facelets.impl.DefaultFaceletContext$TemplateManager.apply(DefaultFaceletContext.java:414)
+	at com.sun.faces.facelets.impl.DefaultFaceletContext.includeDefinition(DefaultFaceletContext.java:384)
+	at com.sun.faces.facelets.tag.ui.InsertHandler.apply(InsertHandler.java:112)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.applyNextHandler(DelegatingMetaTagHandler.java:161)
+	at com.sun.faces.facelets.tag.jsf.ComponentTagHandlerDelegateImpl.apply(ComponentTagHandlerDelegateImpl.java:203)
+	at javax.faces.view.facelets.DelegatingMetaTagHandler.apply(DelegatingMetaTagHandler.java:135)
+	at javax.faces.view.facelets.CompositeFaceletHandler.apply(CompositeFaceletHandler.java:96)
+	at com.sun.faces.facelets.compiler.NamespaceHandler.apply(NamespaceHandler.java:94)
+	at com.sun.faces.facelets.compiler.EncodingHandler.apply(EncodingHandler.java:88)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:313)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:372)
+	at com.sun.faces.facelets.impl.DefaultFacelet.include(DefaultFacelet.java:351)
+	at com.sun.faces.facelets.impl.DefaultFaceletContext.includeFacelet(DefaultFaceletContext.java:204)
+	at com.sun.faces.facelets.tag.ui.CompositionHandler.apply(CompositionHandler.java:175)
+	at com.sun.faces.facelets.compiler.NamespaceHandler.apply(NamespaceHandler.java:94)
+	at com.sun.faces.facelets.compiler.EncodingHandler.apply(EncodingHandler.java:88)
+	at com.sun.faces.facelets.impl.DefaultFacelet.apply(DefaultFacelet.java:162)
+	at com.sun.faces.application.view.FaceletViewHandlingStrategy.buildView(FaceletViewHandlingStrategy.java:381)
+	at com.sun.faces.lifecycle.RenderResponsePhase.execute(RenderResponsePhase.java:102)
+	at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:100)
+	at com.sun.faces.lifecycle.LifecycleImpl.render(LifecycleImpl.java:223)
+	at javax.faces.webapp.FacesServlet.service(FacesServlet.java:671)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.primefaces.webapp.filter.FileUploadFilter.doFilter(FileUploadFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1468)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-01-20 07:32:01,944 ERROR com.sun.faces.util.Util [http-nio-8090-exec-2] JSF1007: Duplicate component ID invoiceForm:confirmation found in view.
+2019-01-20 07:32:01,947 ERROR com.sun.faces.util.Util [http-nio-8090-exec-2] +id: j_id1
+ type: javax.faces.component.UIViewRoot@61b0a0b8
+  +id: javax_faces_location_HEAD
+   type: com.sun.faces.component.ComponentResourceContainer@3ff4d2d9
+    +id: j_id2
+     type: javax.faces.component.UIOutput@537ee5c
+    +id: j_id3
+     type: javax.faces.component.UIOutput@7a394de8
+    +id: j_id4
+     type: javax.faces.component.UIOutput@21819110
+    +id: j_id5
+     type: javax.faces.component.UIOutput@38fafde3
+    +id: j_id6
+     type: javax.faces.component.UIOutput@205a1ae
+    +id: j_id7
+     type: javax.faces.component.UIOutput@3263fa0b
+    +id: j_id8
+     type: javax.faces.component.UIOutput@1fc7e446
+    +id: j_id9
+     type: javax.faces.component.UIOutput@70bd07b8
+    +id: j_id10
+     type: javax.faces.component.UIOutput@5f9ac0d0
+    +id: j_id11
+     type: javax.faces.component.UIOutput@7204ca8a
+  +id: javax_faces_location_BODY
+   type: com.sun.faces.component.ComponentResourceContainer@5241e558
+    +id: j_idt29
+     type: javax.faces.component.UIOutput@4ad9a86f
+      +id: j_idt30
+       type: 
+ 				$(document).ready(function()
+				{			
+					//Enable Last pencil on Grid editor
+					$('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){$(this).click()});
+					
+					if(#{facesContext.validationFailed}) 
+					{
+						PF('wizard').nextNav.hide();
+					}
+					else
+					{
+						PF('wizard').nextNav.show();
+					}									
+										  				  
+				});					
+
+                
+				function blink() { 
+				  $('#amendTool').fadeOut(500).fadeIn(500, blink); 
+				}
+				
+				function showHideNextButton()
+				{					
+					if(#{facesContext.validationFailed}) 
+					{
+						PF('wizard').nextNav.hide();
+					}
+					else
+					{
+						PF('wizard').nextNav.show();
+					}
+				}
+				
+				function clickPencil()
+				{
+					$('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){$(this).click()});
+				}
+					
+			
+  +id: j_idt1
+   type: <html xmlns="http://www.w3.org/1999/xhtml">
+
+	
+  +id: j_idt2
+   type: javax.faces.component.UIOutput@434c7da4
+    +id: j_idt3
+     type: 
+		<title>
+    +id: j_idt4
+     type:  - Costing Lite</title>		
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>	
+		<meta name="Title" content="Admin Pages - ShareOurCar.com"/>				
+		<meta name="description" content="Create your group with your friends and colleagues to share your daily commute by car."/>
+		<meta name="keywords" content="Share Car, Car Sharing, Car Share, car pooling, pool car, Ride share, drive share"/>	
+		<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=yes"/>			
+		
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.css"/>
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap-theme.css"/>		
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/font-awesome.css"/>	
+		
+		 	
+		<link rel="icon" type="image/ico" href="#{request.contextPath}/resources/images/carlogo_icon.ico"/>
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/stylesheet.css"/>
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/style.css"/>
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/jquery.cookiebar.css"/>
+		
+		<script src="#{request.contextPath}/resources/scripts/jquery.cookiebar.js"/>	
+	
+  +id: j_idt5
+   type: javax.faces.component.html.HtmlBody@17c8bfdd
+    +id: j_idt6
+     type: org.primefaces.component.layout.Layout@4afee359
+      +id: j_idt7
+       type: org.primefaces.component.layout.LayoutUnit@4de3b0b9
+        +id: j_idt8
+         type: 
+					<div id="header">		
+						
+        +id: j_idt9
+         type: javax.faces.component.html.HtmlForm@6d6245fc
+          +id: j_idt10
+           type: 
+			<div class="hidden-sm hidden-xs container-fluid">
+			   <div class="row">
+			   	<a href="#{request.contextPath}/ui/rota.xhtml">
+			   	
+				</a>
+			   </div>
+			</div> 
+			<div class="hidden-md hidden-lg .visible-sm-block .visible-xs-block">						   
+			   	<a href="#{request.contextPath}/ui/rota.xhtml">
+			   		
+				</a>
+			</div> 			   
+		
+        +id: j_idt11
+         type: 
+					</div>
+				
+      +id: j_idt12
+       type: org.primefaces.component.layout.LayoutUnit@3f8629da
+        +id: j_idt13
+         type: javax.faces.component.html.HtmlForm@25ff158
+          +id: j_idt14
+           type: 				    	
+					    <div class="container">				        
+				            <ul class="nav navbar-nav">
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/aboutus.xhtml">
+					          		
+          +id: j_idt15
+           type: org.primefaces.component.outputlabel.OutputLabel@5269ffd2
+          +id: j_idt16
+           type: </a>
+					          </li>					        
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/faq.xhtml">
+					          	
+          +id: j_idt17
+           type: org.primefaces.component.outputlabel.OutputLabel@2d5b0dc6
+          +id: j_idt18
+           type: 
+					          </a>
+					          </li>					        
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/terms.xhtml">
+					          	
+          +id: j_idt19
+           type: org.primefaces.component.outputlabel.OutputLabel@231d294e
+          +id: j_idt20
+           type: 
+					          </a>
+					          </li>   					       
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/privacy.xhtml">
+					          	
+          +id: j_idt21
+           type: org.primefaces.component.outputlabel.OutputLabel@5eb5c944
+          +id: j_idt22
+           type: 
+					          </a>
+					          </li>					        
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/contact.xhtml">
+					          	
+          +id: j_idt23
+           type: org.primefaces.component.outputlabel.OutputLabel@43bf3a2f
+          +id: j_idt24
+           type: 							          
+					          </a></li>
+				            </ul>				        
+					    </div>	    				    	
+			   		
+      +id: j_idt25
+       type: org.primefaces.component.layout.LayoutUnit@36ff2aa3
+        +id: j_idt26
+         type: javax.faces.component.html.HtmlForm@7c62326b
+          +id: j_idt27
+           type: 
+			    	<div>
+					  
+          +id: menubar
+           type: org.primefaces.component.menubar.Menubar@c6d2b4a
+          +id: j_idt28
+           type: 
+					</div>					 
+				
+        +id: j_idt31
+         type: 	
+    
+		<div class="container-fluid">
+			<div class="ui-g-12 ui-md-4 ui-lg-6" id="dataEditDiv">				
+				
+        +id: invoiceForm
+         type: javax.faces.component.html.HtmlForm@363916aa
+          +id: growl
+           type: org.primefaces.component.growl.Growl@79dc98fc
+          +id: j_idt32
+           type: org.primefaces.component.wizard.Wizard@14401cc6
+            +id: InvoiceTab
+             type: org.primefaces.component.tabview.Tab@7192427f
+              +id: j_idt33
+               type: org.primefaces.component.panel.Panel@f6086a1
+                +id: j_idt34
+                 type: javax.faces.component.html.HtmlPanelGrid@4b0dd452
+                  +id: j_idt35
+                   type: javax.faces.component.html.HtmlOutputText@1266e4c9
+                  +id: supplierSelect
+                   type: org.primefaces.component.selectonemenu.SelectOneMenu@6546c6f
+                    +id: j_idt36
+                     type: javax.faces.component.UISelectItem@65364760
+                    +id: j_idt37
+                     type: javax.faces.component.UISelectItems@6e6890e9
+                  +id: j_idt38
+                   type: org.primefaces.component.spacer.Spacer@4b0d7141
+                  +id: j_idt39
+                   type: javax.faces.component.html.HtmlOutputText@6e1f5b5b
+                  +id: invoiceSelect
+                   type: org.primefaces.component.selectonemenu.SelectOneMenu@39c51cbf
+                    +id: j_idt40
+                     type: javax.faces.component.UISelectItem@13003cb6
+                    +id: j_idt41
+                     type: javax.faces.component.UISelectItems@33a7d0ee
+                    +id: j_idt42
+                     type: javax.faces.component.UISelectItem@27f68042
+                +id: invoicePanel
+                 type: org.primefaces.component.panel.Panel@364740e7
+                  +id: j_idt43
+                   type: javax.faces.component.html.HtmlPanelGrid@5a167970
+                    +id: j_idt44
+                     type: javax.faces.component.html.HtmlOutputText@24303f15
+                    +id: invNumber
+                     type: org.primefaces.component.inputtext.InputText@299dbbdd
+                    +id: j_idt45
+                     type: javax.faces.component.html.HtmlOutputText@3afaca3c
+                    +id: invDate
+                     type: org.primefaces.component.calendar.Calendar@3636f5fc
+                    +id: j_idt46
+                     type: javax.faces.component.html.HtmlOutputText@135bbcb8
+                    +id: invamtusd
+                     type: org.primefaces.component.inputnumber.InputNumber@575cae5d
+                    +id: j_idt47
+                     type: javax.faces.component.html.HtmlOutputText@3b1b25a0
+                    +id: j_idt48
+                     type: org.primefaces.component.inputtextarea.InputTextarea@3a83be2a
+                    +id: j_idt49
+                     type: javax.faces.component.html.HtmlOutputText@74f36bbe
+                    +id: invAmount
+                     type: org.primefaces.component.inputnumber.InputNumber@466f0d3b
+                    +id: j_idt50
+                     type: javax.faces.component.html.HtmlOutputText@243b0673
+                    +id: j_idt51
+                     type: javax.faces.component.html.HtmlOutputText@3ee8e30
+            +id: InvoicePaymentTab
+             type: org.primefaces.component.tabview.Tab@6cafbb68
+              +id: PaymentsTab
+               type: org.primefaces.component.panel.Panel@52177513
+                +id: paymentList
+                 type: org.primefaces.component.datatable.DataTable@2e63e9bc
+                  +id: j_idt52
+                   type: org.primefaces.component.outputlabel.OutputLabel@598b7d4e
+                  +id: j_id14
+                   type: javax.faces.component.UIPanel@486ef9ec
+                    +id: j_idt73
+                     type: javax.faces.component.html.HtmlOutputText@2138b21f
+                    +id: j_idt74
+                     type: javax.faces.component.html.HtmlOutputText@1027918d
+                    +id: j_idt75
+                     type: javax.faces.component.html.HtmlOutputText@1244ffca
+                    +id: j_idt76
+                     type: org.primefaces.component.spacer.Spacer@2d5ac5f7
+                    +id: j_idt77
+                     type: javax.faces.component.html.HtmlOutputText@49163209
+                    +id: j_idt78
+                     type: javax.faces.component.html.HtmlOutputText@6591695f
+                    +id: totalPaidText
+                     type: javax.faces.component.html.HtmlOutputText@501e7088
+                  +id: j_idt53
+                   type: org.primefaces.component.column.Column@2b107201
+                    +id: j_idt54
+                     type: org.primefaces.component.celleditor.CellEditor@536e8b10
+                      +id: j_idt55
+                       type: javax.faces.component.html.HtmlOutputText@3d5bdbb3
+                      +id: paymentAmountUSD
+                       type: org.primefaces.component.inputnumber.InputNumber@1e6276a0
+                  +id: j_idt56
+                   type: org.primefaces.component.column.Column@364a9f17
+                    +id: j_idt57
+                     type: org.primefaces.component.celleditor.CellEditor@11dba4c5
+                      +id: j_idt58
+                       type: javax.faces.component.html.HtmlOutputText@72be730e
+                      +id: paymentgbpToUsd
+                       type: org.primefaces.component.inputnumber.InputNumber@7fe4dc8f
+                  +id: j_idt59
+                   type: org.primefaces.component.column.Column@1d345643
+                    +id: j_idt60
+                     type: org.primefaces.component.celleditor.CellEditor@518534ac
+                      +id: j_idt61
+                       type: javax.faces.component.html.HtmlOutputText@50220b91
+                      +id: invAmount
+                       type: org.primefaces.component.inputnumber.InputNumber@9fba5be
+                  +id: j_idt62
+                   type: org.primefaces.component.column.Column@36427c8c
+                    +id: j_idt63
+                     type: org.primefaces.component.celleditor.CellEditor@4e9a1ebc
+                      +id: j_idt64
+                       type: javax.faces.component.html.HtmlOutputText@ea4ea7d
+                      +id: bankCharges
+                       type: org.primefaces.component.inputnumber.InputNumber@5a266842
+                  +id: j_idt65
+                   type: org.primefaces.component.column.Column@7f25d996
+                    +id: j_idt66
+                     type: org.primefaces.component.celleditor.CellEditor@61d45730
+                      +id: j_idt67
+                       type: javax.faces.component.html.HtmlOutputText@480aae75
+                      +id: otherCharges
+                       type: org.primefaces.component.inputnumber.InputNumber@2107bb4e
+                  +id: j_idt68
+                   type: org.primefaces.component.column.Column@703f3f91
+                    +id: j_idt69
+                     type: org.primefaces.component.celleditor.CellEditor@33919b71
+                      +id: j_idt70
+                       type: javax.faces.component.html.HtmlOutputText@2ef5e270
+                      +id: j_idt71
+                       type: org.primefaces.component.calendar.Calendar@3234f12b
+                  +id: amendTool
+                   type: org.primefaces.component.column.Column@3bfe834b
+                    +id: j_idt72
+                     type: org.primefaces.component.roweditor.RowEditor@40bdd56
+                +id: j_idt79
+                 type: 
+				
+			    <div class="row">
+			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
+					    
+                +id: newInvPaymentBtn
+                 type: org.primefaces.component.commandbutton.CommandButton@56c49c5
+                +id: j_idt80
+                 type:  
+				    </div>				    			    			    	 		    
+			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
+					    
+                +id: newShipmentBtn
+                 type: org.primefaces.component.commandbutton.CommandButton@10445dea
+                +id: j_idt81
+                 type:  
+				    </div>					    			    
+				 </div>								
+			
+            +id: confirmTab
+             type: org.primefaces.component.tabview.Tab@5f6f7072
+              +id: j_idt82
+               type: org.primefaces.component.panel.Panel@554f7a4
+                +id: confirmation  <===============
+                 type: javax.faces.component.html.HtmlPanelGrid@6211a4aa
+                  +id: j_idt83
+                   type: javax.faces.component.html.HtmlPanelGrid@50081e0f
+                    +id: j_idt84
+                     type: javax.faces.component.html.HtmlOutputText@74c0189c
+                    +id: j_idt85
+                     type: javax.faces.component.html.HtmlOutputText@560b2877
+                    +id: j_idt86
+                     type: javax.faces.component.html.HtmlOutputText@3950e2e8
+                    +id: j_idt87
+                     type: javax.faces.component.html.HtmlOutputText@29b87bab
+                    +id: j_idt88
+                     type: javax.faces.component.html.HtmlOutputText@5dc882f8
+                    +id: j_idt89
+                     type: javax.faces.component.html.HtmlOutputText@528f51a6
+                +id: confirmation  <===============
+                 type: javax.faces.component.html.HtmlPanelGrid@6c76bebd
+                  +id: paymentList
+                   type: org.primefaces.component.datatable.DataTable@6f9e5bb
+                    +id: j_idt90
+                     type: org.primefaces.component.column.Column@1f3f78de
+                      +id: j_idt91
+                       type: javax.faces.component.html.HtmlOutputText@371518fe
+                    +id: j_idt92
+                     type: org.primefaces.component.column.Column@6ecfcbf7
+                      +id: j_idt93
+                       type: javax.faces.component.html.HtmlOutputText@27d22fa8
+                    +id: j_idt94
+                     type: org.primefaces.component.column.Column@43cf4a04
+                      +id: j_idt95
+                       type: javax.faces.component.html.HtmlOutputText@5c82786b
+                    +id: j_idt96
+                     type: org.primefaces.component.column.Column@4c02807f
+                      +id: j_idt97
+                       type: javax.faces.component.html.HtmlOutputText@7a9b5938
+                    +id: j_idt98
+                     type: org.primefaces.component.column.Column@433db305
+                      +id: j_idt99
+                       type: javax.faces.component.html.HtmlOutputText@cb3ca29
+                +id: j_idt100
+                 type: org.primefaces.component.outputlabel.OutputLabel@546ab2b8
+                +id: j_idt101
+                 type: org.primefaces.component.spacer.Spacer@74186394
+                +id: payInvComplete
+                 type: org.primefaces.component.selectbooleancheckbox.SelectBooleanCheckbox@5a934389
+                +id: j_idt102
+                 type: org.primefaces.component.separator.UISeparator@48e33870
+                +id: j_idt103
+                 type: org.primefaces.component.spacer.Spacer@499dbca6
+                +id: j_idt104
+                 type: org.primefaces.component.commandbutton.CommandButton@7eae62c2
+        +id: j_idt105
+         type: 
+				
+			    <div class="row">			      
+					
+        +id: messages
+         type: org.primefaces.component.messages.Messages@3e61f995
+        +id: j_idt106
+         type: 	
+				</div>				
+			</div>				
+		</div>					
+    
+  +id: j_idt107
+   type: 
+
+</html>
+
+2019-01-20 07:32:01,966 ERROR com.sun.faces.application.view.FaceletViewHandlingStrategy [http-nio-8090-exec-2] Error Rendering View[/ui/invoices.xhtml]
+java.lang.IllegalStateException: Component ID invoiceForm:confirmation has already been found in the view.  
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1127)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.application.view.FaceletPartialStateManagementStrategy.saveView(FaceletPartialStateManagementStrategy.java:462)
+	at com.sun.faces.application.StateManagerImpl.saveView(StateManagerImpl.java:89)
+	at com.sun.faces.application.view.WriteBehindStateWriter.getState(WriteBehindStateWriter.java:334)
+	at com.sun.faces.application.view.WriteBehindStateWriter.flushToWriter(WriteBehindStateWriter.java:228)
+	at com.sun.faces.application.view.FaceletViewHandlingStrategy.renderView(FaceletViewHandlingStrategy.java:507)
+	at com.sun.faces.application.view.MultiViewHandler.renderView(MultiViewHandler.java:194)
+	at com.sun.faces.lifecycle.RenderResponsePhase.execute(RenderResponsePhase.java:126)
+	at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:100)
+	at com.sun.faces.lifecycle.LifecycleImpl.render(LifecycleImpl.java:223)
+	at javax.faces.webapp.FacesServlet.service(FacesServlet.java:671)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.primefaces.webapp.filter.FileUploadFilter.doFilter(FileUploadFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1468)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-01-20 07:32:01,967 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8090-exec-2] Servlet.service() for servlet [facesServlet] in context with path [/inventory] threw exception [Component ID invoiceForm:confirmation has already been found in the view.  ] with root cause
+java.lang.IllegalStateException: Component ID invoiceForm:confirmation has already been found in the view.  
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1127)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.application.view.FaceletPartialStateManagementStrategy.saveView(FaceletPartialStateManagementStrategy.java:462)
+	at com.sun.faces.application.StateManagerImpl.saveView(StateManagerImpl.java:89)
+	at com.sun.faces.application.view.WriteBehindStateWriter.getState(WriteBehindStateWriter.java:334)
+	at com.sun.faces.application.view.WriteBehindStateWriter.flushToWriter(WriteBehindStateWriter.java:228)
+	at com.sun.faces.application.view.FaceletViewHandlingStrategy.renderView(FaceletViewHandlingStrategy.java:507)
+	at com.sun.faces.application.view.MultiViewHandler.renderView(MultiViewHandler.java:194)
+	at com.sun.faces.lifecycle.RenderResponsePhase.execute(RenderResponsePhase.java:126)
+	at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:100)
+	at com.sun.faces.lifecycle.LifecycleImpl.render(LifecycleImpl.java:223)
+	at javax.faces.webapp.FacesServlet.service(FacesServlet.java:671)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.primefaces.webapp.filter.FileUploadFilter.doFilter(FileUploadFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1468)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-01-20 07:33:07,246 ERROR com.sun.faces.util.Util [http-nio-8090-exec-4] JSF1007: Duplicate component ID invoiceForm:paymentList found in view.
+2019-01-20 07:33:07,248 ERROR com.sun.faces.util.Util [http-nio-8090-exec-4] +id: j_id1
+ type: javax.faces.component.UIViewRoot@69f4e023
+  +id: javax_faces_location_HEAD
+   type: com.sun.faces.component.ComponentResourceContainer@4fde2edc
+    +id: j_id2
+     type: javax.faces.component.UIOutput@6209aa42
+    +id: j_id3
+     type: javax.faces.component.UIOutput@6360b438
+    +id: j_id4
+     type: javax.faces.component.UIOutput@393f9702
+    +id: j_id5
+     type: javax.faces.component.UIOutput@729f637
+    +id: j_id6
+     type: javax.faces.component.UIOutput@28dd072a
+    +id: j_id7
+     type: javax.faces.component.UIOutput@4e7ab77d
+    +id: j_id8
+     type: javax.faces.component.UIOutput@b38be37
+    +id: j_id9
+     type: javax.faces.component.UIOutput@43687929
+    +id: j_id10
+     type: javax.faces.component.UIOutput@34cc239
+    +id: j_id11
+     type: javax.faces.component.UIOutput@18164c72
+  +id: javax_faces_location_BODY
+   type: com.sun.faces.component.ComponentResourceContainer@56918041
+    +id: j_idt29
+     type: javax.faces.component.UIOutput@56301a8b
+      +id: j_idt30
+       type: 
+ 				$(document).ready(function()
+				{			
+					//Enable Last pencil on Grid editor
+					$('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){$(this).click()});
+					
+					if(#{facesContext.validationFailed}) 
+					{
+						PF('wizard').nextNav.hide();
+					}
+					else
+					{
+						PF('wizard').nextNav.show();
+					}									
+										  				  
+				});					
+
+                
+				function blink() { 
+				  $('#amendTool').fadeOut(500).fadeIn(500, blink); 
+				}
+				
+				function showHideNextButton()
+				{					
+					if(#{facesContext.validationFailed}) 
+					{
+						PF('wizard').nextNav.hide();
+					}
+					else
+					{
+						PF('wizard').nextNav.show();
+					}
+				}
+				
+				function clickPencil()
+				{
+					$('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){$(this).click()});
+				}
+					
+			
+  +id: j_idt1
+   type: <html xmlns="http://www.w3.org/1999/xhtml">
+
+	
+  +id: j_idt2
+   type: javax.faces.component.UIOutput@3388477e
+    +id: j_idt3
+     type: 
+		<title>
+    +id: j_idt4
+     type:  - Costing Lite</title>		
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>	
+		<meta name="Title" content="Admin Pages - ShareOurCar.com"/>				
+		<meta name="description" content="Create your group with your friends and colleagues to share your daily commute by car."/>
+		<meta name="keywords" content="Share Car, Car Sharing, Car Share, car pooling, pool car, Ride share, drive share"/>	
+		<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=yes"/>			
+		
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.css"/>
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap-theme.css"/>		
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/font-awesome.css"/>	
+		
+		 	
+		<link rel="icon" type="image/ico" href="#{request.contextPath}/resources/images/carlogo_icon.ico"/>
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/stylesheet.css"/>
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/style.css"/>
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/jquery.cookiebar.css"/>
+		
+		<script src="#{request.contextPath}/resources/scripts/jquery.cookiebar.js"/>	
+	
+  +id: j_idt5
+   type: javax.faces.component.html.HtmlBody@1957f8a1
+    +id: j_idt6
+     type: org.primefaces.component.layout.Layout@431ee042
+      +id: j_idt7
+       type: org.primefaces.component.layout.LayoutUnit@152c5ee8
+        +id: j_idt8
+         type: 
+					<div id="header">		
+						
+        +id: j_idt9
+         type: javax.faces.component.html.HtmlForm@646e5884
+          +id: j_idt10
+           type: 
+			<div class="hidden-sm hidden-xs container-fluid">
+			   <div class="row">
+			   	<a href="#{request.contextPath}/ui/rota.xhtml">
+			   	
+				</a>
+			   </div>
+			</div> 
+			<div class="hidden-md hidden-lg .visible-sm-block .visible-xs-block">						   
+			   	<a href="#{request.contextPath}/ui/rota.xhtml">
+			   		
+				</a>
+			</div> 			   
+		
+        +id: j_idt11
+         type: 
+					</div>
+				
+      +id: j_idt12
+       type: org.primefaces.component.layout.LayoutUnit@425a2658
+        +id: j_idt13
+         type: javax.faces.component.html.HtmlForm@7672c2a1
+          +id: j_idt14
+           type: 				    	
+					    <div class="container">				        
+				            <ul class="nav navbar-nav">
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/aboutus.xhtml">
+					          		
+          +id: j_idt15
+           type: org.primefaces.component.outputlabel.OutputLabel@1de0999
+          +id: j_idt16
+           type: </a>
+					          </li>					        
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/faq.xhtml">
+					          	
+          +id: j_idt17
+           type: org.primefaces.component.outputlabel.OutputLabel@17e2db5e
+          +id: j_idt18
+           type: 
+					          </a>
+					          </li>					        
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/terms.xhtml">
+					          	
+          +id: j_idt19
+           type: org.primefaces.component.outputlabel.OutputLabel@419471c
+          +id: j_idt20
+           type: 
+					          </a>
+					          </li>   					       
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/privacy.xhtml">
+					          	
+          +id: j_idt21
+           type: org.primefaces.component.outputlabel.OutputLabel@649eeaf4
+          +id: j_idt22
+           type: 
+					          </a>
+					          </li>					        
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/contact.xhtml">
+					          	
+          +id: j_idt23
+           type: org.primefaces.component.outputlabel.OutputLabel@15fda53f
+          +id: j_idt24
+           type: 							          
+					          </a></li>
+				            </ul>				        
+					    </div>	    				    	
+			   		
+      +id: j_idt25
+       type: org.primefaces.component.layout.LayoutUnit@1444b4f5
+        +id: j_idt26
+         type: javax.faces.component.html.HtmlForm@5aab20c6
+          +id: j_idt27
+           type: 
+			    	<div>
+					  
+          +id: menubar
+           type: org.primefaces.component.menubar.Menubar@4971a82d
+          +id: j_idt28
+           type: 
+					</div>					 
+				
+        +id: j_idt31
+         type: 	
+    
+		<div class="container-fluid">
+			<div class="ui-g-12 ui-md-4 ui-lg-6" id="dataEditDiv">				
+				
+        +id: invoiceForm
+         type: javax.faces.component.html.HtmlForm@315d2861
+          +id: growl
+           type: org.primefaces.component.growl.Growl@fc1a3
+          +id: j_idt32
+           type: org.primefaces.component.wizard.Wizard@3a17c74
+            +id: InvoiceTab
+             type: org.primefaces.component.tabview.Tab@47558ced
+              +id: j_idt33
+               type: org.primefaces.component.panel.Panel@1f13aa46
+                +id: j_idt34
+                 type: javax.faces.component.html.HtmlPanelGrid@7bcd726d
+                  +id: j_idt35
+                   type: javax.faces.component.html.HtmlOutputText@616f62de
+                  +id: supplierSelect
+                   type: org.primefaces.component.selectonemenu.SelectOneMenu@6925e05b
+                    +id: j_idt36
+                     type: javax.faces.component.UISelectItem@27c2b76
+                    +id: j_idt37
+                     type: javax.faces.component.UISelectItems@3fe0e5
+                  +id: j_idt38
+                   type: org.primefaces.component.spacer.Spacer@1adc1bae
+                  +id: j_idt39
+                   type: javax.faces.component.html.HtmlOutputText@5c3d0796
+                  +id: invoiceSelect
+                   type: org.primefaces.component.selectonemenu.SelectOneMenu@3f79a0fc
+                    +id: j_idt40
+                     type: javax.faces.component.UISelectItem@403e473e
+                    +id: j_idt41
+                     type: javax.faces.component.UISelectItems@3ac535fc
+                    +id: j_idt42
+                     type: javax.faces.component.UISelectItem@ef08485
+                +id: invoicePanel
+                 type: org.primefaces.component.panel.Panel@7cfcbbe7
+                  +id: j_idt43
+                   type: javax.faces.component.html.HtmlPanelGrid@d6321a9
+                    +id: j_idt44
+                     type: javax.faces.component.html.HtmlOutputText@4ec904f1
+                    +id: invNumber
+                     type: org.primefaces.component.inputtext.InputText@5db0b201
+                    +id: j_idt45
+                     type: javax.faces.component.html.HtmlOutputText@57eec19e
+                    +id: invDate
+                     type: org.primefaces.component.calendar.Calendar@4e547b07
+                    +id: j_idt46
+                     type: javax.faces.component.html.HtmlOutputText@48bc10b0
+                    +id: invamtusd
+                     type: org.primefaces.component.inputnumber.InputNumber@1044831c
+                    +id: j_idt47
+                     type: javax.faces.component.html.HtmlOutputText@310742bb
+                    +id: j_idt48
+                     type: org.primefaces.component.inputtextarea.InputTextarea@5c668bdf
+                    +id: j_idt49
+                     type: javax.faces.component.html.HtmlOutputText@74f73973
+                    +id: invAmount
+                     type: org.primefaces.component.inputnumber.InputNumber@401f0892
+                    +id: j_idt50
+                     type: javax.faces.component.html.HtmlOutputText@4b0698b0
+                    +id: j_idt51
+                     type: javax.faces.component.html.HtmlOutputText@23d6ca7c
+            +id: InvoicePaymentTab
+             type: org.primefaces.component.tabview.Tab@6e2753d4
+              +id: PaymentsTab
+               type: org.primefaces.component.panel.Panel@56448d1a
+                +id: paymentList  <===============
+                 type: org.primefaces.component.datatable.DataTable@29784c7a
+                  +id: j_idt52
+                   type: org.primefaces.component.outputlabel.OutputLabel@3c68e603
+                  +id: j_id14
+                   type: javax.faces.component.UIPanel@6805bba9
+                    +id: j_idt73
+                     type: javax.faces.component.html.HtmlOutputText@1adbc7ee
+                    +id: j_idt74
+                     type: javax.faces.component.html.HtmlOutputText@712b5353
+                    +id: j_idt75
+                     type: javax.faces.component.html.HtmlOutputText@a88fb8b
+                    +id: j_idt76
+                     type: org.primefaces.component.spacer.Spacer@4f15c180
+                    +id: j_idt77
+                     type: javax.faces.component.html.HtmlOutputText@bb58b3b
+                    +id: j_idt78
+                     type: javax.faces.component.html.HtmlOutputText@202fe0d5
+                    +id: totalPaidText
+                     type: javax.faces.component.html.HtmlOutputText@6db603f8
+                  +id: j_idt53
+                   type: org.primefaces.component.column.Column@cced60f
+                    +id: j_idt54
+                     type: org.primefaces.component.celleditor.CellEditor@2b0568fe
+                      +id: j_idt55
+                       type: javax.faces.component.html.HtmlOutputText@74f30c03
+                      +id: paymentAmountUSD
+                       type: org.primefaces.component.inputnumber.InputNumber@298778a6
+                  +id: j_idt56
+                   type: org.primefaces.component.column.Column@5383ad37
+                    +id: j_idt57
+                     type: org.primefaces.component.celleditor.CellEditor@53c17d21
+                      +id: j_idt58
+                       type: javax.faces.component.html.HtmlOutputText@3f3ef04e
+                      +id: paymentgbpToUsd
+                       type: org.primefaces.component.inputnumber.InputNumber@2d6efd47
+                  +id: j_idt59
+                   type: org.primefaces.component.column.Column@63ca07c8
+                    +id: j_idt60
+                     type: org.primefaces.component.celleditor.CellEditor@3bba56e5
+                      +id: j_idt61
+                       type: javax.faces.component.html.HtmlOutputText@73ce6d5c
+                      +id: invAmount
+                       type: org.primefaces.component.inputnumber.InputNumber@291032a7
+                  +id: j_idt62
+                   type: org.primefaces.component.column.Column@1ad7940a
+                    +id: j_idt63
+                     type: org.primefaces.component.celleditor.CellEditor@7333f4cb
+                      +id: j_idt64
+                       type: javax.faces.component.html.HtmlOutputText@7317d37c
+                      +id: bankCharges
+                       type: org.primefaces.component.inputnumber.InputNumber@5bba42b3
+                  +id: j_idt65
+                   type: org.primefaces.component.column.Column@7debea0a
+                    +id: j_idt66
+                     type: org.primefaces.component.celleditor.CellEditor@1192ccd0
+                      +id: j_idt67
+                       type: javax.faces.component.html.HtmlOutputText@5c5371ad
+                      +id: otherCharges
+                       type: org.primefaces.component.inputnumber.InputNumber@55f50f4e
+                  +id: j_idt68
+                   type: org.primefaces.component.column.Column@77ec0440
+                    +id: j_idt69
+                     type: org.primefaces.component.celleditor.CellEditor@709fa221
+                      +id: j_idt70
+                       type: javax.faces.component.html.HtmlOutputText@37866b86
+                      +id: j_idt71
+                       type: org.primefaces.component.calendar.Calendar@4af48d47
+                  +id: amendTool
+                   type: org.primefaces.component.column.Column@5dad4e5d
+                    +id: j_idt72
+                     type: org.primefaces.component.roweditor.RowEditor@50ae7163
+                +id: j_idt79
+                 type: 
+				
+			    <div class="row">
+			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
+					    
+                +id: newInvPaymentBtn
+                 type: org.primefaces.component.commandbutton.CommandButton@54f0faab
+                +id: j_idt80
+                 type:  
+				    </div>				    			    			    	 		    
+			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
+					    
+                +id: newShipmentBtn
+                 type: org.primefaces.component.commandbutton.CommandButton@3a80cbc7
+                +id: j_idt81
+                 type:  
+				    </div>					    			    
+				 </div>								
+			
+            +id: confirmTab
+             type: org.primefaces.component.tabview.Tab@de8b56c
+              +id: j_idt82
+               type: org.primefaces.component.panel.Panel@2eeee8db
+                +id: confirmation
+                 type: javax.faces.component.html.HtmlPanelGrid@7d987a0f
+                  +id: j_idt83
+                   type: javax.faces.component.html.HtmlPanelGrid@417a4888
+                    +id: j_idt84
+                     type: javax.faces.component.html.HtmlOutputText@9f1c61e
+                    +id: j_idt85
+                     type: javax.faces.component.html.HtmlOutputText@50805fcb
+                    +id: j_idt86
+                     type: javax.faces.component.html.HtmlOutputText@6ef60fd6
+                    +id: j_idt87
+                     type: javax.faces.component.html.HtmlOutputText@7ddb2488
+                    +id: j_idt88
+                     type: javax.faces.component.html.HtmlOutputText@7a9dcc1b
+                    +id: j_idt89
+                     type: javax.faces.component.html.HtmlOutputText@2831ba84
+                +id: confirmationPay
+                 type: javax.faces.component.html.HtmlPanelGrid@76e798eb
+                  +id: paymentList  <===============
+                   type: org.primefaces.component.datatable.DataTable@523c1ddb
+                    +id: j_idt90
+                     type: org.primefaces.component.column.Column@4655ee93
+                      +id: j_idt91
+                       type: javax.faces.component.html.HtmlOutputText@63959947
+                    +id: j_idt92
+                     type: org.primefaces.component.column.Column@297f751e
+                      +id: j_idt93
+                       type: javax.faces.component.html.HtmlOutputText@1b9f772f
+                    +id: j_idt94
+                     type: org.primefaces.component.column.Column@725733b9
+                      +id: j_idt95
+                       type: javax.faces.component.html.HtmlOutputText@3dc7c315
+                    +id: j_idt96
+                     type: org.primefaces.component.column.Column@6f428636
+                      +id: j_idt97
+                       type: javax.faces.component.html.HtmlOutputText@f04b2fe
+                    +id: j_idt98
+                     type: org.primefaces.component.column.Column@4405925c
+                      +id: j_idt99
+                       type: javax.faces.component.html.HtmlOutputText@47592ea2
+                +id: j_idt100
+                 type: org.primefaces.component.outputlabel.OutputLabel@3cd17349
+                +id: j_idt101
+                 type: org.primefaces.component.spacer.Spacer@16e8a56f
+                +id: payInvComplete
+                 type: org.primefaces.component.selectbooleancheckbox.SelectBooleanCheckbox@7e17529c
+                +id: j_idt102
+                 type: org.primefaces.component.separator.UISeparator@70355fc2
+                +id: j_idt103
+                 type: org.primefaces.component.spacer.Spacer@47c931b6
+                +id: j_idt104
+                 type: org.primefaces.component.commandbutton.CommandButton@14d927fd
+        +id: j_idt105
+         type: 
+				
+			    <div class="row">			      
+					
+        +id: messages
+         type: org.primefaces.component.messages.Messages@501e0448
+        +id: j_idt106
+         type: 	
+				</div>				
+			</div>				
+		</div>					
+    
+  +id: j_idt107
+   type: 
+
+</html>
+
+2019-01-20 07:33:07,250 ERROR com.sun.faces.application.view.FaceletViewHandlingStrategy [http-nio-8090-exec-4] Error Rendering View[/ui/invoices.xhtml]
+java.lang.IllegalStateException: Component ID invoiceForm:paymentList has already been found in the view.  
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1127)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.application.view.FaceletPartialStateManagementStrategy.saveView(FaceletPartialStateManagementStrategy.java:462)
+	at com.sun.faces.application.StateManagerImpl.saveView(StateManagerImpl.java:89)
+	at com.sun.faces.application.view.WriteBehindStateWriter.getState(WriteBehindStateWriter.java:334)
+	at com.sun.faces.application.view.WriteBehindStateWriter.flushToWriter(WriteBehindStateWriter.java:228)
+	at com.sun.faces.application.view.FaceletViewHandlingStrategy.renderView(FaceletViewHandlingStrategy.java:507)
+	at com.sun.faces.application.view.MultiViewHandler.renderView(MultiViewHandler.java:194)
+	at com.sun.faces.lifecycle.RenderResponsePhase.execute(RenderResponsePhase.java:126)
+	at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:100)
+	at com.sun.faces.lifecycle.LifecycleImpl.render(LifecycleImpl.java:223)
+	at javax.faces.webapp.FacesServlet.service(FacesServlet.java:671)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.primefaces.webapp.filter.FileUploadFilter.doFilter(FileUploadFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1468)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-01-20 07:33:07,251 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8090-exec-4] Servlet.service() for servlet [facesServlet] in context with path [/inventory] threw exception [Component ID invoiceForm:paymentList has already been found in the view.  ] with root cause
+java.lang.IllegalStateException: Component ID invoiceForm:paymentList has already been found in the view.  
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1127)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.application.view.FaceletPartialStateManagementStrategy.saveView(FaceletPartialStateManagementStrategy.java:462)
+	at com.sun.faces.application.StateManagerImpl.saveView(StateManagerImpl.java:89)
+	at com.sun.faces.application.view.WriteBehindStateWriter.getState(WriteBehindStateWriter.java:334)
+	at com.sun.faces.application.view.WriteBehindStateWriter.flushToWriter(WriteBehindStateWriter.java:228)
+	at com.sun.faces.application.view.FaceletViewHandlingStrategy.renderView(FaceletViewHandlingStrategy.java:507)
+	at com.sun.faces.application.view.MultiViewHandler.renderView(MultiViewHandler.java:194)
+	at com.sun.faces.lifecycle.RenderResponsePhase.execute(RenderResponsePhase.java:126)
+	at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:100)
+	at com.sun.faces.lifecycle.LifecycleImpl.render(LifecycleImpl.java:223)
+	at javax.faces.webapp.FacesServlet.service(FacesServlet.java:671)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.primefaces.webapp.filter.FileUploadFilter.doFilter(FileUploadFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1468)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-01-20 07:33:09,756 ERROR com.sun.faces.util.Util [http-nio-8090-exec-6] JSF1007: Duplicate component ID invoiceForm:paymentList found in view.
+2019-01-20 07:33:09,758 ERROR com.sun.faces.util.Util [http-nio-8090-exec-6] +id: j_id1
+ type: javax.faces.component.UIViewRoot@c103b8e
+  +id: javax_faces_location_HEAD
+   type: com.sun.faces.component.ComponentResourceContainer@196d6700
+    +id: j_id2
+     type: javax.faces.component.UIOutput@74bd454c
+    +id: j_id3
+     type: javax.faces.component.UIOutput@6c0e9432
+    +id: j_id4
+     type: javax.faces.component.UIOutput@1813df92
+    +id: j_id5
+     type: javax.faces.component.UIOutput@6a34eef7
+    +id: j_id6
+     type: javax.faces.component.UIOutput@743d51d8
+    +id: j_id7
+     type: javax.faces.component.UIOutput@6c8ae469
+    +id: j_id8
+     type: javax.faces.component.UIOutput@6ae35925
+    +id: j_id9
+     type: javax.faces.component.UIOutput@276d41d8
+    +id: j_id10
+     type: javax.faces.component.UIOutput@39c0777c
+    +id: j_id11
+     type: javax.faces.component.UIOutput@2d26581
+  +id: javax_faces_location_BODY
+   type: com.sun.faces.component.ComponentResourceContainer@72883e8f
+    +id: j_idt29
+     type: javax.faces.component.UIOutput@3f26d287
+      +id: j_idt30
+       type: 
+ 				$(document).ready(function()
+				{			
+					//Enable Last pencil on Grid editor
+					$('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){$(this).click()});
+					
+					if(#{facesContext.validationFailed}) 
+					{
+						PF('wizard').nextNav.hide();
+					}
+					else
+					{
+						PF('wizard').nextNav.show();
+					}									
+										  				  
+				});					
+
+                
+				function blink() { 
+				  $('#amendTool').fadeOut(500).fadeIn(500, blink); 
+				}
+				
+				function showHideNextButton()
+				{					
+					if(#{facesContext.validationFailed}) 
+					{
+						PF('wizard').nextNav.hide();
+					}
+					else
+					{
+						PF('wizard').nextNav.show();
+					}
+				}
+				
+				function clickPencil()
+				{
+					$('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){$(this).click()});
+				}
+					
+			
+  +id: j_idt1
+   type: <html xmlns="http://www.w3.org/1999/xhtml">
+
+	
+  +id: j_idt2
+   type: javax.faces.component.UIOutput@5e72988
+    +id: j_idt3
+     type: 
+		<title>
+    +id: j_idt4
+     type:  - Costing Lite</title>		
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>	
+		<meta name="Title" content="Admin Pages - ShareOurCar.com"/>				
+		<meta name="description" content="Create your group with your friends and colleagues to share your daily commute by car."/>
+		<meta name="keywords" content="Share Car, Car Sharing, Car Share, car pooling, pool car, Ride share, drive share"/>	
+		<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=yes"/>			
+		
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.css"/>
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap-theme.css"/>		
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/font-awesome.css"/>	
+		
+		 	
+		<link rel="icon" type="image/ico" href="#{request.contextPath}/resources/images/carlogo_icon.ico"/>
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/stylesheet.css"/>
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/style.css"/>
+		<link rel="stylesheet" href="#{request.contextPath}/resources/css/jquery.cookiebar.css"/>
+		
+		<script src="#{request.contextPath}/resources/scripts/jquery.cookiebar.js"/>	
+	
+  +id: j_idt5
+   type: javax.faces.component.html.HtmlBody@1488bad8
+    +id: j_idt6
+     type: org.primefaces.component.layout.Layout@27c79280
+      +id: j_idt7
+       type: org.primefaces.component.layout.LayoutUnit@2efcde15
+        +id: j_idt8
+         type: 
+					<div id="header">		
+						
+        +id: j_idt9
+         type: javax.faces.component.html.HtmlForm@126b192b
+          +id: j_idt10
+           type: 
+			<div class="hidden-sm hidden-xs container-fluid">
+			   <div class="row">
+			   	<a href="#{request.contextPath}/ui/rota.xhtml">
+			   	
+				</a>
+			   </div>
+			</div> 
+			<div class="hidden-md hidden-lg .visible-sm-block .visible-xs-block">						   
+			   	<a href="#{request.contextPath}/ui/rota.xhtml">
+			   		
+				</a>
+			</div> 			   
+		
+        +id: j_idt11
+         type: 
+					</div>
+				
+      +id: j_idt12
+       type: org.primefaces.component.layout.LayoutUnit@43e43fc4
+        +id: j_idt13
+         type: javax.faces.component.html.HtmlForm@582ce6aa
+          +id: j_idt14
+           type: 				    	
+					    <div class="container">				        
+				            <ul class="nav navbar-nav">
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/aboutus.xhtml">
+					          		
+          +id: j_idt15
+           type: org.primefaces.component.outputlabel.OutputLabel@10e897cc
+          +id: j_idt16
+           type: </a>
+					          </li>					        
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/faq.xhtml">
+					          	
+          +id: j_idt17
+           type: org.primefaces.component.outputlabel.OutputLabel@5a0066bb
+          +id: j_idt18
+           type: 
+					          </a>
+					          </li>					        
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/terms.xhtml">
+					          	
+          +id: j_idt19
+           type: org.primefaces.component.outputlabel.OutputLabel@38f87820
+          +id: j_idt20
+           type: 
+					          </a>
+					          </li>   					       
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/privacy.xhtml">
+					          	
+          +id: j_idt21
+           type: org.primefaces.component.outputlabel.OutputLabel@7ded023
+          +id: j_idt22
+           type: 
+					          </a>
+					          </li>					        
+					          <li>
+					          	<a href="#{request.contextPath}/faces/views/contact.xhtml">
+					          	
+          +id: j_idt23
+           type: org.primefaces.component.outputlabel.OutputLabel@535c71e3
+          +id: j_idt24
+           type: 							          
+					          </a></li>
+				            </ul>				        
+					    </div>	    				    	
+			   		
+      +id: j_idt25
+       type: org.primefaces.component.layout.LayoutUnit@ab0e08d
+        +id: j_idt26
+         type: javax.faces.component.html.HtmlForm@7172a083
+          +id: j_idt27
+           type: 
+			    	<div>
+					  
+          +id: menubar
+           type: org.primefaces.component.menubar.Menubar@dc2946
+          +id: j_idt28
+           type: 
+					</div>					 
+				
+        +id: j_idt31
+         type: 	
+    
+		<div class="container-fluid">
+			<div class="ui-g-12 ui-md-4 ui-lg-6" id="dataEditDiv">				
+				
+        +id: invoiceForm
+         type: javax.faces.component.html.HtmlForm@303f93d7
+          +id: growl
+           type: org.primefaces.component.growl.Growl@3d06a9d5
+          +id: j_idt32
+           type: org.primefaces.component.wizard.Wizard@5914704e
+            +id: InvoiceTab
+             type: org.primefaces.component.tabview.Tab@3863e433
+              +id: j_idt33
+               type: org.primefaces.component.panel.Panel@740e69c3
+                +id: j_idt34
+                 type: javax.faces.component.html.HtmlPanelGrid@6fc3ce0
+                  +id: j_idt35
+                   type: javax.faces.component.html.HtmlOutputText@7cce3e96
+                  +id: supplierSelect
+                   type: org.primefaces.component.selectonemenu.SelectOneMenu@622a741
+                    +id: j_idt36
+                     type: javax.faces.component.UISelectItem@214799ca
+                    +id: j_idt37
+                     type: javax.faces.component.UISelectItems@2680ac50
+                  +id: j_idt38
+                   type: org.primefaces.component.spacer.Spacer@2bb70c98
+                  +id: j_idt39
+                   type: javax.faces.component.html.HtmlOutputText@38bcae00
+                  +id: invoiceSelect
+                   type: org.primefaces.component.selectonemenu.SelectOneMenu@2528f914
+                    +id: j_idt40
+                     type: javax.faces.component.UISelectItem@66923cd
+                    +id: j_idt41
+                     type: javax.faces.component.UISelectItems@15a93c54
+                    +id: j_idt42
+                     type: javax.faces.component.UISelectItem@48385c4f
+                +id: invoicePanel
+                 type: org.primefaces.component.panel.Panel@2a3aec05
+                  +id: j_idt43
+                   type: javax.faces.component.html.HtmlPanelGrid@3e1a74fd
+                    +id: j_idt44
+                     type: javax.faces.component.html.HtmlOutputText@6502c5c4
+                    +id: invNumber
+                     type: org.primefaces.component.inputtext.InputText@39150eac
+                    +id: j_idt45
+                     type: javax.faces.component.html.HtmlOutputText@3345e7e5
+                    +id: invDate
+                     type: org.primefaces.component.calendar.Calendar@4e627f4c
+                    +id: j_idt46
+                     type: javax.faces.component.html.HtmlOutputText@3dbdbfa1
+                    +id: invamtusd
+                     type: org.primefaces.component.inputnumber.InputNumber@2ccca6d4
+                    +id: j_idt47
+                     type: javax.faces.component.html.HtmlOutputText@30aa0667
+                    +id: j_idt48
+                     type: org.primefaces.component.inputtextarea.InputTextarea@6d6f9721
+                    +id: j_idt49
+                     type: javax.faces.component.html.HtmlOutputText@3d7f7d9a
+                    +id: invAmount
+                     type: org.primefaces.component.inputnumber.InputNumber@744c96e7
+                    +id: j_idt50
+                     type: javax.faces.component.html.HtmlOutputText@14353f37
+                    +id: j_idt51
+                     type: javax.faces.component.html.HtmlOutputText@572640f
+            +id: InvoicePaymentTab
+             type: org.primefaces.component.tabview.Tab@43a75a96
+              +id: PaymentsTab
+               type: org.primefaces.component.panel.Panel@534c07ab
+                +id: paymentList  <===============
+                 type: org.primefaces.component.datatable.DataTable@6ebd4672
+                  +id: j_idt52
+                   type: org.primefaces.component.outputlabel.OutputLabel@787905b6
+                  +id: j_id14
+                   type: javax.faces.component.UIPanel@17383c5
+                    +id: j_idt73
+                     type: javax.faces.component.html.HtmlOutputText@3231bd1f
+                    +id: j_idt74
+                     type: javax.faces.component.html.HtmlOutputText@363bf3fd
+                    +id: j_idt75
+                     type: javax.faces.component.html.HtmlOutputText@65f1439
+                    +id: j_idt76
+                     type: org.primefaces.component.spacer.Spacer@1b2fd29c
+                    +id: j_idt77
+                     type: javax.faces.component.html.HtmlOutputText@24c94da3
+                    +id: j_idt78
+                     type: javax.faces.component.html.HtmlOutputText@4d84f6dc
+                    +id: totalPaidText
+                     type: javax.faces.component.html.HtmlOutputText@3384cd89
+                  +id: j_idt53
+                   type: org.primefaces.component.column.Column@565a4257
+                    +id: j_idt54
+                     type: org.primefaces.component.celleditor.CellEditor@3890b96a
+                      +id: j_idt55
+                       type: javax.faces.component.html.HtmlOutputText@52489ab2
+                      +id: paymentAmountUSD
+                       type: org.primefaces.component.inputnumber.InputNumber@47b5edf7
+                  +id: j_idt56
+                   type: org.primefaces.component.column.Column@437947ac
+                    +id: j_idt57
+                     type: org.primefaces.component.celleditor.CellEditor@7e9ffd40
+                      +id: j_idt58
+                       type: javax.faces.component.html.HtmlOutputText@6894752b
+                      +id: paymentgbpToUsd
+                       type: org.primefaces.component.inputnumber.InputNumber@26f79b
+                  +id: j_idt59
+                   type: org.primefaces.component.column.Column@9eb9414
+                    +id: j_idt60
+                     type: org.primefaces.component.celleditor.CellEditor@89f0d94
+                      +id: j_idt61
+                       type: javax.faces.component.html.HtmlOutputText@43690c81
+                      +id: invAmount
+                       type: org.primefaces.component.inputnumber.InputNumber@74c4b158
+                  +id: j_idt62
+                   type: org.primefaces.component.column.Column@215ac0e0
+                    +id: j_idt63
+                     type: org.primefaces.component.celleditor.CellEditor@51d98af2
+                      +id: j_idt64
+                       type: javax.faces.component.html.HtmlOutputText@5adf994c
+                      +id: bankCharges
+                       type: org.primefaces.component.inputnumber.InputNumber@bc0bd3e
+                  +id: j_idt65
+                   type: org.primefaces.component.column.Column@7cea3166
+                    +id: j_idt66
+                     type: org.primefaces.component.celleditor.CellEditor@6179ba13
+                      +id: j_idt67
+                       type: javax.faces.component.html.HtmlOutputText@474a4a89
+                      +id: otherCharges
+                       type: org.primefaces.component.inputnumber.InputNumber@49ed3613
+                  +id: j_idt68
+                   type: org.primefaces.component.column.Column@64215f49
+                    +id: j_idt69
+                     type: org.primefaces.component.celleditor.CellEditor@48a4c8fc
+                      +id: j_idt70
+                       type: javax.faces.component.html.HtmlOutputText@5d2fcd63
+                      +id: j_idt71
+                       type: org.primefaces.component.calendar.Calendar@7d52357b
+                  +id: amendTool
+                   type: org.primefaces.component.column.Column@1367f68f
+                    +id: j_idt72
+                     type: org.primefaces.component.roweditor.RowEditor@7d6a2f37
+                +id: j_idt79
+                 type: 
+				
+			    <div class="row">
+			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
+					    
+                +id: newInvPaymentBtn
+                 type: org.primefaces.component.commandbutton.CommandButton@5e0db12c
+                +id: j_idt80
+                 type:  
+				    </div>				    			    			    	 		    
+			    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">	
+					    
+                +id: newShipmentBtn
+                 type: org.primefaces.component.commandbutton.CommandButton@3218ae7b
+                +id: j_idt81
+                 type:  
+				    </div>					    			    
+				 </div>								
+			
+            +id: confirmTab
+             type: org.primefaces.component.tabview.Tab@1e67e539
+              +id: j_idt82
+               type: org.primefaces.component.panel.Panel@32586255
+                +id: confirmation
+                 type: javax.faces.component.html.HtmlPanelGrid@1ef31e3
+                  +id: j_idt83
+                   type: javax.faces.component.html.HtmlPanelGrid@76f32cd3
+                    +id: j_idt84
+                     type: javax.faces.component.html.HtmlOutputText@579c4119
+                    +id: j_idt85
+                     type: javax.faces.component.html.HtmlOutputText@2627cb75
+                    +id: j_idt86
+                     type: javax.faces.component.html.HtmlOutputText@5e3f967b
+                    +id: j_idt87
+                     type: javax.faces.component.html.HtmlOutputText@3145acdb
+                    +id: j_idt88
+                     type: javax.faces.component.html.HtmlOutputText@464b763
+                    +id: j_idt89
+                     type: javax.faces.component.html.HtmlOutputText@1c80b8f9
+                +id: confirmationPay
+                 type: javax.faces.component.html.HtmlPanelGrid@3e2e795c
+                  +id: paymentList  <===============
+                   type: org.primefaces.component.datatable.DataTable@22112936
+                    +id: j_idt90
+                     type: org.primefaces.component.column.Column@36f5db8
+                      +id: j_idt91
+                       type: javax.faces.component.html.HtmlOutputText@1a317a5c
+                    +id: j_idt92
+                     type: org.primefaces.component.column.Column@579814df
+                      +id: j_idt93
+                       type: javax.faces.component.html.HtmlOutputText@7c6bcf83
+                    +id: j_idt94
+                     type: org.primefaces.component.column.Column@510df2b
+                      +id: j_idt95
+                       type: javax.faces.component.html.HtmlOutputText@14e2b64f
+                    +id: j_idt96
+                     type: org.primefaces.component.column.Column@3cb76e0
+                      +id: j_idt97
+                       type: javax.faces.component.html.HtmlOutputText@21fea6cd
+                    +id: j_idt98
+                     type: org.primefaces.component.column.Column@2214dc5e
+                      +id: j_idt99
+                       type: javax.faces.component.html.HtmlOutputText@23c5569d
+                +id: j_idt100
+                 type: org.primefaces.component.outputlabel.OutputLabel@7b615873
+                +id: j_idt101
+                 type: org.primefaces.component.spacer.Spacer@2ffd411c
+                +id: payInvComplete
+                 type: org.primefaces.component.selectbooleancheckbox.SelectBooleanCheckbox@2b0f8e91
+                +id: j_idt102
+                 type: org.primefaces.component.separator.UISeparator@227754d3
+                +id: j_idt103
+                 type: org.primefaces.component.spacer.Spacer@5324222e
+                +id: j_idt104
+                 type: org.primefaces.component.commandbutton.CommandButton@16947cf7
+        +id: j_idt105
+         type: 
+				
+			    <div class="row">			      
+					
+        +id: messages
+         type: org.primefaces.component.messages.Messages@413803b2
+        +id: j_idt106
+         type: 	
+				</div>				
+			</div>				
+		</div>					
+    
+  +id: j_idt107
+   type: 
+
+</html>
+
+2019-01-20 07:33:09,759 ERROR com.sun.faces.application.view.FaceletViewHandlingStrategy [http-nio-8090-exec-6] Error Rendering View[/ui/invoices.xhtml]
+java.lang.IllegalStateException: Component ID invoiceForm:paymentList has already been found in the view.  
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1127)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.application.view.FaceletPartialStateManagementStrategy.saveView(FaceletPartialStateManagementStrategy.java:462)
+	at com.sun.faces.application.StateManagerImpl.saveView(StateManagerImpl.java:89)
+	at com.sun.faces.application.view.WriteBehindStateWriter.getState(WriteBehindStateWriter.java:334)
+	at com.sun.faces.application.view.WriteBehindStateWriter.flushToWriter(WriteBehindStateWriter.java:228)
+	at com.sun.faces.application.view.FaceletViewHandlingStrategy.renderView(FaceletViewHandlingStrategy.java:507)
+	at com.sun.faces.application.view.MultiViewHandler.renderView(MultiViewHandler.java:194)
+	at com.sun.faces.lifecycle.RenderResponsePhase.execute(RenderResponsePhase.java:126)
+	at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:100)
+	at com.sun.faces.lifecycle.LifecycleImpl.render(LifecycleImpl.java:223)
+	at javax.faces.webapp.FacesServlet.service(FacesServlet.java:671)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.primefaces.webapp.filter.FileUploadFilter.doFilter(FileUploadFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1468)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-01-20 07:33:09,760 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8090-exec-6] Servlet.service() for servlet [facesServlet] in context with path [/inventory] threw exception [Component ID invoiceForm:paymentList has already been found in the view.  ] with root cause
+java.lang.IllegalStateException: Component ID invoiceForm:paymentList has already been found in the view.  
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1127)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.util.Util.checkIdUniqueness(Util.java:1111)
+	at com.sun.faces.application.view.FaceletPartialStateManagementStrategy.saveView(FaceletPartialStateManagementStrategy.java:462)
+	at com.sun.faces.application.StateManagerImpl.saveView(StateManagerImpl.java:89)
+	at com.sun.faces.application.view.WriteBehindStateWriter.getState(WriteBehindStateWriter.java:334)
+	at com.sun.faces.application.view.WriteBehindStateWriter.flushToWriter(WriteBehindStateWriter.java:228)
+	at com.sun.faces.application.view.FaceletViewHandlingStrategy.renderView(FaceletViewHandlingStrategy.java:507)
+	at com.sun.faces.application.view.MultiViewHandler.renderView(MultiViewHandler.java:194)
+	at com.sun.faces.lifecycle.RenderResponsePhase.execute(RenderResponsePhase.java:126)
+	at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:100)
+	at com.sun.faces.lifecycle.LifecycleImpl.render(LifecycleImpl.java:223)
+	at javax.faces.webapp.FacesServlet.service(FacesServlet.java:671)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.primefaces.webapp.filter.FileUploadFilter.doFilter(FileUploadFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1468)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+2019-01-21 14:08:09,141 WARN com.artisans.inventory.controller.ShipmentWizard [http-nio-8090-exec-4] *** In ShipmentWizard init() *** 
+2019-01-21 14:08:09,554 WARN com.artisans.inventory.controller.ShipmentWizard [http-nio-8090-exec-9] *** In ShipmentWizard init() *** 
+2019-01-21 14:39:05,473 ERROR com.sun.faces.context.AjaxExceptionHandlerImpl [http-nio-8090-exec-3] javax.faces.application.ViewExpiredException: viewId:/ui/shipments.xhtml - View /ui/shipments.xhtml could not be restored.
+	at com.sun.faces.lifecycle.RestoreViewPhase.execute(RestoreViewPhase.java:218)
+	at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:100)
+	at com.sun.faces.lifecycle.RestoreViewPhase.doPhase(RestoreViewPhase.java:133)
+	at com.sun.faces.lifecycle.LifecycleImpl.execute(LifecycleImpl.java:201)
+	at javax.faces.webapp.FacesServlet.service(FacesServlet.java:670)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.primefaces.webapp.filter.FileUploadFilter.doFilter(FileUploadFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1468)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2019-01-21 14:39:08,131 ERROR com.sun.faces.context.AjaxExceptionHandlerImpl [http-nio-8090-exec-5] javax.faces.application.ViewExpiredException: viewId:/ui/shipments.xhtml - View /ui/shipments.xhtml could not be restored.
+	at com.sun.faces.lifecycle.RestoreViewPhase.execute(RestoreViewPhase.java:218)
+	at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:100)
+	at com.sun.faces.lifecycle.RestoreViewPhase.doPhase(RestoreViewPhase.java:133)
+	at com.sun.faces.lifecycle.LifecycleImpl.execute(LifecycleImpl.java:201)
+	at javax.faces.webapp.FacesServlet.service(FacesServlet.java:670)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.primefaces.webapp.filter.FileUploadFilter.doFilter(FileUploadFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1468)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2019-01-21 14:39:09,937 ERROR com.sun.faces.context.AjaxExceptionHandlerImpl [http-nio-8090-exec-10] javax.faces.application.ViewExpiredException: viewId:/ui/shipments.xhtml - View /ui/shipments.xhtml could not be restored.
+	at com.sun.faces.lifecycle.RestoreViewPhase.execute(RestoreViewPhase.java:218)
+	at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:100)
+	at com.sun.faces.lifecycle.RestoreViewPhase.doPhase(RestoreViewPhase.java:133)
+	at com.sun.faces.lifecycle.LifecycleImpl.execute(LifecycleImpl.java:201)
+	at javax.faces.webapp.FacesServlet.service(FacesServlet.java:670)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.primefaces.webapp.filter.FileUploadFilter.doFilter(FileUploadFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1468)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2019-01-21 14:39:17,919 WARN com.artisans.inventory.controller.ShipmentWizard [http-nio-8090-exec-8] *** In ShipmentWizard init() *** 
+2019-01-21 14:58:58,078 WARN com.artisans.inventory.controller.ShipmentWizard [http-nio-8090-exec-3] *** In ShipmentWizard init() *** 
+2019-01-21 14:59:49,791 ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper [http-nio-8090-exec-8] 'Infinity' is not a valid numeric or approximate numeric value
+2019-01-21 14:59:49,824 ERROR com.sun.faces.context.AjaxExceptionHandlerImpl [http-nio-8090-exec-8] org.springframework.orm.jpa.JpaSystemException: could not insert: [com.artisans.inventory.model.ShipmentProduct]; nested exception is org.hibernate.exception.GenericJDBCException: could not insert: [com.artisans.inventory.model.ShipmentProduct]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:314)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:225)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:527)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:242)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:153)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:135)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.data.repository.core.support.SurroundingTransactionDetectorMethodInterceptor.invoke(SurroundingTransactionDetectorMethodInterceptor.java:61)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212)
+	at com.sun.proxy.$Proxy97.saveAndFlush(Unknown Source)
+	at com.artisans.inventory.service.impl.ShipmentServiceImpl.saveShipmentProduct(ShipmentServiceImpl.java:182)
+	at com.artisans.inventory.service.impl.ShipmentServiceImpl$$FastClassBySpringCGLIB$$7debd020.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:746)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:294)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)
+	at com.artisans.inventory.service.impl.ShipmentServiceImpl$$EnhancerBySpringCGLIB$$b2be21ba.saveShipmentProduct(<generated>)
+	at com.artisans.inventory.controller.ShipmentWizard.saveShipmentProduct(ShipmentWizard.java:499)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.el.parser.AstValue.invoke(AstValue.java:247)
+	at org.apache.el.MethodExpressionImpl.invoke(MethodExpressionImpl.java:267)
+	at com.sun.faces.facelets.el.TagMethodExpression.invoke(TagMethodExpression.java:107)
+	at javax.faces.event.MethodExpressionActionListener.processAction(MethodExpressionActionListener.java:148)
+	at javax.faces.event.ActionEvent.processListener(ActionEvent.java:96)
+	at javax.faces.component.UIComponentBase.broadcast(UIComponentBase.java:839)
+	at javax.faces.component.UICommand.broadcast(UICommand.java:315)
+	at javax.faces.component.UIViewRoot.broadcastEvents(UIViewRoot.java:870)
+	at javax.faces.component.UIViewRoot.processDecodes(UIViewRoot.java:1034)
+	at com.sun.faces.lifecycle.ApplyRequestValuesPhase.execute(ApplyRequestValuesPhase.java:79)
+	at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:100)
+	at com.sun.faces.lifecycle.LifecycleImpl.execute(LifecycleImpl.java:201)
+	at javax.faces.webapp.FacesServlet.service(FacesServlet.java:670)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.primefaces.webapp.filter.FileUploadFilter.doFilter(FileUploadFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1468)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.hibernate.exception.GenericJDBCException: could not insert: [com.artisans.inventory.model.ShipmentProduct]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:47)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:111)
+	at org.hibernate.id.insert.AbstractReturningDelegate.performInsert(AbstractReturningDelegate.java:49)
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:2933)
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:3524)
+	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:81)
+	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:637)
+	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:282)
+	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:263)
+	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:317)
+	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:318)
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:275)
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:182)
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:113)
+	at org.hibernate.jpa.event.internal.core.JpaPersistEventListener.saveWithGeneratedId(JpaPersistEventListener.java:67)
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:189)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:132)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:58)
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:783)
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:768)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:305)
+	at com.sun.proxy.$Proxy89.persist(Unknown Source)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:490)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.saveAndFlush(SimpleJpaRepository.java:504)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:377)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:200)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:629)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.doInvoke(RepositoryFactorySupport.java:593)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.invoke(RepositoryFactorySupport.java:578)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:59)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:294)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139)
+	... 73 more
+Caused by: java.sql.SQLException: 'Infinity' is not a valid numeric or approximate numeric value
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:965)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:898)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:887)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:861)
+	at com.mysql.jdbc.PreparedStatement.setDouble(PreparedStatement.java:3260)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.setDouble(HikariProxyPreparedStatement.java)
+	at org.hibernate.type.descriptor.sql.DoubleTypeDescriptor$1.doBind(DoubleTypeDescriptor.java:46)
+	at org.hibernate.type.descriptor.sql.BasicBinder.bind(BasicBinder.java:74)
+	at org.hibernate.type.AbstractStandardBasicType.nullSafeSet(AbstractStandardBasicType.java:280)
+	at org.hibernate.type.AbstractStandardBasicType.nullSafeSet(AbstractStandardBasicType.java:275)
+	at org.hibernate.type.AbstractSingleColumnStandardBasicType.nullSafeSet(AbstractSingleColumnStandardBasicType.java:39)
+	at org.hibernate.persister.entity.AbstractEntityPersister.dehydrate(AbstractEntityPersister.java:2729)
+	at org.hibernate.persister.entity.AbstractEntityPersister.dehydrate(AbstractEntityPersister.java:2704)
+	at org.hibernate.persister.entity.AbstractEntityPersister$4.bindValues(AbstractEntityPersister.java:2925)
+	at org.hibernate.id.insert.AbstractReturningDelegate.performInsert(AbstractReturningDelegate.java:41)
+	... 115 more
+
+2019-01-22 06:29:48,065 WARN com.artisans.inventory.controller.ShipmentWizard [http-nio-8090-exec-8] *** In ShipmentWizard init() *** 
+2019-01-22 06:29:48,155 WARN com.artisans.inventory.controller.ShipmentWizard [http-nio-8090-exec-5] *** In ShipmentWizard init() *** 
+2019-01-22 06:55:51,737 WARN com.artisans.inventory.controller.ShipmentWizard [http-nio-8090-exec-4] *** In ShipmentWizard init() *** 

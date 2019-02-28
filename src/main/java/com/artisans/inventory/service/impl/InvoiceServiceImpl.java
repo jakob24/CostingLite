@@ -3,13 +3,8 @@
  */
 package com.artisans.inventory.service.impl;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import javax.sql.DataSource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.dozer.DozerBeanMapper;
@@ -27,11 +22,6 @@ import com.artisans.inventory.vo.InvoiceVO;
 import com.artisans.inventory.vo.PaymentVO;
 import com.artisans.inventory.vo.SupplierVO;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-
 /**
  * @author Jacob
  *
@@ -48,12 +38,7 @@ public class InvoiceServiceImpl implements InvoiceService
 	@Autowired
 	private PaymentsRepository paymentRepository;	
 	
-
-	 
-	 @Autowired
-	 private DataSource dataSource;
-	
-	/**
+ 	/**
 	 * Get the specified Invoice Details
 	 * @param invoiceId
 	 * @return
@@ -106,13 +91,24 @@ public class InvoiceServiceImpl implements InvoiceService
 	@Transactional(readOnly=false)
 	public InvoiceVO saveInvoiceAndPayments(InvoiceVO invoiceVO)
 	{
-		Invoice invoice = new DozerBeanMapper().map(invoiceVO, Invoice.class); 			
-		invoice = invoiceRepository.saveAndFlush(invoice);		
-    	for(Payment payment :invoice.getPayment())
-    	{
-    		payment.setInvoice(invoice);
-    	}		
-		paymentRepository.saveAll(invoice.getPayment());		
+		Invoice invoice = null;
+		
+		if(invoiceVO.getInvoiceId() == 0) { //New Invoice
+			invoice = new DozerBeanMapper().map(invoiceVO, Invoice.class); 			
+			invoice = invoiceRepository.saveAndFlush(invoice);	
+	    	for(Payment payment :invoice.getPayment())
+	    	{
+	    		payment.setInvoice(invoice);
+	    	}		
+			paymentRepository.saveAll(invoice.getPayment());		
+		} else { //Update
+			invoice = new DozerBeanMapper().map(invoiceVO, Invoice.class); 	
+	    	for(Payment payment :invoice.getPayment()) {
+	    		payment.setInvoice(invoice);
+	    	}	
+	    	paymentRepository.saveAll(invoice.getPayment());
+	    	invoice = invoiceRepository.saveAndFlush(invoice);	
+		}		
 		return new DozerBeanMapper().map(invoice, InvoiceVO.class);
 	}
 	
@@ -154,20 +150,4 @@ public class InvoiceServiceImpl implements InvoiceService
 		Payment payment = new DozerBeanMapper().map(paymentVO, Payment.class); 	
 		paymentRepository.delete(payment);
 	}
-	
-	
-	/**
-	 * Method to generate the Invoice report
-	 * @param jasperReport
-	 * @param parameterMap
-	 * @return
-	 * @throws SQLException
-	 * @throws JRException
-	 * @throws IOException
-	 */
-	public JasperPrint exportInvoicePdfFile(JasperReport jasperReport, Map<String, Object> parameterMap) throws SQLException, JRException, IOException {
-		JasperPrint print = JasperFillManager.fillReport(jasperReport, parameterMap, dataSource.getConnection());
-		return print;		 
-	}
-	
 }

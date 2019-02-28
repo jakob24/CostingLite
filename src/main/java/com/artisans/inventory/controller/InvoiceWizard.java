@@ -6,11 +6,13 @@ package com.artisans.inventory.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 
+import org.apache.commons.math3.util.Precision;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
@@ -19,10 +21,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.artisans.inventory.helper.BeanHelper;
+import com.artisans.inventory.helper.ReportEnum;
 import com.artisans.inventory.helper.UIMessageHelper;
 import com.artisans.inventory.service.api.InvoiceService;
 import com.artisans.inventory.vo.InvoiceVO;
 import com.artisans.inventory.vo.PaymentVO;
+import com.artisans.inventory.vo.ReportParameters;
 import com.artisans.inventory.vo.SupplierVO;
 
 /**
@@ -57,6 +61,9 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
 	private List<InvoiceVO> supplierInvoiceList;
 	
 	private boolean invoicePaymentComplete;
+	
+	@Autowired
+	private ReportsController reportsController;
 	
 			
 	/**
@@ -98,7 +105,11 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
     	else if (flowEvent.getNewStep().equals("InvoicePaymentTab"))
     	{
     		calculatePaymentsAndAddPayButton();
-    		PrimeFaces.current().executeScript(queryScript);  
+    		if(null == getSelectedInvoiceVO() || null == getSelectedInvoiceVO().getPayment() || getSelectedInvoiceVO().getPayment().isEmpty()) {
+    			PrimeFaces.current().executeScript(queryScript);  
+    		} else {
+    			PrimeFaces.current().executeScript(queryFirstTab);  
+    		}
     		return flowEvent.getNewStep();
     	}     
     	else 
@@ -234,6 +245,10 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
     	if(null == paymentVO.getPaymentId() || paymentVO.getPaymentId().intValue() == 0) {
     		//New payment, dont do anything
     	} else {
+    		
+    		//Update Invoice details
+    		invoiceService.updateInvoice(paymentVO.getInvoice());
+    		
     		//Update the Invoice Payment
     		paymentVO = invoiceService.updateInvoicePayment(paymentVO);
     		refreshSelectedInvoiceData(paymentVO.getInvoice().getInvoiceId());
@@ -339,12 +354,14 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
     		if ((null == payment.getPaymentId() || payment.getPaymentId().intValue() == 0)  && payment.getPaymentType().equalsIgnoreCase(PAY_TYPE_INVOICE)) {
     			//Updating only unsaved Data    			
 				if(null != payment.getAmountUsd() && null != payment.getGbpToUsd()) {
-					payment.setAmount(payment.getAmountUsd()/payment.getGbpToUsd());    				
+					payment.setAmount(Precision.round(payment.getAmountUsd()/payment.getGbpToUsd(), 2));    				
     			}    			
+    		} else if (null != payment.getAmountUsd()) {
+    			payment.setAmount(Precision.round(payment.getAmountUsd()/payment.getGbpToUsd(), 2));  
     		}
     		invAmount += payment.getAmount();
     	}
-    	setTotalInvoicePaidAmount(invAmount);
+    	setTotalInvoicePaidAmount(Precision.round(invAmount, 2));
     }
     
     
@@ -389,7 +406,15 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
     public void generateInvoiceReport() {
     	
     	if(null != getSelectedInvoiceId() && getSelectedInvoiceId().intValue() > 0 ) {    		
-    		super.generateInvoiceReport(getSelectedInvoiceVO());		
+    		ReportParameters reportParameters = new ReportParameters();
+    		reportParameters.setReportEnum(ReportEnum.INVOICE);
+    		reportParameters.setReportPrefix(getSelectedInvoiceVO().getSupplier().getName());
+    		reportParameters.setReportPrefix(BeanHelper.getDisplayDate(new Date()));
+    		
+    		LinkedHashMap<String, Object> reportParams = new LinkedHashMap<>();    		
+    		reportParams.put("invoice_id", getSelectedInvoiceVO().getInvoiceId()); 
+    		reportParameters.setReportParameterMap(reportParams);    		
+    		reportsController.generateReport(reportParameters);
     	}
     }
 

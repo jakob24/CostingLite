@@ -26,6 +26,8 @@ public class SupplierVO extends BaseVO implements Serializable {
     private String location;
 
     private List<Invoice> invoice;
+    
+    private String comments; 
 
 
 	/**
@@ -84,6 +86,18 @@ public class SupplierVO extends BaseVO implements Serializable {
 		this.invoice = invoice;
 	}
 
-	
+	/**
+	 * @return the comments
+	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(String comments) {
+		this.comments = comments;
+	}		
 
 }

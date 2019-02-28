@@ -58,11 +58,11 @@
 					
 		          	<p:panel header="Shipment Products">
 						<p:dataTable var="allShipProducts" value="#{ShipmentWizard.selectedShipment.shipmentProduct}" selection="#{ShipmentWizard.selectedShipmentProductVO}"
-							id="allShipProductsList" rowKey="#{allShipProducts.shipmentProductId}" style="margin: 0 auto;"> 
+							id="allShipProductsList" rowKey="#{allShipProducts.product.productId}" style="margin: 0 auto;" > 
 											        		
 					        <p:column selectionMode="single" style="width:16px;text-align:center"/>					        
 					        <p:column headerText="Shipment Product Id" visible="false">  
-					        	<h:outputText value="#{allShipProducts.shipmentProductId}" /> 
+					        	<h:outputText value="#{allShipProducts.product.productId}" /> 
 					        </p:column>	
 					        <p:column headerText="Name" style="width:45%">  
 						    	<h:outputText value="#{allShipProducts.product.name}" /> 
@@ -92,7 +92,7 @@
 		        	<p:panel header="Add Product For Shipment">   
 		                <h:panelGrid columns="4">				                	
 		                	<h:outputText value="Select Product *" />			                	
-					        <p:selectOneMenu id="productSelect" value="#{ShipmentWizard.selectedProductVO}" converter="#{ProductConverter}"  disabled="#{ShipmentWizard.selectedShipment ==null}">
+					        <p:selectOneMenu id="productSelect" value="#{ShipmentWizard.selectedProductVO}" converter="#{ProductConverter}">
 					        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}"/>
 					            <f:selectItems value="#{ReferenceDataController.productVOList}" var="productSel" itemLabel="#{productSel.formattedLabel}" itemValue="#{productSel}"/>
 					           	<p:ajax event="change" listener="#{ShipmentWizard.onSelectingProductToAdd}" update="@this addProductBtn" process="@this"/>
@@ -121,7 +121,7 @@
 		                   		                    		                   
 		                    <h:outputText value="Cost Price (USD)" />
 		                    <p:inputNumber id="cpusd" value="#{ShipmentWizard.selectedShipmentProductVO.costPriceUsd}" decimalPlaces="2" symbol="$">
-		                    	<p:ajax update="@this" />
+		                    	<p:ajax update="@this costPriceGbp" event="change" listener="#{ShipmentWizard.updateCostPriceGBP}" process="@this" />
 		                    </p:inputNumber>
 		                    	
 		                    <h:outputText value="GBP To USD" />
@@ -173,7 +173,7 @@
 				   		 	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-left">	
 				        		<p:outputLabel for="shipComplete" value="Is Shipment Complete" />
 					        		<p:selectOneRadio id="shipComplete" value="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete}" 
-					        			immediate="true" >
+					        			disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}" immediate="true" >
 					            	<f:selectItem itemLabel="Yes" itemValue="1" id="yesbox"  />
 					            	<f:selectItem itemLabel="No" itemValue="0" id="nobox"/>					            	
 					            	<p:ajax immediate="true"/>
@@ -188,7 +188,7 @@
 					    						    	
 					    	<div class="ui-g-7 ui-md-3 ui-lg-2 pull-right">
 							    <p:commandButton value="Save" id="saveShipProductBtn" actionListener="#{ShipmentWizard.saveShipmentProduct}" 
-							    	rendered="#{ShipmentWizard.selectedShipmentProductVO !=null}" 
+							    	rendered="#{ShipmentWizard.selectedShipmentProductVO !=null}" disabled="#{ShipmentWizard.selectedInvoiceVO.shipmentComplete ==1}"
 									ajax="true" styleClass="btn btn-block ui-state-default" immediate="true" update="messages shipmentProductForm:allShipProductsList shipmentProductForm:shipProductPanel" /> <!-- onclick="this.disabled=true;"  -->
 						    </div>
 					    </div>					    		                

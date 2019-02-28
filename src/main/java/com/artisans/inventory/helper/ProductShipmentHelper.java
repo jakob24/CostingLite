@@ -5,6 +5,7 @@ package com.artisans.inventory.helper;
 
 import java.util.List;
 
+import org.apache.commons.math3.util.MathUtils;
 import org.apache.commons.math3.util.Precision;
 
 import com.artisans.inventory.vo.InvoiceVO;
@@ -26,8 +27,7 @@ public class ProductShipmentHelper {
 	 * @param shipmentProductVO
 	 * @return
 	 */
-	public static ShipmentProductVO populateDefaultProductValues(ProductVO productVO, ShipmentProductVO shipmentProductVO) {
-		
+	public static ShipmentProductVO populateDefaultProductValues(ProductVO productVO, ShipmentProductVO shipmentProductVO) {		
 		shipmentProductVO.setGbpToUsd(getInvoiceConversionRate(shipmentProductVO));
 		shipmentProductVO.setOtherCharges(productVO.getOtherCharges());
 		shipmentProductVO.setWebRrp(productVO.getWebRrp());
@@ -37,22 +37,51 @@ public class ProductShipmentHelper {
 		shipmentProductVO.setAmzFees(productVO.getAmzFees());
 		shipmentProductVO.setAmzFbaFees(productVO.getAmzFbaFees());	
 		shipmentProductVO.setCostPriceUsd(productVO.getCostPriceUsd());
-		shipmentProductVO.setCostPriceGbp(productVO.getCostPriceGbp());
+		if(isUSDInvoice(shipmentProductVO)) {
+			shipmentProductVO.setCostPriceGbp(productVO.getCostPriceUsd()/shipmentProductVO.getGbpToUsd());
+		} else {
+			shipmentProductVO.setCostPriceGbp(productVO.getCostPriceGbp());
+		}		
+		
 		shipmentProductVO.setDate(shipmentProductVO.getShipment().getDeliveryDate());
 		shipmentProductVO.setInventory(productVO.getInventory());
 		return shipmentProductVO;
 	}
 	
+	/*
+	 * Method to check if the invoice is pais in USD
+	 */
+	public static boolean isUSDInvoice(ShipmentProductVO shipmentProductVO) {
+		List<PaymentVO> paymentList =  shipmentProductVO.getShipment().getInvoice().getPayment();
+		PaymentVO paymentVO = paymentList.stream().filter(i -> i.getPaymentType().equalsIgnoreCase("INVOICE")).findFirst().orElse(null);	
+		if(null != paymentVO && null != paymentVO.getAmountUsd() && paymentVO.getAmountUsd() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	/**
 	 * Get the conversion rate (GBP to USD) for the invoice Payment
+	 * Take the average conversion rate of all invoice payments
 	 */
 	public static Double getInvoiceConversionRate(ShipmentProductVO shipmentProductVO) {
-		Double rate =1D;
-
+		Double totalRate = 0D;
+		Double rate = 0D;
+		int count = 0;
 		List<PaymentVO> paymentList =  shipmentProductVO.getShipment().getInvoice().getPayment();
-		paymentList.stream().filter(i -> i.getPaymentType().equalsIgnoreCase("INVOICE")).findFirst();		
-		rate = paymentList.get(0).getAmountUsd()==null? 1D : paymentList.get(0).getGbpToUsd();
-		return rate;
+		paymentList.stream().filter(i -> i.getPaymentType().equalsIgnoreCase("INVOICE"));		
+		for(PaymentVO paymentVO : paymentList) {
+			if(null != paymentVO.getAmountUsd() && paymentVO.getAmountUsd() > 0) {
+				totalRate += paymentVO.getGbpToUsd();
+				count++;
+			} else {
+				totalRate = 1D;
+				count = 1;
+				break;
+			}
+		}		
+		rate = totalRate/count;
+		return Precision.round(rate, 4);
 	}
 	
 	/**

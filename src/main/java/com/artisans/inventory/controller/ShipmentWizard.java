@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 
+import org.apache.commons.math3.util.Precision;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
@@ -491,7 +492,13 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 					shipmentProductVOList.add(shipmentProductVO);
 				}
 				getSelectedShipment().setShipmentProduct(shipmentProductVOList);
-				setSelectedShipmentProductVO(shipmentProductVO);			
+				setSelectedShipmentProductVO(shipmentProductVO);
+				
+				if (null != getSelectedShipment().getInvoice().getInvAmountUsd() && getSelectedShipment().getInvoice().getInvAmountUsd() > 0) {
+					String[] params = new String[1];
+					params[0] = shipmentProductVO.getGbpToUsd().toString();
+					UIMessageHelper.getInstance().displayUIMessage("product_price_in_usd", FacesMessage.SEVERITY_INFO, params);
+				}
 			}			
 		}
 		else {
@@ -514,6 +521,18 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 				return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Update cost price of product if the invoice is in USD
+	 */
+	public void updateCostPriceGBP() {
+		if(null != getSelectedShipmentProductVO()) {
+			if (ProductShipmentHelper.isUSDInvoice(getSelectedShipmentProductVO())) {				
+				Double price = Precision.round(getSelectedShipmentProductVO().getCostPriceUsd()/getSelectedShipmentProductVO().getGbpToUsd(), 2);
+				getSelectedShipmentProductVO().setCostPriceGbp(price);
+			}
+		}
 	}
 	
 	/**

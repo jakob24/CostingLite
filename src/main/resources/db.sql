@@ -125,4 +125,8 @@ ADD CONSTRAINT `product_supplier_fk`
   REFERENCES `costing_lite`.`supplier` (`supplier_id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+  
+ #26/02/2019
+ ALTER TABLE `costing_lite`.`supplier` 
+ADD COLUMN `comments` VARCHAR(4000) NULL AFTER `modified_on`;
 
