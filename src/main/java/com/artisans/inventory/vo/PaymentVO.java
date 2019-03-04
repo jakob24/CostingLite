@@ -237,4 +237,16 @@ public class PaymentVO extends BaseVO implements Serializable, Comparable<Paymen
 		   return 1;  // this not null > other null				
 		return this.getDatePaid().compareTo(o.getDatePaid());
 	}
+	
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof PaymentVO)) {
+            return false;
+        }
+
+        PaymentVO paymentVO = (PaymentVO) o;
+        return paymentVO.getPaymentId().intValue() == getPaymentId().intValue();
+    }	
 }

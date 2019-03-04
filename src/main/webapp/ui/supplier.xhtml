@@ -21,7 +21,7 @@
 			</h:outputScript>	
     
 		<div class="container-fluid">
-			<div class="ui-g-12 ui-md-4 ui-lg-4" id="dataEditDiv">
+			<div class="ui-g-12 ui-md-4 ui-lg-7" id="dataEditDiv">
 				<h:form id="dataSettings" prependId="false">
 					<p:growl id="growl" showDetail="true" sticky="true" />  
 					
@@ -35,13 +35,13 @@
 						<p:ajax event="rowEdit" listener="#{StandingDataController.onSupplierEdit}" update=":messages" oncomplete="$('#addNewSupplier').prop('disabled',false);"/> 
 	                    <p:ajax event="rowEditCancel" listener="#{StandingDataController.onSupplierCancel}" update="supplierList"  /> 			        
 				        
-				        <p:column headerText="#{bundle.label_supplier_name}" >  
+				        <p:column headerText="#{bundle.label_supplier_name}" styleClass="ui-g-12 ui-md-4 ui-lg-3">  
 				            <p:cellEditor>  
 				                <f:facet name="output">  
 				                    <h:outputText value="#{supplier.name}" />  
 				                </f:facet>  
 				                <f:facet name="input">  
-				                    <p:inputText value="#{supplier.name}" id="supplierName" required="true">		
+				                    <p:inputText value="#{supplier.name}" id="supplierName" required="true" styleClass="fullDivWidthText" >		
 				                    	<p:ajax event="change" listener="#{StandingDataController.isUniqueSupplierName(supplier)}" process="@this" update="messages"/>                              			
 				                    </p:inputText>	
 				                    <p:tooltip id="toolTipTrack" for="supplierName" value="#{bundle.msg_unique_supplier_name}" trackMouse="true" />	                  				                     
@@ -49,18 +49,29 @@
 				            </p:cellEditor>  
 				        </p:column>
 				        
-				        <p:column headerText="#{bundle.label_supplier_location}" >  
+				        <p:column headerText="#{bundle.label_supplier_location}" styleClass="ui-g-12 ui-md-4 ui-lg-2">  
 				            <p:cellEditor>  
 				                <f:facet name="output">  
 				                    <h:outputText value="#{supplier.location}" />  
 				                </f:facet>  
 				                <f:facet name="input">  
-				                    <p:inputText value="#{supplier.location}" id="supplierLocation" required="true"/>		              				                     
+				                    <p:inputText value="#{supplier.location}" id="supplierLocation" required="true" styleClass="fullDivWidthText"/>		              				                     
 				                </f:facet>  
 				            </p:cellEditor>  
 				        </p:column>		
+				        
+				        <p:column headerText="#{bundle.tbl_header_comments}" styleClass="ui-g-12 ui-md-4 ui-lg-6">  
+				            <p:cellEditor>  
+				                <f:facet name="output">  
+				                    <h:outputText value="#{supplier.comments}" />  
+				                </f:facet>  
+				                <f:facet name="input">  
+				                    <p:inputText value="#{supplier.comments}" id="supplierComments" styleClass="fullDivWidthText"/>		              				                     
+				                </f:facet>  
+				            </p:cellEditor>  
+				        </p:column>					        
 				        			        				        					        
-					    <p:column headerText="#{bundle.btn_label_amend}">  
+					    <p:column headerText="#{bundle.btn_label_amend}" styleClass="ui-g-12 ui-md-4 ui-lg-1">  
 					    	<p:rowEditor />  
 					    </p:column>  					    
 					</p:dataTable>

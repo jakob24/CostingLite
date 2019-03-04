@@ -413,4 +413,15 @@ public class ProductVO extends BaseVO implements Serializable {
 		this.supplier = supplier;
 	}			
 	
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof PaymentVO)) {
+            return false;
+        }
+
+        ProductVO productVO = (ProductVO) o;
+        return productVO.getProductId() == getProductId();
+    }	
 }

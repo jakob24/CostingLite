@@ -208,6 +208,16 @@ public class InvoiceVO extends BaseVO implements Serializable {
 		this.shipmentComplete = shipmentComplete;
 	}
 	
-	
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof InvoiceVO)) {
+            return false;
+        }
+
+        InvoiceVO invoiceVO = (InvoiceVO) o;
+        return invoiceVO.getInvoiceId() == getInvoiceId();
+    }		
 
 }

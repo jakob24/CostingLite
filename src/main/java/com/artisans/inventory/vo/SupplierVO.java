@@ -98,6 +98,18 @@ public class SupplierVO extends BaseVO implements Serializable {
 	 */
 	public void setComments(String comments) {
 		this.comments = comments;
-	}		
+	}	
+	
+	
+    @Override
+    public boolean equals(Object o) {
 
+        if (o == this) return true;
+        if (!(o instanceof SupplierVO)) {
+            return false;
+        }
+
+        SupplierVO supplierVO = (SupplierVO) o;
+        return supplierVO.getSupplierId() == getSupplierId();
+    }	
 }

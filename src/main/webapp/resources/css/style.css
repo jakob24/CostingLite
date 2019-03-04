@@ -397,3 +397,7 @@ body {
     white-space: nowrap;
     width: auto !important;
 }
+
+.fullDivWidthText {
+	width: 100%; box-sizing: border-box;
+}

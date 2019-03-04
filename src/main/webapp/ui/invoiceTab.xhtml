@@ -10,7 +10,7 @@
         	<p:panel header="Add/Edit Invoice">               
                 <h:panelGrid columns="3">				                	
                 	<h:outputText value="Supplier *" />				                	
-			        <p:selectOneMenu id="supplierSelect" value="#{InvoiceWizard.selectedSupplierVO}" converter="#{SupplierConverter}" style="width:150px;">
+			        <p:selectOneMenu id="supplierSelect" value="#{InvoiceWizard.selectedSupplierVO}" converter="#{SupplierConverter}" style="width:250px;">
 			        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}" />
 			            <f:selectItems value="#{ReferenceDataController.supplierVOList}" var="supplier" itemLabel="#{supplier.name}" itemValue="#{supplier}"/>
 			            <p:ajax event="change" update="invoiceSelect invoicePanel" listener="#{InvoiceWizard.findAllInvoicesForSupplier}" />

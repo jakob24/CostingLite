@@ -66,5 +66,15 @@ public class CourierVO extends BaseVO implements Serializable {
 		this.shipmentVO = shipmentVO;
 	}
 
+    @Override
+    public boolean equals(Object o) {
 
+        if (o == this) return true;
+        if (!(o instanceof CourierVO)) {
+            return false;
+        }
+
+        CourierVO courierVO = (CourierVO) o;
+        return courierVO.getCourierId().intValue() == getCourierId().intValue();
+    }
 }

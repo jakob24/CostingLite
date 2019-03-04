@@ -294,5 +294,16 @@ public class ShipmentProductVO extends BaseVO implements Serializable {
 	public void setInventory(Integer inventory) {
 		this.inventory = inventory;
 	}
-		    
+		   
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof ShipmentProductVO)) {
+            return false;
+        }
+
+        ShipmentProductVO shipmentProductVO = (ShipmentProductVO) o;
+        return shipmentProductVO.getShipmentProductId().intValue() == getShipmentProductId().intValue();
+    }		
 }

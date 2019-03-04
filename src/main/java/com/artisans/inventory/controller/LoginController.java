@@ -59,7 +59,7 @@ public class LoginController extends BaseWizard implements Serializable {
 		topMenu.addElement(firstSubmenu);
 				
 		DefaultSubMenu invoiceSubmenu = new DefaultSubMenu("Invoices");		
-		item = new DefaultMenuItem("Manageme Invoices");		
+		item = new DefaultMenuItem("Manage Invoices");		
 		//item.setHref("invoices.xhtml");
 		item.setCommand(INVOICE_ENTRY_METHOD);
 		item.setIcon("fa fa-book");
@@ -96,12 +96,12 @@ public class LoginController extends BaseWizard implements Serializable {
 		item.setHref("supplier.xhtml");
 		item.setIcon("fa fa-user-secret");
 		dataSubmenu.addElement(item);
-		
+					
 		item = new DefaultMenuItem("Maintain User");		
-		//item.setOutcome("subscription");
 		item.setIcon("fa fa-user-plus");
 		dataSubmenu.addElement(item);	
-		
+		topMenu.addElement(dataSubmenu);
+				
 		DefaultSubMenu reportSubmenu = new DefaultSubMenu("Reports");		
 		item = new DefaultMenuItem("Full Inventory Report");
 		item.setCommand("#{ReportsController.generateInventoryReport}");

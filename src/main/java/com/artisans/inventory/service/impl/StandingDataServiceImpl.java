@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,7 +45,8 @@ public class StandingDataServiceImpl extends BaseServiceImpl implements Standing
 	public List<SupplierVO> findSuppliers()
 	{
 		List<SupplierVO> supplierVOList = new ArrayList<SupplierVO>();
-		List<?> supplierList = supplierRepository.findAll();
+		Sort sortSpec = orderBy("name");
+		List<?> supplierList = supplierRepository.findAll(sortSpec);
 		if(null != supplierList && ! supplierList.isEmpty())
 		{
 			CollectionUtils.transform(supplierList, new SupplierTransformer());
@@ -76,7 +78,8 @@ public class StandingDataServiceImpl extends BaseServiceImpl implements Standing
 	public List<CourierVO> findCouriers()
 	{
 		List<CourierVO> courierVOList = new ArrayList<CourierVO>();
-		List<?> courierList = courierRepository.findAll();
+		Sort sortSpec = orderBy("name");
+		List<?> courierList = courierRepository.findAll(sortSpec);
 		if(null != courierList && ! courierList.isEmpty())
 		{
 			CollectionUtils.transform(courierList, new CourierTransformer());
@@ -131,5 +134,6 @@ public class StandingDataServiceImpl extends BaseServiceImpl implements Standing
 		Product product = new DozerBeanMapper().map(productVO, Product.class);    
 		product = productRepository.saveAndFlush(product);
 		return new DozerBeanMapper().map(product, ProductVO.class);  
-	}		
+	}	
+
 }
