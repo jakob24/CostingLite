@@ -94,5 +94,18 @@ public class BaseWizard implements Serializable
 			e.printStackTrace();
 		}			
 	}	
+	
+	
+	/**
+	 * If invoice is paid in USD, return true;
+	 * @param invoiceVO
+	 * @return
+	 */
+	public boolean isInvoiceInUSD(InvoiceVO invoiceVO) {
+    	if(null != invoiceVO.getInvAmountUsd() && invoiceVO.getInvAmountUsd().doubleValue() > 0) 
+    		return true;
+    	else
+    		return false;
+	}
 	    
 }

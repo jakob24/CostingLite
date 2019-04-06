@@ -3,7 +3,7 @@
  
  	<include resource="org/springframework/boot/logging/logback/base.xml"/>
  	
-    <property name="LOGS" value="./logs" />
+    <property name="LOGS" value="./InvLitelogs" />
  
     <appender name="Console"
         class="ch.qos.logback.core.ConsoleAppender">

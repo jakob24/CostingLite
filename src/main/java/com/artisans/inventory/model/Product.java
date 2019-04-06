@@ -83,6 +83,18 @@ public class Product implements Serializable {
     
     @Column(name="amz_fba_fees", precision=22)
     private Double amzFbaFees;    
+        
+    @Column(name="amz_de_rrp", precision=22)
+    private Double amzDeRrp;	
+    
+    @Column(name="amz_de_fba_fees", precision=22)
+    private Double amzDeFbaFees;   
+    
+    @Column(name="amz_fr_rrp", precision=22)
+    private Double amzFrRrp;	
+    
+    @Column(name="amz_fr_fba_fees", precision=22)
+    private Double amzFrFbaFees;       
     
     @Column(name="ean", length=45)
     private String ean;
@@ -109,6 +121,10 @@ public class Product implements Serializable {
     @ManyToOne
     @JoinColumn(name="supplier")
     private Supplier supplier;    
+    
+    @ManyToOne
+    @JoinColumn(name="amazon_fba_size_fees")
+    private AmazonFbaSizeFees amazonFbaSizeFees;      
 
     /** Default constructor. */
     public Product() {
@@ -472,9 +488,7 @@ public class Product implements Serializable {
 	public void setInactiveFrom(Timestamp inactiveFrom) {
 		this.inactiveFrom = inactiveFrom;
 	}
-	
-	
-	
+		
 
 	/**
 	 * @return the costPriceUsd
@@ -516,6 +530,78 @@ public class Product implements Serializable {
 	 */
 	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
+	}
+	
+
+	/**
+	 * @return the amzDeRrp
+	 */
+	public Double getAmzDeRrp() {
+		return amzDeRrp;
+	}
+
+	/**
+	 * @param amzDeRrp the amzDeRrp to set
+	 */
+	public void setAmzDeRrp(Double amzDeRrp) {
+		this.amzDeRrp = amzDeRrp;
+	}
+
+	/**
+	 * @return the amzDeFbaFees
+	 */
+	public Double getAmzDeFbaFees() {
+		return amzDeFbaFees;
+	}
+
+	/**
+	 * @param amzDeFbaFees the amzDeFbaFees to set
+	 */
+	public void setAmzDeFbaFees(Double amzDeFbaFees) {
+		this.amzDeFbaFees = amzDeFbaFees;
+	}
+
+	/**
+	 * @return the amzFrRrp
+	 */
+	public Double getAmzFrRrp() {
+		return amzFrRrp;
+	}
+
+	/**
+	 * @param amzFrRrp the amzFrRrp to set
+	 */
+	public void setAmzFrRrp(Double amzFrRrp) {
+		this.amzFrRrp = amzFrRrp;
+	}
+
+	/**
+	 * @return the amzFrFbaFees
+	 */
+	public Double getAmzFrFbaFees() {
+		return amzFrFbaFees;
+	}
+
+	/**
+	 * @param amzFrFbaFees the amzFrFbaFees to set
+	 */
+	public void setAmzFrFbaFees(Double amzFrFbaFees) {
+		this.amzFrFbaFees = amzFrFbaFees;
+	}
+	
+
+	/**
+	 * @return the amazonFbaSizeFees
+	 */
+	public AmazonFbaSizeFees getAmazonFbaSizeFees() {
+		return amazonFbaSizeFees;
+	}
+
+	/**
+	 * @param amazonFbaSizeFees the amazonFbaSizeFees to set
+	 */
+	public void setAmazonFbaSizeFees(AmazonFbaSizeFees amazonFbaSizeFees) {
+		this.amazonFbaSizeFees = amazonFbaSizeFees;
 	}
 
 	/**

@@ -5,6 +5,7 @@ package com.artisans.inventory.service.api;
 
 import java.util.List;
 
+import com.artisans.inventory.vo.AmazonFbaSizeFeesVO;
 import com.artisans.inventory.vo.CourierVO;
 import com.artisans.inventory.vo.ProductVO;
 import com.artisans.inventory.vo.SupplierVO;
@@ -53,4 +54,11 @@ public interface StandingDataService {
 	 * @return ProductVO
 	 */
 	public ProductVO saveProduct(ProductVO productVO);		
+	
+	
+	/**
+	 * Method to retrieve all amazonFbaSizeFeesVO
+	 * @return
+	 */
+	public List<AmazonFbaSizeFeesVO> findAmazonFbaSizeFees();
 }

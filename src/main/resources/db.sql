@@ -130,3 +130,47 @@ ADD CONSTRAINT `product_supplier_fk`
  ALTER TABLE `costing_lite`.`supplier` 
 ADD COLUMN `comments` VARCHAR(4000) NULL AFTER `modified_on`;
 
+
+#06/03/2019
+ALTER TABLE `costing_lite`.`shipment_product` 
+ADD COLUMN `web_profit` DOUBLE NULL AFTER `web_rrp`,
+ADD COLUMN `ebay_profit` DOUBLE NULL AFTER `web_profit`,
+ADD COLUMN `amz_profit` DOUBLE NULL AFTER `ebay_profit`,
+ADD COLUMN `amz_fba_profit` DOUBLE NULL AFTER `amz_profit`;
+
+#09/03/2019
+ALTER TABLE `costing_lite`.`product` 
+ADD COLUMN `amz_de_rrp` DOUBLE NULL AFTER `supplier`,
+ADD COLUMN `amz_de_fba_fees` DOUBLE NULL AFTER `amz_de_rrp`,
+ADD COLUMN `amz_fr_rrp` DOUBLE NULL AFTER `amz_de_fba_fees`,
+ADD COLUMN `amz_fr_fba_fess` DOUBLE NULL AFTER `amz_fr_rrp`;
+
+ALTER TABLE `costing_lite`.`shipment_product` 
+ADD COLUMN `amz_de_rrp` DOUBLE NULL AFTER `amz_fba_profit`,
+ADD COLUMN `amz_de_fba_fees` DOUBLE NULL AFTER `amz_de_rrp`,
+ADD COLUMN `amz_fr_rrp` DOUBLE NULL AFTER `amz_de_fba_fees`,
+ADD COLUMN `amz_fr_fba_fess` DOUBLE NULL AFTER `amz_fr_rrp`;
+
+CREATE TABLE `costing_lite`.`amazon_fba_size_fees` (
+  `amazon_fba_size_fees_id` INT NOT NULL,
+  `size` VARCHAR(100) NULL,
+  `uk_fees` DOUBLE NULL,
+  `de_fees` DOUBLE NULL,
+  `fr_fees` DOUBLE NULL);
+  
+ALTER TABLE `costing_lite`.`amazon_fba_size_fees` 
+ADD PRIMARY KEY (`amazon_fba_size_fees_id`); 
+
+ALTER TABLE `costing_lite`.`product` 
+ADD INDEX `amazon_fba_size_fees_fk_idx` (`amazon_fba_size_fees` ASC);
+ALTER TABLE `costing_lite`.`product` 
+ADD CONSTRAINT `amazon_fba_size_fees_fk`
+  FOREIGN KEY (`amazon_fba_size_fees`)
+  REFERENCES `costing_lite`.`amazon_fba_size_fees` (`amazon_fba_size_fees_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION; 
+
+ALTER TABLE `costing_lite`.`shipment_product` 
+ADD COLUMN `amz_de_fba_profit` DOUBLE NULL AFTER `amz_fr_fba_fess`,
+ADD COLUMN `amz_fr_fba_profit` DOUBLE NULL AFTER `amz_de_fba_profit`;
+

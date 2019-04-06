@@ -13,13 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.artisans.inventory.model.Courier;
 import com.artisans.inventory.model.Product;
 import com.artisans.inventory.model.Supplier;
+import com.artisans.inventory.repository.AmazonFbaSizeFeesRepository;
 import com.artisans.inventory.repository.CourierRepository;
 import com.artisans.inventory.repository.ProductRepository;
 import com.artisans.inventory.repository.SupplierRepository;
 import com.artisans.inventory.service.api.StandingDataService;
+import com.artisans.inventory.transformers.AmazonFbaSizeFeesTransformer;
 import com.artisans.inventory.transformers.CourierTransformer;
 import com.artisans.inventory.transformers.ProductTransformer;
 import com.artisans.inventory.transformers.SupplierTransformer;
+import com.artisans.inventory.vo.AmazonFbaSizeFeesVO;
 import com.artisans.inventory.vo.CourierVO;
 import com.artisans.inventory.vo.ProductVO;
 import com.artisans.inventory.vo.SupplierVO;
@@ -35,7 +38,10 @@ public class StandingDataServiceImpl extends BaseServiceImpl implements Standing
 	private CourierRepository courierRepository;	
 	
 	@Autowired
-	private ProductRepository productRepository;			
+	private ProductRepository productRepository;	
+	
+	@Autowired
+	private AmazonFbaSizeFeesRepository amazonFbaSizeFeesRepository;
 	
 	/**
 	 * Find the List of Supplier
@@ -136,4 +142,21 @@ public class StandingDataServiceImpl extends BaseServiceImpl implements Standing
 		return new DozerBeanMapper().map(product, ProductVO.class);  
 	}	
 
+	
+	/**
+	 * Method to retrieve all amazonFbaSizeFeesVO
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<AmazonFbaSizeFeesVO> findAmazonFbaSizeFees()
+	{
+		List<AmazonFbaSizeFeesVO> amazonFbaSizeFeesVOList = new ArrayList<AmazonFbaSizeFeesVO>();
+		List<?> amazonFbaSizeFeesList = amazonFbaSizeFeesRepository.findAll();
+		if(null != amazonFbaSizeFeesList && ! amazonFbaSizeFeesList.isEmpty())
+		{
+			CollectionUtils.transform(amazonFbaSizeFeesList, new AmazonFbaSizeFeesTransformer());
+			amazonFbaSizeFeesVOList = (List<AmazonFbaSizeFeesVO>)amazonFbaSizeFeesList;
+		}		
+		return amazonFbaSizeFeesVOList;		
+	}
 }

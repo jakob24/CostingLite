@@ -1,0 +1,885 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="costings" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="903223b6-d8f4-426c-9736-750fea24334c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="InvLiteJDBC"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="CostingsDataSet" uuid="ef664483-887a-4194-8fd0-ddc3010b60a7">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="InvLiteJDBC"/>
+		<parameter name="invoice_id" class="java.lang.Double"/>
+		<queryString language="SQL">
+			<![CDATA[select inv.*, sp.*, p.sku, p.name,sup.name from invoice inv 
+inner join shipment sh on inv.invoice_id = sh.invoice 
+inner join shipment_product sp on sp.shipment=sh.shipment_id
+inner join product p on p.product_id=sp.product
+inner join supplier sup on inv.supplier=sup.supplier_id
+where inv.invoice_id=   6]]>
+		</queryString>
+		<field name="name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="product"/>
+		</field>
+		<field name="sku" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="sku"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="product"/>
+		</field>
+		<field name="product_qty" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="product_qty"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="cost_price_gbp" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="cost_price_gbp"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="landing_cost_gbp" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="landing_cost_gbp"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="web_rrp" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="web_rrp"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="web_profit" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="web_profit"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="ebay_rrp" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="ebay_rrp"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="ebay_fees" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="ebay_fees"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="ebay_profit" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="ebay_profit"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+	</subDataset>
+	<subDataset name="AmazonDataset" uuid="c950a4e4-428d-48b6-8be7-e47495b212e9">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="InvLiteJDBC"/>
+		<queryString language="SQL">
+			<![CDATA[select inv.*, sp.*, p.sku, p.name,sup.name from invoice inv 
+inner join shipment sh on inv.invoice_id = sh.invoice 
+inner join shipment_product sp on sp.shipment=sh.shipment_id
+inner join product p on p.product_id=sp.product
+inner join supplier sup on inv.supplier=sup.supplier_id
+where inv.invoice_id=  6]]>
+		</queryString>
+		<field name="amz_rrp" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="amz_rrp"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="amz_fees" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="amz_fees"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="amz_profit" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="amz_profit"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="amz_fba_fees" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="amz_fba_fees"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="amz_fba_profit" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="amz_fba_profit"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="amz_de_rrp" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="amz_de_rrp"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="amz_de_fba_fees" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="amz_de_fba_fees"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="amz_de_fba_profit" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="amz_de_fba_profit"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="amz_fr_rrp" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="amz_fr_rrp"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="amz_fr_fba_fees" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="amz_fr_fba_fees"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<field name="amz_fr_fba_profit" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="amz_fr_fba_profit"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+		</field>
+		<group name="amz_rrp">
+			<groupExpression><![CDATA[$F{amz_rrp}]]></groupExpression>
+		</group>
+		<group name="amz_fees">
+			<groupExpression><![CDATA[$F{amz_fees}]]></groupExpression>
+		</group>
+		<group name="amz_profit">
+			<groupExpression><![CDATA[$F{amz_profit}]]></groupExpression>
+		</group>
+		<group name="amz_fba_fees">
+			<groupExpression><![CDATA[$F{amz_fba_fees}]]></groupExpression>
+		</group>
+		<group name="amz_fba_profit">
+			<groupExpression><![CDATA[$F{amz_fba_profit}]]></groupExpression>
+		</group>
+		<group name="amz_de_rrp">
+			<groupExpression><![CDATA[$F{amz_de_rrp}]]></groupExpression>
+		</group>
+		<group name="amz_de_fba_fees">
+			<groupExpression><![CDATA[$F{amz_de_fba_fees}]]></groupExpression>
+		</group>
+		<group name="amz_de_fba_profit">
+			<groupExpression><![CDATA[$F{amz_de_fba_profit}]]></groupExpression>
+		</group>
+		<group name="amz_fr_rrp">
+			<groupExpression><![CDATA[$F{amz_fr_rrp}]]></groupExpression>
+		</group>
+		<group name="amz_fr_fba_fees">
+			<groupExpression><![CDATA[$F{amz_fr_fba_fees}]]></groupExpression>
+		</group>
+		<group name="amz_fr_fba_profit">
+			<groupExpression><![CDATA[$F{amz_fr_fba_profit}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="invoice_id" class="java.lang.Double"/>
+	<queryString language="SQL">
+		<![CDATA[select inv.*, sp.*, p.sku, p.name,sup.name as supname from invoice inv 
+inner join shipment sh on inv.invoice_id = sh.invoice 
+inner join shipment_product sp on sp.shipment=sh.shipment_id
+inner join product p on p.product_id=sp.product
+inner join supplier sup on inv.supplier=sup.supplier_id
+where inv.invoice_id=   $P{invoice_id} ]]>
+	</queryString>
+	<field name="invoice_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="invoice_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
+	</field>
+	<field name="invoice_number" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="invoice_number"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
+	</field>
+	<field name="invoice_date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="invoice_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
+	</field>
+	<field name="date_paid" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="date_paid"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
+	</field>
+	<field name="inv_amount" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="inv_amount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
+	</field>
+	<field name="inv_amount_usd" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="inv_amount_usd"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
+	</field>
+	<field name="supplier" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="supplier"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
+	</field>
+	<field name="modified_by" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="modified_by"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
+	</field>
+	<field name="modified_on" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="modified_on"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
+	</field>
+	<field name="comments" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="comments"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
+	</field>
+	<field name="shipment_complete" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="shipment_complete"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="invoice"/>
+	</field>
+	<field name="shipment_product_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="shipment_product_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="cost_price_usd" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cost_price_usd"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="cost_price_gbp" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cost_price_gbp"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="landing_cost_gbp" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="landing_cost_gbp"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="product_qty" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="product_qty"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="shipment" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="shipment"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="product" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="product"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="COLUMN_20" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="modified_by"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="COLUMN_21" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="modified_on"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="amz_fba_fees" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="amz_fba_fees"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="amz_fees" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="amz_fees"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="amz_rrp" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="amz_rrp"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="ebay_fees" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ebay_fees"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="ebay_rrp" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ebay_rrp"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="other_charges" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="other_charges"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="web_rrp" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="web_rrp"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="web_profit" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="web_profit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="ebay_profit" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ebay_profit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="amz_profit" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="amz_profit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="amz_fba_profit" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="amz_fba_profit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="amz_de_rrp" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="amz_de_rrp"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="amz_de_fba_fees" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="amz_de_fba_fees"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="amz_fr_rrp" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="amz_fr_rrp"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="amz_de_fba_profit" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="amz_de_fba_profit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="amz_fr_fba_profit" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="amz_fr_fba_profit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="amz_fr_fba_fees" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="amz_fr_fba_fees"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipment_product"/>
+	</field>
+	<field name="sku" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sku"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="product"/>
+	</field>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="product"/>
+	</field>
+	<field name="supname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="supname"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="supplier"/>
+	</field>
+	<sortField name="invoice_number" order="Descending"/>
+	<variable name="invoice_id" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{invoice_number}]]></variableExpression>
+	</variable>
+	<group name="invoice_number">
+		<groupExpression><![CDATA[$F{invoice_number}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="388" splitType="Stretch">
+			<staticText>
+				<reportElement x="280" y="20" width="260" height="30" uuid="b05c23ca-4cf7-48c9-b5bd-1d1bfc5bcb72"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Shipment Costing Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="58" width="100" height="20" uuid="a4644d52-668f-4868-9ef5-f23f434997a9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoice Nuumber :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="58" width="100" height="20" uuid="0996aab7-e285-4f5c-b76f-15848c7d3f64"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{invoice_number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="90" width="60" height="20" uuid="4d7dc55a-b984-44cc-bacf-397424f86c20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inv_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="115" width="100" height="20" uuid="b1cdbcb7-ce38-4657-9b17-6aedd195e8eb"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{invoice_date})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="87" width="100" height="20" uuid="0b126985-eb4f-46aa-882e-633c7617cacf"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoice Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="116" width="42" height="14" uuid="5ded7547-e14a-47be-9018-64c632f79ddd"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="140" width="60" height="20" uuid="a7c989c0-3b9b-47e7-a6ea-14e2d6046440"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Supplier]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="0" y="168" width="800" height="102" uuid="e1d5f814-c942-4759-9a68-863f74104084">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="CostingsDataSet" uuid="394ea732-1ca7-48ad-8022-cbd9bc220a66">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="260" uuid="2305c934-dbaf-4ec1-873e-63a43b5ea808">
+						<jr:tableHeader style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="260" height="30" uuid="948e783b-9b4c-465b-a159-53c4b4dacaad"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Name]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="260" height="30" uuid="251a44a4-1f2e-41a0-9e7f-c277a4b46fc1"/>
+								<box leftPadding="2"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="67" uuid="c8ef5824-4245-4a10-9c62-048082ad98c4">
+						<jr:tableHeader style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="67" height="30" uuid="08904f71-b863-4319-8150-e4897f6fb990"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Qty]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="67" height="30" uuid="1d78b809-33ff-48e1-bacc-a2cb95fe2eb5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{product_qty}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="67" uuid="ff22dde6-e420-47a6-b139-a27721b7688b">
+						<jr:tableHeader style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="67" height="30" uuid="69c4959c-5bb4-4792-aa9c-3039e5891cf1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Cost Price]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="67" height="30" uuid="97e31cc0-ea14-486a-b7ba-4ea6eb4f923b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{cost_price_gbp}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="68" uuid="d9fb5dab-7283-4ab7-8c1b-8c0f7d0e7266">
+						<jr:tableHeader style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="68" height="30" uuid="104c8726-ff76-416e-95c9-e6e1b763959a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Landing Cost]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="68" height="30" uuid="30003ec2-5988-4c26-8eec-908027c7be95"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{landing_cost_gbp}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="68" uuid="c495e7ee-16ae-49b3-8983-119e3c4b3a85">
+						<jr:tableHeader style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="68" height="30" uuid="d2f52134-c9c6-4ae2-8852-db581e20c5b7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Web RRP]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="68" height="30" uuid="40a6428a-bbc0-4e18-9e2b-d5c5fba831dd"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{web_rrp}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="68" uuid="df4c7438-df52-4114-b6ae-d0a77b84113e">
+						<jr:tableHeader style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="68" height="30" uuid="562c1937-968b-4910-896a-751b252bd9d5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Web Profit]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="68" height="30" forecolor="#09700C" uuid="cabb618b-60dd-47e8-bebd-3212508b7359"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{web_profit}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="67" uuid="4fc70888-1891-4990-9014-1b27fc60af2b">
+						<jr:tableHeader style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="67" height="30" uuid="4f3621d6-a87d-49de-bab6-e5bbece3bd77"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Ebay RRP]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="67" height="30" uuid="40ae95f4-dc06-4041-98f6-ceef07edf832"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{ebay_rrp}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="68" uuid="f7923b22-8344-4bf8-bfbd-111f38ede651">
+						<jr:tableHeader style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="68" height="30" uuid="cbc7d1b2-6367-4e57-8a82-295f62804cf7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Ebay Fees]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="68" height="30" uuid="91df4b61-17e3-461f-8a7c-d484c99ecc43"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{ebay_fees}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="67" uuid="25cdbf84-48b5-45ed-80f1-fce990f05cba">
+						<jr:tableHeader style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="67" height="30" uuid="9c5df0d2-2a3f-4ede-b9ec-078d6d092f7a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Ebay Profit]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="67" height="30" forecolor="#09700C" uuid="6e487bbd-dde8-422c-9265-3daa3742224c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{ebay_profit}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField>
+				<reportElement x="112" y="90" width="58" height="20" uuid="9227704c-0db5-4b6c-97bd-a0e63a039d6d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inv_amount_usd}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement positionType="Float" x="0" y="290" width="800" height="98" uuid="39c983f0-7d00-4247-ab0b-b1be98f28c61">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="AmazonDataset" uuid="82425b0f-c252-4985-8f92-ec63b2051c72">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="73" uuid="d0d28c14-3cde-47eb-aa75-b8fc235b9349">
+						<jr:tableHeader style="Table 1_TH" height="30"/>
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="73" height="30" uuid="cc1b109b-ee3e-41ea-ba6b-8419a15261f5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[RRP]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="73" height="30" uuid="7b88bdc8-3d3f-4f95-9d1c-f02d83c18d0a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{amz_rrp}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="73" uuid="ec702c15-a065-4571-9806-71ba69140fb7">
+						<jr:tableHeader style="Table 1_TH" height="30"/>
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="73" height="30" uuid="cdde83b5-92cb-4490-8b1b-5cf6660071f6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Fees]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="73" height="30" uuid="d3585837-d646-4481-b18f-37cb27f6720d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{amz_fees}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="72" uuid="eebce7ac-fa4b-4c45-b73a-c2c5da93462e">
+						<jr:tableHeader style="Table 1_TH" height="30"/>
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="72" height="30" uuid="8d06a68d-f70d-49f1-a5c8-8ceb13cae256"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Profit]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="72" height="30" forecolor="#09700C" uuid="70e4d107-4dd5-4dec-9a0a-0cd87d184c7b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{amz_profit}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="72" uuid="aa68f025-454c-4f70-92e8-01c3d09c5bb4">
+						<jr:tableHeader style="Table 1_TH" height="30"/>
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="72" height="30" uuid="ff6d0ff3-e83f-4e23-8fa5-50651d548d6d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[FBA Fees]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="72" height="30" uuid="6464d133-36a9-44e2-aac4-13542f2345fb"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{amz_fba_fees}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="73" uuid="189bde42-4068-489f-90dd-e2a8c011a08b">
+						<jr:tableHeader style="Table 1_TH" height="30"/>
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="73" height="30" uuid="b23dd473-4305-46fd-9cd5-359d2342d7c2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[FBA Profit]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="73" height="30" forecolor="#09700C" uuid="038d4d09-2069-450d-9b17-b2adafe715e9"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{amz_fba_profit}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="73" uuid="5af022bc-0c6c-465e-bdfc-bc829e7bfbf5">
+						<jr:tableHeader style="Table 1_TH" height="30"/>
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="73" height="30" uuid="b134d6f2-6086-498b-841f-d775e235f96d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[De RRP]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="73" height="30" uuid="e4917505-111a-4c69-9bdb-c73b924c68c2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{amz_de_rrp}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="73" uuid="e294d039-bea8-4885-92f1-2e1d411bc8e0">
+						<jr:tableHeader style="Table 1_TH" height="30"/>
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="73" height="30" uuid="e5533085-57a8-4128-9810-f9678840e50b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[De FBA Fees]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="73" height="30" uuid="1fa0700f-dd8c-47b4-9645-124b65ad7cb9"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{amz_de_fba_fees}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="73" uuid="d99de37f-55e7-4ddd-a85c-ac65fff9620c">
+						<jr:tableHeader style="Table 1_TH" height="30"/>
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="73" height="30" uuid="003ce6e5-bb14-4bd3-ace0-48987734cad1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[De FBA Profit]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="73" height="30" forecolor="#09700C" uuid="a8b19921-5f0b-4312-9668-ee3a8fa809bd"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{amz_de_fba_profit}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="72" uuid="35715119-392d-4bb0-8c3d-82f8a5459ae2">
+						<jr:tableHeader style="Table 1_TH" height="30"/>
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="72" height="30" uuid="94ac62df-6248-4f0b-8588-ad44839be319"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Fr RRP]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="72" height="30" uuid="113ac57a-9268-4fea-aa15-6def4672dbed"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{amz_fr_rrp}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="73" uuid="83fd0a97-c9e3-480c-bbfd-2d5159ccff9a">
+						<jr:tableHeader style="Table 1_TH" height="30"/>
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="73" height="30" uuid="79ac1569-5343-40d8-9bb4-473236e01952"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Fr FBA Fees]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="73" height="30" uuid="e95be2ae-7243-4cc7-bd66-f34e45e241d4"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{amz_fr_fba_fees}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="73" uuid="606b5a30-2547-4d57-b9a0-5400cbec846b">
+						<jr:tableHeader style="Table 1_TH" height="30"/>
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="73" height="30" uuid="e2df02de-2dd2-4868-a009-7aadb9957c99"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Fr FBA Profit]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="73" height="30" forecolor="#09700C" uuid="ee062f75-ca8c-4673-9eca-3b6eb22bd633"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{amz_fr_fba_profit}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="100" y="92" width="12" height="16" uuid="71215acd-e1c4-4b94-844c-c067c5f23095"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="178" y="92" width="12" height="16" uuid="7180e0cb-041b-4da0-9c8e-76755b26c335"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[£]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="140" width="190" height="20" uuid="30df0333-26c0-424b-b2c1-b1006d18cd5a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{supname}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="350" y="270" width="100" height="20" uuid="4f2c8298-0468-40e8-92b0-7ca0d7997ade"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amazon Prices]]></text>
+			</staticText>
+		</band>
+	</title>
+</jasperReport>

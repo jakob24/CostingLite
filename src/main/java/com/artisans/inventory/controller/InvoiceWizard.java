@@ -306,12 +306,11 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
     	Double invAmount =0D;    	
     	Double totalPaymentAmountUSD = 0D;
     	Double totalPayAmount =0D;    	
-    	boolean invoiceInUSD = false;
+    	boolean invoiceInUSD = isInvoiceInUSD(invoiceVO);
     	boolean valid = true;
     	
     	if(null != invoiceVO.getInvAmountUsd() && invoiceVO.getInvAmountUsd().doubleValue() > 0) {
     		invAmountUSD = invoiceVO.getInvAmountUsd();
-    		invoiceInUSD = true;
     	} else {
     		invAmount = invoiceVO.getInvAmount();
     	}

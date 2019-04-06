@@ -15,60 +15,52 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.artisans.inventory.controller.ReferenceDataController;
-import com.artisans.inventory.vo.ProductVO;
+import com.artisans.inventory.vo.AmazonFbaSizeFeesVO;
 
 /**
- * @author bjacob
+ * @author Jacob
  *
  */
 @SuppressWarnings("rawtypes")
-@Component(value = "ProductConverter")
-@FacesConverter("com.artisans.inventory.converter.ProductConverter")
-public class ProductConverter implements Converter, Serializable {
-
+@Component(value = "AmazonFbaSizeFeesConverter")
+@FacesConverter("com.artisans.inventory.converter.AmazonFbaSizeFeesConverter")
+public class AmazonFbaSizeFeesConverter implements Converter, Serializable  {
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	
 	@Autowired
-	private ReferenceDataController referenceDataController;			
+	private ReferenceDataController referenceDataController;		
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value)
 	{
-		Object selectedProduct = null;		
-		List<ProductVO>products = referenceDataController.getProductVOList();			
-		for(ProductVO product : products)
+		Object selectedAmazonFbaSizeFees = null;		
+		List<AmazonFbaSizeFeesVO> amazonFbaSizeFees = referenceDataController.getAmazonFbaSizeFeesVOList();		
+		for(AmazonFbaSizeFeesVO amazonFbaSizeFeesVO : amazonFbaSizeFees)
 		{
-			if (value.matches("[0-9]+")) {
-				if(product.getProductId() == new Long(value).longValue())
-				{
-					selectedProduct =  product;
-					break;
-				}				
-			} else { 
-				if(product.getName().equalsIgnoreCase(value))
-				{
-					selectedProduct =  product;
-					break;
-				}				
-			}		
+			if(amazonFbaSizeFeesVO.getAmazonFbaSizeFeesId().intValue() == new Integer(value).intValue())
+			{
+				selectedAmazonFbaSizeFees = amazonFbaSizeFeesVO;
+				break;
+			}
 		}		
-		return selectedProduct;
+		
+		return selectedAmazonFbaSizeFees;
 	}
-
-	@Override
+				
 	public String getAsString(FacesContext context, UIComponent component, Object value)
 	{
 		if( null != value && value != "")
 		{
-			return new Long(((ProductVO) value).getProductId()).toString(); 
+			return new Integer(((AmazonFbaSizeFeesVO) value).getAmazonFbaSizeFeesId()).toString(); 
 		}
 		else
 		{
 			return value==null ? "": value.toString();
 		}		
-	}	
+	}		
+
 }

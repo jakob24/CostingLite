@@ -58,6 +58,14 @@ public class ProductVO extends BaseVO implements Serializable {
     private Double amzFees;		
     
     private Double amzFbaFees;  
+    
+    private Double amzDeRrp;	
+
+    private Double amzDeFbaFees;   
+
+    private Double amzFrRrp;	
+
+    private Double amzFrFbaFees;      
 
     private Double costPriceUsd;
 
@@ -67,6 +75,7 @@ public class ProductVO extends BaseVO implements Serializable {
     
     private SupplierVO supplier;
     
+    private AmazonFbaSizeFeesVO amazonFbaSizeFees;   
     
 	/**
 	 * Method to format the Shipment number + date to be 
@@ -411,9 +420,80 @@ public class ProductVO extends BaseVO implements Serializable {
 	 */
 	public void setSupplier(SupplierVO supplier) {
 		this.supplier = supplier;
-	}			
-	
-    @Override
+	}
+			
+    /**
+	 * @return the amzDeRrp
+	 */
+	public Double getAmzDeRrp() {
+		return amzDeRrp;
+	}
+
+	/**
+	 * @param amzDeRrp the amzDeRrp to set
+	 */
+	public void setAmzDeRrp(Double amzDeRrp) {
+		this.amzDeRrp = amzDeRrp;
+	}
+
+	/**
+	 * @return the amzDeFbaFees
+	 */
+	public Double getAmzDeFbaFees() {
+		return amzDeFbaFees;
+	}
+
+	/**
+	 * @param amzDeFbaFees the amzDeFbaFees to set
+	 */
+	public void setAmzDeFbaFees(Double amzDeFbaFees) {
+		this.amzDeFbaFees = amzDeFbaFees;
+	}
+
+	/**
+	 * @return the amzFrRrp
+	 */
+	public Double getAmzFrRrp() {
+		return amzFrRrp;
+	}
+
+	/**
+	 * @param amzFrRrp the amzFrRrp to set
+	 */
+	public void setAmzFrRrp(Double amzFrRrp) {
+		this.amzFrRrp = amzFrRrp;
+	}
+
+	/**
+	 * @return the amzFrFbaFees
+	 */
+	public Double getAmzFrFbaFees() {
+		return amzFrFbaFees;
+	}
+
+	/**
+	 * @param amzFrFbaFees the amzFrFbaFees to set
+	 */
+	public void setAmzFrFbaFees(Double amzFrFbaFees) {
+		this.amzFrFbaFees = amzFrFbaFees;
+	}
+		
+
+	/**
+	 * @return the amazonFbaSizeFees
+	 */
+	public AmazonFbaSizeFeesVO getAmazonFbaSizeFees() {
+		return amazonFbaSizeFees;
+	}
+
+	/**
+	 * @param amazonFbaSizeFees the amazonFbaSizeFees to set
+	 */
+	public void setAmazonFbaSizeFees(AmazonFbaSizeFeesVO amazonFbaSizeFees) {
+		this.amazonFbaSizeFees = amazonFbaSizeFees;
+	}
+
+	@Override
     public boolean equals(Object o) {
 
         if (o == this) return true;

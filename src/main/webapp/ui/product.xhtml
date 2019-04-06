@@ -7,6 +7,28 @@
                 
 
 <ui:composition template="layout.xhtml">
+
+	<style type="text/css">
+    .ui-datalist .ui-datalist-content {
+        border:0 none
+    }
+     
+    .ui-datalist ul {
+        padding: 0px 10px 0 20px;
+        margin: 5px 0;
+    }
+     
+    .value {
+        font-weight: bold;
+    }
+     
+    .ui-autocomplete-itemtip {
+        -moz-box-sizing: content-box;
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+    }
+	</style>
+
     <ui:define name="content">
     
 			<h:outputScript target="body">
@@ -42,12 +64,12 @@
 					
 				    <p:panel id="productSelection" header="Select a Product" style="margin-bottom:10px">
 				        <h:panelGrid columns="3" cellpadding="10">		
-					        <p:selectOneMenu id="console" value="#{StandingDataController.selectedProduct}" converter="#{ProductConverter}" style="width:250px;">
-					        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}" />
-					            <f:selectItems value="#{ReferenceDataController.productVOList}" var="product" itemLabel="#{product.formattedLabel}" itemValue="#{product}"/>
-					            <p:ajax update="editProduct" oncomplete="$('#editProduct').prop('disabled', false); $('#addNewProduct').prop('disabled', true); " />
-					        </p:selectOneMenu>
-					    					    	
+					        <p:autoComplete id="console" value="#{StandingDataController.selectedProduct}" completeMethod="#{StandingDataController.completeProductSelection}"
+                        		var="product" itemLabel="#{product.formattedLabel}" itemValue="#{product}" converter="#{ProductConverter}" scrollHeight="300"
+                        		dropdown="true" size="50" forceSelection="true">                        		
+                        		<p:ajax event="itemSelect" update="editProduct" oncomplete="$('#editProduct').prop('disabled', false); $('#addNewProduct').prop('disabled', true); " />
+                        	</p:autoComplete>					        			        	
+					        					    					    	
 							<p:commandButton value="#{bundle.btn_edit_product}" id="editProduct" action="#{StandingDataController.onEditProduct}" process="@this"
 								styleClass="btn ui-state-default" style="margin-left: 20px" update="productAdd"/>
 								
@@ -128,9 +150,14 @@
 		                    <h:outputText value="Stripe Charges %" />
 		                    <p:inputText value="#{StandingDataController.newProduct.webPpCharge}" required="true">
 		                    	<f:validateDoubleRange minimum="0" />
-		                    </p:inputText>  		                    	                    
-		 					
-		 					<h:panelGroup/><h:panelGroup />		 					
+		                    </p:inputText>  		     
+		                    
+		                    <h:outputText value="Primary Supplier" />		                    
+					        <p:selectOneMenu id="productSupplier" value="#{StandingDataController.newProduct.supplier}" converter="#{SupplierConverter}" style="width:150px;">
+					        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}" />
+					            <f:selectItems value="#{ReferenceDataController.supplierVOList}" var="supplier" itemLabel="#{supplier.name}" itemValue="#{supplier}"/>					            
+					        </p:selectOneMenu>			                                   	                    
+		 							 						 					
 		 					<p:separator/><p:separator/><p:separator/><p:separator/>            				
 		 					
 		                    <h:outputText value="Ebay Retail Price" />
@@ -145,10 +172,18 @@
 		                    
 		                    <p:separator/><p:separator/><p:separator/><p:separator/>    
 		                    
-		                    <h:outputText value="Amazon Retail Price" />
+		                    <h:outputText value="Amazon RRP" />
 		                    <p:inputText value="#{StandingDataController.newProduct.amzRrp}">
 		                    	<f:validateDoubleRange minimum="0" maximum="200" />
 		                    </p:inputText> 
+		                    
+		                    <h:outputText value="Shipping Size" />		                    
+					        <p:selectOneMenu id="productSize" value="#{StandingDataController.newProduct.amazonFbaSizeFees}" converter="#{AmazonFbaSizeFeesConverter}" style="width:150px;">
+					        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}" />
+					            <f:selectItems value="#{ReferenceDataController.amazonFbaSizeFeesVOList}" var="amazonFbaSizeFees" itemLabel="#{amazonFbaSizeFees.size}" itemValue="#{amazonFbaSizeFees}"/>
+					            
+					            <p:ajax event="change" listener="#{StandingDataController.onAmazonFeeSelect}" update="productAdd"/>	
+					        </p:selectOneMenu>			                    
 		                    
 		                    <h:outputText value="Amazon Fees" />
 		                    <p:inputText value="#{StandingDataController.newProduct.amzFees}">
@@ -158,13 +193,29 @@
 		                    <h:outputText value="Amazon FBA Fees" />
 		                    <p:inputText value="#{StandingDataController.newProduct.amzFbaFees}">
 		                    	<f:validateDoubleRange minimum="0" />
-		                    </p:inputText> 		                     		                    
-		                   
-		                    <h:outputText value="Primary Supplier" />		                    
-					        <p:selectOneMenu id="productSupplier" value="#{StandingDataController.newProduct.supplier}" converter="#{SupplierConverter}" style="width:150px;">
-					        	<f:selectItem itemLabel="Choose one .." itemValue="#{null}" />
-					            <f:selectItems value="#{ReferenceDataController.supplierVOList}" var="supplier" itemLabel="#{supplier.name}" itemValue="#{supplier}"/>					            
-					        </p:selectOneMenu>		                    
+		                    </p:inputText> 	                     		                    
+	                    	
+		                    <h:outputText value="Amazon DE RRP" />
+		                    <p:inputText value="#{StandingDataController.newProduct.amzDeRrp}">
+		                    	<f:validateDoubleRange minimum="0" maximum="200" />
+		                    	<p:ajax event="change" listener="#{StandingDataController.calculateDeAmazonFees}" update="amzDeFbaFees"/>	
+		                    </p:inputText> 
+		                    
+		                    <h:outputText value="Amazon DE FBA Fees" />
+		                    <p:inputText value="#{StandingDataController.newProduct.amzDeFbaFees}" id="amzDeFbaFees">
+		                    	<f:validateDoubleRange minimum="0" />
+		                    </p:inputText> 	
+		                    
+		                    <h:outputText value="Amazon FR RRP" />
+		                    <p:inputText value="#{StandingDataController.newProduct.amzFrRrp}">
+		                    	<f:validateDoubleRange minimum="0" maximum="200" />
+		                    	<p:ajax event="change" listener="#{StandingDataController.calculateFrAmazonFees}" update="amzFrFbaFees"/>
+		                    </p:inputText> 
+		                    
+		                    <h:outputText value="Amazon FR FBA Fees" />
+		                    <p:inputText value="#{StandingDataController.newProduct.amzFrFbaFees}" id="amzFrFbaFees">
+		                    	<f:validateDoubleRange minimum="0" />
+		                    </p:inputText> 		                                        	
 		                    
 				        </h:panelGrid>
 				        
@@ -179,7 +230,7 @@
 				</h:form>
 				
 			    <div class="row">			      
-					<p:messages id="messages" showDetail="true" autoUpdate="true"/>	
+					<p:messages id="messages" showDetail="true" autoUpdate="true" escape="false"/>	
 				</div>				
 			</div>				
 		</div>					

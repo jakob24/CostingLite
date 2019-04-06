@@ -4,6 +4,7 @@
 package com.artisans.inventory.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,9 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.artisans.inventory.helper.ApplicationConfiguration;
 import com.artisans.inventory.helper.BeanHelper;
 import com.artisans.inventory.service.api.StandingDataService;
+import com.artisans.inventory.vo.AmazonFbaSizeFeesVO;
 import com.artisans.inventory.vo.CourierVO;
 import com.artisans.inventory.vo.ProductVO;
 import com.artisans.inventory.vo.SupplierVO;
@@ -34,8 +35,6 @@ public class ReferenceDataController implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Autowired
-	private ApplicationConfiguration configUtil;
 	
 	@Autowired
 	StandingDataService standingDataService;		
@@ -45,6 +44,8 @@ public class ReferenceDataController implements Serializable {
 	private List<CourierVO> courierVOList;
 	
 	private List<ProductVO> productVOList;
+	
+	private List<AmazonFbaSizeFeesVO> amazonFbaSizeFeesVOList;
 	
 	private Date today;
 	
@@ -62,11 +63,32 @@ public class ReferenceDataController implements Serializable {
 		
 		//Get All Couriers
 		List<ProductVO> productVOList = standingDataService.findProducts();
-		setProductVOList(productVOList);		
+		setProductVOList(productVOList);
+		
+		//Get All AmazonFbaSizeFees
+		List<AmazonFbaSizeFeesVO> amazonFbaSizeFeesVOList = standingDataService.findAmazonFbaSizeFees();
+		setAmazonFbaSizeFeesVOList(amazonFbaSizeFeesVOList);
 		
 		setToday(BeanHelper.getToday());
 	}
 
+	/**
+	 * Event for product dropdown selection
+	 * 
+	 * @param query
+	 * @return
+	 */
+    public List<ProductVO> completeProductSelection(String query) {
+        List<ProductVO> allProducts = productVOList;
+        List<ProductVO> filteredProducts = new ArrayList<ProductVO>();         
+        for (int i = 0; i < allProducts.size(); i++) {
+        	ProductVO thisProduct = allProducts.get(i);
+            if(thisProduct.getName().toLowerCase().contains(query.toLowerCase())) {
+                filteredProducts.add(thisProduct);
+            }
+        }         
+        return filteredProducts;
+    }	
 	
 	/**
 	 * Method to refresh product Data being held in cache
@@ -117,6 +139,21 @@ public class ReferenceDataController implements Serializable {
 	 */
 	public void setProductVOList(List<ProductVO> productVOList) {
 		this.productVOList = productVOList;
+	}
+
+	
+	/**
+	 * @return the amazonFbaSizeFeesVOList
+	 */
+	public List<AmazonFbaSizeFeesVO> getAmazonFbaSizeFeesVOList() {
+		return amazonFbaSizeFeesVOList;
+	}
+
+	/**
+	 * @param amazonFbaSizeFeesVOList the amazonFbaSizeFeesVOList to set
+	 */
+	public void setAmazonFbaSizeFeesVOList(List<AmazonFbaSizeFeesVO> amazonFbaSizeFeesVOList) {
+		this.amazonFbaSizeFeesVOList = amazonFbaSizeFeesVOList;
 	}
 
 	/**

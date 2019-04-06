@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.artisans.inventory.helper.ApplicationConfiguration;
 import com.artisans.inventory.helper.ProductShipmentHelper;
-import com.artisans.inventory.model.Courier;
 import com.artisans.inventory.model.Invoice;
 import com.artisans.inventory.model.Payment;
 import com.artisans.inventory.model.Product;
@@ -61,6 +61,10 @@ public class ShipmentServiceImpl implements ShipmentService {
 	
 	@Autowired
 	private InvoiceService invoiceService;
+	
+	@Autowired
+	private ApplicationConfiguration configUtil;
+		
 	
 	/**
 	 * Get all the shipments for the selected Invoice
@@ -199,6 +203,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 	public void saveShipmentProduct(List<ShipmentProductVO> shipmentProductVOList) {
 				
 		//Calculate Landing Costs
+		ProductShipmentHelper.setConfigUtil(configUtil);
 		ProductShipmentHelper.calculateShipmentProductprices(shipmentProductVOList);
 		
 		for(ShipmentProductVO shipmentProductVO : shipmentProductVOList) {
@@ -230,6 +235,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 		List<ShipmentProductVO> existingProducts = findAllproductsForShipment(shipmentProductVO.getShipment().getShipmentId());
 		
 		//Calculate Landing Costs
+		ProductShipmentHelper.setConfigUtil(configUtil);
 		ProductShipmentHelper.calculateShipmentProductprices(existingProducts);	
 		
 		//Update the products costs

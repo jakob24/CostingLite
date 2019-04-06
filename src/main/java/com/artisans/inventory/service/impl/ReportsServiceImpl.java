@@ -4,6 +4,7 @@
 package com.artisans.inventory.service.impl;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -39,7 +40,7 @@ public class ReportsServiceImpl implements ReportsService {
 	 * @throws JRException
 	 * @throws IOException
 	 */
-	public JasperPrint generateJasperPrint(String jasperFile, Map<String, Object> parameterMap) throws SQLException, JRException, IOException {
+	public JasperPrint generateJasperPrint(InputStream jasperFile, Map<String, Object> parameterMap) throws SQLException, JRException, IOException {
 		JasperPrint print = JasperFillManager.fillReport(jasperFile, parameterMap, dataSource.getConnection());
 		return print;		 
 	}	

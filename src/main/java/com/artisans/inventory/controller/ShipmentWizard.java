@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.artisans.inventory.helper.ApplicationConfiguration;
 import com.artisans.inventory.helper.ProductShipmentHelper;
 import com.artisans.inventory.helper.UIMessageHelper;
 import com.artisans.inventory.service.api.InvoiceService;
@@ -63,6 +64,9 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	
 	@Autowired
 	private ReferenceDataController referenceDataController;	
+	
+	@Autowired
+	private ApplicationConfiguration configUtil;
 	
 	private SupplierVO selectedSupplierVO;	
 		
@@ -468,6 +472,8 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	 */
 	public void addNewShipmentProduct() {
 		
+		boolean invoiceInUSD = isInvoiceInUSD(getSelectedShipment().getInvoice());
+		
 		if(getSelectedShipment().getInvoice().getShipmentComplete() == SHIPMENT_NOT_COMPLETE)
 		{
 			ProductVO productVO = getSelectedProductVO();				
@@ -479,7 +485,8 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 				shipmentProductVO.setShipment(getSelectedShipment());	
 				shipmentProductVO.setProduct(productVO);
 				
-				shipmentProductVO = ProductShipmentHelper.populateDefaultProductValues(productVO, shipmentProductVO);
+				ProductShipmentHelper.setConfigUtil(configUtil);
+				shipmentProductVO = ProductShipmentHelper.populateDefaultProductValues(productVO, shipmentProductVO, invoiceInUSD);
 				List<ShipmentProductVO> shipmentProductVOList = new ArrayList<ShipmentProductVO>();
 				
 				if(null != getSelectedShipment().getShipmentProduct() && ! getSelectedShipment().getShipmentProduct().isEmpty()) {
@@ -498,6 +505,10 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 					String[] params = new String[1];
 					params[0] = shipmentProductVO.getGbpToUsd().toString();
 					UIMessageHelper.getInstance().displayUIMessage("product_price_in_usd", FacesMessage.SEVERITY_INFO, params);
+				}
+				
+				if(null == productVO.getEbayFees() || null == productVO.getAmzFees()) {
+					UIMessageHelper.getInstance().displayUIMessage("product_fees_not_set", FacesMessage.SEVERITY_WARN);
 				}
 			}			
 		}
@@ -528,6 +539,7 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 	 */
 	public void updateCostPriceGBP() {
 		if(null != getSelectedShipmentProductVO()) {
+			ProductShipmentHelper.setConfigUtil(configUtil);
 			if (ProductShipmentHelper.isUSDInvoice(getSelectedShipmentProductVO())) {				
 				Double price = Precision.round(getSelectedShipmentProductVO().getCostPriceUsd()/getSelectedShipmentProductVO().getGbpToUsd(), 2);
 				getSelectedShipmentProductVO().setCostPriceGbp(price);
@@ -559,6 +571,7 @@ public class ShipmentWizard extends BaseWizard implements Serializable
 					invoiceService.updateInvoice(getSelectedInvoiceVO());
 				}
 				refreshShipmentProductScreen();
+				setSelectedShipmentProductVO(null);
 				UIMessageHelper.getInstance().displayUIMessage("product_saved", FacesMessage.SEVERITY_INFO);
 			}			
 		} else {

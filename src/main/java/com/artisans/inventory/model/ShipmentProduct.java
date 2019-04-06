@@ -66,6 +66,36 @@ public class ShipmentProduct implements Serializable {
     
     @Column(name="amz_fba_fees", precision=22)
     private Double amzFbaFees;    
+    
+    @Column(name="web_profit", precision=22)
+    private Double webProfit;	
+    
+    @Column(name="ebay_profit", precision=22)
+    private Double ebayProfit;
+    
+    @Column(name="amz_profit", precision=22)
+    private Double amzProfit;
+    
+    @Column(name="amz_fba_profit", precision=22)
+    private Double amzFbaProfit;    
+    
+    @Column(name="amz_de_rrp", precision=22)
+    private Double amzDeRrp;	
+    
+    @Column(name="amz_de_fba_fees", precision=22)
+    private Double amzDeFbaFees;   
+    
+    @Column(name="amz_de_fba_profit", precision=22)
+    private Double amzDeFbaProfit;      
+    
+    @Column(name="amz_fr_rrp", precision=22)
+    private Double amzFrRrp;	
+    
+    @Column(name="amz_fr_fba_fees", precision=22)
+    private Double amzFrFbaFees;     
+    
+    @Column(name="amz_fr_fba_profit", precision=22)
+    private Double amzFrFbaProfit;      
         
     @Column(name="modified_on")
     private Timestamp modifiedOn;
@@ -364,6 +394,147 @@ public class ShipmentProduct implements Serializable {
 	 */
 	public void setAmzFbaFees(Double amzFbaFees) {
 		this.amzFbaFees = amzFbaFees;
+	}
+	
+	/**
+	 * @return the webProfit
+	 */
+	public Double getWebProfit() {
+		return webProfit;
+	}
+
+	/**
+	 * @param webProfit the webProfit to set
+	 */
+	public void setWebProfit(Double webProfit) {
+		this.webProfit = webProfit;
+	}
+
+	/**
+	 * @return the ebayProfit
+	 */
+	public Double getEbayProfit() {
+		return ebayProfit;
+	}
+
+	/**
+	 * @param ebayProfit the ebayProfit to set
+	 */
+	public void setEbayProfit(Double ebayProfit) {
+		this.ebayProfit = ebayProfit;
+	}
+
+	/**
+	 * @return the amzProfit
+	 */
+	public Double getAmzProfit() {
+		return amzProfit;
+	}
+
+	/**
+	 * @param amzProfit the amzProfit to set
+	 */
+	public void setAmzProfit(Double amzProfit) {
+		this.amzProfit = amzProfit;
+	}
+
+	/**
+	 * @return the amzFbaProfit
+	 */
+	public Double getAmzFbaProfit() {
+		return amzFbaProfit;
+	}
+
+	/**
+	 * @param amzFbaProfit the amzFbaProfit to set
+	 */
+	public void setAmzFbaProfit(Double amzFbaProfit) {
+		this.amzFbaProfit = amzFbaProfit;
+	}
+	
+	/**
+	 * @return the amzDeRrp
+	 */
+	public Double getAmzDeRrp() {
+		return amzDeRrp;
+	}
+
+	/**
+	 * @param amzDeRrp the amzDeRrp to set
+	 */
+	public void setAmzDeRrp(Double amzDeRrp) {
+		this.amzDeRrp = amzDeRrp;
+	}
+
+	/**
+	 * @return the amzDeFbaFees
+	 */
+	public Double getAmzDeFbaFees() {
+		return amzDeFbaFees;
+	}
+
+	/**
+	 * @param amzDeFbaFees the amzDeFbaFees to set
+	 */
+	public void setAmzDeFbaFees(Double amzDeFbaFees) {
+		this.amzDeFbaFees = amzDeFbaFees;
+	}
+
+	/**
+	 * @return the amzFrRrp
+	 */
+	public Double getAmzFrRrp() {
+		return amzFrRrp;
+	}
+
+	/**
+	 * @param amzFrRrp the amzFrRrp to set
+	 */
+	public void setAmzFrRrp(Double amzFrRrp) {
+		this.amzFrRrp = amzFrRrp;
+	}
+
+	/**
+	 * @return the amzFrFbaFees
+	 */
+	public Double getAmzFrFbaFees() {
+		return amzFrFbaFees;
+	}
+
+	/**
+	 * @param amzFrFbaFees the amzFrFbaFees to set
+	 */
+	public void setAmzFrFbaFees(Double amzFrFbaFees) {
+		this.amzFrFbaFees = amzFrFbaFees;
+	}
+		
+
+	/**
+	 * @return the amzDeFbaProfit
+	 */
+	public Double getAmzDeFbaProfit() {
+		return amzDeFbaProfit;
+	}
+
+	/**
+	 * @param amzDeFbaProfit the amzDeFbaProfit to set
+	 */
+	public void setAmzDeFbaProfit(Double amzDeFbaProfit) {
+		this.amzDeFbaProfit = amzDeFbaProfit;
+	}
+
+	/**
+	 * @return the amzFrFbaProfit
+	 */
+	public Double getAmzFrFbaProfit() {
+		return amzFrFbaProfit;
+	}
+
+	/**
+	 * @param amzFrFbaProfit the amzFrFbaProfit to set
+	 */
+	public void setAmzFrFbaProfit(Double amzFrFbaProfit) {
+		this.amzFrFbaProfit = amzFrFbaProfit;
 	}
 
 	/**

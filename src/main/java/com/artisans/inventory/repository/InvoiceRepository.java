@@ -24,7 +24,7 @@ public interface InvoiceRepository  extends JpaRepository<Invoice, Integer> {
 	 * @param drivePattern
 	 * @return Invoice List
 	 */
-	@Query(value= "SELECT * FROM costing_lite.invoice where supplier= ?1 order by invoice_date desc;", nativeQuery=true)
+	@Query(value= "SELECT * FROM invoice where supplier= ?1 order by invoice_date desc;", nativeQuery=true)
 	public List<Invoice> findAllInvoicesForSupplier(Integer supplierId);
 	
 	/**
@@ -33,6 +33,6 @@ public interface InvoiceRepository  extends JpaRepository<Invoice, Integer> {
 	 * @param drivePattern
 	 * @return Invoice List
 	 */
-	@Query(value= "SELECT * FROM costing_lite.invoice where supplier=1 and date_paid is null order by invoice_date desc;", nativeQuery=true)
+	@Query(value= "SELECT * FROM invoice where supplier=1 and date_paid is null order by invoice_date desc;", nativeQuery=true)
 	public List<Invoice> findAllActiveInvoicesForSupplier(Integer supplierId);
 }

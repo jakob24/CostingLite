@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
@@ -41,11 +42,11 @@ public class ReportsController extends BaseWizard implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	 private ResourceLoader resourceLoader;	
+	private ResourceLoader resourceLoader;	
 	 
-	 final Logger log = LoggerFactory.getLogger(ReportsController.class);
+	final Logger log = LoggerFactory.getLogger(ReportsController.class);
 	 
-	 private static final String PDF_REPORT= ".pdf";
+	private static final String PDF_REPORT= ".pdf";
 	 
 	 
 	/**
@@ -55,8 +56,7 @@ public class ReportsController extends BaseWizard implements Serializable {
 	public void init() 
 	{	
 		
-	}
-		
+	}		
 		
 	/**
 	 * Full inventory Report 
@@ -67,8 +67,7 @@ public class ReportsController extends BaseWizard implements Serializable {
  		reportParameters.setReportPrefix(BeanHelper.getDisplayDate(new Date()));
  		reportParameters.setReportParameterMap(new LinkedHashMap<>());    		
  		generateReport(reportParameters);
-	}
-	 
+	}	 
 	 	 
     /**
      * Generate Invoice Report
@@ -84,9 +83,11 @@ public class ReportsController extends BaseWizard implements Serializable {
 			HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();   
 			response.reset();
 			response.setContentType("application/pdf");	
-			response.setHeader("Content-disposition", "attachment; filename= "+ reportName);
-			String jasperFilePath = resourceLoader.getResource("classpath:" + reportParameters.getReportEnum().getReportTemplateName()).getURI().getPath();
-			JasperPrint jasperPrint = reportService.generateJasperPrint(jasperFilePath, reportParameters.getReportParameterMap());			
+			response.setHeader("Content-disposition", "attachment; filename= "+ reportName);						
+			Resource resource = resourceLoader.getResource("classpath:" + reportParameters.getReportEnum().getReportTemplateName());			
+			log.info("jasperFilePath : " + resource.getFilename() + "::" + resource.getInputStream().toString());
+			
+			JasperPrint jasperPrint = reportService.generateJasperPrint(resource.getInputStream(), reportParameters.getReportParameterMap());			
 			ServletOutputStream stream = response.getOutputStream();			
 			JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
 			stream.flush();

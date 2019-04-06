@@ -11,7 +11,7 @@ public enum ReportEnum {
 
 	INVOICE("_invoice_", "invoice.jasper"),
 	
-	FULL_INVENTORY("_full_inventory_", "inventoryReport.jasper");
+	FULL_INVENTORY("_full_inventory", "inventoryReport.jasper");
 	
 	
 	

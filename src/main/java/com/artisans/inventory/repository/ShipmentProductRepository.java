@@ -22,7 +22,7 @@ public interface ShipmentProductRepository extends JpaRepository<ShipmentProduct
 	 * @param drivePattern
 	 * @return Invoice List
 	 */
-	@Query(value= "select sp.*, p.inventory FROM costing_lite.shipment_product sp inner join product p on p.product_id=sp.product where sp.shipment = ?1 order by shipment_product_id asc", 
+	@Query(value= "select sp.*, p.inventory FROM shipment_product sp inner join product p on p.product_id=sp.product where sp.shipment = ?1 order by shipment_product_id asc", 
 			nativeQuery=true)
 	public List<ShipmentProduct> findAllproductsForShipment(Integer shipmentId);
 }

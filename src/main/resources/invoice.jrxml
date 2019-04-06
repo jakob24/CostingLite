@@ -144,7 +144,7 @@
 					<textFieldExpression><![CDATA[$F{inv_amount}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="420" y="28" width="134" height="24" uuid="4736ff29-ae3d-4fa0-a66d-dfc3327ce439">
+					<reportElement x="420" y="32" width="134" height="20" uuid="4736ff29-ae3d-4fa0-a66d-dfc3327ce439">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="42927123-beaa-403d-9a44-49e12e037af0"/>
 					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
