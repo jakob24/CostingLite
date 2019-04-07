@@ -119,20 +119,20 @@
 		<dependency>
 		      <groupId>javax.servlet</groupId>
 		      <artifactId>jstl</artifactId>
-		      <version>1.2</version>
-		      </dependency>
+		      <scope>provided</scope>
+		</dependency>
+		
 		<dependency>
 		    <groupId>org.glassfish</groupId>
 		    <artifactId>javax.faces</artifactId>
 		    <version>2.3.5</version>
 		</dependency>
 		
-<dependency>
-    <groupId>org.glassfish</groupId>
-    <artifactId>javax.el</artifactId>
-    <version>3.0.0</version>
-    <scope>test</scope>
-</dependency>	
+		<dependency>
+		    <groupId>org.glassfish</groupId>
+		    <artifactId>javax.el</artifactId>
+		    <scope>provided</scope>
+		</dependency>	
 		
 		<dependency>
 			<groupId>com.google.guava</groupId>

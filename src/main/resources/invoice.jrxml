@@ -176,7 +176,7 @@
 					<subreportParameterExpression><![CDATA[$P{invoice_id}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["src/main/resources/invoice_payment.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["invoice_payment.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
 				<reportElement positionType="Float" x="0" y="30" width="560" height="30" uuid="1bb5ad18-d9eb-45aa-8206-18a9af8516f8"/>
@@ -184,7 +184,7 @@
 					<subreportParameterExpression><![CDATA[$P{invoice_id}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["src/main/resources/ship_payments.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["ship_payments.jasper"]]></subreportExpression>
 			</subreport>
 			<line>
 				<reportElement x="20" y="0" width="533" height="1" uuid="2530d12b-a6fb-4e6d-b136-fad0e7c13198"/>
@@ -195,7 +195,7 @@
 					<subreportParameterExpression><![CDATA[$P{invoice_id}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["src/main/resources/shipment_product.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["shipment_product.jasper"]]></subreportExpression>
 			</subreport>
 			<break>
 				<reportElement x="0" y="130" width="99" height="1" uuid="692cc555-b0d7-403d-ac6d-0dff28b5940e"/>

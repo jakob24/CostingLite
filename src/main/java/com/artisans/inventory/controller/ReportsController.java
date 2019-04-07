@@ -85,7 +85,7 @@ public class ReportsController extends BaseWizard implements Serializable {
 			response.setContentType("application/pdf");	
 			response.setHeader("Content-disposition", "attachment; filename= "+ reportName);						
 			Resource resource = resourceLoader.getResource("classpath:" + reportParameters.getReportEnum().getReportTemplateName());			
-			log.info("jasperFilePath : " + resource.getFilename() + "::" + resource.getInputStream().toString());
+			log.error("jasperFilePath : " + resource.getFilename() + "::" + resource.getInputStream().toString());
 			
 			JasperPrint jasperPrint = reportService.generateJasperPrint(resource.getInputStream(), reportParameters.getReportParameterMap());			
 			ServletOutputStream stream = response.getOutputStream();			
