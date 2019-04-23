@@ -14,6 +14,8 @@ import org.primefaces.model.menu.MenuModel;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.artisans.inventory.helper.ReportEnum;
+
 /**
  * @author Jacob
  *
@@ -56,11 +58,17 @@ public class LoginController extends BaseWizard implements Serializable {
 		item.setIcon("fa fa-home");
 		item.setHref("index.xhtml");
 		firstSubmenu.addElement(item);
+		
+		item = new DefaultMenuItem("Settings");		
+		item.setCommand(INVOICE_ENTRY_METHOD);
+		item.setIcon("fa fa-book");
+		item.setHref("mySettings.xhtml");
+		firstSubmenu.addElement(item);	
+		
 		topMenu.addElement(firstSubmenu);
 				
 		DefaultSubMenu invoiceSubmenu = new DefaultSubMenu("Invoices");		
 		item = new DefaultMenuItem("Manage Invoices");		
-		//item.setHref("invoices.xhtml");
 		item.setCommand(INVOICE_ENTRY_METHOD);
 		item.setIcon("fa fa-book");
 		invoiceSubmenu.addElement(item);
@@ -75,7 +83,7 @@ public class LoginController extends BaseWizard implements Serializable {
 		
 		item = new DefaultMenuItem("Manage Shipment Products");		
 		item.setHref("shipmentProduct.xhtml");
-		item.setIcon("fa fa-cart-plus");
+		item.setIcon("fa fa-product-hunt");
 		//item.setCommand(SHIPMENT_ENTRY_METHOD);		
 		shipmentSubmenu.addElement(item);
 		topMenu.addElement(shipmentSubmenu);
@@ -109,10 +117,17 @@ public class LoginController extends BaseWizard implements Serializable {
 		item.setAjax(false);
 		reportSubmenu.addElement(item);	
 				
-		item = new DefaultMenuItem("Shipment Product Report");		
-		item.setHref("courier.xhtml");
-		item.setIcon("fa fa-ship");
-		reportSubmenu.addElement(item);						
+		item = new DefaultMenuItem("Shipment Costing Report");		
+		item.setCommand("#{ReportsController.setPageForReport}");
+		item.setParam("reportType", ReportEnum.SHIPMENT_COSTING);
+		item.setIcon("fa fa-gbp");
+		reportSubmenu.addElement(item);	
+		
+		item = new DefaultMenuItem("Invoice Report");		
+		item.setCommand("#{ReportsController.setPageForReport}");
+		item.setParam("reportType", ReportEnum.INVOICE);
+		item.setIcon("fa fa-money");
+		reportSubmenu.addElement(item);			
 							
 		topMenu.addElement(reportSubmenu);			
 	}	 	

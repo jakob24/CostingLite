@@ -21,7 +21,12 @@ import org.springframework.stereotype.Component;
 @FacesConverter("com.artisans.inventory.converter.toUpperCaseConverter")
 public class ToUpperCaseConverter implements Converter, Serializable {
 
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Override
     public Object getAsObject(FacesContext context, UIComponent component, String submittedValue) {
         return (submittedValue != null) ? submittedValue.toUpperCase() : null;
     }

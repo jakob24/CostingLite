@@ -3,7 +3,7 @@
  
  	<include resource="org/springframework/boot/logging/logback/base.xml"/>
  	
-    <property name="LOGS" value="./InvLitelogs" />
+    <property name="LOGS" value="/InvLitelogs" />
  
     <appender name="Console"
         class="ch.qos.logback.core.ConsoleAppender">
@@ -35,13 +35,13 @@
     </appender>
      
     <!-- LOG everything at Error level -->
-    <root level="info">
+    <root level="error">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </root>
  
     <!-- LOG "com.baeldung*" at TRACE level -->
-    <logger name="com.artisans.inventory" level="warn" additivity="false">
+    <logger name="com.artisans.inventory" level="error" additivity="false">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </logger>

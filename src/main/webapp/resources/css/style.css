@@ -395,8 +395,13 @@ body {
 /* Menu bar conent width */
 .ui-menu-child {
     white-space: nowrap;
-    width: auto !important;
+    min-width: 204px !important;
 }
+
+.ui-menubar .ui-menu-child .ui-menuitem-link {
+	width:100%;
+}
+
 
 .fullDivWidthText {
 	width: 100%; box-sizing: border-box;
@@ -405,5 +410,4 @@ body {
 .ui-separator {
 	margin-top:5px;
 	margin-bottom:5px;
-}
 }

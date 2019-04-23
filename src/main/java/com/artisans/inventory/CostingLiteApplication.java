@@ -4,6 +4,7 @@ import javax.faces.webapp.FacesServlet;
 import javax.servlet.DispatcherType;
 import javax.servlet.ServletContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.CustomScopeConfigurer;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 
@@ -25,6 +27,9 @@ import com.google.common.collect.ImmutableMap;
 })
 public class CostingLiteApplication implements ServletContextAware {
 		
+	@Autowired
+	private Environment environment;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(CostingLiteApplication.class, args);
 	}
@@ -49,16 +54,23 @@ public class CostingLiteApplication implements ServletContextAware {
 		// Iniciar el contexto de JSF
 		// http://stackoverflow.com/a/25509937/1199132		
         servletContext.setInitParameter("com.sun.faces.forceLoadConfiguration", Boolean.TRUE.toString());
-        servletContext.setInitParameter("primefaces.THEME", "home");//home hot-sneaks, bootstrap,smoothness,sunny,start,afternoon,overcast,pepper-grinder
+        
         servletContext.setInitParameter("primefaces.CLIENT_SIDE_VALIDATION", Boolean.TRUE.toString());
         servletContext.setInitParameter("javax.faces.FACELETS_SKIP_COMMENTS", Boolean.TRUE.toString());
         servletContext.setInitParameter("primefaces.FONT_AWESOME", Boolean.TRUE.toString());
         servletContext.setInitParameter("primefaces.UPLOADER", "commons");
         //https://github.com/primefaces/primefaces/issues/3457
         servletContext.setInitParameter("primefaces.MOVE_SCRIPTS_TO_BOTTOM", Boolean.TRUE.toString());
+        
+        if(environment.getActiveProfiles()[0].toString().equalsIgnoreCase("prod")) {
+        	servletContext.setInitParameter("primefaces.THEME", "south-street");
+        } else {
+        	servletContext.setInitParameter("primefaces.THEME", "hot-sneaks");
+        }
 	}
 	
-    @Bean
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	@Bean
     public FilterRegistrationBean FileUploadFilter() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new org.primefaces.webapp.filter.FileUploadFilter());
@@ -70,10 +82,12 @@ public class CostingLiteApplication implements ServletContextAware {
         return registration;
     }
 
-    @Bean
+    @SuppressWarnings("rawtypes")
+	@Bean
     public FilterRegistrationBean hiddenHttpMethodFilterDisabled(
             @Qualifier("hiddenHttpMethodFilter") HiddenHttpMethodFilter filter) {
-        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(filter);
+        @SuppressWarnings("unchecked")
+		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(filter);
         filterRegistrationBean.setEnabled(false);
         return filterRegistrationBean;
     }	

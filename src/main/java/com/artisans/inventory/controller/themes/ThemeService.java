@@ -34,7 +34,13 @@ public class ThemeService implements Serializable
         themes.add(new Theme(3, "Aristo", "aristo"));
         themes.add(new Theme(19, "Hot-Sneaks", "hot-sneaks"));      
         themes.add(new Theme(30, "South-Street", "south-street"));
-        themes.add(new Theme(32, "Sunny", "sunny"));
+        themes.add(new Theme(32, "Sunny", "sunny"));        
+        themes.add(new Theme(30, "Home", "home"));
+        themes.add(new Theme(32, "Bootstrap", "bootstrap"));        
+        themes.add(new Theme(30, "Smoothness", "smoothness"));
+        themes.add(new Theme(32, "Start", "start"));
+        themes.add(new Theme(30, "Overcast", "overcast"));
+        themes.add(new Theme(32, "Pepper-grinder", "pepper-grinder"));   
     }
 
 

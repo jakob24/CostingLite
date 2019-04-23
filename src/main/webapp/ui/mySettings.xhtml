@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+
+<h:body>
+	<ui:composition template="layout.xhtml">
+		<ui:define name="windowTitle">
+	 		User Settings
+	 	</ui:define>
+
+		<ui:define name="content">
+								
+			<h:form id="mySettingsForm" prependId="false">	
+				<p:messages id="messages" autoUpdate="true"/>
+						
+			    <p:panelGrid style="margin-top:20px">
+			    	<f:facet name="header">
+				        <p:row>
+	            			<p:column colspan="3">
+	            				<p:outputLabel value="Choose Style" styleClass="defaultCaption" />
+	            			</p:column>
+						</p:row>
+									    
+			    		<p:row>
+			    		 	<p:column>
+					    	<p:themeSwitcher id="themeStyle" style="width:180px" effect="fade" var="t" value="#{ThemeSwitcherView.theme}">
+		                       	<f:selectItem itemLabel="Choose Theme" itemValue="" />
+		                        <f:selectItems value="#{ThemeSwitcherView.themes}" var="themeX" itemLabel="#{themeX.displayName}" itemValue="#{themeX}"/>
+
+					        </p:themeSwitcher>
+					        </p:column>
+					        <p:column>
+							<p:commandButton value="#{bundle.btn_label_save}" icon="ui-icon-check" 
+								action="#{ThemeSwitcherView.saveUserTheme}" update="messages" style="float:left;"  />	
+								</p:column>		        
+				        </p:row>
+			        </f:facet>
+			    </p:panelGrid>				
+			</h:form>
+		</ui:define>
+	 	
+	</ui:composition>
+</h:body>
+</html>

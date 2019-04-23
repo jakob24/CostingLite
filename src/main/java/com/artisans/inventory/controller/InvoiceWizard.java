@@ -407,8 +407,8 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
     	if(null != getSelectedInvoiceId() && getSelectedInvoiceId().intValue() > 0 ) {    		
     		ReportParameters reportParameters = new ReportParameters();
     		reportParameters.setReportEnum(ReportEnum.INVOICE);
-    		reportParameters.setReportPrefix(getSelectedInvoiceVO().getSupplier().getName());
-    		reportParameters.setReportPrefix(BeanHelper.getDisplayDate(new Date()));
+    		reportParameters.setReportPrefix(getSelectedInvoiceVO().getInvoiceNumber());
+    		reportParameters.setReportSuffix(BeanHelper.getDisplayDate(getSelectedInvoiceVO().getInvoiceDate()));
     		
     		LinkedHashMap<String, Object> reportParams = new LinkedHashMap<>();    		
     		reportParams.put("invoice_id", getSelectedInvoiceVO().getInvoiceId()); 

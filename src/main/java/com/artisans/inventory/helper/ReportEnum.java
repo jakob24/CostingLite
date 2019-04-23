@@ -9,12 +9,13 @@ package com.artisans.inventory.helper;
  */
 public enum ReportEnum {
 
-	INVOICE("_invoice_", "invoice.jasper"),
+	INVOICE("_Invoice_", "invoice.jasper"),
 	
-	FULL_INVENTORY("_full_inventory", "inventoryReport.jasper");
+	FULL_INVENTORY("_Full_Inventory", "inventoryReport.jasper"),
 	
+	SHIPMENT_COSTING("_Shipment_Costing_", "costings.jasper");
 	
-	
+			
 	
 	String reportName;
 	

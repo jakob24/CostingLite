@@ -19,7 +19,7 @@
 			        <p:spacer width="50px"/>
 			        
                 	<h:outputText value="Invoices *" />				                	
-			        <p:selectOneMenu id="invoiceSelect" value="#{InvoiceWizard.selectedInvoiceId}" converter="#{InvoiceConverter}" style="width:150px;" disabled="#{InvoiceWizard.selectedSupplierVO eq null}">
+			        <p:selectOneMenu id="invoiceSelect" value="#{InvoiceWizard.selectedInvoiceId}"  style="width:150px;" disabled="#{InvoiceWizard.selectedSupplierVO eq null}">
 			        	<f:selectItem itemValue="#{null}" itemLabel="Select one" />			        	
 			            <f:selectItems value="#{InvoiceWizard.supplierInvoiceList}" var="invoice" itemLabel="#{invoice.formattedLabel}" itemValue="#{invoice.invoiceId}"/>	
 			            <f:selectItem  itemValue="0" itemLabel="Add New Invoice .."/>		            

@@ -60,14 +60,14 @@
 	<subDataset name="CostingsDataSet" uuid="ef664483-887a-4194-8fd0-ddc3010b60a7">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="InvLiteJDBC"/>
-		<parameter name="invoice_id" class="java.lang.Double"/>
+		<parameter name="invoice_id" class="java.lang.Integer"/>
 		<queryString language="SQL">
 			<![CDATA[select inv.*, sp.*, p.sku, p.name,sup.name from invoice inv 
 inner join shipment sh on inv.invoice_id = sh.invoice 
 inner join shipment_product sp on sp.shipment=sh.shipment_id
 inner join product p on p.product_id=sp.product
 inner join supplier sup on inv.supplier=sup.supplier_id
-where inv.invoice_id=   6]]>
+where inv.invoice_id=   $P{invoice_id}]]>
 		</queryString>
 		<field name="name" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="name"/>
@@ -113,13 +113,14 @@ where inv.invoice_id=   6]]>
 	<subDataset name="AmazonDataset" uuid="c950a4e4-428d-48b6-8be7-e47495b212e9">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="InvLiteJDBC"/>
+		<parameter name="invoice_id" class="java.lang.Integer"/>
 		<queryString language="SQL">
 			<![CDATA[select inv.*, sp.*, p.sku, p.name,sup.name from invoice inv 
 inner join shipment sh on inv.invoice_id = sh.invoice 
 inner join shipment_product sp on sp.shipment=sh.shipment_id
 inner join product p on p.product_id=sp.product
 inner join supplier sup on inv.supplier=sup.supplier_id
-where inv.invoice_id=  6]]>
+where inv.invoice_id=  $P{invoice_id}]]>
 		</queryString>
 		<field name="amz_rrp" class="java.lang.Double">
 			<property name="com.jaspersoft.studio.field.label" value="amz_rrp"/>
@@ -199,14 +200,14 @@ where inv.invoice_id=  6]]>
 			<groupExpression><![CDATA[$F{amz_fr_fba_profit}]]></groupExpression>
 		</group>
 	</subDataset>
-	<parameter name="invoice_id" class="java.lang.Double"/>
+	<parameter name="invoice_id" class="java.lang.Integer"/>
 	<queryString language="SQL">
 		<![CDATA[select inv.*, sp.*, p.sku, p.name,sup.name as supname from invoice inv 
 inner join shipment sh on inv.invoice_id = sh.invoice 
 inner join shipment_product sp on sp.shipment=sh.shipment_id
 inner join product p on p.product_id=sp.product
 inner join supplier sup on inv.supplier=sup.supplier_id
-where inv.invoice_id=   $P{invoice_id} ]]>
+where inv.invoice_id=   $P{invoice_id}]]>
 	</queryString>
 	<field name="invoice_id" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="invoice_id"/>
@@ -372,7 +373,6 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 		<property name="com.jaspersoft.studio.field.label" value="supname"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="supplier"/>
 	</field>
-	<sortField name="invoice_number" order="Descending"/>
 	<variable name="invoice_id" class="java.lang.Double">
 		<variableExpression><![CDATA[$F{invoice_number}]]></variableExpression>
 	</variable>
@@ -447,11 +447,15 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 				</reportElement>
-				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="CostingsDataSet" uuid="394ea732-1ca7-48ad-8022-cbd9bc220a66">
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="CostingsDataSet" uuid="712dc705-7e16-48ea-b71e-94069350b285">
+						<datasetParameter name="invoice_id">
+							<datasetParameterExpression><![CDATA[$P{invoice_id}]]></datasetParameterExpression>
+						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
 					<jr:column width="260" uuid="2305c934-dbaf-4ec1-873e-63a43b5ea808">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:tableHeader style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
@@ -472,6 +476,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="67" uuid="c8ef5824-4245-4a10-9c62-048082ad98c4">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:tableHeader style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
@@ -491,6 +496,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="67" uuid="ff22dde6-e420-47a6-b139-a27721b7688b">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:tableHeader style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
@@ -510,6 +516,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="68" uuid="d9fb5dab-7283-4ab7-8c1b-8c0f7d0e7266">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:tableHeader style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
@@ -529,6 +536,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="68" uuid="c495e7ee-16ae-49b3-8983-119e3c4b3a85">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 						<jr:tableHeader style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
@@ -548,6 +556,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="68" uuid="df4c7438-df52-4114-b6ae-d0a77b84113e">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
 						<jr:tableHeader style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
@@ -567,6 +576,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="67" uuid="4fc70888-1891-4990-9014-1b27fc60af2b">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
 						<jr:tableHeader style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
@@ -586,6 +596,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="68" uuid="f7923b22-8344-4bf8-bfbd-111f38ede651">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
 						<jr:tableHeader style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
@@ -605,6 +616,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="67" uuid="25cdbf84-48b5-45ed-80f1-fce990f05cba">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
 						<jr:tableHeader style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
@@ -638,12 +650,17 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
 				</reportElement>
-				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="AmazonDataset" uuid="82425b0f-c252-4985-8f92-ec63b2051c72">
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="AmazonDataset" uuid="85c73819-736d-4efb-96dc-3d0d8a2f018d">
+						<datasetParameter name="invoice_id">
+							<datasetParameterExpression><![CDATA[$P{invoice_id}]]></datasetParameterExpression>
+						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
 					<jr:column width="73" uuid="d0d28c14-3cde-47eb-aa75-b8fc235b9349">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:tableHeader style="Table 1_TH" height="30"/>
 						<jr:columnHeader style="Table 1_CH" height="30">
 							<staticText>
@@ -663,6 +680,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="73" uuid="ec702c15-a065-4571-9806-71ba69140fb7">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:tableHeader style="Table 1_TH" height="30"/>
 						<jr:columnHeader style="Table 1_CH" height="30">
 							<staticText>
@@ -682,6 +700,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="72" uuid="eebce7ac-fa4b-4c45-b73a-c2c5da93462e">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:tableHeader style="Table 1_TH" height="30"/>
 						<jr:columnHeader style="Table 1_CH" height="30">
 							<staticText>
@@ -701,6 +720,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="72" uuid="aa68f025-454c-4f70-92e8-01c3d09c5bb4">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:tableHeader style="Table 1_TH" height="30"/>
 						<jr:columnHeader style="Table 1_CH" height="30">
 							<staticText>
@@ -712,7 +732,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="72" height="30" uuid="6464d133-36a9-44e2-aac4-13542f2345fb"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{amz_fba_fees}]]></textFieldExpression>
@@ -720,6 +740,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="73" uuid="189bde42-4068-489f-90dd-e2a8c011a08b">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 						<jr:tableHeader style="Table 1_TH" height="30"/>
 						<jr:columnHeader style="Table 1_CH" height="30">
 							<staticText>
@@ -731,7 +752,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="73" height="30" forecolor="#09700C" uuid="038d4d09-2069-450d-9b17-b2adafe715e9"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{amz_fba_profit}]]></textFieldExpression>
@@ -739,6 +760,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="73" uuid="5af022bc-0c6c-465e-bdfc-bc829e7bfbf5">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
 						<jr:tableHeader style="Table 1_TH" height="30"/>
 						<jr:columnHeader style="Table 1_CH" height="30">
 							<staticText>
@@ -750,7 +772,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="73" height="30" uuid="e4917505-111a-4c69-9bdb-c73b924c68c2"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{amz_de_rrp}]]></textFieldExpression>
@@ -758,6 +780,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="73" uuid="e294d039-bea8-4885-92f1-2e1d411bc8e0">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
 						<jr:tableHeader style="Table 1_TH" height="30"/>
 						<jr:columnHeader style="Table 1_CH" height="30">
 							<staticText>
@@ -769,7 +792,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="73" height="30" uuid="1fa0700f-dd8c-47b4-9645-124b65ad7cb9"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{amz_de_fba_fees}]]></textFieldExpression>
@@ -777,6 +800,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="73" uuid="d99de37f-55e7-4ddd-a85c-ac65fff9620c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
 						<jr:tableHeader style="Table 1_TH" height="30"/>
 						<jr:columnHeader style="Table 1_CH" height="30">
 							<staticText>
@@ -788,7 +812,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="73" height="30" forecolor="#09700C" uuid="a8b19921-5f0b-4312-9668-ee3a8fa809bd"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{amz_de_fba_profit}]]></textFieldExpression>
@@ -796,6 +820,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="72" uuid="35715119-392d-4bb0-8c3d-82f8a5459ae2">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
 						<jr:tableHeader style="Table 1_TH" height="30"/>
 						<jr:columnHeader style="Table 1_CH" height="30">
 							<staticText>
@@ -807,7 +832,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="72" height="30" uuid="113ac57a-9268-4fea-aa15-6def4672dbed"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{amz_fr_rrp}]]></textFieldExpression>
@@ -815,6 +840,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="73" uuid="83fd0a97-c9e3-480c-bbfd-2d5159ccff9a">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
 						<jr:tableHeader style="Table 1_TH" height="30"/>
 						<jr:columnHeader style="Table 1_CH" height="30">
 							<staticText>
@@ -826,7 +852,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="73" height="30" uuid="e95be2ae-7243-4cc7-bd66-f34e45e241d4"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{amz_fr_fba_fees}]]></textFieldExpression>
@@ -834,6 +860,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="73" uuid="606b5a30-2547-4d57-b9a0-5400cbec846b">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column11"/>
 						<jr:tableHeader style="Table 1_TH" height="30"/>
 						<jr:columnHeader style="Table 1_CH" height="30">
 							<staticText>
@@ -845,7 +872,7 @@ where inv.invoice_id=   $P{invoice_id} ]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="73" height="30" forecolor="#09700C" uuid="ee062f75-ca8c-4673-9eca-3b6eb22bd633"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{amz_fr_fba_profit}]]></textFieldExpression>

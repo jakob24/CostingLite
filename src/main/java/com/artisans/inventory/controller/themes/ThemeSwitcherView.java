@@ -92,4 +92,8 @@ public class ThemeSwitcherView implements Serializable
         FacesContext context = FacesContext.getCurrentInstance();
     	setTheme(context.getExternalContext().getInitParameter("primefaces.THEME"));       
     }	
+	
+	public void saveUserTheme() {
+		//setTheme
+	}
 }
