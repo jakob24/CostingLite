@@ -129,7 +129,7 @@ public class StandingDataServiceImpl extends BaseServiceImpl implements Standing
 	
 	
 	/**
-	 * Create or update Courier
+	 * Create or update Product
 	 * @param CourierVO
 	 * @return CourierVO
 	 */

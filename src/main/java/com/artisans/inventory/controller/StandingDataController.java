@@ -231,6 +231,23 @@ public class StandingDataController implements Serializable {
     	setNewProduct(prod);    	
     }
     
+    
+    public void onCopyProduct() {
+    	setNewProduct(getSelectedProduct());
+    	getNewProduct().setProductId(0);
+    	getNewProduct().setName("Copy - " + getNewProduct().getName());    	
+    }
+    
+    
+    public void onEbayPriceChange() {
+    	ProductVO thisProduct = getNewProduct();  
+    	if(null != thisProduct.getEbayRrp()  && (null == thisProduct.getEbayFees() ||  thisProduct.getEbayFees().longValue() == 0)) {
+    		Double ebayFeePercentage = new Double(configUtil.getProperty("ebay.approx.charge.percentage"));	    		
+			Double ebayFee = thisProduct.getEbayRrp() * (ebayFeePercentage/100);
+			thisProduct.setEbayFees(Precision.round(ebayFee, 2));    		
+    	}
+    }
+    
     /**
      * Calculate product RRP based on shipping size
      */
@@ -238,7 +255,7 @@ public class StandingDataController implements Serializable {
     	ProductVO thisProduct = getNewProduct();    	
 		if(null != thisProduct.getAmzRrp() && null != thisProduct.getAmazonFbaSizeFees()) {			
 			String prices = calculateAmazonPrices(thisProduct);					
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Recommended Amazon Prices", prices.toString()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Recommended Amazon Prices - Update Manually", prices.toString()));
 		}    	
     }
     
@@ -257,10 +274,12 @@ public class StandingDataController implements Serializable {
 			//Fees
 			Double amzFee = Precision.round(thisProduct.getAmzRrp() * (amzReferalFeePercentage/100) , 2);				
 			//FBA
-			Double amzFBAFee = Precision.round(amzFee + feesVO.getUkFees(), 2);	
+			Double amzFBAFee = Precision.round(feesVO.getUkFees(), 2);	
+			
+			Double totalFee = Precision.round(amzFee + amzFBAFee, 2);	
 			
 			prices.append("<br/>UK Fees  = " + amzFee + "<br/>");
-			prices.append("UK FBA Fees = " + amzFBAFee + "<br/>");
+			prices.append("UK FBA Fees = " + amzFBAFee +", Total Fees = " + totalFee + "<br/>");
 								
 			//DE RRP	
 			Double deRRP =null;
@@ -352,11 +371,18 @@ public class StandingDataController implements Serializable {
     		if( ! isUniqueProductName(thisProduct)) {
     			UIMessageHelper.getInstance().displayUIMessage("uniqie_product_name", FacesMessage.SEVERITY_ERROR);    	
     			return;
+    		} else if(thisProduct.getName().startsWith("Copy")) {
+    			UIMessageHelper.getInstance().displayUIMessage("uniqie_product_name", FacesMessage.SEVERITY_ERROR);    	
+    			return;
     		}
-    	}  
-    	
-    	
+    	}    	
     	standingDataService.saveProduct(thisProduct);
+    	    	
+    	//Update Standing Data
+		List<ProductVO> productVOList = standingDataService.findProducts();
+		referenceDataController.setProductVOList(productVOList);		
+    	setProductVOList(referenceDataController.getProductVOList());
+    	
     	UIMessageHelper.getInstance().displayUIMessage("product_saved", FacesMessage.SEVERITY_INFO); 
     }
       

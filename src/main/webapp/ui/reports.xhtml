@@ -27,6 +27,7 @@
 										
 					<c:set var="show1" value="#{ReportsController.reportType.reportName eq '_Shipment_Costing_'}" />
 					<c:set var="show2" value="#{ReportsController.reportType.reportName eq '_Invoice_'}" />
+					<c:set var="show3" value="#{ReportsController.reportType.reportName eq '_AllInvoices_'}" />
 					
 					<p:panel header="Costings Report" rendered="#{show1}">  
 						<h:panelGroup  >
@@ -71,6 +72,17 @@
 					        </h:panelGrid>
 						</h:panelGroup>
 					</p:panel>
+					
+					<p:panel header="All Invoices Report" rendered="#{show3}">
+						<h:panelGroup>
+							<h:panelGrid columns="3">	
+			                	<h:outputText value="From Date *" />				                	
+			                    	<p:calendar id="invDate" value="#{ReportsController.fromDate}" required="true" label="InvoiceDate" pattern="dd/MM/yyyy"> 
+			                    		<p:ajax event="dateSelect" oncomplete="enablePrint();"/>
+			                    </p:calendar>
+					        </h:panelGrid>
+						</h:panelGroup>
+					</p:panel>					
 
 													
 				    <div class="pull-right" style="margin-top: 10px;">					    	

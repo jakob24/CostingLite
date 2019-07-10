@@ -3,6 +3,7 @@
  */
 package com.artisans.inventory.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -33,6 +34,10 @@ public interface InvoiceRepository  extends JpaRepository<Invoice, Integer> {
 	 * @param drivePattern
 	 * @return Invoice List
 	 */
-	@Query(value= "SELECT * FROM invoice where supplier=1 and date_paid is null order by invoice_date desc;", nativeQuery=true)
+	@Query(value= "SELECT * FROM invoice where supplier= ?1 and date_paid is null order by invoice_date desc;", nativeQuery=true)
 	public List<Invoice> findAllActiveInvoicesForSupplier(Integer supplierId);
+	
+	
+	@Query(value= "SELECT count(*) FROM invoice where supplier= ?1  and YEAR(invoice_date) = YEAR(?2);", nativeQuery=true)
+	public Integer findCountOfSupplierInvoiceForYear(Integer supplierId, Date sqlDate);
 }

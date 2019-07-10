@@ -3,6 +3,8 @@
  */
 package com.artisans.inventory.service.api;
 
+
+import java.util.Date;
 import java.util.List;
 
 import com.artisans.inventory.vo.InvoiceVO;
@@ -68,5 +70,12 @@ public interface InvoiceService
 	 * @return PaymentVO
 	 */
 	public void deleteInvoicePayment(PaymentVO paymentVO);	
+	
+	/**
+	 * Get count of Supplier Invoices in the current Year
+	 * @param supplierId
+	 * @return
+	 */
+	public Integer findCountOfSupplierInvoiceForYear(Integer supplierId, Date sqlDate);
 
 }

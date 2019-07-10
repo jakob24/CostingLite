@@ -4,6 +4,7 @@
 package com.artisans.inventory.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -149,5 +150,10 @@ public class InvoiceServiceImpl implements InvoiceService
 	public void deleteInvoicePayment(PaymentVO paymentVO) {
 		Payment payment = new DozerBeanMapper().map(paymentVO, Payment.class); 	
 		paymentRepository.delete(payment);
+	}
+	
+	
+	public Integer findCountOfSupplierInvoiceForYear(Integer supplierId, Date invoiceDate) {
+		return invoiceRepository.findCountOfSupplierInvoiceForYear(supplierId, new java.sql.Date(invoiceDate.getTime()));
 	}
 }

@@ -53,7 +53,7 @@ public class ProductShipmentHelper {
 		shipmentProductVO.setEbayRrp(productVO.getEbayRrp());
 		
 		//Ebay Fees
-		if(null == productVO.getEbayFees() && null != productVO.getEbayRrp()) {
+		if((null == productVO.getEbayFees()  || productVO.getEbayFees().longValue() == 0 ) && null != productVO.getEbayRrp()) {
 			Double ebayFees = new Double(configUtil.getProperty("ebay.approx.charge.percentage"));
 			shipmentProductVO.setEbayFees(Precision.round(productVO.getEbayRrp() * (ebayFees/100),2));
 			
@@ -274,8 +274,7 @@ public class ProductShipmentHelper {
 		percentage = Precision.round((totalShipmentAmount * 100) / invoiceAmount, 4);
 		return percentage;
 	}
-
-
+	
 	/**
 	 * @return the configUtil
 	 */

@@ -61,7 +61,7 @@ public class ReferenceDataController implements Serializable {
 		List<CourierVO> couriervoList = standingDataService.findCouriers();
 		setCourierVOList(couriervoList);
 		
-		//Get All Couriers
+		//Get All Products
 		List<ProductVO> productVOList = standingDataService.findProducts();
 		setProductVOList(productVOList);
 		

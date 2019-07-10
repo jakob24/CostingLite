@@ -39,6 +39,7 @@
 	                    <h:outputText value="Invoice Date *" />
 	                    <p:calendar id="invDate" value="#{InvoiceWizard.selectedInvoiceVO.invoiceDate}" required="true" label="InvoiceDate" pattern="dd/MM/yyyy" 
 	                    	readonly="#{InvoiceWizard.selectedInvoiceVO.datePaid != null}" showOn="#{InvoiceWizard.selectedInvoiceVO.datePaid == null ? 'both' : 'none'}"> 
+	                    	<p:ajax event="dateSelect" listener="#{InvoiceWizard.onInvoiceDateChange}" update="@this invNumber" />
 	                    </p:calendar>
 	                    
 	                    <h:outputText value="Invoice Amount (USD)" />				                    

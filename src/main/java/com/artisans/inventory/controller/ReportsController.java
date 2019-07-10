@@ -61,6 +61,8 @@ public class ReportsController extends BaseWizard implements Serializable {
 	private SupplierVO selectedSupplierVO;
 	
 	private List<InvoiceVO> supplierInvoiceList;
+	
+	private Date fromDate;
 	 
 	 
 	/**
@@ -81,10 +83,11 @@ public class ReportsController extends BaseWizard implements Serializable {
 		
 		switch (reportType) {
 		    case FULL_INVENTORY:				
-		        break;
+		        break;		        
+		    case ALL_INVOICES:
+		    	setSelectedInvoiceVO(null);	
 		    case SHIPMENT_COSTING:		    	
-				setSelectedInvoiceVO(null);				
-		        
+				setSelectedInvoiceVO(null);		        
 		    case INVOICE:	
 		    	setSelectedInvoiceVO(null);	        
 		}		
@@ -103,13 +106,21 @@ public class ReportsController extends BaseWizard implements Serializable {
 		        break;
 		    case SHIPMENT_COSTING:
 		    	generateCostingsReport();
-		        break;
-		        
+		        break;		        
 		    case INVOICE:
 		    	generateInvoiceReport();
-		        break;		        
+		        break;	
+		    case ALL_INVOICES:
+		    	generateAllInvoicesReport();
+		        break;			        
 		}		
 	}
+	
+	public void findAllInvoicesFromDate()
+	{
+		setSelectedInvoiceVO(null);
+		setSupplierInvoiceList(findAllInvoicesForSupplier(getSelectedSupplierVO()));
+	}	
 		
 	public void findAllInvoicesForSupplier()
 	{
@@ -126,13 +137,28 @@ public class ReportsController extends BaseWizard implements Serializable {
 	
 	
 	/**
+	 * All invoices from Date report
+	 */
+	public void generateAllInvoicesReport() {
+		ReportParameters reportParameters = new ReportParameters();
+ 		reportParameters.setReportEnum(ReportEnum.ALL_INVOICES); 
+ 		reportParameters.setReportPrefix(BeanHelper.getDisplayDate(new Date()));
+ 		reportParameters.setReportParameterMap(new LinkedHashMap<>());    
+ 		LinkedHashMap<String, Object> reportParams = new LinkedHashMap<>(); 
+ 		
+   		reportParams.put("date",getFromDate());
+		reportParameters.setReportParameterMap(reportParams);   		
+ 		generateReport(reportParameters);
+	}	
+	
+	/**
 	 * Full inventory Report 
 	 */
 	public void generateInventoryReport() {
 		ReportParameters reportParameters = new ReportParameters();
  		reportParameters.setReportEnum(ReportEnum.FULL_INVENTORY); 
  		reportParameters.setReportPrefix(BeanHelper.getDisplayDate(new Date()));
- 		reportParameters.setReportParameterMap(new LinkedHashMap<>());    		
+ 		reportParameters.setReportParameterMap(new LinkedHashMap<>());   
  		generateReport(reportParameters);
 	}	 
 	
@@ -272,7 +298,19 @@ public class ReportsController extends BaseWizard implements Serializable {
 	public void setSelectedInvoiceId(Integer selectedInvoiceId) {
 		this.selectedInvoiceId = selectedInvoiceId;
 	}
-	
-	
+
+	/**
+	 * @return the fromDate
+	 */
+	public Date getFromDate() {
+		return fromDate;
+	}
+
+	/**
+	 * @param fromDate the fromDate to set
+	 */
+	public void setFromDate(Date fromDate) {
+		this.fromDate = fromDate;
+	}
 	
 }

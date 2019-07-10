@@ -5,6 +5,7 @@ package com.artisans.inventory.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.math3.util.Precision;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.FlowEvent;
@@ -131,6 +133,7 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
         		selectedInvoiceVO.setInvoiceDate(new Date());
         		selectedInvoiceVO.setSupplier(getSelectedSupplierVO());
         		selectedInvoiceVO.setShipmentComplete(SHIPMENT_NOT_COMPLETE);
+        		selectedInvoiceVO.setInvoiceNumber(createTempInvoiceNumber());
         	} else if(null != getSelectedInvoiceId()) {
         		//Get Selected Invoice details
         		selectedInvoiceVO = invoiceService.findInvoice(getSelectedInvoiceId());
@@ -140,6 +143,33 @@ public class InvoiceWizard extends BaseWizard implements Serializable {
     		selectedInvoiceVO = null;
     	}
     }    
+    
+    public void onInvoiceDateChange() {    	
+    	selectedInvoiceVO.setInvoiceNumber(createTempInvoiceNumber());
+    }
+    
+    
+    
+    
+    private String createTempInvoiceNumber() {
+    	
+    	String year = "";
+    	Date invoiceDate = null;
+    	if(null == getSelectedInvoiceVO().getInvoiceDate()) {
+    		year = new Integer(Calendar.getInstance().get(Calendar.YEAR)).toString();
+    		invoiceDate = new Date();
+    	} else {
+    		Calendar cal = Calendar.getInstance();
+    		cal.setTime(getSelectedInvoiceVO().getInvoiceDate());
+    		year = new Integer(cal.get(Calendar.YEAR)).toString();
+    		invoiceDate = getSelectedInvoiceVO().getInvoiceDate();
+    	}
+    	Integer count = invoiceService.findCountOfSupplierInvoiceForYear(getSelectedSupplierVO().getSupplierId(), invoiceDate) + 1;
+    	
+    	String cnt = StringUtils.leftPad(count.toString(), 3, "0");    	
+    	String supName = getSelectedSupplierVO().getName().substring(0, 3).toUpperCase();    	
+    	return supName + "-"+ cnt + "-" + year;
+    }
     
 	/**
 	 * Get All Invoices for the supplier

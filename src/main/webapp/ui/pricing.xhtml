@@ -62,25 +62,6 @@
 				<h:form id="dataSettings" prependId="false">
 					<p:growl id="growl" showDetail="true" sticky="true" />  
 					
-				    <p:panel id="productSelection" header="Select a Product" style="margin-bottom:10px">
-				        <h:panelGrid columns="4" cellpadding="10">		
-					        <p:autoComplete id="console" value="#{StandingDataController.selectedProduct}" completeMethod="#{StandingDataController.completeProductSelection}"
-                        		var="product" itemLabel="#{product.formattedLabel}" itemValue="#{product}" converter="#{ProductConverter}" scrollHeight="300"
-                        		dropdown="true" size="50" forceSelection="true">                        		
-                        		<p:ajax event="itemSelect" update="editProduct" oncomplete="$('#editProduct').prop('disabled', false); $('#addNewProduct').prop('disabled', true); " />
-                        	</p:autoComplete>					        			        	
-					        					    					    	
-							<p:commandButton value="#{bundle.btn_edit_product}" id="editProduct" action="#{StandingDataController.onEditProduct}" process="@this"
-								styleClass="btn ui-state-default" style="margin-left: 20px" update="productAdd"/>
-								
-							<p:commandButton value="#{bundle.btn_add_new_product}" id="addNewProduct" action="#{StandingDataController.onAddProduct}" process="@this"
-								styleClass="btn ui-state-default" update="productAdd"/>	
-								
-							<p:commandButton value="#{bundle.btn_copy_product}" id="copyProduct" action="#{StandingDataController.onCopyProduct}" process="@this"
-								styleClass="btn ui-state-default" style="margin-left: 20px" update="productAdd"/>
-																									
-				        </h:panelGrid>
-				    </p:panel>
             
 				    <p:panel id="productAdd" header="Product Details" style="margin-bottom:10px">
 				        <h:panelGrid columns="4" columnClasses="labelx, valuex">		

@@ -128,6 +128,12 @@ public class LoginController extends BaseWizard implements Serializable {
 		item.setParam("reportType", ReportEnum.INVOICE);
 		item.setIcon("fa fa-money");
 		reportSubmenu.addElement(item);			
+		
+		item = new DefaultMenuItem("All Invoices Report");		
+		item.setCommand("#{ReportsController.setPageForReport}");
+		item.setParam("reportType", ReportEnum.ALL_INVOICES);
+		item.setIcon("fa fa-money");
+		reportSubmenu.addElement(item);			
 							
 		topMenu.addElement(reportSubmenu);			
 	}	 	
